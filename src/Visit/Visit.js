@@ -8,15 +8,55 @@ import {getFakeData} from "./fakeData";
 export default function Visit() {
 
     const data = getFakeData()
-    const listOfVisits = data.map((v) => )
+    const listOfVisits = data.map((v) =>
+        <div className="row align-items-center" key={v.visitId}>
+            <div className="row align-items-center">
+                <div className="col-auto my-3 mx-2 container rounded-3 bg-white text-dark">
+                    {v.date.slice(0,10)}
+                </div>
+
+                <div className="col-9 container rounded-3 bg-white text-dark my-3">
+                    <div className="row justify-content-between">
+                        <div className="col-4 fs-3">
+                            {v.doctorId.firstName} {v.doctorId.lastName}
+                        </div>
+                        <div className="col-2 ">
+                            See details
+                        </div>
+                    </div>
+
+                    <div className="row align-items-center">
+                        <div className="col-2">
+                            <img src="https://www.getmaple.ca/site-content/uploads/2020/08/female_dr.jpg"
+                                 className="img-fluid rounded-circle" style={{height: "100px", width: "100px"}}
+                                 alt="doctor"/>
+                        </div>
+                        <div className="col-5 m-1">
+                            <div className="row fs-5 mx-1">
+                                {v.doctorId.medicalSpecialities}
+                            </div>
+                            <div className="row ">
+                                <div className="col">
+                                    <FontAwesomeIcon icon={faLocationDot} className="me-2"/>
+                                    {v.clinic.clinicName}, X: {v.clinic.longitude}, Y: {v.clinic.latitude}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    )
 
     useEffect( () => {
 
-    }, [resourceType])
+    }, [])
 
     return (
         <ChakraProvider>
-            <div className="container col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10">
+            <div className="container col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow">
 
                 <div className="row justify-content-center">
                     <div className="col-auto my-3 mx-2 container rounded-3 bg-white text-dark ">
@@ -66,49 +106,8 @@ export default function Visit() {
                     </div>
                 </div>
 
-                <div className="row align-items-center">
-                    <div className="row align-items-center">
-                        <div className="col-auto my-3 mx-2 container rounded-3 bg-white text-dark">
-                            Wednesday
-                            <br/>
-                            06 October 17:50
-                        </div>
+                {listOfVisits}
 
-                        <div className="col-9 container rounded-3 bg-white text-dark my-3">
-                            <div className="row justify-content-between">
-                                <div className="col-4 fs-3">
-                                    Dermatologist
-                                </div>
-                                <div className="col-2 ">
-                                    See details
-                                </div>
-                            </div>
-
-                            <div className="row align-items-center">
-                                <div className="col-2">
-                                    <img src="https://www.getmaple.ca/site-content/uploads/2020/08/female_dr.jpg"
-                                         className="img-fluid rounded-circle" style={{height: "100px", width: "100px"}}
-                                         alt="doctor"/>
-                                </div>
-                                <div className="col-5 m-1">
-                                    <div className="row fs-5 mx-1">
-                                        dr. n. med. Jacek</div>
-                                    <div className="row ">
-                                        <div className="col">
-                                            <FontAwesomeIcon icon={faLocationDot} className="me-2"/>
-                                            AppSick Kraków - Lubelska 29
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                </div>
 
             </div>
 
