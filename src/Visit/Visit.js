@@ -4,15 +4,20 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCalendarDays, faLocationDot, faChartLine, faPills, faXmark, faVideo} from '@fortawesome/free-solid-svg-icons'
 import {getFakeData} from "./fakeData";
+import Collapse from 'react-bootstrap/Collapse';
 
 export default function Visit() {
-
     const data = getFakeData()
+
+    // Rozsuwane See Details
+    const [open, setOpen] = useState(false);
+
     const listOfVisits = data.map((v) =>
         <div className="row align-items-center" key={v.visitId}>
+
             <div className="row align-items-center">
-                <div className="col-auto my-3 mx-2 container rounded-3 bg-white text-dark">
-                    {v.date.slice(0,10)}
+                <div className="col-auto my-3 mx-2 container rounded-3 bg-white text-dark shadow-sm">
+                    {v.date.slice(0, 10)}
                 </div>
 
                 <div className="col-9 container rounded-3 bg-white text-dark my-3">
@@ -20,7 +25,10 @@ export default function Visit() {
                         <div className="col-4 fs-3">
                             {v.doctorId.firstName} {v.doctorId.lastName}
                         </div>
-                        <div className="col-2 ">
+                        <div className="col-auto text-capitalize text-decoration-underline"
+                             onClick={() => setOpen(!open)}
+                             aria-controls="example-collapse-text"
+                             aria-expanded={open}>
                             See details
                         </div>
                     </div>
@@ -36,21 +44,49 @@ export default function Visit() {
                                 {v.doctorId.medicalSpecialities}
                             </div>
                             <div className="row ">
-                                <div className="col">
+                                <div className="col text-primary ">
                                     <FontAwesomeIcon icon={faLocationDot} className="me-2"/>
                                     {v.clinic.clinicName}, X: {v.clinic.longitude}, Y: {v.clinic.latitude}
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {/* Rozsuwane*/}
+
+                    <Collapse in={open}>
+                        <div>
+                            <br/>
+                            <hr/>
+                            <br/>
+                            <div id="example-collapse-text">
+                                <div className="fs-4">
+                                    Recommendations
+                                </div>
+                                <div>
+                                    {v.patient.firstName}
+                                    <br/>
+                                    {v.patient.birthDate}
+                                </div>
+                                <br/>
+                                <hr/>
+                                <br/>
+                                <div className="fs-4">
+                                    Referrals
+                                </div>
+                                <div>
+                                    {v.patient.password}
+                                    <br/>
+                                    {v.patient.medicalData.weight}
+                                </div>
+                            </div>
+                        </div>
+                    </Collapse>
                 </div>
             </div>
         </div>
-
-
     )
 
-    useEffect( () => {
+    useEffect(() => {
 
     }, [])
 
@@ -59,10 +95,10 @@ export default function Visit() {
             <div className="container col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow">
 
                 <div className="row justify-content-center">
-                    <div className="col-auto my-3 mx-2 container rounded-3 bg-white text-dark ">
+                    <div className="col-auto my-3 mx-2 container rounded-3 bg-white text-dark shadow-sm">
                         Today's visits:
                     </div>
-                    <div className="col-9 container rounded-3 bg-white text-dark my-3 ">
+                    <div className="col-9 container rounded-3 bg-white text-dark my-3 shadow-sm">
                         You do not have appointments planned for today.
                     </div>
                 </div>
@@ -76,11 +112,11 @@ export default function Visit() {
 
                 <br/>
 
-                <div className="row">
+                <div className="row ">
                     <div className="col-2">
 
                     </div>
-                    <div className="col-auto rounded-5 bg-white m-2">
+                    <div className="col-auto rounded-5 bg-white m-2 shadow-sm">
                         <FontAwesomeIcon icon={faCalendarDays} className="me-2"/>
                         Data
                     </div>
