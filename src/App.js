@@ -8,11 +8,12 @@ import Home from "./Home/Home"
 import Login from "./Login/Login"
 import Register from "./Register/Register"
 import Visit from "./Visit/Visit"
+import Navbar from "./Navbar/Navbar";
 
 function App() {
   return (
     <Router>
-      <h2>navbar</h2>
+      <Navbar />
       <Switch>
         <Route exact path="/">
           <Home />
