@@ -7,7 +7,7 @@ import './App.css';
 import Home from "./Home/Home"
 import Login from "./Login/Login"
 import Register from "./Register/Register"
-import Visit from "./Visit/Visit"
+import ListOfVisits from "./Visit/ListOfVisits"
 import Navbar from "./Navbar/Navbar";
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
           <Register />
         </Route>
         <Route path="/visit">
-          <Visit />
+          <ListOfVisits />
         </Route>
       </Switch>
     </Router>
