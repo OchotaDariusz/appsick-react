@@ -1,12 +1,12 @@
 import React from "react"
 import './Navbar.css'
-import logo from './logoAppsick.png'
+import logo from './logo.png'
 
 export default function Navbar() {
     return (
         <div className="nav">
             <div className="nav-name">
-                <div className="name"><img src={logo}/></div>
+                <img src={logo} className="App-logo" alt="logo" />
             </div>
             <div className="nav-list">
                 <ol>
