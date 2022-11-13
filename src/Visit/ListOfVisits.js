@@ -97,7 +97,7 @@ export default function ListOfVisits() {
           </div>
         </div>
 
-        {listOfVisits.map(visit => <Visit visit={visit}/>)}
+        {listOfVisits.map(visit => <Visit visit={visit} />)}
 
       </div>
 
