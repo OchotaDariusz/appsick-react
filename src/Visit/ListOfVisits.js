@@ -11,13 +11,18 @@ import {
 import Visit from "./Visit"
 import {ChakraProvider} from '@chakra-ui/react'
 import 'bootstrap/dist/css/bootstrap.css';
-import { formatDistance, subDays } from 'date-fns'
+import { formatDistance } from 'date-fns'
 
 
 const isToday = (visit) => {
     return new Date(visit.date).getFullYear() === new Date().getFullYear()
         && new Date(visit.date).getMonth() === new Date().getMonth()
         && new Date(visit.date).getDay() === new Date().getDay();
+}
+
+const formatVisitDate = visit => {
+    visit.date = new Date(visit.date).toLocaleDateString()
+    return visit
 }
 
 export default function ListOfVisits() {
@@ -43,10 +48,21 @@ export default function ListOfVisits() {
                     let dateB = new Date(b.date);
                     return dateB - dateA;
                 })
-                setFutureVisits(visits.filter(visit => new Date(visit.date).getTime() > new Date().getTime() && !isToday(visit)))
 
-                setPastVisits(visits.filter(visit => new Date(visit.date).getTime() < new Date().getTime()))
-                setCurrentVisits(visits.filter(visit => isToday(visit)))
+                setFutureVisits(() => {
+                    let listOfFutureVisits = visits.filter(visit => new Date(visit.date).getTime() > new Date().getTime() && !isToday(visit))
+                    return listOfFutureVisits.map(formatVisitDate)
+                })
+
+                setCurrentVisits(() => {
+                    let listOfCurrentVisits = visits.filter(visit => isToday(visit))
+                    return listOfCurrentVisits.map(formatVisitDate)
+                })
+
+                setPastVisits(() => {
+                    let listOfPastVisits = visits.filter(visit => new Date(visit.date).getTime() < new Date().getTime())
+                    return listOfPastVisits.map(formatVisitDate)
+                })
             })
             .catch(err => console.warn(err.message))
     }, [])

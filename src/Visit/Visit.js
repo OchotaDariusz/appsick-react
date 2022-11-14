@@ -1,31 +1,47 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faLocationDot} from "@fortawesome/free-solid-svg-icons";
 import Collapse from 'react-bootstrap/Collapse';
 import {useState} from "react";
 
-export default function Visit({ visit }) {
-  const [open, setOpen] = useState(false);
+export default function Visit({visit}) {
+    const [open, setOpen] = useState(false);
 
-  return (
-    <div className="row align-items-center" >
+    const snakeToCamel = str =>
+        str.toLowerCase().replace(/([-_][a-z])/g, group =>
+            group
+                .toUpperCase()
+                .replace('_', '')
+        )
+
+    let finalResult
+    if (!visit.doctor.medicalSpecialities[0].includes("_")) {
+        console.log("nie zawiera")
+        finalResult = visit.doctor.medicalSpecialities[0]
+    } else {
+        console.log("zawiera")
+        const result = snakeToCamel(visit.doctor.medicalSpecialities[0]).replace(/([A-Z])/g, " $1");
+        finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+    }
+    return (
+        <div className="row align-items-center">
 
             <div className="row align-items-center">
                 <div className="col-auto my-3 mx-2 container rounded-3 bg-white text-dark shadow-sm p-2">
                     {visit.date}
                 </div>
 
-        <div className="col-9 container rounded-3 bg-white text-dark my-3">
-          <div className="row justify-content-between">
-            <div className="col-4 fs-3">
-              {visit.doctor.user.firstName} {visit.doctor.user.lastName}
-            </div>
-            <div className="col-auto text-capitalize text-decoration-underline"
-                 onClick={() => setOpen(!open)}
-                 aria-controls="example-collapse-text"
-                 aria-expanded={open}>
-                See details
-            </div>
-          </div>
+                <div className="col-9 container rounded-3 bg-white text-dark my-3">
+                    <div className="row justify-content-between">
+                        <div className="col-4 fs-3">
+                            {visit.doctor.user.firstName} {visit.doctor.user.lastName}
+                        </div>
+                        <div className="col-auto text-capitalize text-decoration-underline"
+                             onClick={() => setOpen(!open)}
+                             aria-controls="example-collapse-text"
+                             aria-expanded={open}>
+                            See details
+                        </div>
+                    </div>
 
                     <div className="row align-items-center">
                         <div className="col-2">
@@ -47,37 +63,37 @@ export default function Visit({ visit }) {
                         </div>
                     </div>
 
-           {/*Rozsuwane*/}
-          <Collapse in={open}>
-              <div>
-                  <br/>
-                  <hr/>
-                  <br/>
-                  <div id="example-collapse-text">
-                      <div className="fs-4">
-                          Recommendations
-                      </div>
-                      <div>
-                          first name
-                          <br/>
-                          {/*{visit.patient.birthDate}*/}
-                      </div>
-                      <br/>
-                      <hr/>
-                      <br/>
-                      <div className="fs-4">
-                          Referrals
-                      </div>
-                      <div>
-                          {/*{visit.patient.password}*/}
-                          <br/>
-                          {/*{visit.patient.medicalData.weight}*/}
-                      </div>
-                  </div>
-              </div>
-          </Collapse>
+                    {/*Rozsuwane*/}
+                    <Collapse in={open}>
+                        <div>
+                            <br/>
+                            <hr/>
+                            <br/>
+                            <div id="example-collapse-text">
+                                <div className="fs-4">
+                                    Recommendations
+                                </div>
+                                <div>
+                                    first name
+                                    <br/>
+                                    {/*{visit.patient.birthDate}*/}
+                                </div>
+                                <br/>
+                                <hr/>
+                                <br/>
+                                <div className="fs-4">
+                                    Referrals
+                                </div>
+                                <div>
+                                    {/*{visit.patient.password}*/}
+                                    <br/>
+                                    {/*{visit.patient.medicalData.weight}*/}
+                                </div>
+                            </div>
+                        </div>
+                    </Collapse>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
