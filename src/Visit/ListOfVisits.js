@@ -37,13 +37,12 @@ export default function ListOfVisits() {
                     let dateB = new Date(b.date);
                     return dateB - dateA;
                 })
-                setFutureVisits(() => {
-                    visits.filter(visit => new Date(visit.date).getTime() > new Date().getTime() && !(
-                        new Date(visit.date).getFullYear() === new Date().getFullYear()
-                        && new Date(visit.date).getMonth() === new Date().getMonth()
-                        && new Date(visit.date).getDay() === new Date().getDay()
-                    ))
-                })
+                setFutureVisits(visits.filter(visit => new Date(visit.date).getTime() > new Date().getTime() && !(
+                    new Date(visit.date).getFullYear() === new Date().getFullYear()
+                    && new Date(visit.date).getMonth() === new Date().getMonth()
+                    && new Date(visit.date).getDay() === new Date().getDay()
+                )))
+
                 setPastVisits(visits.filter(visit => new Date(visit.date).getTime() < new Date().getTime()))
                 setCurrentVisits(visits.filter(visit => new Date(visit.date).getFullYear() === new Date().getFullYear()
                                                         && new Date(visit.date).getMonth() === new Date().getMonth()
