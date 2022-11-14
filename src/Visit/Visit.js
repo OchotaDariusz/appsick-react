@@ -7,7 +7,7 @@ export default function Visit({ visit }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="row align-items-center" key={visit.visitId}>
+    <div className="row align-items-center" >
 
       <div className="row align-items-center">
         <div className="col-auto my-3 mx-2 container rounded-3 bg-white text-dark shadow-sm">
@@ -17,7 +17,7 @@ export default function Visit({ visit }) {
         <div className="col-9 container rounded-3 bg-white text-dark my-3">
           <div className="row justify-content-between">
             <div className="col-4 fs-3">
-              {visit.doctorFirstName} {visit.doctorLastName}
+              {visit.doctor.user.firstName} {visit.doctor.user.lastName}
             </div>
             <div className="col-auto text-capitalize text-decoration-underline"
                  onClick={() => setOpen(!open)}
@@ -36,18 +36,18 @@ export default function Visit({ visit }) {
             </div>
             <div className="col-5 m-1">
               <div className="row fs-5 mx-1">
-                {visit.doctorSpecialities}
+                {visit.doctor.medicalSpecialities}
               </div>
               <div className="row ">
                 <div className="col text-primary ">
                   <FontAwesomeIcon icon={faLocationDot} className="me-2"/>
-                  {visit.clinicName}, X: {visit.longitude}, Y: {visit.latitude}
+                  {visit.clinic.clinicName}, X: {visit.clinic.longitude}, Y: {visit.clinic.latitude}
                 </div>
               </div>
             </div>
           </div>
-           {/*Rozsuwane*/}
 
+           {/*Rozsuwane*/}
           <Collapse in={open}>
               <div>
                   <br/>
