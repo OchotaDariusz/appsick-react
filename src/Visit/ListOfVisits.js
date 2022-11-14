@@ -14,6 +14,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { formatDistance, subDays } from 'date-fns'
 
 
+const isToday = (visit) => {
+    return new Date(visit.date).getFullYear() === new Date().getFullYear()
+        && new Date(visit.date).getMonth() === new Date().getMonth()
+        && new Date(visit.date).getDay() === new Date().getDay();
+}
+
 export default function ListOfVisits() {
     const [currentVisits, setCurrentVisits] = useState([])
     const [pastVisits, setPastVisits] = useState([])
@@ -37,16 +43,10 @@ export default function ListOfVisits() {
                     let dateB = new Date(b.date);
                     return dateB - dateA;
                 })
-                setFutureVisits(visits.filter(visit => new Date(visit.date).getTime() > new Date().getTime() && !(
-                    new Date(visit.date).getFullYear() === new Date().getFullYear()
-                    && new Date(visit.date).getMonth() === new Date().getMonth()
-                    && new Date(visit.date).getDay() === new Date().getDay()
-                )))
+                setFutureVisits(visits.filter(visit => new Date(visit.date).getTime() > new Date().getTime() && !isToday(visit)))
 
                 setPastVisits(visits.filter(visit => new Date(visit.date).getTime() < new Date().getTime()))
-                setCurrentVisits(visits.filter(visit => new Date(visit.date).getFullYear() === new Date().getFullYear()
-                                                        && new Date(visit.date).getMonth() === new Date().getMonth()
-                                                        && new Date(visit.date).getDay() === new Date().getDay()))
+                setCurrentVisits(visits.filter(visit => isToday(visit)))
             })
             .catch(err => console.warn(err.message))
     }, [])
