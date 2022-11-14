@@ -40,8 +40,10 @@
 body {
 
     width: 100%;
-    height: 100vh;
-    background-image: linear-gradient(to top left, #b2e0bb 50%, #fdfcfc 50%);
+    height: 500px;
+    background-image: url('/src/tlo.jpg');
+    background-repeat: repeat-x;
+    /*background-image: linear-gradient(to top left, url("tlo.jpg") 50%, #fdfcfc 50%);*/
 }
 
 .home-tlo {
