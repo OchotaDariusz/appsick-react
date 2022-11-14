@@ -9,9 +9,9 @@ import {
     faVideo
 } from '@fortawesome/free-solid-svg-icons'
 import Visit from "./Visit"
+import TodayVisit from "./TodayVisit"
 import {ChakraProvider} from '@chakra-ui/react'
-import 'bootstrap/dist/css/bootstrap.css';
-import { formatDistance } from 'date-fns'
+import 'bootstrap/dist/css/bootstrap.css'
 
 
 const isToday = (visit) => {
@@ -56,7 +56,7 @@ export default function ListOfVisits() {
 
                 setCurrentVisits(() => {
                     let listOfCurrentVisits = visits.filter(visit => isToday(visit))
-                    return listOfCurrentVisits.map(formatVisitDate)
+                    return listOfCurrentVisits
                 })
 
                 setPastVisits(() => {
@@ -83,7 +83,7 @@ export default function ListOfVisits() {
                         </div>
                         <div className="col-9 container rounded-3 bg-info bg-opacity-10 text-dark my-3 shadow-sm">
                             {currentVisits.length > 0 ?
-                                currentVisits.map(visit => <Visit visit={visit} key={visit.visitId}/>) :
+                                currentVisits.map(visit => <TodayVisit visit={visit} key={visit.visitId}/>) :
                                 "You do not have appointments planned for today."
                             }
                         </div>

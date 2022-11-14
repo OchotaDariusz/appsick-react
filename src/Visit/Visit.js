@@ -15,10 +15,8 @@ export default function Visit({visit}) {
 
     let finalResult
     if (!visit.doctor.medicalSpecialities[0].includes("_")) {
-        console.log("nie zawiera")
-        finalResult = visit.doctor.medicalSpecialities[0]
+        finalResult = visit.doctor.medicalSpecialities[0].charAt(0) + visit.doctor.medicalSpecialities[0].slice(1)
     } else {
-        console.log("zawiera")
         const result = snakeToCamel(visit.doctor.medicalSpecialities[0]).replace(/([A-Z])/g, " $1");
         finalResult = result.charAt(0).toUpperCase() + result.slice(1);
     }
