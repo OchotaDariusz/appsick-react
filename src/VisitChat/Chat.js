@@ -36,19 +36,23 @@ class Chatroom {
     return await addDoc(this.chats, chat);
   }
 
-  getChats(callback) {
+  async getChats(callback) {
     const queryResults = query(
       this.chats,
       where('visitId', '==', this.visitId),
       orderBy('date')
     );
-    onSnapshot(queryResults, snapshot => {
-      snapshot.docChanges().forEach(change => {
-        if (change.type === 'added') {
-          callback(change.doc.data());
-          // this.clearChat();
-        }
-      });
+    // onSnapshot(queryResults, snapshot => {
+    //   snapshot.docChanges().forEach(change => {
+    //     if (change.type === 'added') {
+    //       callback(change.doc.data());
+    //       // this.clearChat();
+    //     }
+    //   });
+    // })
+    const querySnapshot = await getDocs(queryResults)
+    querySnapshot.forEach((doc) => {
+      callback(doc.data())
     })
   }
 

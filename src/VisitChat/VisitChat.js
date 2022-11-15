@@ -21,13 +21,18 @@ let chatroom, messages
 export default function VisitChat(props) {
 
   const updateChat = () => {
+    console.log("in updateChat")
     messages = []
     chatroom.getChats(chat => {
-      console.log("chat " + chat)
       messages.push(chat)
     })
-    setChatMessages(messages)
+      .then(() => {
+        setChatMessages(messages)
+      })
   }
+
+  const [chatMessages, setChatMessages] = useState([])
+  const [chatMessage, setChatMessage] = useState("")
 
   useEffect(() => {
     getVisit(props.match.params.visitId)
@@ -45,9 +50,6 @@ export default function VisitChat(props) {
 
   }, [])
 
-  const [chatMessages, setChatMessages] = useState([])
-  const [chatMessage, setChatMessage] = useState("")
-
   const sendMessage = event => {
     event.preventDefault()
     chatroom.addChat(chatMessage)
@@ -63,7 +65,7 @@ export default function VisitChat(props) {
         <ul className="chat-list | list-group">
           {
             chatMessages.map(
-              message => <ChatMessage author={message.author} message={message.message} time={message.date}/>
+              (message, index) => <ChatMessage author={message.author} message={message.message} time={message.date} key={index}/>
             )
           }
         </ul>
