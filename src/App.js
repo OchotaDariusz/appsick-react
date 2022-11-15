@@ -8,6 +8,7 @@ import Home from "./Home/Home"
 import Login from "./Login/Login"
 import Register from "./Register/Register"
 import ListOfVisits from "./Visit/ListOfVisits"
+import VisitChat from "./VisitChat/VisitChat"
 import Navbar from "./Navbar/Navbar";
 import VisitRegistration from "./Visit/VisitRegistration";
 
@@ -25,9 +26,10 @@ function App() {
         <Route path="/register">
           <Register />
         </Route>
-        <Route path="/visit">
+        <Route exact path="/visit">
           <ListOfVisits />
         </Route>
+        <Route exact path="/visit/:visitId" component={VisitChat} />
         <Route path="/register-visit">
           <VisitRegistration />
         </Route>
