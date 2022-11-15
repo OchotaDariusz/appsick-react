@@ -1,6 +1,8 @@
 import React from "react"
 import './Home.css'
-import logo from '../logo.svg'
+import logo from '../logo1.svg'
+import News from "./News";
+import Footer from "../Footer/Footer";
 
 export default function Home() {
     return (
@@ -11,6 +13,9 @@ export default function Home() {
                     Give it a try now. <br/><br/></h2>
                 <button className={'button'}>START WITH US</button>
             </div>
+
+            <News/>
+
 
             <div className={"big-ass"}>
                 <div className={"dupa"}>
@@ -42,7 +47,7 @@ export default function Home() {
                                 <img src={logo} className="d-block w-10 opacity-0" alt="..."/>
                                 <div className="carousel-caption d-none d-md-block text-dark text-slider">
                                     <h5>Magda M</h5>
-                                    <p>Czuję że się mną zaopiekowano.  </p>
+                                    <p>Czuję że się mną zaopiekowano. </p>
                                 </div>
                             </div>
                         </div>
@@ -63,6 +68,7 @@ export default function Home() {
 
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 }

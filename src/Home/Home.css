@@ -33,3 +33,47 @@
     box-shadow: 5px 3px 3px black;
     font-size: 25px;
 }
+.big-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    padding: 0;
+}
+.container1 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    text-align: center;
+    padding: 0;
+    margin-bottom: 25px;
+}
+
+.article {
+    display: inline-block;
+    width: 28%;
+    text-align: center;
+    padding: 3%;
+    background-color: #fffff0;
+
+}
+
+.article-in {
+    background-color: white;
+    transition: transform 0.2s;
+    box-shadow: 5px 3px 3px gray;
+    /*border: solid 1px black;*/
+}
+
+.article-in:hover {
+    transform: scale(1.1);
+}
+
+h3 {
+    text-align: left;
+    padding: 5px;
+}
+
+p {
+    padding: 5px;
+    text-align: left;
+}
