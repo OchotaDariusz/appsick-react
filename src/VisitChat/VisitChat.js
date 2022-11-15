@@ -20,12 +20,12 @@ const getPatient = async patientId => {
 let chatroom, messages
 export default function VisitChat(props) {
 
-  const updateChat = () => {
+  const updateChat = (setterFn) => {
     console.log("in updateChat")
     messages = []
     chatroom.getChats(chat => {
       messages.push(chat)
-    })
+    }, setterFn)
       .then(() => {
         setChatMessages(messages)
       })
@@ -41,7 +41,7 @@ export default function VisitChat(props) {
           .then(patient => {
             chatroom = new Chatroom(props.match.params.visitId, `${patient.user.firstName} ${patient.user.lastName}`)
             console.log("use effect update chat now")
-            updateChat()
+            updateChat(setChatMessages)
             console.log(chatMessages)
           })
           .catch(err => console.log(err.message))
@@ -54,7 +54,7 @@ export default function VisitChat(props) {
     event.preventDefault()
     chatroom.addChat(chatMessage)
     console.log("sendMessage update chat now")
-    updateChat()
+    // updateChat(setChatMessages)
   }
 
   return (
