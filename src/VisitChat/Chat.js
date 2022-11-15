@@ -24,6 +24,7 @@ class Chatroom {
     this.visitId = visitId;
     this.author = author;
     this.chats = collection(db, 'appsick-visits');
+    this.unsub = () => {}
   }
 
   async addChat(message) {
@@ -36,20 +37,21 @@ class Chatroom {
     return await addDoc(this.chats, chat);
   }
 
-  async getChats(callback) {
+  async getChats(callback, setterFn) {
+    this.unsub()
     const queryResults = query(
       this.chats,
       where('visitId', '==', this.visitId),
       orderBy('date')
     );
-    // onSnapshot(queryResults, snapshot => {
-    //   snapshot.docChanges().forEach(change => {
-    //     if (change.type === 'added') {
-    //       callback(change.doc.data());
-    //       // this.clearChat();
-    //     }
-    //   });
-    // })
+    this.unsub = onSnapshot(queryResults, snapshot => {
+      snapshot.docChanges().forEach(change => {
+        if (change.type === 'added') {
+          console.log(change.doc.data())
+          setterFn(prevMessages => [...prevMessages, change.doc.data()])
+        }
+      });
+    })
     const querySnapshot = await getDocs(queryResults)
     querySnapshot.forEach((doc) => {
       callback(doc.data())
