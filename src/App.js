@@ -8,6 +8,7 @@ import Home from "./Home/Home"
 import Login from "./Login/Login"
 import Register from "./Register/Register"
 import Visit from "./Visit/Visit"
+import VisitChat from "./VisitChat/VisitChat"
 import Navbar from "./Navbar/Navbar";
 
 function App() {
@@ -24,9 +25,10 @@ function App() {
         <Route path="/register">
           <Register />
         </Route>
-        <Route path="/visit">
+        <Route exact path="/visit">
           <Visit />
         </Route>
+        <Route exact path="/visit/:visitId" component={VisitChat} />
       </Switch>
     </Router>
   );
