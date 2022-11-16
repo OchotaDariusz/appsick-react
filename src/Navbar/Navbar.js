@@ -5,6 +5,7 @@ import visit from './visitstest.png'
 import drugs from './drugstest.png'
 import contact from './contact.png'
 import findings from './findingstest.png'
+import newVisit from './new_visit.png'
 
 
 
@@ -41,7 +42,7 @@ export default function Navbar() {
                             <p>CONTACT</p>
                         </div>
                         <div className="col-3 text-justify" >
-                            <img className="float-start w-10 mx-2" src={contact} alt="Logo" />
+                            <img className="float-start w-10 mx-2" src={newVisit} alt="Logo" />
 
                             <p>Make an appointment</p>
                         </div>
