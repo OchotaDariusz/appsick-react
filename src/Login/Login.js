@@ -4,15 +4,11 @@ import {useHistory} from "react-router-dom";
 import InputFields from "../components/InputFields"
 export default function Login() {
     const [info, setInfo] = useState("")
-
-
     const history = useHistory();
-
     const routeChange = () =>{
         let path = `/`;
         history.push(path);
     }
-
 
     // const email = useRef(null);
     const [email,setEmail] = useState("");
@@ -26,8 +22,8 @@ export default function Login() {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ "email": email.current.value,
-                                        "password": password.current.value
+            body: JSON.stringify({ "email": email,
+                                        "password": password
             })
         })
             .then(response => {
@@ -38,19 +34,13 @@ export default function Login() {
                 setInfo("Invalid email or password")
                 return response.json()
             })
-
-
             .then(response => console.log(JSON.stringify(response)))
-
-
-
-
     }
 
         console.log(email)
     return (
         <>
-            <div className="container">
+            <div className="containerr">
                 <div className="forms">
                     <div className="form register">
                         <span className="title">login</span>

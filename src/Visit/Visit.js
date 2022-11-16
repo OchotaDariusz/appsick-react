@@ -16,11 +16,11 @@ export default function Visit() {
         <div className="row align-items-center" key={v.visitId}>
 
             <div className="row align-items-center">
-                <div className="col-auto my-3 mx-2 container rounded-3 bg-white text-dark shadow-sm">
+                <div className="col-auto my-3 mx-2 containerr rounded-3 bg-white text-dark shadow-sm">
                     {v.date.slice(0, 10)}
                 </div>
 
-                <div className="col-9 container rounded-3 bg-white text-dark my-3">
+                <div className="col-9 containerr rounded-3 bg-white text-dark my-3">
                     <div className="row justify-content-between">
                         <div className="col-4 fs-3">
                             {v.doctorId.firstName} {v.doctorId.lastName}
@@ -92,13 +92,13 @@ export default function Visit() {
 
     return (
         <ChakraProvider>
-            <div className="container col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow">
+            <div className="containerr col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow">
 
                 <div className="row justify-content-center">
-                    <div className="col-auto my-3 mx-2 container rounded-3 bg-white text-dark shadow-sm">
+                    <div className="col-auto my-3 mx-2 containerr rounded-3 bg-white text-dark shadow-sm">
                         Today's visits:
                     </div>
-                    <div className="col-9 container rounded-3 bg-white text-dark my-3 shadow-sm">
+                    <div className="col-9 containerr rounded-3 bg-white text-dark my-3 shadow-sm">
                         You do not have appointments planned for today.
                     </div>
                 </div>
