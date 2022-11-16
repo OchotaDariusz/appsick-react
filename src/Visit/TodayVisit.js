@@ -2,10 +2,10 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLocationDot} from "@fortawesome/free-solid-svg-icons";
 import Collapse from 'react-bootstrap/Collapse';
 import {useState} from "react";
-import maleDoctor from "../Navbar/DoctorMale.png";
-import femaleDoctor from "../Navbar/DoctorFemale.png";
+import maleDoctor from "../Navbar/DoctorMale.png"
+import femaleDoctor from "../Navbar/DoctorFemale.png"
 
-export default function Visit({visit}) {
+export default function TodayVisit({visit}) {
     const [open, setOpen] = useState(false);
 
     const snakeToCamel = str =>
@@ -15,23 +15,18 @@ export default function Visit({visit}) {
                 .replace('_', '')
         )
 
-    let finalResult
+    let fullMedicalName
     if (!visit.doctor.medicalSpecialities[0].includes("_")) {
-        finalResult = visit.doctor.medicalSpecialities[0].charAt(0) + visit.doctor.medicalSpecialities[0].slice(1)
+        fullMedicalName = visit.doctor.medicalSpecialities[0].charAt(0) + visit.doctor.medicalSpecialities[0].slice(1)
     } else {
         const result = snakeToCamel(visit.doctor.medicalSpecialities[0]).replace(/([A-Z])/g, " $1");
-        finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+        fullMedicalName = result.charAt(0).toUpperCase() + result.slice(1);
     }
     return (
         <div className="row align-items-center">
 
-            <div className="row align-items-center text-center">
-                <div className="col-auto my-3 mx-2 container rounded-3 bg-white text-dark shadow-sm p-2">
-                    {visit.date[0]} <hr />
-                    {visit.date[1].slice(0, 5)}
-                </div>
 
-                <div className="col-9 container rounded-3 bg-white text-dark my-3">
+                <div className=" container rounded-3 bg-white text-dark my-3">
                     <div className="row justify-content-between">
                         <div className="col-4 fs-3">
                             {visit.doctor.user.firstName} {visit.doctor.user.lastName}
@@ -53,7 +48,7 @@ export default function Visit({visit}) {
                         </div>
                         <div className="col-5 m-1">
                             <div className="row fs-5 mx-1">
-                                {finalResult}
+                                {fullMedicalName}
                             </div>
                             <div className="row ">
                                 <div className="col text-primary ">
@@ -93,7 +88,6 @@ export default function Visit({visit}) {
                             </div>
                         </div>
                     </Collapse>
-                </div>
             </div>
         </div>
     );
