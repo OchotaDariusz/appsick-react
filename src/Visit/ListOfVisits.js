@@ -58,10 +58,11 @@ export default function ListOfVisits() {
                     let dateB = new Date(b.date);
                     return dateB - dateA;
                 })
-                            setFutureVisits(() => {
-                                let listOfFutureVisits = visits.filter(visit => new Date(visit.date).getTime() > new Date().getTime() && !isToday(visit))
-                                return listOfFutureVisits.map(formatVisitDate)
-                            })
+                setFutureVisits(() => {
+                    let listOfFutureVisits = visits.filter(visit => new Date(visit.date).getTime() > new Date().getTime() && !isToday(visit))
+                    return listOfFutureVisits.map(formatVisitDate)
+                })
+
             })
             .catch(err => console.warn(err.message))
     }, [])
@@ -74,6 +75,7 @@ export default function ListOfVisits() {
                     let dateB = new Date(b.date);
                     return dateB - dateA;
                 })
+
                 setPastVisits(() => {
                     let listOfPastVisits = visits.filter(visit => new Date(visit.date).getTime() < new Date().getTime())
                     return listOfPastVisits.map(formatVisitDate)
