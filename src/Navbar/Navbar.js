@@ -1,61 +1,59 @@
 import React from "react"
 import './Navbar.css'
-import logo from './logo.png'
-import DoctorFemale from './DoctorFemale.png'
-import DoctorMale from './DoctorMale.png'
-import Drugs from './Drugs.png'
-import Visits from './Visits.png'
-import {faStethoscope} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { CiMedicalClipboard } from "react-icons/ci";
+import logo from './logotest.png'
+import visit from './visitstest.png'
+import drugs from './drugstest.png'
+import contact from './contact.png'
+import findings from './findingstest.png'
+
 
 
 
 export default function Navbar() {
     return (
-        <div className="    ">
+        <div className="    " style={{backgroundColor:'white'}}>
             <div className="row">
                 <div className="col-3">
-                    <div className="row">
-                        <div className="col-6 justify-content-center">
+                        <div className="justify-content-center px-5">
                             <img src={logo} alt="Logo" />
                         </div>
+                </div>
+                <div className="col-7 align-items-center">
+                    <div className="row align-items-center" style={{height:'100%'}}>
+                        <div className="col-2 text-justify" >
+                            <img className="float-start w-10 mx-2" src={visit} alt="Logo" />
+
+                            <p>VISIT</p>
+                        </div>
+                        <div className="col-2 text-justify" >
+                            <img className="float-start w-10 mx-2" src={findings} alt="Logo" />
+
+                            <p>FINDINGS</p>
+                        </div>
+                        <div className="col-2 text-justify" >
+                            <img className="float-start w-10 mx-2" src={drugs} alt="Logo" />
+
+                            <p>DRUGS</p>
+                        </div>
+                        <div className="col-2 text-justify" >
+                            <img className="float-start w-10 mx-2" src={contact} alt="Logo" />
+
+                            <p>CONTACT</p>
+                        </div>
+                        <div className="col-3 text-justify" >
+                            <img className="float-start w-10 mx-2" src={contact} alt="Logo" />
+
+                            <p>Make an appointment</p>
+                        </div>
                     </div>
-
                 </div>
-                <div className="col-6 align-items-center">
-                    <div className="row">
-                        <div className="col-2">
-                            <CiMedicalClipboard className="ml-4 float-start mx-2" size={40}  />
-                            VISIT
-                        </div>
-                        <div className="col-2">
-                            FINDINGS
-                        </div>
-                        <div className="col-2">
-                            CONTACTS
-                        </div>
-                        <div className="col-2">
-                            <FontAwesomeIcon icon={faStethoscope} className=""/> Make an appointment
-
-                        </div>
-                        <div className="col-4">
-
-                                <div className="search">
-                                    <input type="text" className="search__input" aria-label="search"
-                                           placeholder="enter your search"/>
-                                    <button className="search__submit" aria-label="submit search">
-                                        <i className="fa fa-search"></i></button>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-3">
-                    XX login XX
+                <div className="col-2">
+                    <button className="btn btn-secondary btn-sm my-3 mx-4">REGISTRATION</button>
+                    <button className="btn btn-secondary btn-sm">LOGIN</button>
 
                 </div>
 
-                {/*<div className={"login-button"}><button className={'btn third'} type={'submit'}>Login</button></div>*/}
+                {/*<div className={"login-button"}><button className={'btn third'} type={'submit'}>Login</button></div>  Make an appointment */}
             </div>
         </div>
 

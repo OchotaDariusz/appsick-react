@@ -3,6 +3,8 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.css';
+import Bootstrap from 'bootstrap'
 import './App.css';
 import Home from "./Home/Home"
 import Login from "./Login/Login"

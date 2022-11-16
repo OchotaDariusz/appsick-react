@@ -176,26 +176,6 @@ ol > li > ul > li:hover > a {
   outline: 0;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.65);
 }
-.btn {
-    box-sizing: border-box;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: transparent;
-    border: 2px solid #e74c3c;
-    border-radius: 0.6em;
-    color: #e74c3c;
-    cursor: pointer;
-    display: flex;
-    align-self: center;
-    font-size: 1rem;
-    line-height: 1;
-    margin: 20px;
-    padding: 1.2em 2.8em;
-    text-decoration: none;
-    text-align: center;
-    text-transform: uppercase;
-}
 
 .btn:hover{
     color: white;
