@@ -22,9 +22,9 @@ export default function Navbar() {
                 <div className="col-7 align-items-center">
                     <div className="row align-items-center" style={{height:'100%'}}>
                         <div className="col-2 text-justify" >
-                            <img className="float-start w-10 mx-2" src={visit} alt="Logo" />
+                            <img className="float-start w-10 mx-2 " src={visit} alt="Logo" />
 
-                            <p>VISIT</p>
+                            <p>MY APPOINTMENTS</p>
                         </div>
                         <div className="col-2 text-justify" >
                             <img className="float-start w-10 mx-2" src={findings} alt="Logo" />
