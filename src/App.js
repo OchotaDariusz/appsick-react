@@ -9,6 +9,7 @@ import Login from "./Login/Login"
 import Register from "./Register/Register"
 import ListOfVisits from "./Visit/ListOfVisits"
 import Navbar from "./Navbar/Navbar";
+import VisitRegistration from "./Visit/VisitRegistration";
 
 function App() {
   return (
@@ -26,6 +27,9 @@ function App() {
         </Route>
         <Route path="/visit">
           <ListOfVisits />
+        </Route>
+        <Route path="/register-visit">
+          <VisitRegistration />
         </Route>
       </Switch>
     </Router>
