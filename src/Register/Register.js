@@ -119,7 +119,7 @@ export default function Register() {
             routeChange()
 
         } else {
-            alert("gdzie kurła")
+            alert("nope")
         }
     }
 
