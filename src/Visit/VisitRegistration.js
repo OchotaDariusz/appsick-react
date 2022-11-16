@@ -34,6 +34,14 @@ const VisitRegistration = () => {
         return clinics.json();
     }
 
+    async function getAvailableDatesForDoctor(doctorId){
+        // TODO: backend logic
+        if (doctorId === 0){
+            return []
+        }
+        return ['2022-12-6T14:30:00', '2023-4-20T10:45:00'];
+    }
+
     useEffect(() =>{
         getListOfClinics().then(clinics => {
             setClinicList( () => {return clinics} );
@@ -49,12 +57,23 @@ const VisitRegistration = () => {
     }, [visitDetails.clinic.clinicId]);
 
     useEffect(() => {
-        //TODO load visit dates available for the doctor
-    }, [visitObject.doctor]);
+        getAvailableDatesForDoctor(visitDetails.doctor.doctorId).then(dates => {
+            setVisitDateList(() => {return dates})
+        })
+            .catch(err => console.warn(err.message))
+    }, [visitDetails.doctor.doctorId]);
 
     const changeClinic = (e) => {
+        visitObject = {...visitDetails}
         visitObject.clinic.clinicId = e.target.value;
         setVisitDetails(visitObject);
+        console.log(visitDetails)
+    }
+
+    const changeDoctor = (e) => {
+        visitObject = {...visitDetails};
+        visitObject.doctor.doctorId = e.target.value;
+        setVisitDetails(visitObject)
         console.log(visitDetails)
     }
 
@@ -63,14 +82,14 @@ const VisitRegistration = () => {
             <div className="container col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow">
                 <form className="row justify-content-center">
                     <label htmlFor={"clinic"}>Clinic:</label>
-                    <select id={"clinic-select"} name={"clinic"} className="form-select" onChange={changeClinic} required>
+                    <select name={"clinic"} className="form-select" onChange={changeClinic} required>
                         <option value="" hidden>- Select Clinic -</option>
                         {clinicList.map(clinic => {
                             return <option key={clinic.clinicId} value={clinic.clinicId}>{clinic.clinicName}</option>;
                         })}
                     </select>
                     <label htmlFor={"doctor"}>Doctor:</label>
-                    <select name={"doctor"} required>
+                    <select name={"doctor"} className={"form-select"} onChange={changeDoctor} required>
                         <option value="" hidden>- Select a Doctor -</option>
                         {doctorList.map(doctor => {
                             return <option key={doctor.doctorId} value={doctor.doctorId}>{doctor.user.firstName} {doctor.user.lastName}</option>;
@@ -78,7 +97,9 @@ const VisitRegistration = () => {
                     </select>
                     <label htmlFor={"date"}>Date:</label>
                     <select name={"date"} required>
-                        {}
+                        {visitDateList.map(date => {
+                            return <option key={date} value={date}>{date}</option>
+                        })}
                     </select>
                     <button type={"submit"}>SUBMIT</button>
                 </form>
@@ -87,7 +108,4 @@ const VisitRegistration = () => {
     );
 };
 
-
-
 export default VisitRegistration;
-
