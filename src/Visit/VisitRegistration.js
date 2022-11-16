@@ -22,6 +22,21 @@ const VisitRegistration = () => {
     const [doctorList, setDoctorList] = useState([])
     const [visitDateList, setVisitDateList] = useState([])
 
+    useEffect(() =>{
+        getListOfClinics().then(clinics => {
+            // TODO
+        })
+    }, [])
+
+    useEffect(() => {
+        // TODO load doctors available for the clinic
+    }, [visitDetails.clinic])
+
+    useEffect(() => {
+        //TODO load visit dates available for the doctor
+    }, [visitDetails.doctor]);
+
+
     const BASE_URL = "http://localhost:8080/api";
 
     async function getListOfClinics(){
