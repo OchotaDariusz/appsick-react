@@ -24,8 +24,6 @@ const VisitRegistration = () => {
     const [doctorList, setDoctorList] = useState([])
     const [visitDateList, setVisitDateList] = useState([])
 
-    const BASE_URL = "";
-
     async function getListOfClinics(){
         const clinics = await fetch("http://localhost:8080/api/clinic");
         return clinics.json();
@@ -39,28 +37,18 @@ const VisitRegistration = () => {
     }, [])
 
     useEffect(() => {
-        // TODO load doctors available for the clinic
-    }, [visitObject.clinic])
+        console.log("effect")
+        console.log(visitDetails)
+    }, [visitDetails]);
 
     useEffect(() => {
         //TODO load visit dates available for the doctor
     }, [visitObject.doctor]);
 
-
-    const ClinicOption = (props) => {
-        return (
-            <option onClick={() => {console.log("DUPA")} }>{props.name}</option>
-        )
-    }
-    const doctorOption = (option) => {
-        return (
-            <option>{option}</option>
-        )
-    }
-    const visitDateOption = (option) => {
-        return (
-            <option>{option}</option>
-        )
+    const changeClinic = (e) => {
+        visitObject.clinic.clinicId = e.target.value;
+        setVisitDetails(visitObject);
+        console.log(visitDetails)
     }
 
     return (
@@ -68,9 +56,11 @@ const VisitRegistration = () => {
             <div className="container col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow">
                 <form className="row justify-content-center">
                     <label htmlFor={"clinic"}>Clinic:</label>
-                    <select name={"clinic"} className="form-select">
+                    <select id={"clinic-select"} name={"clinic"} className="form-select" onChange={changeClinic}>
                         <option value="" hidden>- Select Clinic -</option>
-                        {clinicList.map(clinic => <ClinicOption key={clinic.clinicId} name={clinic.clinicName}/>)}
+                        {clinicList.map(clinic => {
+                            return <option key={clinic.clinicId} value={clinic.clinicId}>{clinic.clinicName}</option>;
+                        })}
                     </select>
                     <label htmlFor={"doctor"}>Doctor:</label>
                     <select name={"doctor"}>
