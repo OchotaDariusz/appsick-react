@@ -54,7 +54,7 @@ export default function VisitChat(props) {
   }
 
   const endVisit = () => {
-    chatroom.endVisit()
+    chatroom.endVisit(setChatMessages)
   }
 
   return (
@@ -87,7 +87,7 @@ export default function VisitChat(props) {
           </div>
         </div>
         <div className="d-flex justify-content-center my-2">
-          <button className="btn btn-danger" onClick={endVisit}>End Visit</button>
+          <button type="button" className="btn btn-danger" onClick={endVisit}>End Visit</button>
         </div>
       </form>
 

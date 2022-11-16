@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import {
-  getFirestore, collection, onSnapshot, getDocs, addDoc, deleteDoc,
+  getFirestore, collection, doc, onSnapshot, getDocs, addDoc, deleteDoc,
   query, where, orderBy
 } from "firebase/firestore";
 
@@ -24,7 +24,8 @@ class Chatroom {
     this.visitId = visitId;
     this.author = author;
     this.chats = collection(db, 'appsick-visits');
-    this.unsub = () => {}
+    this.unsub = () => {
+    }
   }
 
   async addChat(message) {
@@ -57,7 +58,7 @@ class Chatroom {
     })
   }
 
-  async endVisit() {
+  async endVisit(callback) {
     this.unsub()
     const queryResults = query(
       this.chats,
@@ -66,11 +67,34 @@ class Chatroom {
     )
     const querySnapshot = await getDocs(queryResults)
     const chatHistory = []
+    let chatMessage;
     querySnapshot.forEach((doc) => {
-      chatHistory.push(doc.data())
-      deleteDoc(doc.id)
+      chatMessage = doc.data()
+      chatMessage.date = new Date(chatMessage.date.toDate())
+      chatHistory.push(chatMessage)
     })
-    console.log(chatHistory)
+    fetch("http://localhost:8080/api/chats", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(chatHistory)
+    })
+      .then(() => {
+        getDocs(queryResults)
+          .then(snapshot => {
+            snapshot.docs.forEach(snapshotDoc => {
+              const idToRemove = snapshotDoc.id
+              const docRef = doc(db, 'appsick-visits', idToRemove)
+              deleteDoc(docRef)
+            })
+            callback([])
+          })
+          .catch(err => console.log(err.message));
+      })
+      .catch(err => console.log(err.message))
+
   }
 }
 
