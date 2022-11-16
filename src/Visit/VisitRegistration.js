@@ -42,6 +42,10 @@ const VisitRegistration = () => {
         return ['2022-12-6T14:30:00', '2023-4-20T10:45:00'];
     }
 
+    // async function postVisit(){
+    //     const response = await fetch(`http://localhost:8080/api/visit`, {body: visitDetails})
+    // }
+
     useEffect(() =>{
         getListOfClinics().then(clinics => {
             setClinicList( () => {return clinics} );
@@ -64,17 +68,21 @@ const VisitRegistration = () => {
     }, [visitDetails.doctor.doctorId]);
 
     const changeClinic = (e) => {
-        visitObject = {...visitDetails}
+        visitObject = {...visitDetails};
         visitObject.clinic.clinicId = e.target.value;
         setVisitDetails(visitObject);
-        console.log(visitDetails)
     }
 
     const changeDoctor = (e) => {
         visitObject = {...visitDetails};
         visitObject.doctor.doctorId = e.target.value;
-        setVisitDetails(visitObject)
-        console.log(visitDetails)
+        setVisitDetails(visitObject);
+    }
+
+    const changeVisitDate = async (e) => {
+        visitObject = {...visitDetails};
+        visitObject.date = e.target.value;
+        setVisitDetails(visitObject);
     }
 
     return (
@@ -96,7 +104,8 @@ const VisitRegistration = () => {
                         })}
                     </select>
                     <label htmlFor={"date"}>Date:</label>
-                    <select name={"date"} required>
+                    <select name={"date"} onChange={changeVisitDate} required>
+                        <option value="" hidden>- Select a Date -</option>
                         {visitDateList.map(date => {
                             return <option key={date} value={date}>{date}</option>
                         })}
