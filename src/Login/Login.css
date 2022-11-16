@@ -2,21 +2,21 @@
 
 
 
-.container{
+.containerr{
     position: relative;
-    max-width: 430px;
-    width: 100%;
+
+    width: 60%;
     background: #fff;
     border-radius: 10px;
     margin: auto;
     box-shadow: 5px 10px 20px rgb(0 0 0 / 50%);
 }
-.container .form{
+.containerr .form{
     padding: 50px;
 
 }
 
-.container .form .title{
+.containerr .form .title{
     position: relative;
     font-size: 27px;
     font-weight: 600;
@@ -28,13 +28,27 @@
     position: relative;
     margin-top: 30px;
     height: 50px;
-    width: 90%;
+    width: 100%;
+
 }
 
+
+.form span{
+    top: 10px;
+    position: relative;
+    margin-top: 30px;
+    height: 50px;
+    width: 90%;
+    padding: 0 35px;
+
+}
+
+
 .input-field input{
-    position: absolute;
+    /*position: absolute;*/
     height: 100%;
-    width: auto;
+    width: 60%;
+    margin: auto;
     padding: 0 35px;
     border: none;
     outline: none;
@@ -42,12 +56,12 @@
     border-top: 2px solid transparent;
 }
 
-.input-field i{
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+/*.input-field i{*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    transform: translateY(-50%);*/
 
-}
+/*}*/
 
 .input-field i.showHidePw{
     right: 0;
