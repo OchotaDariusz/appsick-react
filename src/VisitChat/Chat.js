@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import {
-  getFirestore, collection, doc, onSnapshot, getDocs, addDoc, deleteDoc,
+  getFirestore, collection, onSnapshot, getDocs, addDoc, deleteDoc,
   query, where, orderBy
 } from "firebase/firestore";
 
@@ -47,7 +47,6 @@ class Chatroom {
     this.unsub = onSnapshot(queryResults, snapshot => {
       snapshot.docChanges().forEach(change => {
         if (change.type === 'added') {
-          console.log(change.doc.data())
           setterFn(prevMessages => [...prevMessages, change.doc.data()])
         }
       });
@@ -58,6 +57,21 @@ class Chatroom {
     })
   }
 
+  async endVisit() {
+    this.unsub()
+    const queryResults = query(
+      this.chats,
+      where('visitId', '==', this.visitId),
+      orderBy('date')
+    )
+    const querySnapshot = await getDocs(queryResults)
+    const chatHistory = []
+    querySnapshot.forEach((doc) => {
+      chatHistory.push(doc.data())
+      deleteDoc(doc.id)
+    })
+    console.log(chatHistory)
+  }
 }
 
 export default Chatroom
