@@ -8,7 +8,7 @@ export default function News() {
             <div className="big-container">
             <div className="container1">
                 <header>
-                    <h1>-----NEWS------</h1>
+                    <h1 style={{paddingTop:'75px', fontStyle:'50px'}}>NEWS</h1>
                 </header>
                 <div id="news">
                     <div className="article">

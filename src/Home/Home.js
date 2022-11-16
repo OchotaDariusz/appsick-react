@@ -8,8 +8,8 @@ export default function Home() {
     return (
         <div>
             <div className={"home-tlo"}>
-                <h1>App Sick</h1>
-                <h2>With our help you can make an appointment quickly and safely.<br/>
+                <h1 style={{padding:'40px 0px 40px 0px'}}>App Sick</h1>
+                <h2 style={{padding:'0px 0px 40px 0px'}}>With our help you can make an appointment quickly and safely.<br/>
                     Give it a try now. <br/><br/></h2>
                 <button className={'button'}>START WITH US</button>
             </div>
