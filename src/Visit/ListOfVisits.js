@@ -21,7 +21,7 @@ const isToday = (visit) => {
 }
 
 const formatVisitDate = visit => {
-    visit.date = new Date(visit.date).toLocaleDateString()
+    visit.date = [new Date(visit.date).toLocaleDateString(),new Date(visit.date).toLocaleTimeString()]
     return visit
 }
 
@@ -58,10 +58,10 @@ export default function ListOfVisits() {
                     let dateB = new Date(b.date);
                     return dateB - dateA;
                 })
-                setFutureVisits(() => {
-                    let listOfFutureVisits = visits.filter(visit => new Date(visit.date).getTime() > new Date().getTime() && !isToday(visit))
-                    return listOfFutureVisits.map(formatVisitDate)
-                })
+                            setFutureVisits(() => {
+                                let listOfFutureVisits = visits.filter(visit => new Date(visit.date).getTime() > new Date().getTime() && !isToday(visit))
+                                return listOfFutureVisits.map(formatVisitDate)
+                            })
             })
             .catch(err => console.warn(err.message))
     }, [])
@@ -91,40 +91,11 @@ export default function ListOfVisits() {
                     return dateB - dateA;
                 })
                 setCurrentVisits(() => {
-                    let listOfCurrentVisits = visits.filter(visit => isToday(visit))
-                    return listOfCurrentVisits.map(formatVisitDate)
+                    return visits.map(formatVisitDate)
                 })
             })
             .catch(err => console.warn(err.message))
     }, [])
-
-
-    // useEffect(() => {
-    //     getListOfVisits()
-    //         .then(visits => {
-    //             visits.sort((a, b) => {
-    //                 let dateA = new Date(a.date);
-    //                 let dateB = new Date(b.date);
-    //                 return dateB - dateA;
-    //             })
-    //
-    //             setFutureVisits(() => {
-    //                 let listOfFutureVisits = visits.filter(visit => new Date(visit.date).getTime() > new Date().getTime() && !isToday(visit))
-    //                 return listOfFutureVisits.map(formatVisitDate)
-    //             })
-    //
-    //             setCurrentVisits(() => {
-    //                 let listOfCurrentVisits = visits.filter(visit => isToday(visit))
-    //                 return listOfCurrentVisits
-    //             })
-    //
-    //             setPastVisits(() => {
-    //                 let listOfPastVisits = visits.filter(visit => new Date(visit.date).getTime() < new Date().getTime())
-    //                 return listOfPastVisits.map(formatVisitDate)
-    //             })
-    //         })
-    //         .catch(err => console.warn(err.message))
-    // }, [])
 
 
     return (
@@ -135,13 +106,17 @@ export default function ListOfVisits() {
                         <div className="col-2"></div>
                         <div className="col fs-3 ">Incoming</div>
                     </div>
-                    <div className="row justify-content-center">
+                    <div className="row align-items-center">
+
                         {futureVisits.map(visit => <Visit visit={visit} key={visit.visitId}/>)}
-                        <div
-                            className="col-auto my-3 mx-2 container rounded-3 bg-info bg-opacity-10 text-dark shadow-sm">
-                            Today's visits:
-                        </div>
-                        <div className="col-9 container rounded-3 bg-info bg-opacity-10 text-dark my-3 shadow-sm">
+
+                        <hr />
+
+                        <div className="col-auto my-3 mx-2 container rounded-3 bg-info bg-opacity-10
+                         text-dark shadow-sm text-center">
+                            Today's <br />visits:</div>
+
+                        <div className="col-9 container rounded-3 bg-white text-dark my-3">
                             {currentVisits.length > 0 ?
                                 currentVisits.map(visit => <TodayVisit visit={visit} key={visit.visitId}/>) :
                                 "You do not have appointments planned for today."
@@ -149,6 +124,8 @@ export default function ListOfVisits() {
                         </div>
                     </div>
 
+                    <br/>
+                    <hr />
                     <br/>
 
                     <div className="row justify-content-center">

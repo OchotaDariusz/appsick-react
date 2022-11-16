@@ -2,6 +2,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLocationDot} from "@fortawesome/free-solid-svg-icons";
 import Collapse from 'react-bootstrap/Collapse';
 import {useState} from "react";
+import maleDoctor from "../Navbar/DoctorMale.png";
+import femaleDoctor from "../Navbar/DoctorFemale.png";
 
 export default function Visit({visit}) {
     const [open, setOpen] = useState(false);
@@ -23,9 +25,10 @@ export default function Visit({visit}) {
     return (
         <div className="row align-items-center">
 
-            <div className="row align-items-center">
+            <div className="row align-items-center text-center">
                 <div className="col-auto my-3 mx-2 container rounded-3 bg-white text-dark shadow-sm p-2">
-                    {visit.date}
+                    {visit.date[0]} <hr />
+                    {visit.date[1].slice(0, 5)}
                 </div>
 
                 <div className="col-9 container rounded-3 bg-white text-dark my-3">
@@ -43,7 +46,7 @@ export default function Visit({visit}) {
 
                     <div className="row align-items-center">
                         <div className="col-2">
-                            <img src="https://www.getmaple.ca/site-content/uploads/2020/08/female_dr.jpg"
+                            <img src={visit.doctor.user.sex === "MALE" ? maleDoctor : femaleDoctor}
                                  className="img-fluid rounded-circle"
                                  style={{height: "100px", width: "100px"}}
                                  alt="doctor"/>
