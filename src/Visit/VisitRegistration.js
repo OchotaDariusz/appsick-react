@@ -15,7 +15,7 @@ const VisitRegistration = () => {
             "patient": {
                 "patientId": 1 // TODO: fetch data
             },
-            "reason": "",
+            "reason": "Cancer",
             "status": "PENDING"
         }
 
@@ -42,9 +42,10 @@ const VisitRegistration = () => {
         return ['2022-12-6T14:30:00', '2023-4-20T10:45:00'];
     }
 
-    // async function postVisit(){
-    //     const response = await fetch(`http://localhost:8080/api/visit`, {body: visitDetails})
-    // }
+    async function postVisit(){
+        const response = await fetch(`http://localhost:8080/api/visit`, {method: "POST", body: visitDetails})
+        return response;
+    }
 
     useEffect(() =>{
         getListOfClinics().then(clinics => {
@@ -85,10 +86,23 @@ const VisitRegistration = () => {
         setVisitDetails(visitObject);
     }
 
+    const submitVisit = (e) => {
+        const form = document.getElementById("visit-form")
+        if (!form.checkValidity()) {
+            console.log("Form invalid")
+            // TODO: informative pop-up
+            return;
+        }
+        e.preventDefault();
+        console.log("POSTING")
+        postVisit().then(response => console.log(response))
+            .catch(err => console.warn(err.message));
+    }
+
     return (
         <ChakraProvider>
             <div className="container col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow">
-                <form className="row justify-content-center">
+                <form id={"visit-form"} className="row justify-content-center">
                     <label htmlFor={"clinic"}>Clinic:</label>
                     <select name={"clinic"} className="form-select" onChange={changeClinic} required>
                         <option value="" hidden>- Select Clinic -</option>
@@ -110,7 +124,7 @@ const VisitRegistration = () => {
                             return <option key={date} value={date}>{date}</option>
                         })}
                     </select>
-                    <button type={"submit"}>SUBMIT</button>
+                    <button type={"submit"} onClick={submitVisit}>SUBMIT</button>
                 </form>
             </div>
         </ChakraProvider>
