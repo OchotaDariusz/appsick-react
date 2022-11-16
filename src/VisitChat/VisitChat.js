@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import Chatroom from "./Chat"
 import ChatMessage from "./ChatMessage";
-import InputFields from "../components/InputFields"
 
 const getData = async (endpoint, id) => {
   const response = await fetch(`${endpoint}/${id}`)
@@ -21,7 +20,6 @@ let chatroom, messages
 export default function VisitChat(props) {
 
   const updateChat = (setterFn) => {
-    console.log("in updateChat")
     messages = []
     chatroom.getChats(chat => {
       messages.push(chat)
@@ -40,21 +38,23 @@ export default function VisitChat(props) {
         getPatient(visit.patient.patientId)
           .then(patient => {
             chatroom = new Chatroom(props.match.params.visitId, `${patient.user.firstName} ${patient.user.lastName}`)
-            console.log("use effect update chat now")
             updateChat(setChatMessages)
-            console.log(chatMessages)
           })
           .catch(err => console.log(err.message))
       })
       .catch(err => console.log(err.message))
 
-  }, [])
+  }, [props.match.params.visitId])
+
 
   const sendMessage = event => {
     event.preventDefault()
     chatroom.addChat(chatMessage)
-    console.log("sendMessage update chat now")
-    // updateChat(setChatMessages)
+    document.querySelector("#messageInput").value = ""
+  }
+
+  const endVisit = () => {
+    chatroom.endVisit()
   }
 
   return (
@@ -65,23 +65,32 @@ export default function VisitChat(props) {
         <ul className="chat-list | list-group">
           {
             chatMessages.map(
-              (message, index) => <ChatMessage author={message.author} message={message.message} time={message.date} key={index}/>
+              (message, index) => <ChatMessage
+                author={message.author}
+                message={message.message}
+                time={message.date}
+                key={index}/>
             )
           }
         </ul>
       </div>
 
-      <form onSubmit={sendMessage} className="new-chat | my-3">
+      <form onSubmit={sendMessage} className="new-chat | my-5 pb-3">
         <div className="input-group">
           <div className="input-group-prepend">
-            <div className="input-group-text">Your message:</div>
+            <span className="input-group-text">Your message:</span>
           </div>
-          <InputFields placeholder={"message..."} type={"text"} set={setChatMessage}/>
+            <input placeholder="message..." className="form-control" type="text" id="messageInput" onChange={e=>setChatMessage(e.target.value)} />
+            {/*<InputFields placeholder={"message..."} type={"text"} set={setChatMessage}/>*/}
           <div className="input-group-append">
             <button type="submit" className="btn btn-primary">Send</button>
           </div>
         </div>
+        <div className="d-flex justify-content-center my-2">
+          <button className="btn btn-danger" onClick={endVisit}>End Visit</button>
+        </div>
       </form>
+
 
     </div>
   );

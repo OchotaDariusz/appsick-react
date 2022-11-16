@@ -1,12 +1,14 @@
 import React from "react"
+import "./ChatMessage.css"
+import formatDistanceToNow from "date-fns/formatDistanceToNow"
 
-export default function ChatMessage({ author, message, date }) {
+export default function ChatMessage({ author, message, time }) {
 
   return (
     <li className="list-group-item">
-      <span className="author">{author}</span>
+      <span className="author fw-bold">{author}:&nbsp;</span>
       <span className="message">{message}</span>
-      <div className="date">{date}</div>
+      <div className="time">{formatDistanceToNow(time.toDate(), { addSuffix: true })}</div>
     </li>
   )
 }
