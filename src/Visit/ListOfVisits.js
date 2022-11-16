@@ -21,7 +21,7 @@ const isToday = (visit) => {
 }
 
 const formatVisitDate = visit => {
-    visit.date = [new Date(visit.date).toLocaleDateString(),new Date(visit.date).toLocaleTimeString()]
+    visit.date = [new Date(visit.date).toLocaleDateString(), new Date(visit.date).toLocaleTimeString()]
     return visit
 }
 
@@ -111,23 +111,29 @@ export default function ListOfVisits() {
                     <div className="row align-items-center">
 
                         {futureVisits.map(visit => <Visit visit={visit} key={visit.visitId}/>)}
-
-                        <hr />
-
-                        <div className="col-auto my-3 mx-2 container rounded-3 bg-info bg-opacity-10
-                         text-dark shadow-sm text-center">
-                            Today's <br />visits:</div>
-
-                        <div className="col-9 container rounded-3 bg-white text-dark my-3">
-                            {currentVisits.length > 0 ?
-                                currentVisits.map(visit => <TodayVisit visit={visit} key={visit.visitId}/>) :
-                                "You do not have appointments planned for today."
-                            }
+                        <div className="">
+                            <hr/>
                         </div>
+                        <br />
+                        <br />
+                        <div className="row align-items-center">
+                            <div className="col-auto my-3 mx-2 container rounded-3 bg-info bg-opacity-10
+                         text-dark shadow-sm text-center ">
+                                Today's <br/>visits:
+                            </div>
+
+                            <div className="container col-9">
+                                {currentVisits.length > 0 ?
+                                    currentVisits.map(visit => <TodayVisit visit={visit} key={visit.visitId}/>) :
+                                    "You do not have appointments planned for today."
+                                }
+                            </div>
+                        </div>
+
                     </div>
 
                     <br/>
-                    <hr />
+                    <hr/>
                     <br/>
 
                     <div className="row justify-content-center">
@@ -145,23 +151,23 @@ export default function ListOfVisits() {
                             <FontAwesomeIcon icon={faCalendarDays} className="me-2"/>
                             Data
                         </div>
-                        <div className="col-auto rounded-5 bg-white m-2">
+                        <div className="col-auto rounded-5 bg-white m-2 shadow-sm">
                             <FontAwesomeIcon icon={faLocationDot} className="me-2"/>
                             Visits
                         </div>
-                        <div className="col-auto rounded-5 bg-white m-2">
+                        <div className="col-auto rounded-5 bg-white m-2 shadow-sm">
                             <FontAwesomeIcon icon={faChartLine} className="me-2"/>
                             Examinations
                         </div>
-                        <div className="col-auto rounded-5 bg-white m-2">
+                        <div className="col-auto rounded-5 bg-white m-2 shadow-sm">
                             <FontAwesomeIcon icon={faPills} className="me-2"/>
                             Prescriptions
                         </div>
-                        <div className="col-auto rounded-5 bg-white m-2">
+                        <div className="col-auto rounded-5 bg-white m-2 shadow-sm ">
                             <FontAwesomeIcon icon={faVideo} className="me-2"/>
                             Video calls
                         </div>
-                        <div className="col-auto m-2">
+                        <div className="col-auto m-2 shadow-sm">
                             <FontAwesomeIcon icon={faXmark} className="me-2"/>
                             Clear
                         </div>
