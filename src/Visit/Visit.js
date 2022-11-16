@@ -46,7 +46,10 @@ export default function Visit({visit}) {
 
                     <div className="row align-items-center">
                         <div className="col-2">
-                            <img src={visit.doctor.user.sex === "MALE" ? maleDoctor : femaleDoctor}
+                            <img src={visit.doctor.user.image ?
+                                visit.doctor.user.image :
+                                visit.doctor.user.sex === "MALE" ?
+                                    maleDoctor : femaleDoctor}
                                  className="img-fluid rounded-circle"
                                  style={{height: "100px", width: "100px"}}
                                  alt="doctor"/>
