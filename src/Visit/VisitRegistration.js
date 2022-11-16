@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { ChakraProvider, Select } from '@chakra-ui/react'
 
 const VisitRegistration = () => {
+
     let visitObject = {
             "clinic": {
                 "clinicId": 0
@@ -22,63 +24,69 @@ const VisitRegistration = () => {
     const [doctorList, setDoctorList] = useState([])
     const [visitDateList, setVisitDateList] = useState([])
 
+    const BASE_URL = "";
+
+    async function getListOfClinics(){
+        const clinics = await fetch("http://localhost:8080/api/clinic");
+        return clinics.json();
+    }
+
     useEffect(() =>{
         getListOfClinics().then(clinics => {
-            // TODO
+            setClinicList( () => {return clinics} );
         })
+            .catch(err => console.warn(err.message))
     }, [])
 
     useEffect(() => {
         // TODO load doctors available for the clinic
-    }, [visitDetails.clinic])
+    }, [visitObject.clinic])
 
     useEffect(() => {
         //TODO load visit dates available for the doctor
-    }, [visitDetails.doctor]);
+    }, [visitObject.doctor]);
 
 
-    const BASE_URL = "http://localhost:8080/api";
-
-    async function getListOfClinics(){
-        const clinics = await fetch(BASE_URL + "/clinic");
-        return clinics.json();
+    const ClinicOption = (props) => {
+        return (
+            <option onClick={() => {console.log("DUPA")} }>{props.name}</option>
+        )
+    }
+    const doctorOption = (option) => {
+        return (
+            <option>{option}</option>
+        )
+    }
+    const visitDateOption = (option) => {
+        return (
+            <option>{option}</option>
+        )
     }
 
     return (
-        <div className="container col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow">
-            <form className="row justify-content-center">
-                <label htmlFor={"clinic"}>Clinic:</label>
-                <select name={"clinic"}>
-                    {}
-                </select>
-                <label htmlFor={"doctor"}>Doctor:</label>
-                <select name={"doctor"}>
-                    {}
-                </select>
-                <label htmlFor={"date"}>Doctor:</label>
-                <select name={"date"}>
-                    {}
-                </select>
-            </form>
-        </div>
+        <ChakraProvider>
+            <div className="container col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow">
+                <form className="row justify-content-center">
+                    <label htmlFor={"clinic"}>Clinic:</label>
+                    <select name={"clinic"} className="form-select">
+                        <option value="" hidden>- Select Clinic -</option>
+                        {clinicList.map(clinic => <ClinicOption key={clinic.clinicId} name={clinic.clinicName}/>)}
+                    </select>
+                    <label htmlFor={"doctor"}>Doctor:</label>
+                    <select name={"doctor"}>
+                        {}
+                    </select>
+                    <label htmlFor={"date"}>Date:</label>
+                    <select name={"date"}>
+                        {}
+                    </select>
+                </form>
+            </div>
+        </ChakraProvider>
     );
 };
 
-const clinicOption = (option) => {
-    return (
-        <option>{option}</option>
-    )
-}
-const doctorOption = (option) => {
-    return (
-        <option>{option}</option>
-    )
-}
-const visitDateOption = (option) => {
-    return (
-        <option>{option}</option>
-    )
-}
+
 
 export default VisitRegistration;
 
