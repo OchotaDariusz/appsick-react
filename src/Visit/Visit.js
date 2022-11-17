@@ -4,6 +4,10 @@ import Collapse from 'react-bootstrap/Collapse';
 import {useState} from "react";
 import maleDoctor from "../Navbar/DoctorMale.png";
 import femaleDoctor from "../Navbar/DoctorFemale.png";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import VisitChat from "../VisitChat/VisitChat";
+import {Link} from "react-router-dom";
+import Map from "../Map/Map";
 
 export default function Visit({visit}) {
     const [open, setOpen] = useState(false);
@@ -62,6 +66,9 @@ export default function Visit({visit}) {
                                 <div className="col text-primary ">
                                     <FontAwesomeIcon icon={faLocationDot} className="me-2"/>
                                     {visit.clinic.clinicName}, X: {visit.clinic.longitude}, Y: {visit.clinic.latitude}
+                                    <div>
+                                        <Map />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -89,10 +96,17 @@ export default function Visit({visit}) {
                                     Referrals
                                 </div>
                                 <div>
-                                    {/*{visit.patient.password}*/}
+                                    {visit.patient.user.telephoneNumber}
                                     <br/>
-                                    {/*{visit.patient.medicalData.weight}*/}
+                                    {visit.patient.user.email}
                                 </div>
+                                <br />
+                                <hr />
+                                <div className="btn btn-dark my-3">
+                                    <Link to={`/visit/${visit.visitId}`}>Chat with a doctor</Link>
+                                </div>
+                                <br />
+
                             </div>
                         </div>
                     </Collapse>
