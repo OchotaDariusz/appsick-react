@@ -84,6 +84,13 @@ const VisitRegistration = () => {
         setVisitDetails(visitObject);
     }
 
+    const toggleOnline = (e) => {
+        visitObject = {...visitDetails};
+        visitObject.online = !visitDetails.online;
+        setVisitDetails(visitObject);
+        console.log(visitObject.online)
+    }
+
     const submitVisit = (e) => {
         const form = document.getElementById("visit-form")
         if (!form.checkValidity()) {
@@ -122,6 +129,9 @@ const VisitRegistration = () => {
                         <label htmlFor="visit-description">Visit description:</label>
                         <textarea className="form-control" name={"visit-description"} rows="5" onChange={changeVisitDescription}></textarea>
                     </div>
+
+                    <label htmlFor={"online"}>Online visit:</label>
+                    <input type={"checkbox"} name={"online"} onToggle={toggleOnline}/>
 
                     <button type={"submit"} onClick={submitVisit}>SUBMIT</button>
                 </form>
