@@ -22,10 +22,12 @@ export default function Navbar() {
                 </div>
                 <div className="col-7 align-items-center">
                     <div className="row align-items-center" style={{height:'100%'}}>
-                        <div className="col-2 text-justify" >
+                        <div className="col-3 text-justify" >
+                            <a href={'/visit'}>
                             <img className="float-start w-10 mx-2 " src={visit} alt="Logo" />
 
                             <p>MY APPOINTMENTS</p>
+                        </a>
                         </div>
 
                         <div className="col-2 text-justify" >
