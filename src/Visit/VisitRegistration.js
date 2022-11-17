@@ -23,8 +23,6 @@ const VisitRegistration = () => {
     const [visitDetails, setVisitDetails] = useState(visitObject)
     const [clinicList, setClinicList] = useState([])
     const [doctorList, setDoctorList] = useState([])
-    const [visitDescription, setVisitDescription] = useState("")
-    const [online, setOnline] = useState(false)
     const history = useHistory();
 
     async function getListOfClinics(){
