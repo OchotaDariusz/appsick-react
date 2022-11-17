@@ -6,7 +6,8 @@ import drugs from './drugstest.png'
 import contact from './contact.png'
 import findings from './findingstest.png'
 import newVisit from './new_visit.png'
-import {Link} from "react-router-dom";
+
+
 
 
 export default function Navbar() {
