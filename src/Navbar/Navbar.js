@@ -46,7 +46,7 @@ export default function Navbar() {
                         <li className="nav-item">
                             <Link className="nav-link" to={'/register-visit'}>
                                 <img className="float-start mx-2" src={newVisit} alt="Logo"/>
-                                <p className={"float-start"}>Make an appointment</p></Link>
+                                <p className={"float-start"}>MAKE AN APPOINTMENT</p></Link>
                         </li>
                     </ul>
                     <span className="navbar-text">

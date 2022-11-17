@@ -4,11 +4,11 @@ import location from "./location.png";
 
 export default function Footer() {
     return (
-        <div className="    ">
+        <div>
             <div className="row text-white" style={{padding:'50px 100px 100px', backgroundColor:' #465969'}}>
 
                 <div className="col-2" >
-                    <h4>Dupa</h4>
+                    <h5>MY APPOINTMENTS</h5>
                     <p>text text text</p>
                     <p>text text text</p>
                     <p>text text text</p>
@@ -19,7 +19,7 @@ export default function Footer() {
 
                 </div>
                 <div className="col-2" >
-                    <h4>Dupa</h4>
+                    <h5>FINDINGS</h5>
                     <p>text text text</p>
                     <p>text text text</p>
                     <p>text text text</p>
@@ -30,7 +30,7 @@ export default function Footer() {
 
                 </div>
                 <div className="col-2" >
-                    <h4>Dupa</h4>
+                    <h5>DRUGS</h5>
                     <p>text text text</p>
                     <p>text text text</p>
                     <p>text text text</p>
@@ -41,7 +41,7 @@ export default function Footer() {
 
                 </div>
                 <div className="col-2" >
-                    <h4>Dupa</h4>
+                    <h5>MAKE AN APPOINTMENT</h5>
                     <p>text text text</p>
                     <p>text text text</p>
                     <p>text text text</p>

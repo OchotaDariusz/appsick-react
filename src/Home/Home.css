@@ -1,4 +1,4 @@
-.home-tlo {
+.home-main-text {
     padding-top: 50px;
     background-image: url('/src/home-bar.jpg');
     height: 600px;
@@ -7,14 +7,14 @@
     text-align: center;
     color: #b2e0bb;
 }
-.big-ass{
+.main-container-of-slides{
     width: 100%;
     text-align: center;
     height: 400px;
     background-color: rgba(0,0,0,0.2);
 
 }
-.dupa{
+.container-of-slides{
     margin: auto;
     padding: 0;
     height: 300px;
@@ -34,13 +34,13 @@
     box-shadow: 5px 3px 3px black;
     font-size: 25px;
 }
-.big-container {
+.main-container-news {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
     padding: 0;
 }
-.container1 {
+.container-news {
     margin-left: auto;
     margin-right: auto;
     width: 100%;

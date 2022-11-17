@@ -7,7 +7,7 @@ import Footer from "../Footer/Footer";
 export default function Home() {
     return (
         <div>
-            <div className={"home-tlo"}>
+            <div className={"home-main-text"}>
                 <h1 style={{padding:'40px 0px 40px 0px'}}>App Sick</h1>
                 <h2 style={{padding:'0px 0px 40px 0px'}}>With our help you can make an appointment quickly and safely.<br/>
                     Give it a try now. <br/><br/></h2>
@@ -17,8 +17,8 @@ export default function Home() {
             <News/>
 
 
-            <div className={"big-ass"}>
-                <div className={"dupa"}>
+            <div className={"main-container-of-slides"}>
+                <div className={"container-of-slides"}>
                     <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="false">
                         <div className="carousel-indicators">
                             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
