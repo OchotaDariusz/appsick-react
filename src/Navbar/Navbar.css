@@ -197,3 +197,7 @@ ol > li > ul > li:hover > a {
 .third:hover {
     box-shadow: 0 0 10px 0 #97d5a2 inset, 0 0 10px 4px #97d5a2;
 }
+a{
+    text-decoration: none;
+    color: black;
+}

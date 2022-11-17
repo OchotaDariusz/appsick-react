@@ -15,17 +15,20 @@ export default function Navbar() {
         <div className="    " style={{backgroundColor:'white'}}>
             <div className="row">
                 <div className="col-3">
-                        <div className="justify-content-center px-5">
+                       <a href={'/'}> <div className="justify-content-center px-5">
                             <img src={logo} alt="Logo" />
                         </div>
+                       </a>
                 </div>
                 <div className="col-7 align-items-center">
                     <div className="row align-items-center" style={{height:'100%'}}>
-                        <div className="col-2 text-justify" >
+                        <div className="col-2 text-justify" style={{textDecoration:'none'}}><a href={'/visit'}>
                             <img className="float-start w-10 mx-2" src={visit} alt="Logo" />
 
-                            <p>VISIT</p>
+                            <p >VISIT</p>
+                        </a>
                         </div>
+
                         <div className="col-2 text-justify" >
                             <img className="float-start w-10 mx-2" src={findings} alt="Logo" />
 
@@ -37,9 +40,10 @@ export default function Navbar() {
                             <p>DRUGS</p>
                         </div>
                         <div className="col-2 text-justify" >
-                            <img className="float-start w-10 mx-2" src={contact} alt="Logo" />
+                            <a href={'/visit/:visitId'}><img className="float-start w-10 mx-2" src={contact} alt="Logo" />
 
                             <p>CONTACT</p>
+                        </a>
                         </div>
                         <div className="col-3 text-justify" >
                             <img className="float-start w-10 mx-2" src={newVisit} alt="Logo" />
@@ -49,8 +53,8 @@ export default function Navbar() {
                     </div>
                 </div>
                 <div className="col-2">
-                    <button className="btn btn-secondary btn-sm my-3 mx-4">REGISTRATION</button>
-                    <button className="btn btn-secondary btn-sm">LOGIN</button>
+                    <a href={'/register'}><button className="btn btn-secondary btn-sm my-3 mx-4">REGISTRATION</button></a>
+                    <a href={'/login'}><button className="btn btn-secondary btn-sm">LOGIN</button></a>
 
                 </div>
 
