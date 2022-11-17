@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { ChakraProvider, Select } from '@chakra-ui/react'
+import React, { useState, useEffect } from 'react';
+import { ChakraProvider, Select } from '@chakra-ui/react';
+import {useHistory} from "react-router-dom";
 
 const VisitRegistration = () => {
 
@@ -24,6 +25,7 @@ const VisitRegistration = () => {
     const [doctorList, setDoctorList] = useState([])
     const [visitDescription, setVisitDescription] = useState("")
     const [online, setOnline] = useState(false)
+    const history = useHistory();
 
     async function getListOfClinics(){
         const clinics = await fetch("http://localhost:8080/api/clinic");
@@ -99,9 +101,9 @@ const VisitRegistration = () => {
             return;
         }
         e.preventDefault();
-        console.log("POSTING")
         postVisit().then(response => console.log(response))
             .catch(err => console.warn(err.message));
+        history.push("/visit")
     }
 
     return (
