@@ -65,9 +65,9 @@ export default function Visit({visit}) {
                             <div className="row ">
                                 <div className="col text-primary ">
                                     <FontAwesomeIcon icon={faLocationDot} className="me-2"/>
-                                    {visit.clinic.clinicName}, X: {visit.clinic.longitude}, Y: {visit.clinic.latitude}
+                                    {visit.clinic.clinicName}, X: {visit.clinic.latitude}, Y: {visit.clinic.longitude}
                                     <div>
-                                        <Map />
+                                        <Map visit={visit}/>
                                     </div>
                                 </div>
                             </div>

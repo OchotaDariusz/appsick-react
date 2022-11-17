@@ -1,17 +1,14 @@
 import React from "react"
-import {GoogleMap, useLoadScript, Marker} from "@react-google-maps/api";
-import {useMemo} from "react"
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 
 function MyVerticallyCenteredModal(props) {
 
-    const { isLoaded } = useLoadScript({
-        googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-    })
-
+    console.log("props.visit")
+    console.log(props.visit)
     return (
+
         <Modal
             {...props}
             size="lg"
@@ -25,10 +22,13 @@ function MyVerticallyCenteredModal(props) {
             </Modal.Header>
             <Modal.Body>
 
-                <GoogleMap zoom={10}
-                           center={{lat: 44, lng: -80}}
-                           mapContainerClassName="map-container">
-                </GoogleMap>
+                <iframe
+                    width="766"
+                    height="500"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    src={`https://www.google.com/maps/embed/v1/place?key=API_KEY&q=a&center=${props.visit?.clinic.latitude},${props.visit?.clinic.longitude}`}
+                    allowFullScreen>
+                </iframe>
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={props.onHide}>Close</Button>
@@ -37,7 +37,7 @@ function MyVerticallyCenteredModal(props) {
     );
 }
 
-export default function Map() {
+export default function Map({visit}) {
     const [modalShow, setModalShow] = React.useState(false);
 
     return (
@@ -49,6 +49,7 @@ export default function Map() {
             <MyVerticallyCenteredModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
+                visit={visit}
             />
         </>
     );
