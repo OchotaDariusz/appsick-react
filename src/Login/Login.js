@@ -28,6 +28,7 @@ export default function Login() {
         })
             .then(response => {
                 console.log(response)
+                localStorage.setItem('user', response.data)
                 // if(response.status >199 && response.status <300 ){
                 //     routeChange();
                 // }
@@ -38,6 +39,11 @@ export default function Login() {
     }
 
         console.log(email)
+        localStorage.setItem("user", "JWT")
+        console.log(localStorage)
+        console.log(localStorage.clear())
+        console.log(localStorage)
+
     return (
         <>
             <div className="containerr">

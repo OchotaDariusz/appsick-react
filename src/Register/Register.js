@@ -8,7 +8,6 @@ import {useHistory} from "react-router-dom";
 
 
 export default function Register() {
-    const [isActive, setIsActive] = useState(false);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [password, setPassword] = useState("");
@@ -24,26 +23,29 @@ export default function Register() {
     const [confirmationColor, setConfirmationColor] = useState("white");
     const [passwordConfirmationInfo, setPasswordConfirmationInfo] = useState("");
     const [emailColor, setEmailColor] = useState("white");
+    const history = useHistory();
 
+    let passValidation = /(?=.*[!#@$^%*])[a-zA-Z0-9!#@$%*^]{6,100}$/;
     const handleChange = (e) => {
         setGender(e.target.value);
     }
-    let passValidation = /(?=.*[!#@$^%*])[a-zA-Z0-9!#@$%*^]{6,100}$/;
+
+    const routeChange = () => {
+        let path = `/`;
+        history.push(path);
+    }
 
     useEffect(() => {
         const isPasswordOk = setTimeout(() => {
-            if (password.match(passValidation)) {
+            if (password.length === 0) {
+                setPasswordColor("white")
+                setPasswordInfo("")
+            } else if (password.match(passValidation)) {
                 setPasswordColor("green")
                 setPasswordInfo("")
-
             } else {
                 setPasswordColor("salmon");
                 setPasswordInfo("invalid password")
-            }
-            // password.match(passValidation) ? setPasswordColor("green") : setPasswordColor("salmon");
-            if (password.length == 0) {
-                setPasswordColor("white")
-                setPasswordInfo("")
             }
         }, 1000);
         return () => {
@@ -53,18 +55,16 @@ export default function Register() {
 
     useEffect(() => {
         const isConfirmationOk = setTimeout(() => {
-            // passwordConfirmation === password ? setConfirmationColor("green") : setConfirmationColor("salmon")
-            if (passwordConfirmation === password) {
+            if (password.length === 0 ||
+                passwordConfirmation.length === 0) {
+                setConfirmationColor("white")
+                setPasswordConfirmationInfo("")
+            } else if (passwordConfirmation === password) {
                 setConfirmationColor("green")
                 setPasswordConfirmationInfo("")
             } else {
                 setConfirmationColor("salmon")
                 setPasswordConfirmationInfo("passwords are different")
-            }
-            if (password.length == 0 ||
-                passwordConfirmation.length == 0) {
-                setConfirmationColor("white")
-                setPasswordConfirmationInfo("")
             }
         }, 1000);
         return () => {
@@ -72,32 +72,41 @@ export default function Register() {
         }
     }, [passwordConfirmation, password])
 
-    // useEffect(() => {
-    //     const isEmailTaken = setTimeout( ()=> {
-    //         axios.get("API", {
-    //             params: {
-    //                 email: `${email}`
-    //             }
-    //         }).then(({data}) => {
-    //             console.log(data)
-    //             //        jesli nie dostane uzytkownika to setEmailColor("green")
-    //             //    else setEmailColor("salmon")
-    //         })
-    //     },1000)
-    //     return () => {
-    //         clearTimeout(isEmailTaken)
-    //     };
-    // }, [email]);
+    useEffect(() => {
+        const isEmailTaken = setTimeout(() => {
+            axios.get('http://localhost:8080/api/register/', {
+                params: {
+                    email: `${email}`
+                }
+            }).then(({data}) => {
+                if (data === true) {
+                    setEmailInfo("User already exist");
+                    setEmailColor("salmon")
+
+                }else if(email.length===0){
+                    setEmailInfo("");
+                    setEmailColor("white");
+
+                } else {
+                    setEmailInfo("");
+                    setEmailColor("green");
+                }
+            })
+        }, 1000)
+        return () => {
+            clearTimeout(isEmailTaken)
+        };
+    }, [email]);
 
 
     const submitForm = (event) => {
         event.preventDefault()
         if (password === passwordConfirmation &&
             password.length > 6 &&
-            pesel.length === 11 &&
+            // pesel.length === 11 &&
             emailInfo === ""
         ) {
-            fetch('http://localhost:8080/register', {
+            fetch('http://localhost:8080/api/register', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -123,12 +132,7 @@ export default function Register() {
         }
     }
 
-    const history = useHistory();
 
-    const routeChange = () => {
-        let path = `/`;
-        history.push(path);
-    }
     return (
 
         <div className="containerr">
@@ -141,7 +145,8 @@ export default function Register() {
                             <form onSubmit={submitForm}>
                                 <InputFields placeholder={"Enter your first name"} type={"text"} set={setFirstName}/>
                                 <InputFields placeholder={"Enter your last name"} type={"text"} set={setLastName}/>
-                                <InputFields placeholder={"Enter your email"} type={"email"} set={setEmail}
+                                <InputFields color={emailColor} placeholder={"Enter your email"} type={"email"}
+                                             set={setEmail}
                                              info={emailInfo}/>
                                 <InputFields info={passwordInfo} color={passwordColor}
                                              placeholder={"Enter your password"} type={"password"}
@@ -163,6 +168,7 @@ export default function Register() {
                                            onChange={handleChange} name="gender"/>
                                     <label>Female</label>
                                 </div>
+                                <br/>
                                 <button className="btn btn-success">submit</button>
                             </form>
                         </div>
