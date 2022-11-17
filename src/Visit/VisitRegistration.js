@@ -22,7 +22,8 @@ const VisitRegistration = () => {
     const [visitDetails, setVisitDetails] = useState(visitObject)
     const [clinicList, setClinicList] = useState([])
     const [doctorList, setDoctorList] = useState([])
-    const [visitDateList, setVisitDateList] = useState([])
+    const [visitDescription, setVisitDescription] = useState("")
+    const [online, setOnline] = useState(false)
 
     async function getListOfClinics(){
         const clinics = await fetch("http://localhost:8080/api/clinic");
@@ -32,14 +33,6 @@ const VisitRegistration = () => {
     async function getDoctorsForClinic(clinicId){
         const clinics = await fetch(`http://localhost:8080/api/clinic/${clinicId}/doctor`);
         return clinics.json();
-    }
-
-    async function getAvailableDatesForDoctor(doctorId){
-        // TODO: backend logic
-        if (doctorId === 0){
-            return []
-        }
-        return ["2022-11-17T10:00", "2022-12-14T19:57:07.153Z"];
     }
 
     async function postVisit(){
@@ -66,13 +59,6 @@ const VisitRegistration = () => {
         })
             .catch(err => console.warn(err.message))
     }, [visitDetails.clinic.clinicId]);
-
-    useEffect(() => {
-        getAvailableDatesForDoctor(visitDetails.doctor.doctorId).then(dates => {
-            setVisitDateList(() => {return dates})
-        })
-            .catch(err => console.warn(err.message))
-    }, [visitDetails.doctor.doctorId]);
 
     const changeClinic = (e) => {
         visitObject = {...visitDetails};
@@ -124,13 +110,7 @@ const VisitRegistration = () => {
                         })}
                     </select>
                     <label htmlFor={"date"}>Date:</label>
-                    <select name={"date"} onChange={changeVisitDate} required>
-                        <option value="" hidden>- Select a Date -</option>
-                        {visitDateList.map(date => {
-                            return <option key={date} value={date}>{date}</option>
-                        })}
-                    </select>
-                    <input type={"datetime-local"} onChange={(e) => console.log(e.target.value)}/>
+                    <input type={"datetime-local"} name={"date"} onChange={changeVisitDate}/>
                     <button type={"submit"} onClick={submitVisit}>SUBMIT</button>
                 </form>
             </div>
