@@ -39,11 +39,17 @@ const VisitRegistration = () => {
         if (doctorId === 0){
             return []
         }
-        return ['2022-12-6T14:30:00', '2023-4-20T10:45:00'];
+        return ["2022-11-17T10:00", "2022-12-14T19:57:07.153Z"];
     }
 
     async function postVisit(){
-        const response = await fetch(`http://localhost:8080/api/visit`, {method: "POST", body: visitDetails})
+        const response = await fetch(`http://localhost:8080/api/visit`, {
+            method: "POST",
+            body: JSON.stringify(visitDetails),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
         return response;
     }
 
@@ -124,6 +130,7 @@ const VisitRegistration = () => {
                             return <option key={date} value={date}>{date}</option>
                         })}
                     </select>
+                    <input type={"datetime-local"} onChange={(e) => console.log(e.target.value)}/>
                     <button type={"submit"} onClick={submitVisit}>SUBMIT</button>
                 </form>
             </div>
