@@ -72,9 +72,15 @@ const VisitRegistration = () => {
         setVisitDetails(visitObject);
     }
 
-    const changeVisitDate = async (e) => {
+    const changeVisitDate = (e) => {
         visitObject = {...visitDetails};
         visitObject.date = e.target.value;
+        setVisitDetails(visitObject);
+    }
+
+    const changeVisitDescription = (e) => {
+        visitObject = {...visitDetails};
+        visitObject.reason = e.target.value;
         setVisitDetails(visitObject);
     }
 
@@ -110,7 +116,13 @@ const VisitRegistration = () => {
                         })}
                     </select>
                     <label htmlFor={"date"}>Date:</label>
-                    <input type={"datetime-local"} name={"date"} onChange={changeVisitDate}/>
+                    <input type={"datetime-local"} name={"date"} onChange={changeVisitDate} required/>
+
+                    <div className="form-group info-border">
+                        <label htmlFor="visit-description">Visit description:</label>
+                        <textarea className="form-control" name={"visit-description"} rows="5" onChange={changeVisitDescription}></textarea>
+                    </div>
+
                     <button type={"submit"} onClick={submitVisit}>SUBMIT</button>
                 </form>
             </div>
