@@ -26,7 +26,7 @@ function MyVerticallyCenteredModal(props) {
                     width="766"
                     height="500"
                     referrerPolicy="no-referrer-when-downgrade"
-                    src={`https://www.google.com/maps/embed/v1/place?key=API_KEY&q=a&center=${props.visit?.clinic.latitude},${props.visit?.clinic.longitude}`}
+                    src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}Y&q=a&center=${props.visit?.clinic.latitude},${props.visit?.clinic.longitude}`}
                     allowFullScreen>
                 </iframe>
             </Modal.Body>

@@ -1,7 +1,7 @@
 import React, {useRef, useState} from "react"
 import "./Login.css"
 import {useHistory} from "react-router-dom";
-import InputFields from "../components/InputFields"
+import InputFields from "../InputFields"
 export default function Login() {
     const [info, setInfo] = useState("")
     const history = useHistory();

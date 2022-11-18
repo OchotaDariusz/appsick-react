@@ -2,23 +2,15 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLocationDot} from "@fortawesome/free-solid-svg-icons";
 import Collapse from 'react-bootstrap/Collapse';
 import {useState} from "react";
-import maleDoctor from "../Navbar/DoctorMale.png"
-import femaleDoctor from "../Navbar/DoctorFemale.png"
+import maleDoctor from "../../assets/icons/DoctorMale.png"
+import femaleDoctor from "../../assets/icons/DoctorFemale.png"
 import {Link} from "react-router-dom";
 import Map from "../Map/Map";
-
+import {snakeToCamel} from "../../utils/Utils";
 
 export default function TodayVisit({visit}) {
 
-
     const [open, setOpen] = useState(false);
-
-    const snakeToCamel = str =>
-        str.toLowerCase().replace(/([-_][a-z])/g, group =>
-            group
-                .toUpperCase()
-                .replace('_', '')
-        )
 
     let fullMedicalName
     if (!visit.doctor.medicalSpecialities[0].includes("_")) {
