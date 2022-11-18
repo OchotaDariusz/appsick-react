@@ -40,13 +40,12 @@ export default function ListOfVisits() {
         return data.json()
     }
 
+
     useEffect(() => {
         getListOfVisits("/future")
             .then(visits => {
                 visits.sort((a, b) => {
-                    let dateA = new Date(a.date);
-                    let dateB = new Date(b.date);
-                    return dateB - dateA;
+                    return new Date(b.date) - new Date(a.date);
                 })
                 setFutureVisits(() => {
                     let listOfFutureVisits = visits.filter(visit => new Date(visit.date).getTime() > new Date().getTime() && !isToday(visit))
@@ -61,11 +60,8 @@ export default function ListOfVisits() {
         getListOfVisits("/past")
             .then(visits => {
                 visits.sort((a, b) => {
-                    let dateA = new Date(a.date);
-                    let dateB = new Date(b.date);
-                    return dateB - dateA;
+                    return new Date(b.date) - new Date(a.date);
                 })
-
                 setPastVisits(() => {
                     let listOfPastVisits = visits.filter(visit => new Date(visit.date).getTime() < new Date().getTime())
                     return listOfPastVisits.map(formatVisitDate)
@@ -78,9 +74,7 @@ export default function ListOfVisits() {
         getListOfVisits("/current")
             .then(visits => {
                 visits.sort((a, b) => {
-                    let dateA = new Date(a.date);
-                    let dateB = new Date(b.date);
-                    return dateB - dateA;
+                    return new Date(b.date) - new Date(a.date);
                 })
                 setCurrentVisits(() => {
                     return visits.map(formatVisitDate)
@@ -104,10 +98,11 @@ export default function ListOfVisits() {
                         <div className="">
                             <hr/>
                         </div>
-                        <br />
-                        <br />
+                        <br/>
+                        <br/>
                         <div className="row align-items-center">
-                            <div className="col-auto my-3 mx-2 container bg-white border-2 border-opacity-75 border-dark border rounded text-center">
+                            <div
+                                className="col-auto my-3 mx-2 container bg-white border-2 border-opacity-75 border-dark border rounded text-center">
                                 Today's <br/>visits:
                             </div>
 
