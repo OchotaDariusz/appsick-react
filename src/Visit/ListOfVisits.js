@@ -35,23 +35,13 @@ export default function ListOfVisits() {
     const PATIENT_ID = "1"
     const listOfVisitsURL = BASE_URL + PATIENT_ID
 
-    async function getListOfFutureVisits() {
-        const data = await fetch(listOfVisitsURL + "/future")
-        return data.json()
-    }
-
-    async function getListOfPastVisits() {
-        const data = await fetch(listOfVisitsURL + "/past")
-        return data.json()
-    }
-
-    async function getListOfCurrentVisits() {
-        const data = await fetch(listOfVisitsURL + "/current")
+    async function getListOfVisits(time) {
+        const data = await fetch(listOfVisitsURL + time)
         return data.json()
     }
 
     useEffect(() => {
-        getListOfFutureVisits()
+        getListOfVisits("/future")
             .then(visits => {
                 visits.sort((a, b) => {
                     let dateA = new Date(a.date);
@@ -68,7 +58,7 @@ export default function ListOfVisits() {
     }, [])
 
     useEffect(() => {
-        getListOfPastVisits()
+        getListOfVisits("/past")
             .then(visits => {
                 visits.sort((a, b) => {
                     let dateA = new Date(a.date);
@@ -85,7 +75,7 @@ export default function ListOfVisits() {
     }, [])
 
     useEffect(() => {
-        getListOfCurrentVisits()
+        getListOfVisits("/current")
             .then(visits => {
                 visits.sort((a, b) => {
                     let dateA = new Date(a.date);
