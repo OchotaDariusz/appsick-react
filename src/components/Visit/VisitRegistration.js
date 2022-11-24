@@ -23,6 +23,7 @@ const VisitRegistration = () => {
     const [visitDetails, setVisitDetails] = useState(visitObject)
     const [clinicList, setClinicList] = useState([])
     const [doctorList, setDoctorList] = useState([])
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const history = useHistory();
 
     async function getListOfClinics(){
@@ -98,10 +99,13 @@ const VisitRegistration = () => {
             // TODO: informative pop-up
             return;
         }
+        if (isSubmitting) { return; }
+        setIsSubmitting(true);
         e.preventDefault();
         postVisit().then(response => console.log(response))
-            .catch(err => console.warn(err.message));
-        history.push("/visit")
+            .then(() => history.push("/visit"))
+            .catch(err => console.warn(err.message))
+            .finally(() => setIsSubmitting(false));
     }
 
     return (
