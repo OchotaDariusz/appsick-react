@@ -99,9 +99,7 @@ const VisitRegistration = () => {
             // TODO: informative pop-up
             return;
         }
-        if (isSubmitting) {
-            return;
-        }
+        if (isSubmitting) { return; }
         setIsSubmitting(true);
         e.preventDefault();
         postVisit().then(response => console.log(response))
