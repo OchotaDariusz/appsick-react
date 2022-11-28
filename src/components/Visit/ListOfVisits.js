@@ -31,7 +31,7 @@ export default function ListOfVisits() {
     const [futureVisits, setFutureVisits] = useState([])
 
 
-    const BASE_URL = "https://appsick.alwaysdata.net/api/visit/patient/"
+    const BASE_URL = "http://localhost:8080/api/visit/patient/"
     const PATIENT_ID = "1"
     const listOfVisitsURL = BASE_URL + PATIENT_ID
 

@@ -12,20 +12,6 @@ import Map from "../Map/Map";
 export default function Visit({visit}) {
     const [open, setOpen] = useState(false);
 
-    const snakeToCamel = str =>
-        str.toLowerCase().replace(/([-_][a-z])/g, group =>
-            group
-                .toUpperCase()
-                .replace('_', '')
-        )
-
-    let finalResult
-    if (!visit.doctor.medicalSpecialities[0].includes("_")) {
-        finalResult = visit.doctor.medicalSpecialities[0].charAt(0) + visit.doctor.medicalSpecialities[0].slice(1)
-    } else {
-        const result = snakeToCamel(visit.doctor.medicalSpecialities[0]).replace(/([A-Z])/g, " $1");
-        finalResult = result.charAt(0).toUpperCase() + result.slice(1);
-    }
     return (
         <div className="row align-items-center">
 
@@ -60,7 +46,7 @@ export default function Visit({visit}) {
                         </div>
                         <div className="col-5 m-1">
                             <div className="row fs-5 mx-1">
-                                {finalResult}
+                                {visit.doctor.medicalSpecialities[0]}
                             </div>
                             <div className="row ">
                                 <div className="col text-primary ">
