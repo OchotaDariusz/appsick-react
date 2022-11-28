@@ -1,5 +1,5 @@
 import React from "react"
-import location from "./location.png";
+import location from "../../assets/background/location.png";
 
 
 export default function Footer() {

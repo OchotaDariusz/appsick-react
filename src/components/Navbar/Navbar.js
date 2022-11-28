@@ -1,11 +1,11 @@
 import React from "react"
 import './Navbar.css'
-import logo from './logotest.png'
-import visit from './visitstest.png'
-import drugs from './drugstest.png'
-import contact from './contact.png'
-import findings from './findingstest.png'
-import newVisit from './new_visit.png'
+import logo from '../../assets/logo/logotest.png'
+import visit from '../../assets/icons/visitstest.png'
+import drugs from '../../assets/icons/drugstest.png'
+import contact from '../../assets/icons/contact.png'
+import findings from '../../assets/icons/findingstest.png'
+import newVisit from '../../assets/icons/new_visit.png'
 import {Link} from "react-router-dom";
 
 

@@ -1,6 +1,6 @@
 import React from "react"
 import './Home.css'
-import logo from '../logo1.svg'
+import logo from '../../assets/logo/logo1.svg'
 import News from "./News";
 import Footer from "../Footer/Footer";
 
