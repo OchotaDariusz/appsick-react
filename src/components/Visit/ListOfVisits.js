@@ -1,34 +1,21 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {
-    faCalendarDays,
-    faLocationDot,
-    faChartLine,
-    faPills,
-    faXmark,
-    faVideo
-} from '@fortawesome/free-solid-svg-icons'
+import useLoadMoreOnScroll from "react-hook-pagination";
+import {faCalendarDays, faChartLine, faLocationDot, faPills, faVideo, faXmark} from '@fortawesome/free-solid-svg-icons'
 import Visit from "./Visit"
 import TodayVisit from "./TodayVisit"
 import {ChakraProvider} from '@chakra-ui/react'
 import 'bootstrap/dist/css/bootstrap.css'
+import {List, ListItem} from "@mui/material";
+import {isToday, formatVisitDate} from "../../utils/Utils";
 
 
-const isToday = (visit) => {
-    return new Date(visit.date).getFullYear() === new Date().getFullYear()
-        && new Date(visit.date).getMonth() === new Date().getMonth()
-        && new Date(visit.date).getDay() === new Date().getDay();
-}
-
-const formatVisitDate = visit => {
-    visit.date = [new Date(visit.date).toLocaleDateString(), new Date(visit.date).toLocaleTimeString()]
-    return visit
-}
 
 export default function ListOfVisits() {
     const [currentVisits, setCurrentVisits] = useState([])
     const [pastVisits, setPastVisits] = useState([])
     const [futureVisits, setFutureVisits] = useState([])
+
 
 
     const BASE_URL = "http://localhost:8080/api/visit/patient/"
@@ -59,9 +46,9 @@ export default function ListOfVisits() {
     useEffect(() => {
         getListOfVisits("/past")
             .then(visits => {
-                visits.sort((a, b) => {
-                    return new Date(b.date) - new Date(a.date);
-                })
+                console.log("PAST visits")
+                console.log(visits)
+
                 setPastVisits(() => {
                     let listOfPastVisits = visits.filter(visit => new Date(visit.date).getTime() < new Date().getTime())
                     return listOfPastVisits.map(formatVisitDate)
@@ -73,6 +60,8 @@ export default function ListOfVisits() {
     useEffect(() => {
         getListOfVisits("/current")
             .then(visits => {
+                console.log("current visits")
+                console.log(visits)
                 visits.sort((a, b) => {
                     return new Date(b.date) - new Date(a.date);
                 })
@@ -83,9 +72,19 @@ export default function ListOfVisits() {
             .catch(err => console.warn(err.message))
     }, [])
 
+    const scroller = useRef();
+    const {
+        start,
+        end,
+        isFetching,
+        doneFetching,
+        setIsFetching,
+        forceDonefetching
+    } = useLoadMoreOnScroll({ fetchSize: 2, scroller: scroller, limit: 100 });
+
 
     return (
-        <>
+        <div>
             <ChakraProvider>
                 <div className="container col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow">
                     <div className="row justify-content-center">
@@ -157,7 +156,15 @@ export default function ListOfVisits() {
                         </div>
                     </div>
 
-                    {pastVisits.map(visit => <Visit visit={visit} key={visit.visitId}/>)}
+                    {/*{pastVisits.map(visit => <Visit visit={visit} key={visit.visitId}/>)}*/}
+                    <List ref={scroller}>
+                        <For data={pastVisits} itemRenderer={(emp, idx) => (
+                            <ListItem key={pastVisits.map(visit => visit.visitId)}>
+
+                                {/*<Visit visit={visit}></Visit>*/}
+                            </ListItem>)}
+                        ></For>
+                    </List>
 
                 </div>
 
@@ -167,7 +174,7 @@ export default function ListOfVisits() {
                 <br/>
                 <br/>
             </ChakraProvider>
-        </>
+        </div>
 
     );
 }
