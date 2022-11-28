@@ -37,7 +37,11 @@ export default function VisitChat(props) {
       .then(visit => {
         getPatient(visit.patient.patientId)
           .then(patient => {
-            chatroom = new Chatroom(props.match.params.visitId, `${patient.user.firstName} ${patient.user.lastName}`)
+            chatroom = new Chatroom(
+              props.match.params.visitId,
+              visit.patient.patientId,
+              `${patient.user.firstName} ${patient.user.lastName}`
+            )
             updateChat(setChatMessages)
           })
           .catch(err => console.log(err.message))

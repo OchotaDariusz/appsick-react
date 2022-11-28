@@ -20,8 +20,9 @@ initializeApp(firebaseConfig);
 const db = getFirestore();
 
 class Chatroom {
-  constructor(visitId, author) {
+  constructor(visitId, userId, author) {
     this.visitId = visitId;
+    this.userId = userId;
     this.author = author;
     this.chats = collection(db, 'appsick-visits');
     this.unsub = () => {
@@ -32,6 +33,7 @@ class Chatroom {
     const chat = {
       message: message,
       author: this.author,
+      userId: this.userId,
       visitId: this.visitId,
       date: new Date()
     };
