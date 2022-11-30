@@ -1,5 +1,4 @@
 import React from "react"
-import './Home.css'
 import logo from '../../assets/logo/logo1.svg'
 import News from "./News";
 import Footer from "../Footer/Footer";
@@ -8,9 +7,9 @@ export default function Home() {
     return (
         <div>
             <div className={"home-main-text"}>
-                <h1 style={{padding:'40px 0px 40px 0px'}}>App Sick</h1>
-                <h2 style={{padding:'0px 0px 40px 0px'}}>With our help you can make an appointment quickly and safely.<br/>
-                    Give it a try now. <br/><br/></h2>
+                <div className="fs-1 px-4" >App Sick</div>
+                <div className="fs-2" >With our help you can make an appointment quickly and safely.<br/>
+                    Give it a try now. <br/><br/></div>
                 <button className={'button'}>START WITH US</button>
             </div>
 

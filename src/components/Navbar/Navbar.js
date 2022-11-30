@@ -1,5 +1,4 @@
 import React from "react"
-import './Navbar.css'
 import logo from '../../assets/logo/logotest.png'
 import visit from '../../assets/icons/visitstest.png'
 import drugs from '../../assets/icons/drugstest.png'
@@ -9,11 +8,9 @@ import newVisit from '../../assets/icons/new_visit.png'
 import {Link} from "react-router-dom";
 
 
-
-
 export default function Navbar() {
     return (
-        <nav className="navbar navbar-expand-lg sticky-top bg-light" style={{padding: '0px'}}>
+        <nav className="navbar navbar-expand-lg sticky-top bg-light p-0" >
             <div className="container-fluid">
                 <a className="navbar-brand" href={'/'}>
                     <div className="justify-content-center px-3">
@@ -24,33 +21,34 @@ export default function Navbar() {
                         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarText">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <Link className="nav-link" to={'/visit'}>
-                                <img className="float-start mx-2 " src={visit} alt="Logo"/>
-                                <p className={"float-start"}>MY APPOINTMENTS</p></Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to={'#'}><img className="float-start mx-2" src={findings} alt="Logo"/>
-                                <p className={"float-start"}>FINDINGS</p></Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to={'#'}>
-                                <img className="float-start mx-2" src={drugs} alt="Logo"/>
-                                <p className={"float-start"}>DRUGS</p></Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to={'/visit/:visitId'}>
-                                <img className="float-start mx-2" src={contact} alt="Logo"/>
-                                <p className={"float-start"}>CONTACT</p></Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to={'/register-visit'}>
-                                <img className="float-start mx-2" src={newVisit} alt="Logo"/>
-                                <p className={"float-start"}>MAKE AN APPOINTMENT</p></Link>
-                        </li>
-                    </ul>
+                <div className="collapse navbar-collapse" >
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li className="nav-item">
+                                <Link className="nav-link" to={'/visit'}>
+                                    <img className="float-start mx-2 " src={visit} alt="Logo"/>
+                                    <p className={"float-start"}>MY APPOINTMENTS</p></Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to={'#'}><img className="float-start mx-2" src={findings}
+                                                                         alt="Logo"/>
+                                    <p className={"float-start"}>FINDINGS</p></Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to={'#'}>
+                                    <img className="float-start mx-2" src={drugs} alt="Logo"/>
+                                    <p className={"float-start"}>DRUGS</p></Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to={'/visit/:visitId'}>
+                                    <img className="float-start mx-2" src={contact} alt="Logo"/>
+                                    <p className={"float-start"}>CONTACT</p></Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to={'/register-visit'}>
+                                    <img className="float-start mx-2" src={newVisit} alt="Logo"/>
+                                    <p className={"float-start"}>MAKE AN APPOINTMENT</p></Link>
+                            </li>
+                        </ul>
                     <span className="navbar-text">
                         <Link className="nav-link float-start" to={'/register'}>
                             <button className="btn btn-secondary btn-sm mx-2 my-1">REGISTRATION</button></Link>
@@ -61,6 +59,5 @@ export default function Navbar() {
             </div>
         </nav>
 
-    )
-        ;
+    );
 }
