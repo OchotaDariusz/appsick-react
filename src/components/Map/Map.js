@@ -1,6 +1,8 @@
 import React from "react"
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faLocationDot} from "@fortawesome/free-solid-svg-icons";
 
 
 function MyVerticallyCenteredModal(props) {
@@ -39,17 +41,20 @@ export default function Map({visit}) {
     const [modalShow, setModalShow] = React.useState(false);
 
     return (
-        <div>
-            <Button variant="primary" onClick={() => setModalShow(true)}>
+        <>
+            <div role="button" className="text-start p-0 text-primary" onClick={() => setModalShow(true)}>
+                <FontAwesomeIcon icon={faLocationDot}/>
+                <p className="d-inline-block mx-1">
+                    {visit.clinic.clinicName}, X: {visit.clinic.longitude}, Y: {visit.clinic.latitude}
+                </p>
 
-            </Button>
-
+            </div>
             <MyVerticallyCenteredModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 visit={visit}
             />
-        </div>
+        </>
     );
 }
 

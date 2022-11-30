@@ -42,9 +42,7 @@ export default function TodayVisit({visit}) {
                             {visit?.doctor?.medicalSpecialities[0]}
                         </div>
                         <div className="row ">
-                            <div className="col text-primary ">
-                                <FontAwesomeIcon icon={faLocationDot} className="me-2"/>
-                                {visit.clinic.clinicName}, X: {visit.clinic.longitude}, Y: {visit.clinic.latitude}
+                            <div className="col fs-5">
                                 <div>
                                     <Map visit={visit}/>
                                 </div>
