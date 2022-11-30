@@ -6,19 +6,11 @@ import maleDoctor from "../../assets/icons/DoctorMale.png"
 import femaleDoctor from "../../assets/icons/DoctorFemale.png"
 import {Link} from "react-router-dom";
 import Map from "../Map/Map";
-import {snakeToCamel} from "../../utils/Utils";
 
 export default function TodayVisit({visit}) {
 
     const [open, setOpen] = useState(false);
 
-    let fullMedicalName
-    if (!visit.doctor.medicalSpecialities[0].includes("_")) {
-        fullMedicalName = visit.doctor.medicalSpecialities[0].charAt(0) + visit.doctor.medicalSpecialities[0].slice(1)
-    } else {
-        const result = snakeToCamel(visit.doctor.medicalSpecialities[0]).replace(/([A-Z])/g, " $1");
-        fullMedicalName = result.charAt(0).toUpperCase() + result.slice(1);
-    }
     return (
         <div className="row align-items-center">
 
@@ -47,7 +39,7 @@ export default function TodayVisit({visit}) {
                     </div>
                     <div className="col-5 m-1">
                         <div className="row fs-5 mx-1">
-                            {fullMedicalName}
+                            {visit?.doctor?.medicalSpecialities[0]}
                         </div>
                         <div className="row ">
                             <div className="col text-primary ">
