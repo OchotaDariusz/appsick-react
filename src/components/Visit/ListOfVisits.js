@@ -3,7 +3,6 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCalendarDays, faChartLine, faLocationDot, faPills, faVideo, faXmark} from '@fortawesome/free-solid-svg-icons'
 import Visit from "./Visit"
 import TodayVisit from "./TodayVisit"
-import {ChakraProvider} from '@chakra-ui/react'
 import 'bootstrap/dist/css/bootstrap.css'
 import {List, ListItem} from "@mui/material";
 import {isToday, formatVisitDate} from "../../utils/Utils";
@@ -15,15 +14,23 @@ const PATIENT_ID = "1"
 const listOfVisitsURL = BASE_URL + PATIENT_ID
 
 export default function ListOfVisits() {
+    let pageNumber = 2;
     const [currentVisits, setCurrentVisits] = useState([])
     const [pastVisits, setPastVisits] = useState([])
     const [futureVisits, setFutureVisits] = useState([])
 
-
-
-    const BASE_URL = "http://localhost:8080/api/visit/patient/"
-    const PATIENT_ID = "1"
-    const listOfVisitsURL = BASE_URL + PATIENT_ID
+    const loadMorePastVisits = useCallback(() => {
+        getListOfVisits(`/past?pageNumber=${pageNumber}`)
+            .then(visits => {
+                pageNumber++;
+                setPastVisits(prevVisits => {
+                    let listOfPastVisits = visits
+                    listOfPastVisits.map(formatVisitDate)
+                    return [...prevVisits, ...listOfPastVisits]
+                })
+            })
+            .catch(err => console.warn(err.message))
+    }, []);
 
     async function getListOfVisits(time) {
         const data = await fetch(listOfVisitsURL + time)
@@ -31,13 +38,13 @@ export default function ListOfVisits() {
     }
 
 
+
     useEffect(() => {
         getListOfVisits("/future")
             .then(visits => {
 
                 setFutureVisits(() => {
-                    let listOfFutureVisits = visits.filter(visit => new Date(visit.date).getTime() > new Date().getTime() && !isToday(visit))
-                    return listOfFutureVisits.map(formatVisitDate)
+                    return visits.map(formatVisitDate)
                 })
 
             })
@@ -48,8 +55,7 @@ export default function ListOfVisits() {
         getListOfVisits("/past")
             .then(visits => {
                 setPastVisits(() => {
-                    let listOfPastVisits = visits.filter(visit => new Date(visit.date).getTime() < new Date().getTime())
-                    return listOfPastVisits.map(formatVisitDate)
+                    return visits.map(formatVisitDate)
                 })
             })
             .catch(err => console.warn(err.message))
@@ -148,14 +154,14 @@ export default function ListOfVisits() {
                 {/*        ></For>*/}
                 {/*    </List>*/}
 
-                </div>
+            </div>
 
 
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-            </ChakraProvider>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
         </div>
 
     );

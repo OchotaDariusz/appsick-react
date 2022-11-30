@@ -39,7 +39,7 @@ export default function Map({visit}) {
     const [modalShow, setModalShow] = React.useState(false);
 
     return (
-        <>
+        <div>
             <Button variant="primary" onClick={() => setModalShow(true)}>
 
             </Button>
@@ -49,7 +49,7 @@ export default function Map({visit}) {
                 onHide={() => setModalShow(false)}
                 visit={visit}
             />
-        </>
+        </div>
     );
 }
 
