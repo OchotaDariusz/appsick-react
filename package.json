@@ -1,7 +1,6 @@
 {
   "name": "appsick-react",
   "version": "0.1.0",
-  "type": "module",
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "^2.3.7",
@@ -30,12 +29,11 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",
     "react-dom": "^18.2.0",
-    "react-hook-pagination": "^1.0.3",
     "react-icons": "^4.6.0",
-    "react-paginate": "^8.1.4",
     "react-router": "^6.4.3",
     "react-router-dom": "^5.3.4",
     "react-scripts": "^5.0.1",
+    "react-virtuoso": "^3.1.5",
     "sort-by": "^1.2.0"
   },
   "scripts": {

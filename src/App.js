@@ -13,7 +13,6 @@ import ListOfVisits from "./components/Visit/ListOfVisits"
 import VisitChat from "./components/VisitChat/VisitChat"
 import Navbar from "./components/Navbar/Navbar";
 import VisitRegistration from "./components/Visit/VisitRegistration";
-
 function App() {
   return (
     <Router>
