@@ -8,6 +8,7 @@ import {List, ListItem} from "@mui/material";
 import {isToday, formatVisitDate} from "../../utils/Utils";
 import PastVisits from './PastVisits'
 import {Spinner} from '@chakra-ui/react'
+import BackToTopBtn from "../BackToTopBtn/BackToTopBtn";
 
 const BASE_URL = "http://localhost:8080/api/visit/patient/"
 const PATIENT_ID = "1"
@@ -19,15 +20,23 @@ export default function ListOfVisits() {
     const [pastVisits, setPastVisits] = useState([])
     const [futureVisits, setFutureVisits] = useState([])
 
+    const [isCurrentVisitsLoading, setIsCurrentVisitsLoading] = useState(true);
+    const [isPastVisitsLoading, setIsPastVisitsLoading] = useState(true);
+    const [isFutureVisitsLoading, setIsFutureVisitsLoading] = useState(true);
+
     const loadMorePastVisits = useCallback(() => {
         getListOfVisits(`/past?pageNumber=${pageNumber}`)
             .then(visits => {
                 pageNumber++;
-                setPastVisits(prevVisits => {
-                    let listOfPastVisits = visits
-                    listOfPastVisits.map(formatVisitDate)
-                    return [...prevVisits, ...listOfPastVisits]
-                })
+                // TODO: remove timeout
+                setTimeout(() => {
+                    setPastVisits(prevVisits => {
+                        let listOfPastVisits = visits
+                        listOfPastVisits.map(formatVisitDate)
+                        return [...prevVisits, ...listOfPastVisits]
+                    })
+                }, 2000)
+
             })
             .catch(err => console.warn(err.message))
     }, []);
@@ -41,11 +50,10 @@ export default function ListOfVisits() {
     useEffect(() => {
         getListOfVisits("/future")
             .then(visits => {
-
                 setFutureVisits(() => {
                     return visits.map(formatVisitDate)
                 })
-
+                setIsFutureVisitsLoading(false)
             })
             .catch(err => console.warn(err.message))
     }, [])
@@ -56,6 +64,7 @@ export default function ListOfVisits() {
                 setPastVisits(() => {
                     return visits.map(formatVisitDate)
                 })
+                setIsPastVisitsLoading(false)
             })
             .catch(err => console.warn(err.message))
     }, [])
@@ -66,6 +75,7 @@ export default function ListOfVisits() {
                 setCurrentVisits(() => {
                     return visits.map(formatVisitDate)
                 })
+                setIsCurrentVisitsLoading(false)
             })
             .catch(err => console.warn(err.message))
     }, [])
@@ -77,7 +87,7 @@ export default function ListOfVisits() {
                     <div className="col-2"></div>
                     <div className="col fs-3 mt-3">Incoming</div>
                 </div>
-                {futureVisits.map(visit => <Visit visit={visit} key={visit.visitId}/>)}
+                {(isFutureVisitsLoading) ? <Spinner /> : futureVisits.map(visit => <Visit visit={visit} key={visit.visitId}/>)}
                 <div className="row align-items-center">
 
                     <div>
@@ -95,8 +105,9 @@ export default function ListOfVisits() {
 
                         <div className="container col-9">
                             {currentVisits.length > 0 ?
-                                currentVisits.map(visit => <TodayVisit visit={visit} key={visit.visitId}/>) :
-                                <div className="col-12 container border-2 border-dark border-opacity-75 border rounded-3 bg-white text-dark my-3 p-3">
+                                (isCurrentVisitsLoading) ? <Spinner /> : currentVisits.map(visit => <TodayVisit visit={visit} key={visit.visitId}/>) :
+                                <div
+                                    className="col-12 container border-2 border-dark border-opacity-75 border rounded-3 bg-white text-dark my-3 p-3">
                                     You do not have appointments planned for today.
                                 </div>
                             }
@@ -146,7 +157,7 @@ export default function ListOfVisits() {
                     </div>
                 </div>
 
-                <PastVisits pastVisits={pastVisits} loadMorePastVisits={loadMorePastVisits}/>
+                {(isPastVisitsLoading) ? <div className="d-flex justify-content-center"> <Spinner /> </div> : <PastVisits pastVisits={pastVisits} loadMorePastVisits={loadMorePastVisits}/>}
 
             </div>
 
@@ -155,7 +166,7 @@ export default function ListOfVisits() {
             <br/>
             <br/>
             <br/>
-
+            <BackToTopBtn />
         </div>
 
     );

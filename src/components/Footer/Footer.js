@@ -1,11 +1,12 @@
 import React from "react"
 import location from "../../assets/background/location.png";
+import Map from "../Map/Map";
 
 
 export default function Footer() {
     return (
-        <div>
-            <div className="row text-white" style={{padding:'50px 100px 100px', backgroundColor:' #465969'}}>
+        <div className="mt-auto">
+            <div className="row text-white p-5" style={{backgroundColor:'#465969'}}>
 
                 <div className="col-2" >
                     <h5>MY APPOINTMENTS</h5>
@@ -52,8 +53,8 @@ export default function Footer() {
 
                 </div>
                 <div className="col-4" style={{height:'300px'}} >
-                    <img src={location} className="d-block w-10" alt="..."/>
-
+                    {/*<img src={location} className="d-block w-10" alt="..."/>*/}
+                    <Map />
                 </div>
 
             </div>

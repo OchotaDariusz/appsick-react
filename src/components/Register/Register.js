@@ -5,6 +5,7 @@ import InputFields from "../InputFields";
 import "../Login/Login.css"
 import axios from "axios";
 import {useHistory} from "react-router-dom";
+import Footer from "../Footer/Footer";
 
 
 export default function Register() {
@@ -134,15 +135,12 @@ export default function Register() {
 
 
     return (
-
-        <div className="containerr">
-            <div className="row">
-                <div className="col-2"></div>
-                <div className="col-8">
-                    <div className="forms ">
-                        <div className="form register">
-                            <span className="title">register</span>
-                            <form onSubmit={submitForm}>
+<>
+        <div className="container-fluid col-6 rounded-5 bg-dark text-dark bg-opacity-10 shadow my-5 mb-5 text-center pb-3">
+                        <div className="form pt-2">
+                            <span className="fs-2">Register</span>
+                            <form onSubmit={submitForm} className="text-center">
+                                <div className="d-flex flex-column justify-content-center align-items-center">
                                 <InputFields placeholder={"Enter your first name"} type={"text"} set={setFirstName}/>
                                 <InputFields placeholder={"Enter your last name"} type={"text"} set={setLastName}/>
                                 <InputFields color={emailColor} placeholder={"Enter your email"} type={"email"}
@@ -160,24 +158,23 @@ export default function Register() {
                                 <InputFields type={"date"} set={setBirthDate}/>
                                 <InputFields placeholder={"Enter your PESEL"} type={"text"}
                                              set={setPesel}/> {/*   TODO color/info */}
-                                <div className="input-field ">
-                                    <input style={{width: 'auto'}} type="radio" value="MALE"
-                                           onChange={handleChange} name="gender"/>
+                                </div>
+                                <div className="mt-3">
+                                    <input type="radio" value="MALE"
+                                           onChange={handleChange} name="gender" className="form-check-input mx-2"/>
                                     <label>Male</label>
-                                    <input style={{width: 'auto'}} type="radio" value="FEMALE"
-                                           onChange={handleChange} name="gender"/>
+                                    <input type="radio" value="FEMALE"
+                                           onChange={handleChange} name="gender" className="form-check-input mx-2"/>
                                     <label>Female</label>
                                 </div>
                                 <br/>
-                                <button className="btn btn-success">submit</button>
+                                <button className="btn btn-lg rounded-pill btn-success">Submit</button>
                             </form>
-                        </div>
-                    </div>
-                </div>
 
 
             </div>
         </div>
-
+        <Footer />
+</>
     );
 }

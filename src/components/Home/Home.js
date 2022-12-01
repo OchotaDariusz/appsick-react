@@ -6,7 +6,7 @@ import Footer from "../Footer/Footer";
 export default function Home() {
     return (
         <div>
-            <div className={"home-main-text"}>
+            <div className="home-main-text">
                 <div className="fs-1 px-4" >App Sick</div>
                 <div className="fs-2" >With our help you can make an appointment quickly and safely.<br/>
                     Give it a try now. <br/><br/></div>
