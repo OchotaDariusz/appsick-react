@@ -22,7 +22,8 @@ export default function TodayVisit({visit}) {
                     <div className="col-auto text-capitalize text-decoration-underline"
                          onClick={() => setOpen(!open)}
                          aria-controls="example-collapse-text"
-                         aria-expanded={open}>
+                         aria-expanded={open}
+                         role="button">
                         See details
                     </div>
                 </div>

@@ -9,6 +9,7 @@ import VisitChat from "../VisitChat/VisitChat";
 import {Link} from "react-router-dom";
 import Map from "../Map/Map";
 import {Spinner} from '@chakra-ui/react'
+import Button from "react-bootstrap/Button";
 
 export default function Visit({visit}) {
     const [open, setOpen] = useState(false);
@@ -17,7 +18,7 @@ export default function Visit({visit}) {
         <div className="row align-items-center">
 
             <div className="row align-items-center text-center ">
-                <div className="col-2 px-5 ">
+                <div className="col-2 px-3 ">
                     <div className="col-auto rounded-3 bg-white text-dark shadow-sm p-2 ">
                         {visit?.date[0]}
                         <hr/>
@@ -85,8 +86,9 @@ export default function Visit({visit}) {
                                 </div>
                                 <br/>
                                 <hr/>
-                                <div className="btn btn-dark my-3">
-                                    <Link to={`/visit/${visit?.visitId}`}>Chat with a doctor</Link>
+                                <div>
+                                    <Link to={`/visit/${visit?.visitId}`} className="btn btn-dark my-3">Ask doctor a question</Link>
+                                    {new Date(visit?.date) < new Date() ? <Button className="btn bi-skip-forward-btn-fill border-danger border-4 ">Cancel Visit</Button> : ""}
                                 </div>
                                 <br/>
 

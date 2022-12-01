@@ -45,7 +45,7 @@ export default function Map({visit}) {
             <div role="button" className="text-start p-0 text-primary" onClick={() => setModalShow(true)}>
                 <FontAwesomeIcon icon={faLocationDot}/>
                 <p className="d-inline-block mx-1">
-                    {visit.clinic.clinicName}, X: {visit.clinic.longitude}, Y: {visit.clinic.latitude}
+                    {visit.clinic.clinicName}
                 </p>
 
             </div>

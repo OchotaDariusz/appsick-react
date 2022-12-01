@@ -72,7 +72,7 @@ export default function ListOfVisits() {
 
     return (
         <div>
-            <div className="container col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow">
+            <div className="container-fluid col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow mt-3">
                 <div className="row justify-content-center">
                     <div className="col-2"></div>
                     <div className="col fs-3 mt-3">Incoming</div>
@@ -80,16 +80,15 @@ export default function ListOfVisits() {
                 {futureVisits.map(visit => <Visit visit={visit} key={visit.visitId}/>)}
                 <div className="row align-items-center">
 
-                    {futureVisits.map(visit => <Visit visit={visit} key={visit.visitId}/>)}
-                    <div className="">
+                    <div>
                         <hr/>
                     </div>
                     <br/>
                     <br/>
                     <div className="row align-items-center">
-                        <div className="col-2 px-5">
+                        <div className="col-2 px-2">
                             <div
-                                className="col-auto my-3 mx-2 container bg-white border-2 border-opacity-75 border-dark border rounded text-center">
+                                className=" my-3 mx-2  bg-white border-2 border-opacity-75 border-dark border rounded text-center">
                                 Today's <br/>visits:
                             </div>
                         </div>
@@ -121,27 +120,27 @@ export default function ListOfVisits() {
                     <div className="col-2">
 
                     </div>
-                    <div className="col-auto rounded-5 bg-white m-2 shadow-sm">
+                    <div className="col-auto rounded-5 bg-white m-2 shadow-sm" role="button">
                         <FontAwesomeIcon icon={faCalendarDays} className="me-2"/>
                         Data
                     </div>
-                    <div className="col-auto rounded-5 bg-white m-2 shadow-sm">
+                    <div className="col-auto rounded-5 bg-white m-2 shadow-sm" role="button">
                         <FontAwesomeIcon icon={faLocationDot} className="me-2"/>
                         Visits
                     </div>
-                    <div className="col-auto rounded-5 bg-white m-2 shadow-sm">
+                    <div className="col-auto rounded-5 bg-white m-2 shadow-sm" role="button">
                         <FontAwesomeIcon icon={faChartLine} className="me-2"/>
                         Examinations
                     </div>
-                    <div className="col-auto rounded-5 bg-white m-2 shadow-sm">
+                    <div className="col-auto rounded-5 bg-white m-2 shadow-sm" role="button">
                         <FontAwesomeIcon icon={faPills} className="me-2"/>
                         Prescriptions
                     </div>
-                    <div className="col-auto rounded-5 bg-white m-2 shadow-sm ">
+                    <div className="col-auto rounded-5 bg-white m-2 shadow-sm " role="button">
                         <FontAwesomeIcon icon={faVideo} className="me-2"/>
                         Video calls
                     </div>
-                    <div className="col-auto m-2 shadow-sm">
+                    <div className="col-auto m-2 shadow-sm" role="button">
                         <FontAwesomeIcon icon={faXmark} className="me-2"/>
                         Clear
                     </div>
