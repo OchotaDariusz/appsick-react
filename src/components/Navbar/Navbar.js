@@ -55,9 +55,9 @@ export default function Navbar() {
                 <div className="d-flex justify-content-end">
                     <span className="navbar-text">
                         <Link className="nav-link float-start" to={'/register'}>
-                            <button className="btn btn-secondary btn-sm mx-2 my-1">REGISTRATION</button></Link>
+                            <button className="btn bg-dark bg-opacity-75 btn-sm mx-2 my-1 rounded-pill text-white fs-5">Registration</button></Link>
                         <Link className="nav-link float-start" to={'/login'}>
-                            <button className="btn btn-secondary btn-sm mx-2 my-1">LOGIN</button></Link>
+                            <button className="btn bg-dark bg-opacity-75 btn-sm mx-2 my-1 rounded-pill text-white fs-5">Login</button></Link>
                     </span>
                 </div>
             </div>

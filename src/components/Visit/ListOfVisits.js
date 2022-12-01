@@ -151,7 +151,7 @@ export default function ListOfVisits() {
                         <FontAwesomeIcon icon={faVideo} className="me-2"/>
                         Video calls
                     </div>
-                    <div className="col-auto m-2 shadow-sm" role="button">
+                    <div className="col-auto m-2 shadow-sm" >
                         <FontAwesomeIcon icon={faXmark} className="me-2"/>
                         Clear
                     </div>

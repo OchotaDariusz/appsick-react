@@ -5,7 +5,7 @@ import {useState} from "react";
 import maleDoctor from "../../assets/icons/DoctorMale.png"
 import femaleDoctor from "../../assets/icons/DoctorFemale.png"
 import {Link} from "react-router-dom";
-import Map from "../Map/Map";
+import MapModal from "../Map/MapModal";
 
 export default function TodayVisit({visit}) {
 
@@ -45,7 +45,7 @@ export default function TodayVisit({visit}) {
                         <div className="row ">
                             <div className="col fs-5">
                                 <div>
-                                    <Map visit={visit}/>
+                                    <MapModal visit={visit}/>
                                 </div>
                             </div>
                         </div>

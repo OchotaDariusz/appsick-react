@@ -7,7 +7,7 @@ import femaleDoctor from "../../assets/icons/DoctorFemale.png";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import VisitChat from "../VisitChat/VisitChat";
 import {Link} from "react-router-dom";
-import Map from "../Map/Map";
+import MapModal from "../Map/MapModal";
 import {Spinner} from '@chakra-ui/react'
 import Button from "react-bootstrap/Button";
 
@@ -53,7 +53,7 @@ export default function Visit({visit}) {
                         <div className="col-5 m-1">
                             <div className="row fs-5">
                                 {visit?.doctor?.medicalSpecialities[0]}
-                                <Map visit={visit}/>
+                                <MapModal visit={visit}/>
                             </div>
                         </div>
                     </div>
