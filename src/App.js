@@ -12,6 +12,8 @@ import ListOfVisits from "./components/Visit/ListOfVisits"
 import VisitChat from "./components/VisitChat/VisitChat"
 import Navbar from "./components/Navbar/Navbar";
 import VisitRegistration from "./components/Visit/VisitRegistration";
+import Credits from "./components/Footer/Credits";
+
 function App() {
   return (
     <Router>
@@ -25,6 +27,9 @@ function App() {
         </Route>
         <Route path="/register">
           <Register />
+        </Route>
+        <Route path="/credits">
+          <Credits />
         </Route>
         <Route exact path="/visit">
           <ListOfVisits />
