@@ -107,7 +107,7 @@ export default function Register() {
             // pesel.length === 11 &&
             emailInfo === ""
         ) {
-            fetch('http://localhost:8080/api/register', {
+            fetch('http://localhost:8080/api/auth/register', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

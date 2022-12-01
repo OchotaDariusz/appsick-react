@@ -3,6 +3,7 @@ import "./Login.css"
 import {useHistory} from "react-router-dom";
 import InputFields from "../InputFields"
 import Footer from "../Footer/Footer";
+import axios from "axios";
 
 export default function Login() {
     const [info, setInfo] = useState("")
@@ -18,34 +19,20 @@ export default function Login() {
 
     const submitForm = (event) => {
         event.preventDefault()
-        fetch('http://localhost:8080/login', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "email": email,
-                "password": password
-            })
+        axios.post('http://localhost:8080/api/auth/login', {
+            "email": email,
+            "password": password
         })
-            .then(response => {
-                console.log(response)
-                localStorage.setItem('user', response.data)
-                // if(response.status >199 && response.status <300 ){
-                //     routeChange();
-                // }
-                setInfo("Invalid email or password")
-                return response.json()
-            })
-            .then(response => console.log(JSON.stringify(response)))
+          .then(response => {
+              console.log(response)
+              document.cookie = `appsick=${response.data.value}`
+              // if(response.status >199 && response.status <300 ){
+              //     routeChange();
+              // }
+              setInfo("Invalid email or password")
+          })
+          .catch(err => console.log(err.message))
     }
-
-    console.log(email)
-    localStorage.setItem("user", "JWT")
-    console.log(localStorage)
-    console.log(localStorage.clear())
-    console.log(localStorage)
 
     return (
         <>

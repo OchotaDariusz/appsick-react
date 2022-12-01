@@ -8,12 +8,8 @@ const getData = async (endpoint, id) => {
   return data
 }
 
-const getVisit = async visitId => {
-  return await getData("http://localhost:8080/api/visit", visitId)
-}
-
-const getPatient = async patientId => {
-  return await getData("http://localhost:8080/api/patient", patientId)
+const getUser = async () => {
+  return await getData("http://localhost:8080/api/auth/current")
 }
 
 let chatroom, messages
@@ -33,20 +29,18 @@ export default function VisitChat(props) {
   const [chatMessage, setChatMessage] = useState("")
 
   useEffect(() => {
-    getVisit(props.match.params.visitId)
-      .then(visit => {
-        getPatient(visit.patient.patientId)
-          .then(patient => {
-            chatroom = new Chatroom(
-              props.match.params.visitId,
-              visit.patient.patientId,
-              `${patient.user.firstName} ${patient.user.lastName}`
-            )
-            updateChat(setChatMessages)
-          })
-          .catch(err => console.log(err.message))
+
+    getUser()
+      .then(user => {
+        chatroom = new Chatroom(
+          props.match.params.visitId,
+          user.userId,
+          `${user.firstName} ${user.lastName}`
+        )
+        updateChat(setChatMessages)
       })
       .catch(err => console.log(err.message))
+
 
   }, [props.match.params.visitId])
 
@@ -84,8 +78,9 @@ export default function VisitChat(props) {
           <div className="input-group-prepend">
             <span className="input-group-text">Your message:</span>
           </div>
-            <input placeholder="message..." className="form-control" type="text" id="messageInput" onChange={e=>setChatMessage(e.target.value)} />
-            {/*<InputFields placeholder={"message..."} type={"text"} set={setChatMessage}/>*/}
+          <input placeholder="message..." className="form-control" type="text" id="messageInput"
+                 onChange={e => setChatMessage(e.target.value)}/>
+          {/*<InputFields placeholder={"message..."} type={"text"} set={setChatMessage}/>*/}
           <div className="input-group-append">
             <button type="submit" className="btn btn-primary">Send</button>
           </div>

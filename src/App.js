@@ -4,6 +4,7 @@ import {
   Route
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap';
 import Bootstrap from 'bootstrap'
 import Home from "./components/Home/Home"
 import Login from "./components/Login/Login"
