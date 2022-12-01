@@ -7,10 +7,14 @@ export default function Home() {
     return (
         <div>
             <div className="home-main-text">
-                <div className="fs-1 px-4" >App Sick</div>
-                <div className="fs-2" >With our help you can make an appointment quickly and safely.<br/>
+                <div className="fs-1 px-4">App Sick</div>
+                <div className="fs-2">With our help you can make an appointment quickly and safely.<br/>
                     Give it a try now. <br/><br/></div>
-                <button className={'button'}>START WITH US</button>
+                <div className="article">
+                    <div className="article-in">
+                        <button className="btn fs-1 border-2 border-white text-white">START WITH US</button>
+                    </div>
+                </div>
             </div>
 
             <News/>
@@ -31,22 +35,25 @@ export default function Home() {
                             <div className="carousel-item active">
                                 <img src={logo} className="d-block w-10 opacity-0 " alt="..."/>
                                 <div className="carousel-caption d-none d-md-block text-dark text-slider">
-                                    <h5>Mietek P</h5>
-                                    <p>Szybka i przyjemna wizyta! Najlepsza lewatywa w Mieście </p>
+                                    <div className="fs-3">Klara</div>
+                                    <p>Polecam pediatra miły i kompetentny. Nie ma presji czasu a więc mozna przegadać
+                                        wszystko z czym sie przyszło.</p>
                                 </div>
                             </div>
                             <div className="carousel-item">
                                 <img src={logo} className="d-block w-10 opacity-0" alt="..."/>
                                 <div className="carousel-caption d-none d-md-block text-dark text-slider">
-                                    <h5>Janusz K</h5>
-                                    <p>Ręce Pani doktor zrobiły cuda. Pnis jak nowy</p>
+                                    <div className="fs-3">Hania</div>
+                                    <p>Bardzo udana współpraca. Cena nie zniechęca, zwłaszcza że korzystam średnio raz
+                                        na 3-4 miesiące.</p>
                                 </div>
                             </div>
                             <div className="carousel-item">
                                 <img src={logo} className="d-block w-10 opacity-0" alt="..."/>
                                 <div className="carousel-caption d-none d-md-block text-dark text-slider">
-                                    <h5>Magda M</h5>
-                                    <p>Czuję że się mną zaopiekowano. </p>
+                                    <div className="fs-3">Marek</div>
+                                    <p>Idealne w okresie grypowym. Bez problemu uzyskałam receptę i L4. Dziekuję za
+                                        pomoc!</p>
                                 </div>
                             </div>
                         </div>

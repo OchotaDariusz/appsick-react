@@ -10,7 +10,7 @@ export default function News() {
                     <header>
                         <h1 className="fs-1">Subscription Plans</h1>
                     </header>
-                    <div id="news">
+                    <div id="news" role="button">
                         <div className="article">
                             <div className="article-in">
                                 <img src="https://images.pexels.com/photos/254069/pexels-photo-254069.jpeg?auto=compress&cs=tinysrgb&w=1600" className="rounded-3" alt="..."/>

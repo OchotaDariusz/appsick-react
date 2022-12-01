@@ -7,6 +7,10 @@ html, body {
     margin: 0;
 }
 
+.our-color {
+    color: #b2e0bb;
+}
+
 body {
     overflow-y: hidden;
 
@@ -16,7 +20,6 @@ body {
     width: 100%;
     background-image: url('/src/assets/background/tlo.jpg');
     background-repeat: repeat;
-    font-family: 'Arial', sans-serif;
 
 }
 
@@ -59,16 +62,16 @@ body {
     transform: translateY(-100%);
 }
 
-.button {
-    height: 100px;
-    width: 295px;
-    border-radius: 7px;
-    background: rgba(255, 255, 255, 0.2);
+/*.button {*/
+/*    height: 100px;*/
+/*    width: 295px;*/
+/*    border-radius: 7px;*/
+/*    background: rgba(255, 255, 255, 0.2);*/
 
-    color: white;
-    box-shadow: 5px 3px 3px black;
-    font-size: 25px;
-}
+/*    color: white;*/
+/*    box-shadow: 5px 3px 3px black;*/
+/*    font-size: 25px;*/
+/*}*/
 
 .main-container-news {
     margin-left: auto;
@@ -95,9 +98,7 @@ body {
 }
 
 .article-in {
-    background-color: white;
     transition: transform 0.2s;
-    border-radius: 15px;
 
     /*border: solid 1px black;*/
 }
