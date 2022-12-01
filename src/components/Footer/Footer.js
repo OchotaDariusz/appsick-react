@@ -40,8 +40,13 @@ export default function Footer() {
 
                 </div>
                 <div className="col-2">
-                    <p>text text text</p>
-                    <p>text text text</p>
+                    <div className="fs-4">
+                        Our location:
+                    </div>
+                    <div className="fs6">
+                        Plac Szczepański 7/66
+                        03-333 Warszawa
+                    </div>
 
 
                 </div>
