@@ -75,8 +75,9 @@ export default function ListOfVisits() {
             <div className="container col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow">
                 <div className="row justify-content-center">
                     <div className="col-2"></div>
-                    <div className="col fs-3 ">Incoming</div>
+                    <div className="col fs-3 mt-3">Incoming</div>
                 </div>
+                {futureVisits.map(visit => <Visit visit={visit} key={visit.visitId}/>)}
                 <div className="row align-items-center">
 
                     {futureVisits.map(visit => <Visit visit={visit} key={visit.visitId}/>)}
@@ -96,7 +97,7 @@ export default function ListOfVisits() {
                         <div className="container col-9">
                             {currentVisits.length > 0 ?
                                 currentVisits.map(visit => <TodayVisit visit={visit} key={visit.visitId}/>) :
-                                <div className="col-12 container rounded-3 bg-white text-dark my-3 p-3">
+                                <div className="col-12 container border-2 border-dark border-opacity-75 border rounded-3 bg-white text-dark my-3 p-3">
                                     You do not have appointments planned for today.
                                 </div>
                             }

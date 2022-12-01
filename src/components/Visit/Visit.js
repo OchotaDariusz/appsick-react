@@ -25,15 +25,16 @@ export default function Visit({visit}) {
                     </div>
                 </div>
 
-                <div className="col-10 rounded-3 bg-white text-dark my-3 ">
+                <div className="col-10 rounded-3 bg-white text-dark my-3 pb-3 px-4 pt-2">
                     <div className="row justify-content-between">
-                        <div className="col-4 fs-3">
+                        <div className="col-6 my-1 fs-3 text-start">
                             {visit?.doctor?.user?.firstName} {visit?.doctor?.user?.lastName}
                         </div>
                         <div className="col-auto text-capitalize text-decoration-underline"
                              onClick={() => setOpen(!open)}
                              aria-controls="example-collapse-text"
-                             aria-expanded={open}>
+                             aria-expanded={open}
+                             role="button">
                             See details
                         </div>
                     </div>

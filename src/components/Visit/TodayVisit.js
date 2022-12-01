@@ -14,9 +14,9 @@ export default function TodayVisit({visit}) {
     return (
         <div className="row align-items-center">
 
-            <div className="bg-white border-2 border-opacity-75 border-dark border rounded text-center">
+            <div className="bg-white border-2 border-opacity-75 border-dark border rounded-3 text-center my-3 pb-3 px-4 pt-2">
                 <div className="row justify-content-between">
-                    <div className="col-4 fs-3">
+                    <div className="col-6 my-1 fs-3 text-start">
                         {visit.doctor.user.firstName} {visit.doctor.user.lastName}
                     </div>
                     <div className="col-auto text-capitalize text-decoration-underline"
