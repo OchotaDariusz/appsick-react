@@ -5,7 +5,7 @@ import drugs from '../../assets/icons/Drugs48.png'
 import contact from '../../assets/icons/Online48.png'
 import newVisit from '../../assets/icons/Umow_wizyte48.png'
 import {Link} from "react-router-dom";
-
+import {CgKey} from "react-icons/cg"
 
 export default function Navbar() {
     return (
@@ -52,13 +52,14 @@ export default function Navbar() {
                         </div>
                     </div>
                 </div>
-                <div className="d-flex justify-content-end">
-                    <span className="navbar-text">
-                        <Link className="nav-link float-start" to={'/register'}>
-                            <button className="btn btn-sm mx-2 my-1 rounded-pill text-white fs-5 px-3" style={{backgroundColor: "#465969"}}>Registration</button></Link>
-                        <Link className="nav-link float-start" to={'/login'}>
-                            <button className="btn  btn-sm mx-2 my-1 rounded-pill text-white fs-5 px-3" style={{backgroundColor: "#465969"}}>Login</button></Link>
-                    </span>
+                <div className="d-flex justify-content-end pb-5">
+                    <div className="btn-primary fs-3 rounded-pill button-login bg-black p-2 " role="button">
+                        <p>Login | Register  </p>
+                        <div className="fs-1">
+                            <CgKey/>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </nav>

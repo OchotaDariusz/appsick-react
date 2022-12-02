@@ -110,3 +110,34 @@ body {
     right: 20px;
     display: none;
 }
+
+/*//////////////////////////////////////////////*/
+
+.button-login {
+    color: white;
+    position: absolute;
+    height: 60px;
+    display: inline-flex;
+    align-items: end;
+    overflow:hidden;
+    width: auto;
+    max-width: 60px; /** I'm animating max-width because width needs to be auto, and auto can't be animated **/
+    -webkit-transition: max-width 0.5s;
+    transition: max-width 0.5s;
+}
+
+.button-login:hover {
+    max-width: 400px;
+}
+
+.icon-login {
+    white-space: nowrap;
+    padding-right: 15px;
+}
+
+.text {
+    margin-right: 15px;
+    padding: 0px 8px;
+    align-items: end;
+
+}
