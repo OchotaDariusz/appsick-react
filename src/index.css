@@ -127,16 +127,17 @@ body {
 }
 
 .button-login:hover {
-    max-width: 400px;
+    max-width: 500px;
 }
 
 .icon-login {
+    position: absolute;
     white-space: nowrap;
     padding-right: 15px;
 }
 
 .text {
-    margin-right: 15px;
+    margin: 50px;
     padding: 0px 8px;
     align-items: end;
 

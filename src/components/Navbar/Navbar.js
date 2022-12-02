@@ -6,6 +6,7 @@ import contact from '../../assets/icons/Online48.png'
 import newVisit from '../../assets/icons/Umow_wizyte48.png'
 import {Link} from "react-router-dom";
 import {CgKey} from "react-icons/cg"
+import key from "./key.svg"
 
 export default function Navbar() {
     return (
@@ -53,10 +54,12 @@ export default function Navbar() {
                     </div>
                 </div>
                 <div className="d-flex justify-content-end pb-5">
-                    <div className="btn-primary fs-3 rounded-pill button-login bg-black p-2 " role="button">
+                    <div className="button-login btn-primary fs-3 rounded-pill  bg-black p-2 " role="button">
                         <p>Login | Register  </p>
                         <div className="fs-1">
                             <CgKey/>
+                            {/*<img src={key} alt="key"/>*/}
+
                         </div>
 
                     </div>
