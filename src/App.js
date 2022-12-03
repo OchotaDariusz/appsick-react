@@ -11,14 +11,14 @@ import Login from "./components/Login/Login"
 import Register from "./components/Register/Register"
 import ListOfVisits from "./components/Visit/ListOfVisits"
 import VisitChat from "./components/VisitChat/VisitChat"
-import Navbar from "./components/Navbar/Navbar";
+import TheNavbar from "./components/Navbar/TheNavbar";
 import VisitRegistration from "./components/Visit/VisitRegistration";
 import Credits from "./components/Footer/Credits";
 
 function App() {
   return (
     <Router>
-      <Navbar />
+      <TheNavbar />
       <Switch>
         <Route exact path="/">
           <Home />
