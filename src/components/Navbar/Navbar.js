@@ -1,5 +1,5 @@
 import React from "react"
-import logo from '../../assets/logo/logotest.png'
+import logo from '../../assets/logo/logo.svg'
 import visit from '../../assets/icons/Visit.svg'
 import drugs from '../../assets/icons/Drugs.svg'
 import contact from '../../assets/icons/Contact.svg'
@@ -11,14 +11,14 @@ import key from "./key.svg"
 export default function Navbar() {
     return (
         <nav className="navbar navbar-expand-lg bg-light">
-            <div className="container-fluid">
-                <div className="navbar-brand"><Link to={'/'}><img src={logo} alt="Logo"/></Link></div>
+            <div className="container-fluid justify-content-between">
+                <div className="navbar-brand"><Link to={'/'}><img src={logo} style={{height:80}} alt="Logo"/></Link></div>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
                         aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse d-flex justify-content-center" id="navbarNavAltMarkup">
+                <div className="collapse navbar-collapse d-flex justify-content-center " id="navbarNavAltMarkup">
                     <div className="navbar-nav container row">
                         <div className="row row-cols-10 align-items-center">
                             <div className="col"></div>
