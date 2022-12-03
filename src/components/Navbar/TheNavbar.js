@@ -15,7 +15,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 export default function TheNavbar() {
     return (
         <>
-            <nav className="navbar navbar-expand-sm  navbar-light flex-nowrap">
+            <nav className="navbar navbar-expand-sm  navbar-light flex-nowrap bg-light">
                 <button className="navbar-toggler mr-2" type="button" data-toggle="collapse" data-target="#navbar5">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -24,35 +24,37 @@ export default function TheNavbar() {
                 </span>
                 <div className="navbar-collapse collapse w-100 justify-content-center" id="navbar5">
                     <ul className="navbar-nav mx-auto ">
-                        <li>
-                            <Link className="nav-link d-flex align-items-center fs-5 px-5" to={'/visit'}>
-                                <img className="float-start img-fluid mx-2" src={visit} style={{height: 60}}
-                                     alt="visit"/>
-                                <p>VISIT HISTORY</p>
-                            </Link>
+                        <li className="nav-link d-flex align-items-center fs-5 px-5">
+                            <div className="container d-inline-block">
+                                <Link to={'/visit'}>
+                                    <img className="float-start img-fluid mx-2" src={visit} style={{height: 60}}
+                                         alt="visit"/>
+                                    VISIT HISTORY
+                                </Link>
+                            </div>
                         </li>
 
-                        <li>
-                            <Link className="nav-link d-flex align-items-center fs-5 px-5" to={'#'}>
+                        <li className="nav-link d-flex align-items-center fs-5 px-5">
+                            <Link to={'#'}>
                                 <img className="float-start img-fluid mx-2 " src={drugs} style={{height: 60}}
                                      alt="drugs"/>
-                                <p>DRUGS</p>
+                                DRUGS
                             </Link>
                         </li>
 
-                        <li>
-                            <Link className="nav-link d-flex align-items-center fs-5 px-5" to={'#'}>
+                        <li className="nav-link d-flex align-items-center fs-5 px-5">
+                            <Link to={'#'}>
                                 <img className="float-start img-fluid mx-2" src={contact} style={{height: 60}}
                                      alt="contact"/>
-                                <p>CONTACT</p>
+                                CONTACT
                             </Link>
                         </li>
 
-                        <li>
-                            <Link className="nav-link d-flex align-items-center fs-5 px-5" to={'/register-visit'}>
+                        <li className="nav-link d-flex align-items-center fs-5 px-5">
+                            <Link to={'/register-visit'}>
                                 <img className="float-start img-fluid mx-2" src={newVisit} style={{height: 60}}
                                      alt="newVisit"/>
-                                <p>MAKE AN <br/>APPOINTMENT</p>
+                                MAKE AN <br/>APPOINTMENT
                             </Link>
                         </li>
                     </ul>
