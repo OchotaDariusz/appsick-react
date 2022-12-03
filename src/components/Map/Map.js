@@ -13,7 +13,7 @@ export default function Map() {
                 loading="lazy"
                 allowFullScreen
                 referrerPolicy="no-referrer-when-downgrade"
-                src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+                src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
     &q=Space+Needle,Seattle+WA`}>
             </iframe>
         </>
