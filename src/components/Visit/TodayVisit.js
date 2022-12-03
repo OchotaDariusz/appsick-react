@@ -2,8 +2,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLocationDot} from "@fortawesome/free-solid-svg-icons";
 import Collapse from 'react-bootstrap/Collapse';
 import {useState} from "react";
-import maleDoctor from "../../assets/icons/DoctorMale.png"
-import femaleDoctor from "../../assets/icons/DoctorFemale.png"
+import maleDoctor from "../../assets/icons/Lekarz.svg"
+import femaleDoctor from "../../assets/icons/Lekarka.svg"
 import {Link} from "react-router-dom";
 import MapModal from "../Map/MapModal";
 

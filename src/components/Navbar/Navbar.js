@@ -1,9 +1,9 @@
 import React from "react"
 import logo from '../../assets/logo/logotest.png'
-import visit from '../../assets/icons/Visits48.png'
-import drugs from '../../assets/icons/Drugs48.png'
-import contact from '../../assets/icons/Online48.png'
-import newVisit from '../../assets/icons/Umow_wizyte48.png'
+import visit from '../../assets/icons/Visit.svg'
+import drugs from '../../assets/icons/Drugs.svg'
+import contact from '../../assets/icons/Contact.svg'
+import newVisit from '../../assets/icons/new_visit.svg'
 import {Link} from "react-router-dom";
 import {CgKey} from "react-icons/cg"
 import key from "./key.svg"
@@ -24,28 +24,29 @@ export default function Navbar() {
                             <div className="col"></div>
                             <div className="col-2">
                                 <Link className="nav-link d-flex align-items-center" to={'/visit'}>
-                                    <img className="float-start img-fluid mx-2" src={visit}
+                                    <img className="float-start img-fluid mx-2" src={visit} style={{height:80}}
                                          alt="visit"/>
                                     <p>VISIT HISTORY</p>
                                 </Link>
                             </div>
                             <div className="col">
                                 <Link className="nav-link d-flex align-items-center" to={'#'}>
-                                    <img className="float-start img-fluid mx-2" src={drugs}
+                                    <img className="float-start img-fluid mx-2" src={drugs} style={{height:80}}
                                          alt="drugs"/>
                                     <p>DRUGS</p>
                                 </Link>
                             </div>
                             <div className="col">
                                 <Link className="nav-link d-flex align-items-center" to={'#'}>
-                                    <img className="float-start img-fluid mx-2" src={contact}
+                                    <img className="float-start img-fluid mx-2" src={contact} style={{height:80}}
                                          alt="contact"/>
                                     <p>CONTACT</p>
                                 </Link>
                             </div>
                             <div className="col-2">
                                 <Link className="nav-link d-flex align-items-center" to={'/register-visit'}>
-                                    <img className="float-start img-fluid mx-2" src={newVisit} alt="newVisit"/>
+                                    <img className="float-start img-fluid mx-2" src={newVisit} style={{height:80}}
+                                         alt="newVisit"/>
                                     <p>MAKE AN APPOINTMENT</p>
                                 </Link>
                             </div>
@@ -54,7 +55,7 @@ export default function Navbar() {
                     </div>
                 </div>
                 <div className="d-flex justify-content-end pb-5">
-                    <div className="button-login btn-primary fs-3 rounded-pill  bg-black p-2 " role="button">
+                    <div className="button-login  fs-3 text-black border border-dark border-2 rounded-pill p-2 " role="button">
                         <p>Login | Register  </p>
                         <div className="fs-1">
                             <CgKey/>

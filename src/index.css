@@ -119,11 +119,12 @@ body {
     height: 60px;
     display: inline-flex;
     align-items: end;
-    overflow:hidden;
+    overflow: hidden;
     width: auto;
     max-width: 60px; /** I'm animating max-width because width needs to be auto, and auto can't be animated **/
     -webkit-transition: max-width 0.5s;
     transition: max-width 0.5s;
+
 }
 
 .button-login:hover {
