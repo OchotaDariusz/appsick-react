@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react"
+import React, {useEffect, useState} from "react"
 import InputFields from "../InputFields";
 
 
@@ -75,7 +75,7 @@ export default function Register() {
 
     useEffect(() => {
         const isEmailTaken = setTimeout(() => {
-            axios.get('http://localhost:8080/api/register/', {
+            axios.get(`http://localhost:8080/api/register/`, {
                 params: {
                     email: `${email}`
                 }
@@ -107,7 +107,7 @@ export default function Register() {
             // pesel.length === 11 &&
             emailInfo === ""
         ) {
-            fetch('http://localhost:8080/api/auth/register', {
+            fetch(`http://localhost:8080/api/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

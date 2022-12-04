@@ -1,0 +1,13 @@
+.message__label {
+    border-top-left-radius: 50vw !important;
+    border-bottom-left-radius: 50vw !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.btn__chat {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-right-radius: 50vw !important;
+    border-bottom-right-radius: 50vw !important;
+}

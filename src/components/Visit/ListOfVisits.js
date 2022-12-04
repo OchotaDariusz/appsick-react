@@ -11,31 +11,14 @@ import {
 import Visit from "./Visit"
 import TodayVisit from "./TodayVisit"
 import 'bootstrap/dist/css/bootstrap.css'
-import { List, ListItem } from "@mui/material";
-import { isToday, formatVisitDate } from "../../utils/Utils";
+import { formatVisitDate } from "../../utils/Utils";
 import PastVisits from './PastVisits'
 import { Spinner } from '@chakra-ui/react'
 import BackToTopBtn from "../BackToTopBtn/BackToTopBtn";
-import axios from "axios";
 
-const BASE_URL = "http://localhost:8080/api/visit/patient/"
+const BASE_URL = `http://localhost:8080/api/visit/patient/`
 const PATIENT_ID = "1"
 const listOfVisitsURL = BASE_URL + PATIENT_ID
-
-function getCookie(cname) {
-  let name = cname + "=";
-  let ca = document.cookie.split(';');
-  for(let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
 
 export default function ListOfVisits() {
 
@@ -66,33 +49,17 @@ export default function ListOfVisits() {
   }, []);
 
   async function getListOfVisits(time) {
-    // console.log("cookie appsick:")
-    // console.log(getCookie("appsick"))
-    // const requestHeaders = {
-    //   method: 'GET',
-    //   headers: {
-    //     "Cookie": `appsick=${getCookie("appsick")}`,
-    //     "Authorization": `Bearer ${getCookie("appsick")}`,
-    //     "Access-Control-Allow-Origin": "*"
-    //   },
-    //   redirect: 'follow'
-    // };
-    //
-    // const data = await fetch(listOfVisitsURL + time, requestHeaders)
-    // const instance = axios.create({
-    //   withCredentials: true,
-    //   baseURL: BASE_URL
-    // })
-    // return await instance.get(listOfVisitsURL + time, {
-    //   headers: {
-    //     "Authorization": `Bearer ${getCookie("appsick")}`,
-    //     "Access-Control-Allow-Origin": "http://localhost:8080",
-    //     "Access-Control-Allow-Credentials": "true"
-    //   }
-    // })
-    return axios.get(listOfVisitsURL + time)
+    const data = await fetch(listOfVisitsURL + time, {
+      mode: 'cors',
+      credentials: "include",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
+    })
+    return await data.json()
   }
-
 
   useEffect(() => {
     getListOfVisits("/future")
@@ -105,9 +72,7 @@ export default function ListOfVisits() {
         }
       })
       .catch(err => console.warn(err.message))
-  }, [])
 
-  useEffect(() => {
     getListOfVisits("/past")
       .then(visits => {
         if (visits.status !== 401) {
@@ -118,9 +83,7 @@ export default function ListOfVisits() {
         }
       })
       .catch(err => console.warn(err.message))
-  }, [])
 
-  useEffect(() => {
     getListOfVisits("/current")
       .then(visits => {
         if (visits.status !== 401) {

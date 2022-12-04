@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
-import Chatroom from "./Chat"
-import ChatMessage from "./ChatMessage";
+import "./VisitChat.css"
+import Chatroom from "./Chatroom"
+import ChatMessage from "./ChatMessage/ChatMessage"
+import { Spinner } from "@chakra-ui/react"
 
 const getData = async (endpoint, id) => {
   const response = await fetch(`${endpoint}/${id}`)
@@ -13,23 +15,27 @@ const getUser = async () => {
 }
 
 let chatroom, messages
+
+
 export default function VisitChat(props) {
 
+  const [isNewChatMessageLoading, setIsNewChatMessageLoading] = useState(true)
+  const [chatMessages, setChatMessages] = useState([])
+  const [chatMessage, setChatMessage] = useState("")
+
   const updateChat = (setterFn) => {
+    setIsNewChatMessageLoading(true)
     messages = []
     chatroom.getChats(chat => {
       messages.push(chat)
     }, setterFn)
       .then(() => {
         setChatMessages(messages)
+        setIsNewChatMessageLoading(false)
       })
   }
 
-  const [chatMessages, setChatMessages] = useState([])
-  const [chatMessage, setChatMessage] = useState("")
-
   useEffect(() => {
-
     getUser()
       .then(user => {
         chatroom = new Chatroom(
@@ -40,10 +46,7 @@ export default function VisitChat(props) {
         updateChat(setChatMessages)
       })
       .catch(err => console.log(err.message))
-
-
   }, [props.match.params.visitId])
-
 
   const sendMessage = event => {
     event.preventDefault()
@@ -57,12 +60,15 @@ export default function VisitChat(props) {
 
   return (
     <div className="container my-4">
+      <div className="container-fluid col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow mt-3">
       <h1 className="my-4 text-center">Visit Chat</h1>
 
       <div className="chat-window">
         <ul className="chat-list | list-group">
           {
-            chatMessages.map(
+            (chatMessages === []) ?
+              <li className="list-group-item"><Spinner /></li> :
+              chatMessages.map(
               (message, index) => <ChatMessage
                 author={message.author}
                 message={message.message}
@@ -70,26 +76,26 @@ export default function VisitChat(props) {
                 key={index}/>
             )
           }
+          {(isNewChatMessageLoading) ? <li className="list-group-item"><Spinner /></li> : ""}
         </ul>
       </div>
 
       <form onSubmit={sendMessage} className="new-chat | my-5 pb-3">
         <div className="input-group">
           <div className="input-group-prepend">
-            <span className="input-group-text">Your message:</span>
+            <span className="message__label | input-group-text">Your message:</span>
           </div>
           <input placeholder="message..." className="form-control" type="text" id="messageInput"
                  onChange={e => setChatMessage(e.target.value)}/>
-          {/*<InputFields placeholder={"message..."} type={"text"} set={setChatMessage}/>*/}
           <div className="input-group-append">
-            <button type="submit" className="btn btn-primary">Send</button>
+            <button type="submit" className="btn__chat | btn btn-primary">Send</button>
           </div>
         </div>
         <div className="d-flex justify-content-center my-2">
           <button type="button" className="btn btn-danger" onClick={endVisit}>End Visit</button>
         </div>
       </form>
-
+      </div>
 
     </div>
   );
