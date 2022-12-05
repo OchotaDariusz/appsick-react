@@ -5,8 +5,8 @@ html, body {
     min-height: 100vh;
     overflow-x: hidden;
     margin: 0;
+    font-family: Montserrat, sans-serif;
 }
-
 
 body {
     overflow-y: hidden;
@@ -85,6 +85,7 @@ body {
     padding: 0;
     margin-bottom: 25px;
 
+
 }
 
 .article {
@@ -144,3 +145,14 @@ body {
     align-items: end;
 
 }
+
+
+/*@media (min-width: 768px) {*/
+/*    .navbar-brand.abs {*/
+/*        position: absolute;*/
+/*        width: auto;*/
+/*        left: 50%;*/
+/*        transform: translateX(-50%);*/
+/*        text-align: center;*/
+/*    }*/
+/*}*/
