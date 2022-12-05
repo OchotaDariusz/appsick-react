@@ -10,6 +10,27 @@ import {CgKey} from "react-icons/cg"
 
 export default function TheNavbar() {
 
+    const logout = async () => {
+        fetch(`http://localhost:8080/api/auth/logout`, {
+            method: 'POST',
+            redirect: 'follow',
+            mode: 'cors',
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Cache': 'no-cache'
+            }
+        })
+            .then(res => res.json())
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.log(err.message)
+            })
+    }
 
     return (
         <>
@@ -63,19 +84,30 @@ export default function TheNavbar() {
                     </div>
 
                     <div className="w-100">
-                        <div className="collapse navbar-collapse nav-link d-flex justify-content-end align-items-center">
-                            <div
-                                className="menu-login button-login fs-3 text-black border border-dark border-2 rounded-pill p-2 "
-                                role="button">
-                                <p>{'\u00A0'}{'\u00A0'}Login | Register{'\u00A0'}</p>
-                                <div className="fs-1 d-inline">
-                                    <CgKey/>
-                                </div>
-                            </div>
+                        <div
+                            className="collapse navbar-collapse nav-link d-flex justify-content-end align-items-center">
+
+                                <Link
+                                    className="menu-login button-login fs-3 text-black border border-dark border-2 rounded-pill p-2"
+                                    role="button" to={'/login'}>
+
+                                    <p>{'\u00A0'}{'\u00A0'}Login | Register{'\u00A0'}</p>
+                                    <div className="fs-1 d-inline">
+                                        <CgKey/>
+                                    </div>
+
+                                </Link>
                         </div>
+
                     </div>
                 </div>
             </nav>
+            <div
+                className="fs-3 text-black border border-dark border-2 float-end rounded-pill  p-2 px-4"
+                role="button">
+                Logout tymczasowy
+
+            </div>
 
         </>
     );

@@ -168,7 +168,7 @@ export default function Register() {
                                     <label>Female</label>
                                 </div>
                                 <br/>
-                                <button className="btn btn-lg rounded-pill btn-success">Submit</button>
+                                <button className="btn fs-3 text-black border border-dark border-2 rounded-pill p-2 px-4">Submit</button>
                             </form>
 
 
