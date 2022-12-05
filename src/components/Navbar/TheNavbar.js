@@ -13,7 +13,7 @@ export default function TheNavbar() {
 
     return (
         <>
-            <nav className="navbar navbar-expand-md bg-light flex-sm-nowrap flex-wrap">
+            <nav className="navbar navbar-expand-md bg-light  flex-nowrap">
                 <div className="container-fluid">
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
@@ -29,31 +29,31 @@ export default function TheNavbar() {
                     </span>
                     <div className="collapse navbar-collapse d-flex justify-content-center" id="navbarNavAltMarkup">
                         <div className="navbar-nav container">
-                            <div className="row align-items-center d-inline-block">
-                                <div className="col fs-4 mx-3">
-                                    <Link className="nav-link d-flex " to={'/visit'}>
-                                        <img className="float-start img-fluid mx-2" src={visit} style={{height: 60}}
-                                             alt="visit"/>
+                            <div className="row">
+                                <div className="col fs-4  mx-2">
+                                    <Link className="nav-link d-flex align-items-center" to={'/visit'}>
+                                        <img className="float-start img-fluid mx-2" src={visit}
+                                             alt="visit"  style={{height: 60}} />
                                         VISIT HISTORY
                                     </Link>
                                 </div>
-                                <div className="col fs-4 mx-3">
+                                <div className="col fs-4 mx-2">
                                     <Link className="nav-link d-flex align-items-center" to={'#'}>
                                         <img className="float-start img-fluid mx-2" src={drugs}
-                                             alt="drugs" style={{height: 60}}/>
+                                             alt="drugs"  style={{height: 60}} />
                                         DRUGS
                                     </Link>
                                 </div>
-                                <div className="col fs-4 mx-3">
+                                <div className="col fs-4 mx-2">
                                     <Link className="nav-link d-flex align-items-center" to={'#'}>
                                         <img className="float-start img-fluid mx-2" src={contact}
-                                             alt="contact"  style={{width: 60}}/>
+                                             alt="contact"  style={{height: 60}} />
                                         CONTACT
                                     </Link>
                                 </div>
-                                <div className="col fs-4 mx-3">
+                                <div className="col fs-4 mx-2">
                                     <Link className="nav-link d-flex align-items-center" to={'/register-visit'}>
-                                        <img className="float-start img-fluid mx-2" src={newVisit} alt="newVisit"  style={{height: 60}}/>
+                                        <img className="float-start img-fluid mx-2" src={newVisit} alt="newVisit"  style={{height: 60}} />
                                         MAKE AN APPOINTMENT
                                     </Link>
                                 </div>
