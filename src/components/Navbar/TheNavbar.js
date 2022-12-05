@@ -29,77 +29,41 @@ export default function TheNavbar() {
                     </span>
                     <div className="collapse navbar-collapse d-flex justify-content-center" id="navbarNavAltMarkup">
                         <div className="navbar-nav container">
-                            <div className="row">
-                                <div className="col fs-4  mx-2">
+                            <div className="row flex-nowrap align-items-center">
+                                <div className="col fs-4  mx43">
                                     <Link className="nav-link d-flex align-items-center" to={'/visit'}>
-                                        <img className="float-start img-fluid mx-2" src={visit}
-                                             alt="visit"  style={{height: 60}} />
+                                        <img className="float-start img-fluid mx-1" src={visit}
+                                             alt="visit" style={{height: 60}}/>
                                         VISIT HISTORY
                                     </Link>
                                 </div>
-                                <div className="col fs-4 mx-2">
+                                <div className="col fs-4 mx-4">
                                     <Link className="nav-link d-flex align-items-center" to={'#'}>
-                                        <img className="float-start img-fluid mx-2" src={drugs}
-                                             alt="drugs"  style={{height: 60}} />
+                                        <img className="float-start img-fluid mx-1" src={drugs}
+                                             alt="drugs" style={{height: 60}}/>
                                         DRUGS
                                     </Link>
                                 </div>
-                                <div className="col fs-4 mx-2">
+                                <div className="col fs-4 mx-4">
                                     <Link className="nav-link d-flex align-items-center" to={'#'}>
-                                        <img className="float-start img-fluid mx-2" src={contact}
-                                             alt="contact"  style={{height: 60}} />
+                                        <img className="float-start img-fluid mx-1" src={contact}
+                                             alt="contact" style={{height: 60}}/>
                                         CONTACT
                                     </Link>
                                 </div>
-                                <div className="col fs-4 mx-2">
+                                <div className="col fs-4 mx-4">
                                     <Link className="nav-link d-flex align-items-center" to={'/register-visit'}>
-                                        <img className="float-start img-fluid mx-2" src={newVisit} alt="newVisit"  style={{height: 60}} />
+                                        <img className="float-start img-fluid mx-1" src={newVisit} alt="newVisit"
+                                             style={{height: 60}}/>
                                         MAKE AN APPOINTMENT
                                     </Link>
                                 </div>
-                                {/*<ul className="navbar-nav text-black mx-auto">*/}
-                                {/*    <li className="nav-link fs-5 px-5">*/}
-                                {/*        <Link to={'/visit'}>*/}
-                                {/*            <img className="float-start img-fluid mx-2" src={visit}*/}
-                                {/*                 style={{height: 60}}*/}
-                                {/*                 alt="visit"/>*/}
-                                {/*            VISIT <br/>HISTORY*/}
-                                {/*        </Link>*/}
-                                {/*    </li>*/}
-
-                                {/*    <li className="nav-link fs-5 px-5">*/}
-                                {/*        <Link to={'#'}>*/}
-                                {/*            <img className="float-start img-fluid mx-2 " src={drugs}*/}
-                                {/*                 style={{height: 60}}*/}
-                                {/*                 alt="drugs"/>*/}
-                                {/*            DRUGS*/}
-                                {/*        </Link>*/}
-                                {/*    </li>*/}
-
-                                {/*    <li className="nav-link fs-5 px-5">*/}
-                                {/*        <Link to={'#'}>*/}
-                                {/*            <img className="float-start img-fluid mx-2" src={contact}*/}
-                                {/*                 style={{height: 60}}*/}
-                                {/*                 alt="contact"/>*/}
-                                {/*            CONTACT*/}
-                                {/*        </Link>*/}
-                                {/*    </li>*/}
-
-                                {/*    <li className="nav-link fs-5 px-5">*/}
-                                {/*        <Link to={'/register-visit'}>*/}
-                                {/*            <img className="float-start img-fluid mx-2" src={newVisit}*/}
-                                {/*                 style={{height: 60}}*/}
-                                {/*                 alt="newVisit"/>*/}
-                                {/*            MAKE AN <br/>APPOINTMENT*/}
-                                {/*        </Link>*/}
-                                {/*    </li>*/}
-                                {/*</ul>*/}
                             </div>
                         </div>
                     </div>
 
                     <div className="w-100">
-                        <div className="nav-link d-flex justify-content-end pb-5">
+                        <div className="collapse navbar-collapse nav-link d-flex justify-content-end align-items-center">
                             <div
                                 className="menu-login button-login fs-3 text-black border border-dark border-2 rounded-pill p-2 "
                                 role="button">
