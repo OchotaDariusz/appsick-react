@@ -28,7 +28,7 @@ export default function TheNavbar() {
                         <Link to={'/'}><img src={logo} style={{height: 80}} alt="Logo"/></Link>
                     </span>
                     <div className="collapse navbar-collapse d-flex justify-content-center" id="navbarNavAltMarkup">
-                        <div className="navbar-nav container row">
+                        <div className="navbar-nav container">
                             <div className="row align-items-center d-inline-block">
                                 <div className="col fs-4 mx-3">
                                     <Link className="nav-link d-flex " to={'/visit'}>
