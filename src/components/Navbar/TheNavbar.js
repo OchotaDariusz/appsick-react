@@ -7,8 +7,13 @@ import newVisit from '../../assets/icons/new_visit.svg'
 import hamburger from '../../assets/icons/hamburger.svg'
 import {Link} from "react-router-dom";
 import {CgKey} from "react-icons/cg"
+import Login from "../Login/Login";
+import Button from "react-bootstrap/Button";
+import Register from "../Register/Register";
 
 export default function TheNavbar() {
+
+    const [loginModalShow, setLoginModalShow] = React.useState(false);
 
     const logout = async () => {
         fetch(`http://localhost:8080/api/auth/logout`, {
@@ -87,16 +92,21 @@ export default function TheNavbar() {
                         <div
                             className="collapse navbar-collapse nav-link d-flex justify-content-end align-items-center">
 
-                                <Link
-                                    className="menu-login button-login fs-3 text-black border border-dark border-2 rounded-pill p-2"
-                                    role="button" to={'/login'}>
+                            <Link
+                                className="menu-login button-login fs-3 text-black border border-dark border-2 rounded-pill p-2"
+                                onClick={() => setLoginModalShow(true)}>
+                                {'\u00A0'}{'\u00A0'}Login | Register{'\u00A0'}
+                                <div className="fs-1 d-inline">
+                                    <CgKey/>
+                                </div>
+                            </Link>
 
-                                    <p>{'\u00A0'}{'\u00A0'}Login | Register{'\u00A0'}</p>
-                                    <div className="fs-1 d-inline">
-                                        <CgKey/>
-                                    </div>
+                            <Login
+                                show={loginModalShow}
+                                onHide={() => setLoginModalShow(false)}
 
-                                </Link>
+                            />
+
                         </div>
 
                     </div>

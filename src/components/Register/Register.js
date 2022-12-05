@@ -6,9 +6,12 @@ import "../Login/Login.css"
 import axios from "axios";
 import {useHistory} from "react-router-dom";
 import Footer from "../Footer/Footer";
+import {Center, Divider} from '@chakra-ui/react'
+import Modal from 'react-bootstrap/Modal';
+import {Link} from "react-router-dom"
 
 
-export default function Register() {
+export default function Register(props) {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [password, setPassword] = useState("");
@@ -84,7 +87,7 @@ export default function Register() {
                     setEmailInfo("User already exist");
                     setEmailColor("salmon")
 
-                }else if(email.length===0){
+                } else if (email.length === 0) {
                     setEmailInfo("");
                     setEmailColor("white");
 
@@ -135,12 +138,19 @@ export default function Register() {
 
 
     return (
-<>
-        <div className="container-fluid col-6 rounded-5 bg-dark text-dark bg-opacity-10 shadow my-5 mb-5 text-center pb-3">
-                        <div className="form pt-2">
-                            <span className="fs-2">Register</span>
-                            <form onSubmit={submitForm} className="text-center">
-                                <div className="d-flex flex-column justify-content-center align-items-center">
+        <>
+            <Modal
+                {...props}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+
+                <Modal.Body>
+                    <div className="form pt-2">
+                        <span className="fs-2">Registration form</span>
+                        <form onSubmit={submitForm} className="text-center">
+                            <div className="d-flex flex-column justify-content-center align-items-center">
                                 <InputFields placeholder={"Enter your first name"} type={"text"} set={setFirstName}/>
                                 <InputFields placeholder={"Enter your last name"} type={"text"} set={setLastName}/>
                                 <InputFields color={emailColor} placeholder={"Enter your email"} type={"email"}
@@ -158,23 +168,27 @@ export default function Register() {
                                 <InputFields type={"date"} set={setBirthDate}/>
                                 <InputFields placeholder={"Enter your PESEL"} type={"text"}
                                              set={setPesel}/> {/*   TODO color/info */}
-                                </div>
-                                <div className="mt-3">
-                                    <input type="radio" value="MALE"
-                                           onChange={handleChange} name="gender" className="form-check-input mx-2"/>
-                                    <label>Male</label>
-                                    <input type="radio" value="FEMALE"
-                                           onChange={handleChange} name="gender" className="form-check-input mx-2"/>
-                                    <label>Female</label>
-                                </div>
-                                <br/>
-                                <button className="btn fs-3 text-black border border-dark border-2 rounded-pill p-2 px-4">Submit</button>
-                            </form>
+                            </div>
+                            <div className="mt-3">
+                                <input type="radio" value="MALE"
+                                       onChange={handleChange} name="gender" className="form-check-input mx-2"/>
+                                <label>Male</label>
+                                <input type="radio" value="FEMALE"
+                                       onChange={handleChange} name="gender" className="form-check-input mx-2"/>
+                                <label>Female</label>
+                            </div>
+                            <br/>
+                            <button
+                                className="btn fs-3 text-black border border-dark border-2 rounded-pill p-2 px-4">Submit
+                            </button>
+                        </form>
 
 
-            </div>
-        </div>
-        <Footer />
-</>
+                    </div>
+                </Modal.Body>
+
+            </Modal>
+
+        </>
     );
 }
