@@ -9,7 +9,6 @@ import Register from "../Register/Register";
 
 export default function Login(props) {
 
-    const [registerModalShow, setRegisterModalShow] = React.useState(false);
 
     const [info, setInfo] = useState("")
     const history = useHistory();
@@ -68,7 +67,7 @@ export default function Login(props) {
                             </div>
                         </div>
                                 <div className="row">
-                                    <div className="form pt-2 col-sm-6 ">
+                                    <div className="form pt-2 col-md-6 ">
 
                                         <span className="fs-2">Login</span>
                                         <form onSubmit={submitForm} className="text-center">
@@ -78,7 +77,8 @@ export default function Login(props) {
                                             </div>
                                             <div>{info}</div>
                                             <button
-                                                className="btn fs-3 text-black border border-dark border-2 rounded-pill px-4 mx-2 custom-btn btn-14">Submit
+                                                className="btn fs-3 text-black border border-dark
+                                                border-2 rounded-pill px-4 mx-2 custom-btn btn-14 green-shadow">Submit
                                             </button>
 
                                         </form>
@@ -95,14 +95,19 @@ export default function Login(props) {
                                         <div className="fs-3">Don't have an account yet?</div>
                                         <br />
 
-                                        <Link className="fs-3 text-black border border-dark border-2 rounded-pill p-2 px-4"
-                                              onClick={() => setRegisterModalShow(true)}
+                                        <div className="fs-3 text-black border border-dark border-2 rounded-pill p-2 px-4 green-shadow"
+                                             role="buttond"
+                                              onClick={() => {
+                                                  props.setRegisterModalShow(true);
+                                                  props.setLoginModalShow(false);
+                                              }}
                                         >
                                             Create new
-                                        </Link>
+                                        </div>
                                         <Register
-                                            show={registerModalShow}
-                                            onHide={() => setRegisterModalShow(false)}/>
+                                            setRegisterModalShow={props.setRegisterModalShow}
+                                            setLoginModalShow={props.setLoginModalShow}
+                                            />
 
                                     </div>
                                 </div>

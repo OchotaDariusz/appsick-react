@@ -13,7 +13,8 @@ import Register from "../Register/Register";
 
 export default function TheNavbar() {
 
-    const [loginModalShow, setLoginModalShow] = React.useState(false);
+    const [loginModalShow, setLoginModalShow] = useState(false);
+    const [registerModalShow, setRegisterModalShow] = useState(false);
 
     const logout = async () => {
         fetch(`http://localhost:8080/api/auth/logout`, {
@@ -92,19 +93,26 @@ export default function TheNavbar() {
                         <div
                             className="collapse navbar-collapse nav-link d-flex justify-content-end align-items-center">
 
-                            <Link
-                                className="menu-login button-login fs-3 text-black border border-dark border-2 rounded-pill p-2"
+                            <div
+                                className="menu-login button-login fs-3 text-black border border-dark border-2 rounded-pill p-2 green-shadow"
                                 onClick={() => setLoginModalShow(true)}>
                                 {'\u00A0'}{'\u00A0'}Login | Register{'\u00A0'}
                                 <div className="fs-1 d-inline">
                                     <CgKey/>
                                 </div>
-                            </Link>
+                            </div>
 
                             <Login
                                 show={loginModalShow}
                                 onHide={() => setLoginModalShow(false)}
-
+                                setRegisterModalShow={setRegisterModalShow}
+                                setLoginModalShow={setLoginModalShow}
+                            />
+                            <Register
+                                show={registerModalShow}
+                                onHide={() => setRegisterModalShow(false)}
+                                setRegisterModalShow={setRegisterModalShow}
+                                setLoginModalShow={setLoginModalShow}
                             />
 
                         </div>
@@ -113,7 +121,7 @@ export default function TheNavbar() {
                 </div>
             </nav>
             <div
-                className="fs-3 text-black border border-dark border-2 float-end rounded-pill  p-2 px-4"
+                className="fs-3 text-black border border-dark border-2 float-end rounded-pill p-2 px-4 green-shadow"
                 role="button">
                 Logout tymczasowy
 

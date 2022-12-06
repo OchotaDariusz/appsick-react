@@ -98,7 +98,7 @@ export default function ListOfVisits() {
 
   return (
     <div>
-      <div className="container-fluid col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow mt-3">
+      <div className="container-fluid col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 mt-3 green-shadow">
         <div className="row justify-content-center">
           <div className="col-2"></div>
           <div className="col fs-3 mt-3">Incoming</div>

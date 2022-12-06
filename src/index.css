@@ -144,3 +144,8 @@ body {
     padding: 0px 8px;
     align-items: end;
 }
+
+.navbar, .green-shadow {
+    /*box-shadow: rgba(26, 63, 45, 0.47) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;*/
+    box-shadow: rgba(26, 63, 45, 0.47) 0px 3px 7px;
+}
