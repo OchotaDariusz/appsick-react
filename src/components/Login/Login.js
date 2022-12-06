@@ -1,14 +1,9 @@
 import React, {useState} from "react"
 import "./Login.css"
-import {useHistory} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import InputFields from "../InputFields"
-import Footer from "../Footer/Footer";
-import {Link} from "react-router-dom"
-import {CgKey} from "react-icons/cg";
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import logo from '../../assets/logo/logo.svg'
-import visit from "../../assets/icons/Visit.svg";
 import {Center, Divider} from '@chakra-ui/react'
 import Register from "../Register/Register";
 
@@ -66,8 +61,8 @@ export default function Login(props) {
 
                 <Modal.Body>
                     <div className="container">
-                        <div className="row align-content-around">
-                            <div className="col">
+                        <div className="row d-flex justify-content-center">
+                            <div className="col-auto">
                                 <img className="" src={logo}
                                      alt="logo" style={{height: 160}}/>
                             </div>
