@@ -95,7 +95,8 @@ export default function TheNavbar() {
 
                             <div
                                 className="menu-login button-login fs-3 text-black border border-dark border-2 rounded-pill p-2 green-shadow"
-                                onClick={() => setLoginModalShow(true)}>
+                                onClick={() => setLoginModalShow(true)}
+                                role="button">
                                 {'\u00A0'}{'\u00A0'}Login | Register{'\u00A0'}
                                 <div className="fs-1 d-inline">
                                     <CgKey/>
