@@ -12,6 +12,8 @@ import {Link} from "react-router-dom"
 import Login from "../Login/Login";
 import {BsArrowLeft} from "react-icons/bs";
 import {CgKey} from "react-icons/cg";
+import {MdPersonAddAlt} from "react-icons/md";
+import {RiSendPlaneLine} from "react-icons/ri";
 
 
 export default function Register(props) {
@@ -148,7 +150,21 @@ export default function Register(props) {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
+                <Modal.Header>
+                    <div className="btn fs-3 text-black border
+                            border-dark border-2 rounded-pill p-2 d-flex col-auto
+                             btnx nav-link  mx-auto "
+                         onClick={() => {
+                             props.setRegisterModalShow(false);
+                             props.setLoginModalShow(true);
+                         }}>
+                        <div className="fs-1 d-inline mx-2 d-flex align-content-center">
+                            <BsArrowLeft/>
 
+                        </div>
+                        Back to Login Page
+                    </div>
+                </Modal.Header>
                 <Modal.Body>
                     <div className="container">
                         <div className="row flex-wrap">
@@ -156,18 +172,7 @@ export default function Register(props) {
                                 <span className="fs-2">Registration form</span>
                             </div>
                             <div className="d-flex justify-content-end">
-                                <div className="btn fs-3 text-black border
-                            border-dark border-2 rounded-pill p-2 green-shadow d-flex col-auto"
-                                     onClick={() => {
-                                         props.setRegisterModalShow(false);
-                                         props.setLoginModalShow(true);
-                                     }}>
-                                    <div className="fs-1 d-inline mx-2 d-flex align-content-center">
-                                        <BsArrowLeft/>
 
-                                    </div>
-                                    Back to Login Page
-                                </div>
                                 <Login
                                     setRegisterModalShow={props.setRegisterModalShow}
                                     setLoginModalShow={props.setLoginModalShow}
@@ -206,7 +211,11 @@ export default function Register(props) {
                             </div>
                             <br/>
                             <button
-                                className="btn fs-3 text-black border border-dark border-2 rounded-pill p-2 px-4 green-shadow">Submit
+                                className="btn fs-3 d-flex border border-dark border-2 rounded-pill p-2 px-4 btnx mx-auto">
+                                Submit
+                                <div className="fs-1 d-inline px-3">
+                                    <RiSendPlaneLine/>
+                                </div>
                             </button>
 
                         </form>
@@ -217,5 +226,5 @@ export default function Register(props) {
             </Modal>
 
         </>
-);
+    );
 }

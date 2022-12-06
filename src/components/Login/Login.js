@@ -6,6 +6,8 @@ import Modal from 'react-bootstrap/Modal';
 import logo from '../../assets/logo/logo.svg'
 import {Center, Divider} from '@chakra-ui/react'
 import Register from "../Register/Register";
+import {MdPersonAddAlt} from "react-icons/md";
+import {RiSendPlaneLine} from "react-icons/ri";
 
 export default function Login(props) {
 
@@ -66,51 +68,60 @@ export default function Login(props) {
                                      alt="logo" style={{height: 160}}/>
                             </div>
                         </div>
-                                <div className="row">
-                                    <div className="form pt-2 col-md-6 ">
+                        <div className="row">
+                            <div className="form pt-2 col-md-6 ">
 
-                                        <span className="fs-2">Login</span>
-                                        <form onSubmit={submitForm} className="text-center">
-                                            <div className="d-flex flex-column justify-content-center align-items-center mb-4">
-                                                <InputFields placeholder={"Email"} type={"text"} set={setEmail}/>
-                                                <InputFields placeholder={"Password"} type={"password"} set={setPassword}/>
-                                            </div>
-                                            <div>{info}</div>
-                                            <button
-                                                className="btn fs-3 text-black border border-dark
-                                                border-2 rounded-pill px-4 mx-2 custom-btn btn-14 green-shadow">Submit
-                                            </button>
-
-                                        </form>
+                                <span className="fs-2">Login</span>
+                                <form onSubmit={submitForm} className="text-center">
+                                    <div className="d-flex flex-column justify-content-center align-items-center mb-4">
+                                        <InputFields placeholder={"Email"} type={"text"} set={setEmail}/>
+                                        <InputFields placeholder={"Password"} type={"password"} set={setPassword}/>
                                     </div>
-                                    <div className="col-sm-1">
-                                        <Center height='350px'>
-                                            <Divider orientation='vertical' />
-                                        </Center>
-                                    </div>
-                                    <div className="col-sm-4 ">
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="fs-3">Don't have an account yet?</div>
-                                        <br />
+                                    <div>{info}</div>
 
-                                        <div className="fs-3 text-black border border-dark border-2 rounded-pill p-2 px-4 green-shadow"
-                                             role="buttond"
-                                              onClick={() => {
-                                                  props.setRegisterModalShow(true);
-                                                  props.setLoginModalShow(false);
-                                              }}
-                                        >
-                                            Create new
+                                    <div
+                                        className="btn fs-3 text-black border border-dark
+                                        border-2 rounded-pill p-2 px-4 btnx d-flex ">
+                                        Submit
+                                        <div className="fs-1 d-inline px-3">
+                                            <RiSendPlaneLine />
                                         </div>
-                                        <Register
-                                            setRegisterModalShow={props.setRegisterModalShow}
-                                            setLoginModalShow={props.setLoginModalShow}
-                                            />
+                                    </div>
 
+                                </form>
+                            </div>
+                            <div className="col-sm-1">
+                                <Center height='350px'>
+                                    <Divider orientation='vertical'/>
+                                </Center>
+                            </div>
+                            <div className="col-sm-4 ">
+                                <br/>
+                                <br/>
+                                <br/>
+                                <div className="fs-3">Don't have an account yet?</div>
+                                <br/>
+
+                                <div className="btnx fs-3 text-black border border-dark border-2
+                                rounded-pill p-2 px-4 d-flex "
+                                     role="button"
+                                     onClick={() => {
+                                         props.setRegisterModalShow(true);
+                                         props.setLoginModalShow(false);
+                                     }}
+                                >
+                                    Join us
+                                    <div className="fs-1 d-inline px-3">
+                                        <MdPersonAddAlt/>
                                     </div>
                                 </div>
+                                <Register
+                                    setRegisterModalShow={props.setRegisterModalShow}
+                                    setLoginModalShow={props.setLoginModalShow}
+                                />
+
+                            </div>
+                        </div>
                     </div>
                 </Modal.Body>
 

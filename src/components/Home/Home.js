@@ -9,7 +9,14 @@ export default function Home() {
             <div className="home-main-text">
                 <div className="fs-1 px-4">App Sick</div>
                 <div className="fs-2">With our help you can make an appointment quickly and safely.<br/>
-                    Give it a try now. <br/><br/></div>
+                    Give it a try now.
+                    <br />
+                    DO PRZEROBIENIA
+                    <br/><br/></div>
+<div className="fs-4">
+    AppSick is a promising startup in the private health sector in Poland. Our ambition is to deliver the most accessible and convenient systems for private healthcare market. This means a commitment to excellent customer experience, through great service and value.
+    Our application is aimed at coordination of private healthcare companies. We offer management systems for both digital & local consultations between a patient and a doctor.
+</div>
                 <div className="article">
                     <div className="article-in">
                         <button className="btn fs-1 border-2 border-white text-white">START WITH US</button>

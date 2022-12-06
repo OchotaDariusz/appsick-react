@@ -148,28 +148,28 @@ export default function ListOfVisits() {
           <div className="col-2">
 
           </div>
-          <div className="col-auto rounded-5 bg-white m-1 shadow-sm" role="button">
+          <div className="col-auto rounded-5 bg-white m-1 shadow-sm nvbr" role="button">
             <FontAwesomeIcon icon={faCalendarDays} className="me-2"/>
             Data
           </div>
-          <div className="col-auto rounded-5 bg-white m-1 shadow-sm" role="button">
+          <div className="col-auto rounded-5 bg-white m-1 shadow-sm nvbr" role="button">
             <FontAwesomeIcon icon={faLocationDot} className="me-2"/>
             Local Visits
           </div>
-          <div className="col-auto rounded-5 bg-white m-1 shadow-sm " role="button">
+          <div className="col-auto rounded-5 bg-white m-1 shadow-sm nvbr" role="button">
             <FontAwesomeIcon icon={faVideo} className="me-2"/>
             Video calls
           </div>
-          <div className="col-auto rounded-5 bg-white m-1 shadow-sm" role="button">
+          <div className="col-auto rounded-5 bg-white m-1 shadow-sm nvbr" role="button">
             <FontAwesomeIcon icon={faChartLine} className="me-2"/>
             Examinations
           </div>
-          <div className="col-auto rounded-5 bg-white m-1 shadow-sm" role="button">
+          <div className="col-auto rounded-5 bg-white m-1 shadow-sm nvbr" role="button">
             <FontAwesomeIcon icon={faPills} className="me-2"/>
             Prescriptions
           </div>
 
-          <div className="col-auto m-1 shadow-sm">
+          <div className="col-auto m-1 ">
             <FontAwesomeIcon icon={faXmark} className="me-2"/>
             Clear
           </div>

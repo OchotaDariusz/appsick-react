@@ -57,28 +57,28 @@ export default function TheNavbar() {
                     <div className="collapse navbar-collapse d-flex justify-content-center" id="navbarNavAltMarkup">
                         <div className="navbar-nav container">
                             <div className="row flex-nowrap align-items-center">
-                                <div className="col fs-4  mx43">
+                                <div className="col fs-4  mx-4 nvbr">
                                     <Link className="nav-link d-flex align-items-center" to={'/visit'}>
                                         <img className="float-start img-fluid mx-1" src={visit}
                                              alt="visit" style={{height: 60}}/>
                                         VISIT HISTORY
                                     </Link>
                                 </div>
-                                <div className="col fs-4 mx-4">
+                                <div className="col fs-4 mx-4 nvbr">
                                     <Link className="nav-link d-flex align-items-center" to={'#'}>
                                         <img className="float-start img-fluid mx-1" src={drugs}
                                              alt="drugs" style={{height: 60}}/>
                                         DRUGS
                                     </Link>
                                 </div>
-                                <div className="col fs-4 mx-4">
+                                <div className="col fs-4 mx-4 nvbr">
                                     <Link className="nav-link d-flex align-items-center" to={'#'}>
                                         <img className="float-start img-fluid mx-1" src={contact}
                                              alt="contact" style={{height: 60}}/>
                                         CONTACT
                                     </Link>
                                 </div>
-                                <div className="col fs-4 mx-4">
+                                <div className="col fs-4 mx-4 nvbr">
                                     <Link className="nav-link d-flex align-items-center" to={'/register-visit'}>
                                         <img className="float-start img-fluid mx-1" src={newVisit} alt="newVisit"
                                              style={{height: 60}}/>
@@ -91,7 +91,7 @@ export default function TheNavbar() {
 
                     <div className="w-100">
                         <div
-                            className="collapse navbar-collapse nav-link d-flex justify-content-end align-items-center">
+                            className="btnx collapse navbar-collapse nav-link d-flex justify-content-end align-items-center">
 
                             <div
                                 className="menu-login button-login fs-3 text-black border border-dark border-2 rounded-pill p-2 green-shadow"
@@ -120,12 +120,7 @@ export default function TheNavbar() {
                     </div>
                 </div>
             </nav>
-            <div
-                className="fs-3 text-black border border-dark border-2 float-end rounded-pill p-2 px-4 green-shadow"
-                role="button">
-                Logout tymczasowy
 
-            </div>
 
         </>
     );
