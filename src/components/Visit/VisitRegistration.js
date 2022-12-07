@@ -110,7 +110,7 @@ const VisitRegistration = () => {
 
     return (
         <ChakraProvider>
-            <div className="container col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow">
+            <div className="container col-6 mx-auto rounded-5 bg-light  green-shadow mt-3">
                 <form id={"visit-form"} className="row justify-content-center">
                     <label htmlFor={"clinic"}>Clinic:</label>
                     <select name={"clinic"} className="form-select" onChange={changeClinic} required>

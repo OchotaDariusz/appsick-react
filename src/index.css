@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@350&display=swap');
 
+:root {
+    --A-color: rgba(161, 151, 145, 0.29);
+    --B-color: rgba(207, 204, 237, 93);
+    --C-color: rgba(230, 238, 239, 0.93);
+    --D-color: rgba(237, 217, 204, 93);
+    --E-color: rgba(201, 189, 181, 79);
+}
+
+
+
 html, body {
     max-width: 100%;
     min-height: 100vh;
@@ -15,8 +25,10 @@ body {
     -moz-osx-font-smoothing: grayscale;
 
     width: 100%;
-    background-image: url('/src/assets/background/tlo.jpg');
-    background-repeat: repeat;
+    /*background-image: url('/src/assets/background/tlo.jpg');*/
+    /*background-repeat: repeat;*/
+    background: linear-gradient(70deg, rgba(230, 238, 239, 0.93), var(--A-color)) !important;
+
 
 }
 
@@ -98,7 +110,6 @@ body {
 
 .article-in {
     transition: transform 0.2s;
-
     /*border: solid 1px black;*/
 }
 
@@ -148,13 +159,13 @@ body {
 
 .navbar, .green-shadow {
     /*box-shadow: rgba(26, 63, 45, 0.47) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;*/
-    box-shadow: rgba(26, 63, 45, 0.47) 0px 3px 7px;
+    box-shadow: var(--E-color) 0px 3px 7px;
 }
 
 .btnx {
 
     -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
-    box-shadow: rgba(26, 63, 45, 0.47) 0px 3px 7px;
+    box-shadow: var(--E-color) 0px 3px 7px;
 
     -webkit-transition: .3s all ease;
     -o-transition: .3s all ease;
@@ -182,3 +193,4 @@ body {
     position: relative;
     top: 0;
 }
+

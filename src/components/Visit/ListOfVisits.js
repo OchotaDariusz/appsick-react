@@ -31,16 +31,23 @@ export default function ListOfVisits() {
   const [isPastVisitsLoading, setIsPastVisitsLoading] = useState(true);
   const [isFutureVisitsLoading, setIsFutureVisitsLoading] = useState(true);
 
+  // const
+
   const loadMorePastVisits = useCallback(() => {
     getListOfVisits(`/past?pageNumber=${pageNumber}`)
       .then(visits => {
         pageNumber++;
+
+        let filter = {
+        }
+
+
         // TODO: remove timeout
         setTimeout(() => {
-          setPastVisits(prevVisits => {
+          setPastVisits(portionOfPastVisits => {
             let listOfPastVisits = visits
             listOfPastVisits.map(formatVisitDate)
-            return [...prevVisits, ...listOfPastVisits]
+            return [...portionOfPastVisits, ...listOfPastVisits]
           })
         }, 2000)
 
@@ -98,7 +105,7 @@ export default function ListOfVisits() {
 
   return (
     <div>
-      <div className="container-fluid col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 mt-3 green-shadow">
+      <div className="container-fluid col-6 mx-auto rounded-5 bg-light text-dark  mt-3 green-shadow">
         <div className="row justify-content-center">
           <div className="col-2"></div>
           <div className="col fs-3 mt-3">Incoming</div>
