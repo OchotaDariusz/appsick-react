@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { ChakraProvider } from '@chakra-ui/react';
+import React, {useEffect, useState} from 'react';
+import {ChakraProvider} from '@chakra-ui/react';
 import {useHistory} from "react-router-dom";
+import { Spinner } from '@chakra-ui/react'
+import 'bootstrap/js/dist/util';
+import 'bootstrap/js/dist/dropdown';
 
 const VisitRegistration = () => {
 
@@ -22,36 +25,66 @@ const VisitRegistration = () => {
 
     const [visitDetails, setVisitDetails] = useState(visitObject)
     const [clinicList, setClinicList] = useState([])
+    const [isClinicListLoading, setIsClinicListLoading] = useState(true)
     const [doctorList, setDoctorList] = useState([])
+    const [isDoctorListLoading, setIsDoctorListLoading] = useState(true)
     const [isSubmitting, setIsSubmitting] = useState(false);
     const history = useHistory();
 
     async function getListOfClinics(){
-        const clinics = await fetch(`http://localhost:8080/api/clinic`);
+        setIsClinicListLoading(true);
+        const clinics = await fetch(`http://localhost:8080/api/clinic`, {
+            method: "GET",
+            redirect: 'follow',
+            mode: 'cors',
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Cache': 'no-cache'
+            }
+        });
         return clinics.json();
     }
 
     async function getDoctorsForClinic(clinicId){
-        const clinics = await fetch(`http://localhost:8080/api/clinic/${clinicId}/doctor`);
-        return clinics.json();
+        setIsDoctorListLoading(true);
+        const doctors = await fetch(`http://localhost:8080/api/clinic/${clinicId}/doctor`, {
+            method: "GET",
+            redirect: 'follow',
+            mode: 'cors',
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Cache': 'no-cache'
+            }
+        });
+        return doctors.json();
     }
 
     async function postVisit(){
-        const response = await fetch(`http://localhost:8080/api/visit`, {
+        return await fetch(`http://localhost:8080/api/visit`, {
             method: "POST",
             body: JSON.stringify(visitDetails),
+            redirect: 'follow',
+            mode: 'cors',
+            credentials: 'include',
             headers: {
-                "Content-Type": "application/json"
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Cache': 'no-cache'
             }
-        })
-        return response;
+        });
     }
 
     useEffect(() =>{
         getListOfClinics().then(clinics => {
             setClinicList( () => {return clinics} );
-        })
-            .catch(err => console.warn(err.message))
+        }).catch(err => console.warn(err.message))
     }, [])
 
     useEffect(() => {
@@ -108,40 +141,143 @@ const VisitRegistration = () => {
             .finally(() => setIsSubmitting(false));
     }
 
+    function onlineVisitForm(){
     return (
-        <ChakraProvider>
-            <div className="container col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow">
-                <form id={"visit-form"} className="row justify-content-center">
-                    <label htmlFor={"clinic"}>Clinic:</label>
-                    <select name={"clinic"} className="form-select" onChange={changeClinic} required>
-                        <option value="" hidden>- Select Clinic -</option>
-                        {clinicList.map(clinic => {
-                            return <option key={clinic.clinicId} value={clinic.clinicId}>{clinic.clinicName}</option>;
-                        })}
-                    </select>
+        <form id={"visit-form"} className="row justify-content-center">
                     <label htmlFor={"doctor"}>Doctor:</label>
                     <select name={"doctor"} className={"form-select"} onChange={changeDoctor} required>
                         <option value="" hidden>- Select a Doctor -</option>
-                        {doctorList.map(doctor => {
-                            return <option key={doctor.doctorId} value={doctor.doctorId}>{doctor.user.firstName} {doctor.user.lastName}</option>;
-                        })}
+                        {isDoctorListLoading ? "XD" : doctorList.map(doctor => {
+                            return <option key={doctor.doctorId}
+                                           value={doctor.doctorId}>{doctor.user.firstName} {doctor.user.lastName}</option>;
+                        })
+                        }
                     </select>
                     <label htmlFor={"date"}>Date:</label>
                     <input type={"datetime-local"} name={"date"} onChange={changeVisitDate} required/>
 
                     <div className="form-group info-border">
                         <label htmlFor="visit-description">Visit description:</label>
-                        <textarea className="form-control" name={"visit-description"} rows="5" onChange={changeVisitDescription}></textarea>
+                        <textarea className="form-control" name={"visit-description"} rows="5"
+                                  onChange={changeVisitDescription}></textarea>
                     </div>
-
-                    <label htmlFor={"online"}>Online visit:</label>
-                    <input type={"checkbox"} name={"online"} onToggle={toggleOnline}/>
 
                     <button type={"submit"} onClick={submitVisit}>SUBMIT</button>
                 </form>
+    )
+    }
+
+    function clinicVisitForm(){
+        return (
+            <form id={"visit-form"} className="row justify-content-center">
+                <label htmlFor={"clinic"}>Clinic:</label>
+                <select name={"clinic"} className="form-select" onChange={changeClinic} required>
+                    <option value="" hidden>- Select Clinic -</option>
+                    {isClinicListLoading ? "loading" : clinicList.map(clinic => {
+                        return <option key={clinic.clinicId} value={clinic.clinicId}>{clinic.clinicName}</option>;
+                    })
+                    }
+                </select>
+                <label htmlFor={"doctor"}>Doctor:</label>
+                <select name={"doctor"} className={"form-select"} onChange={changeDoctor} required>
+                    <option value="" hidden>- Select a Doctor -</option>
+                    {isDoctorListLoading ? "XD" : doctorList.map(doctor => {
+                        return <option key={doctor.doctorId}
+                                       value={doctor.doctorId}>{doctor.user.firstName} {doctor.user.lastName}</option>;
+                    })
+                    }
+                </select>
+                <label htmlFor={"date"}>Date:</label>
+                <input type={"datetime-local"} name={"date"} onChange={changeVisitDate} required/>
+
+                <div className="form-group info-border">
+                    <label htmlFor="visit-description">Visit description:</label>
+                    <textarea className="form-control" name={"visit-description"} rows="5"
+                              onChange={changeVisitDescription}></textarea>
+                </div>
+
+                <button type={"submit"} onClick={submitVisit}>SUBMIT</button>
+            </form>
+        )
+    }
+    return (
+        <>
+            <div className={"container col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow"}>
+
+                <nav className={"align-items-center"}>
+                    <div className={"nav nav-tabs nav-fill"} id="nav-tab" role="tablist">
+
+                        <button className={"nav-link active"} data-bs-toggle={"tab"} id={"nav-online-tab"}
+                                data-bs-target={"#nav-online"} type={"button"} role={"tab"}
+                                aria-controls={"nav-online"} aria-selected={"true"}>Online consultation</button>
+
+                        <button className={"nav-link"} data-bs-toggle={"tab"} id={"nav-clinic-tab"}
+                                data-bs-target={"#nav-clinic"} type={"button"} role={"tab"}
+                                aria-controls={"nav-clinic"} aria-selected={"false"}>Meet in person</button>
+
+                    </div>
+                </nav>
+
+                <div className={"tab-content"} id={"nav-tabContent"}>
+
+                    <div className={"tab-pane fade show active p-3"} id={"nav-online"} role={"tabpanel"}
+                         aria-labelledby={"nav-online-tab"}>
+                        {onlineVisitForm()}
+                    </div>
+
+                    <div className={"tab-pane fade p-3"} id={"nav-clinic"} role={"tabpanel"}
+                         aria-labelledby={"nav-clinic-tab"}>
+                        {clinicVisitForm()}
+                    </div>
+
+                </div>
             </div>
-        </ChakraProvider>
+        </>
     );
 };
 
 export default VisitRegistration;
+
+
+// function dupa() {
+//
+//     return (
+//         <ChakraProvider>
+//             <div className="container col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow">
+//                 <form id={"visit-form"} className="row justify-content-center">
+//                     <label htmlFor={"clinic"}>Clinic:</label>
+//                     <select name={"clinic"} className="form-select" onChange={changeClinic} required>
+//                         <option value="" hidden>- Select Clinic -</option>
+//                         {isClinicListLoading ? "loading" : clinicList.map(clinic => {
+//                             return <option key={clinic.clinicId} value={clinic.clinicId}>{clinic.clinicName}</option>;
+//                         })
+//                         }
+//                     </select>
+//                     <label htmlFor={"doctor"}>Doctor:</label>
+//                     <select name={"doctor"} className={"form-select"} onChange={changeDoctor} required>
+//                         <option value="" hidden>- Select a Doctor -</option>
+//                         {isDoctorListLoading ? "XD" : doctorList.map(doctor => {
+//                             return <option key={doctor.doctorId}
+//                                            value={doctor.doctorId}>{doctor.user.firstName} {doctor.user.lastName}</option>;
+//                         })
+//                         }
+//                     </select>
+//                     <label htmlFor={"date"}>Date:</label>
+//                     <input type={"datetime-local"} name={"date"} onChange={changeVisitDate} required/>
+//
+//                     <div className="form-group info-border">
+//                         <label htmlFor="visit-description">Visit description:</label>
+//                         <textarea className="form-control" name={"visit-description"} rows="5"
+//                                   onChange={changeVisitDescription}></textarea>
+//                     </div>
+//
+//                     <label htmlFor={"online"}>Online visit:</label>
+//                     <input type={"checkbox"} name={"online"} onToggle={toggleOnline}/>
+//
+//                     <button type={"submit"} onClick={submitVisit}>SUBMIT</button>
+//                 </form>
+//             </div>
+//         </ChakraProvider>
+//     )
+//
+// }
