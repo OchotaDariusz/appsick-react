@@ -7,9 +7,11 @@ import 'bootstrap/js/dist/dropdown';
 
 const VisitRegistration = () => {
 
+    const ONLINE_CLINIC_ID = 1; // TODO discuss. Maybe id should be nullable
+
     let visitObject = {
             "clinic": {
-                "clinicId": 1
+                "clinicId": ONLINE_CLINIC_ID
             },
             "date": "2022-11-14T19:57:07.153Z",
             "doctor": {
@@ -90,6 +92,26 @@ const VisitRegistration = () => {
         return doctors.json();
     }
 
+    async function getDoctorsForSpeciality(speciality){
+        setIsDoctorListLoading(true);
+        const doctors = await fetch(`http://localhost:8080/api/doctor/specialities/${speciality}`, {
+            method: "GET",
+            redirect: 'follow',
+            mode: 'cors',
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Cache': 'no-cache'
+            }
+        }).then(response => {
+            setIsDoctorListLoading(false);
+            return response;
+        });
+        return doctors.json();
+    }
+
     async function postVisit(){
         return await fetch(`http://localhost:8080/api/visit`, {
             method: "POST",
@@ -103,6 +125,10 @@ const VisitRegistration = () => {
                 'Cache': 'no-cache'
             }
         });
+    }
+
+    async function checkUserLoggedIn(){
+        return; // TODO
     }
 
     useEffect(() =>{
@@ -123,6 +149,13 @@ const VisitRegistration = () => {
         })
             .catch(err => console.warn(err.message))
     }, [visitDetails.clinic.clinicId]);
+
+    useEffect(() => {
+        getDoctorsForSpeciality(visitDetails.doctorSpeciality).then( doctors => {
+            setDoctorList(() => {return doctors});
+        })
+            .catch(err => console.warn(err.message))
+    }, [visitDetails.doctorSpeciality])
 
     const changeClinic = (e) => {
         visitObject = {...visitDetails};
@@ -148,9 +181,16 @@ const VisitRegistration = () => {
         setVisitDetails(visitObject);
     }
 
+    const changeDoctorSpeciality = (e) => {
+        visitObject = {...visitDetails};
+        visitObject.doctorSpeciality = e.target.value;
+        setVisitDetails(visitObject);
+    }
+
     const toggleOnline = (e) => {
         visitObject = {...visitDetails};
         visitObject.online = e.target.value === "true";
+        if (e.target.value === "true") {visitObject.clinic.clinicId = ONLINE_CLINIC_ID}
         setVisitDetails(visitObject);
     }
 
@@ -236,11 +276,11 @@ const VisitRegistration = () => {
 
                 <div className={"container mx-auto m-3 m- p-3"}>
                     <label className={"p-3"} htmlFor={"specialities"}>Speciality:</label>
-                    <select name={"specialities"} className={"form-select"} onChange={changeDoctor} required>
+                    <select name={"specialities"} className={"form-select"} onChange={changeDoctorSpeciality} required>
                         <option value="" hidden>- Select a Speciality -</option>
                         {isDoctorSpecialitiesLoading ? "loading" : doctorSpecialities.map(speciality => {
                             return <option key={speciality}
-                                           value={speciality.doctorId}>{speciality}</option>;
+                                           value={speciality}>{speciality}</option>;
                         })
                         }
                     </select>
