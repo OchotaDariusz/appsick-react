@@ -9,13 +9,14 @@ const VisitRegistration = () => {
 
     let visitObject = {
             "clinic": {
-                "clinicId": 0
+                "clinicId": 1
             },
             "date": "2022-11-14T19:57:07.153Z",
             "doctor": {
                 "doctorId": 0
             },
-            "online": false,
+            "doctorSpeciality": "",
+            "online": true,
             "patient": {
                 "patientId": 1 // TODO: fetch data
             },
@@ -93,7 +94,6 @@ const VisitRegistration = () => {
         return await fetch(`http://localhost:8080/api/visit`, {
             method: "POST",
             body: JSON.stringify(visitDetails),
-            redirect: 'follow',
             mode: 'cors',
             credentials: 'include',
             headers: {
@@ -150,10 +150,10 @@ const VisitRegistration = () => {
 
     const toggleOnline = (e) => {
         visitObject = {...visitDetails};
-        visitObject.online = !visitDetails.online;
+        visitObject.online = e.target.value === "true";
         setVisitDetails(visitObject);
-        console.log(visitObject.online)
     }
+
 
     const submitVisit = (e) => {
         const form = document.getElementById("visit-form")
@@ -251,11 +251,13 @@ const VisitRegistration = () => {
 
                         <button className={"nav-link active"} data-bs-toggle={"tab"} id={"nav-online-tab"}
                                 data-bs-target={"#nav-online"} type={"button"} role={"tab"}
-                                aria-controls={"nav-online"} aria-selected={"true"}>Online consultation</button>
+                                aria-controls={"nav-online"} aria-selected={"true"}
+                                onClick={toggleOnline} value={"true"}>Online consultation</button>
 
                         <button className={"nav-link"} data-bs-toggle={"tab"} id={"nav-clinic-tab"}
                                 data-bs-target={"#nav-clinic"} type={"button"} role={"tab"}
-                                aria-controls={"nav-clinic"} aria-selected={"false"}>Meet in person</button>
+                                aria-controls={"nav-clinic"} aria-selected={"false"}
+                                onClick={toggleOnline}>Meet in person</button>
 
                     </div>
                 </nav>
@@ -279,47 +281,3 @@ const VisitRegistration = () => {
 };
 
 export default VisitRegistration;
-
-
-// function dupa() {
-//
-//     return (
-//         <ChakraProvider>
-//             <div className="container col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow">
-//                 <form id={"visit-form"} className="row justify-content-center">
-//                     <label htmlFor={"clinic"}>Clinic:</label>
-//                     <select name={"clinic"} className="form-select" onChange={changeClinic} required>
-//                         <option value="" hidden>- Select Clinic -</option>
-//                         {isClinicListLoading ? "loading" : clinicList.map(clinic => {
-//                             return <option key={clinic.clinicId} value={clinic.clinicId}>{clinic.clinicName}</option>;
-//                         })
-//                         }
-//                     </select>
-//                     <label htmlFor={"doctor"}>Doctor:</label>
-//                     <select name={"doctor"} className={"form-select"} onChange={changeDoctor} required>
-//                         <option value="" hidden>- Select a Doctor -</option>
-//                         {isDoctorListLoading ? "XD" : doctorList.map(doctor => {
-//                             return <option key={doctor.doctorId}
-//                                            value={doctor.doctorId}>{doctor.user.firstName} {doctor.user.lastName}</option>;
-//                         })
-//                         }
-//                     </select>
-//                     <label htmlFor={"date"}>Date:</label>
-//                     <input type={"datetime-local"} name={"date"} onChange={changeVisitDate} required/>
-//
-//                     <div className="form-group info-border">
-//                         <label htmlFor="visit-description">Visit description:</label>
-//                         <textarea className="form-control" name={"visit-description"} rows="5"
-//                                   onChange={changeVisitDescription}></textarea>
-//                     </div>
-//
-//                     <label htmlFor={"online"}>Online visit:</label>
-//                     <input type={"checkbox"} name={"online"} onToggle={toggleOnline}/>
-//
-//                     <button type={"submit"} onClick={submitVisit}>SUBMIT</button>
-//                 </form>
-//             </div>
-//         </ChakraProvider>
-//     )
-//
-// }
