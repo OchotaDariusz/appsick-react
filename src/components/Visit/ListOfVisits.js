@@ -15,6 +15,7 @@ import {formatVisitDate} from "../../utils/Utils";
 import PastVisits from './PastVisits'
 import {Spinner} from '@chakra-ui/react'
 import BackToTopBtn from "../BackToTopBtn/BackToTopBtn";
+import classnames from 'classnames';
 
 const BASE_URL = `http://localhost:8080/api/visit/patient/`
 const PATIENT_ID = "1"
@@ -31,17 +32,25 @@ export default function ListOfVisits() {
     const [isPastVisitsLoading, setIsPastVisitsLoading] = useState(true);
     const [isFutureVisitsLoading, setIsFutureVisitsLoading] = useState(true);
 
-    const [isLocal, setIsLocal] = useState(true)
-    const [isOnline, setIsOnline] = useState(true)
-    const [isExamination, setIsExamination] = useState(true)
-    const [isPrescription, setIsPrescription] = useState(true)
+    const [isLocal, setIsLocal] = useState(false)
+    const [isOnline, setIsOnline] = useState(false)
+    const [isExamination, setIsExamination] = useState(false)
+    const [isPrescription, setIsPrescription] = useState(false)
     let local = ""
     let online = ""
     let examination = ""
     let prescription = ""
 
+    const [localFilterButtonClasses, setLocalFilterButtonClasses] = useState("col-auto rounded-5 bg-dark m-1 shadow-sm nvbr")
+    const [onlineFilterButtonClasses, setOnlineFilterButtonClasses] = useState("col-auto rounded-5 bg-dark m-1 shadow-sm nvbr")
+    const [examinationFilterButtonClasses, setExaminationFilterButtonClasses] = useState("col-auto rounded-5 bg-dark m-1 shadow-sm nvbr")
+    const [prescriptionFilterButtonClasses, setPrescriptionFilterButtonClasses] = useState("col-auto rounded-5 bg-dark m-1 shadow-sm nvbr")
+
+
+    const [isFiltered, setIsFiltered] = useState(false)
+
     useEffect(() => {
-        if (isLocal) {
+        if (!isLocal) {
             local = ""
             setLocalFilterButtonClasses("col-auto rounded-5 bg-white m-1 shadow-sm nvbr")
         } else {
@@ -51,7 +60,7 @@ export default function ListOfVisits() {
     }, [isLocal])
 
     useEffect(() => {
-        if (isOnline) {
+        if (!isOnline) {
             online = ""
             setOnlineFilterButtonClasses("col-auto rounded-5 bg-white m-1 shadow-sm nvbr")
         } else {
@@ -61,7 +70,7 @@ export default function ListOfVisits() {
     }, [isOnline])
 
     useEffect(() => {
-        if (isExamination) {
+        if (!isExamination) {
             examination = ""
             setExaminationFilterButtonClasses("col-auto rounded-5 bg-white m-1 shadow-sm nvbr")
         } else {
@@ -71,7 +80,7 @@ export default function ListOfVisits() {
     }, [isExamination])
 
     useEffect(() => {
-        if (isPrescription) {
+        if (!isPrescription) {
             prescription = ""
             setPrescriptionFilterButtonClasses("col-auto rounded-5 bg-white m-1 shadow-sm nvbr")
         } else {
@@ -210,29 +219,42 @@ export default function ListOfVisits() {
                         <FontAwesomeIcon icon={faCalendarDays} className="me-1"/>
                         Data
                     </button>
-                    <button className="col-auto rounded-5 bg-white m-1 shadow-sm nvbr"
-                            onClick={() => setIsLocal(!isLocal)}>
-                        <FontAwesomeIcon icon={faLocationDot} className="me-2"/>
-                        Local Visits {isLocal ? "On" : "off"}
+                    <button className={localFilterButtonClasses}
+                            onClick={() => {
+                                setIsLocal(!isLocal)
+                                setIsFiltered(isFiltered)
+                            }}>
+                        <FontAwesomeIcon icon={faLocationDot} className="me-1"/>
+                        Local Visits
                     </button>
-                    <button className="col-auto rounded-5 bg-white m-1 shadow-sm nvbr"
-                            onClick={() => setIsOnline(!isOnline)}>
-                        <FontAwesomeIcon icon={faVideo} className="me-2"/>
-                        Video calls {isOnline ? "On" : "off"}
+                    <button className={onlineFilterButtonClasses}
+                            onClick={() => {
+                                setIsOnline(!isOnline)
+                                setIsFiltered(isFiltered)
+                            }}>
+                        <FontAwesomeIcon icon={faVideo} className="me-1"/>
+                        Video calls
                     </button>
-                    <button className="col-auto rounded-5 bg-white m-1 shadow-sm nvbr"
-                            onClick={() => setIsExamination(!isExamination)}>
-                        <FontAwesomeIcon icon={faChartLine} className="me-2"/>
-                        Examinations {isExamination ? "On" : "off"}
+                    <button className={examinationFilterButtonClasses}
+                            onClick={() => {
+                                setIsExamination(!isExamination)
+                                setIsFiltered(isFiltered)
+                            }}>
+                        <FontAwesomeIcon icon={faChartLine} className="me-1"/>
+                        Examinations
                     </button>
-                    <button className="col-auto rounded-5 bg-white m-1 shadow-sm nvbr"
-                            onClick={() => setIsPrescription(!isPrescription)}>
-                        <FontAwesomeIcon icon={faPills} className="me-2"/>
-                        Prescriptions {isPrescription ? "On" : "off"}
+                    <button className={prescriptionFilterButtonClasses}
+                            onClick={() => {
+                                setIsPrescription(!isPrescription)
+                                setIsFiltered(isFiltered)
+                            }}>
+                        <FontAwesomeIcon icon={faPills} className="me-1"/>
+                        Prescriptions
                     </button>
 
-                    <button className="col-auto m-1 ">
-                        <FontAwesomeIcon icon={faXmark} className="me-2"/>
+                    <button className="col-auto m-0"
+                            onClick={() => setIsFiltered(!isFiltered)}>
+                        <FontAwesomeIcon icon={faXmark} className="me-1"/>
                         Clear
                     </button>
                 </div>

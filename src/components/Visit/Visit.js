@@ -53,7 +53,8 @@ export default function Visit({visit}) {
                         <div className="col-5 m-1">
                             <div className="row fs-5">
                                 {visit?.doctor?.medicalSpecialities[0]}
-                                <MapModal visit={visit}/>
+                                {visit.type?.include("ONLINE") ? "Online Visit" : <MapModal visit={visit}/>}
+
                             </div>
                         </div>
                     </div>
