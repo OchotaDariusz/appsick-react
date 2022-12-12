@@ -187,8 +187,7 @@ export default function ListOfVisits() {
                     <br/>
                     <div className="row align-items-center">
                         <div className="col-2 px-2">
-                            <div
-                                className=" my-3 mx-2  bg-white border-2 border-opacity-75 border-dark border rounded text-center">
+                            <div className=" my-3 mx-2  bg-white border-2 border-opacity-75 border-dark border rounded text-center">
                                 Today's <br/>visits:
                             </div>
                         </div>
