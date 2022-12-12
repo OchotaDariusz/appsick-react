@@ -43,32 +43,40 @@ export default function ListOfVisits() {
     useEffect(() => {
         if (isLocal) {
             local = ""
+            setLocalFilterButtonClasses("col-auto rounded-5 bg-white m-1 shadow-sm nvbr")
         } else {
-            local = "&type=0"
+            local = "&visitType=0"
+            setLocalFilterButtonClasses("col-auto rounded-5 bg-white m-1 shadow-sm nvbr border border-dark border-2")
         }
-    },[isLocal])
+    }, [isLocal])
 
     useEffect(() => {
         if (isOnline) {
             online = ""
+            setOnlineFilterButtonClasses("col-auto rounded-5 bg-white m-1 shadow-sm nvbr")
         } else {
-            online = "&type=1"
+            online = "&visitType=1"
+            setOnlineFilterButtonClasses("col-auto rounded-5 bg-white m-1 shadow-sm nvbr border border-dark border-2")
         }
     }, [isOnline])
 
     useEffect(() => {
         if (isExamination) {
             examination = ""
+            setExaminationFilterButtonClasses("col-auto rounded-5 bg-white m-1 shadow-sm nvbr")
         } else {
-            examination = "&type=2"
+            examination = "&visitType=2"
+            setExaminationFilterButtonClasses("col-auto rounded-5 bg-white m-1 shadow-sm nvbr border border-dark border-2")
         }
     }, [isExamination])
 
     useEffect(() => {
         if (isPrescription) {
             prescription = ""
+            setPrescriptionFilterButtonClasses("col-auto rounded-5 bg-white m-1 shadow-sm nvbr")
         } else {
-            prescription = "&type=3"
+            prescription = "&visitType=3"
+            setPrescriptionFilterButtonClasses("col-auto rounded-5 bg-white m-1 shadow-sm nvbr border border-dark border-2")
         }
     }, [isPrescription])
 
@@ -118,17 +126,6 @@ export default function ListOfVisits() {
             })
             .catch(err => console.warn(err.message))
 
-        getListOfVisits("/past")
-            .then(visits => {
-                if (visits.status !== 401) {
-                    setPastVisits(() => {
-                        return visits.map(formatVisitDate)
-                    })
-                    setIsPastVisitsLoading(false)
-                }
-            })
-            .catch(err => console.warn(err.message))
-
         getListOfVisits("/current")
             .then(visits => {
                 if (visits.status !== 401) {
@@ -140,6 +137,20 @@ export default function ListOfVisits() {
             })
             .catch(err => console.warn(err.message))
     }, [])
+
+    useEffect(() => {
+        let pastVisitsUrl = (!isFiltered) ? "/past" : `/past?pageNumber=1${local}${online}${examination}${prescription}`
+        getListOfVisits(pastVisitsUrl)
+            .then(visits => {
+                if (visits.status !== 401) {
+                    setPastVisits(() => {
+                        return visits.map(formatVisitDate)
+                    })
+                    setIsPastVisitsLoading(false)
+                }
+            })
+            .catch(err => console.warn(err.message))
+    }, [isLocal, isOnline, isExamination, isPrescription])
 
     return (
         <div>
@@ -196,7 +207,7 @@ export default function ListOfVisits() {
 
                     </div>
                     <button className="col-auto rounded-5 bg-white m-1 shadow-sm nvbr">
-                        <FontAwesomeIcon icon={faCalendarDays} className="me-2"/>
+                        <FontAwesomeIcon icon={faCalendarDays} className="me-1"/>
                         Data
                     </button>
                     <button className="col-auto rounded-5 bg-white m-1 shadow-sm nvbr"
