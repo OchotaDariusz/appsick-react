@@ -19,23 +19,23 @@ const VisitRegistration = () => {
             "patient": {
                 "patientId": 1 // TODO: fetch data
             },
-            "reason": "Cancer",
+            "reason": "",
             "status": "PENDING"
         }
 
     const [visitDetails, setVisitDetails] = useState(visitObject)
     const [clinicList, setClinicList] = useState([])
-    const [isClinicListLoading, setIsClinicListLoading] = useState(true)
     const [doctorList, setDoctorList] = useState([])
+    const [doctorSpecialities, setDoctorSpecialities] = useState([])
+    const [isClinicListLoading, setIsClinicListLoading] = useState(true)
     const [isDoctorListLoading, setIsDoctorListLoading] = useState(true)
+    const [isDoctorSpecialitiesLoading, setIsDoctorSpecialitiesLoading] = useState(true)
     const [isSubmitting, setIsSubmitting] = useState(false);
     const history = useHistory();
 
-    async function getListOfClinics(){
-        setIsClinicListLoading(true);
-        const clinics = await fetch(`http://localhost:8080/api/clinic`, {
-            method: "GET",
-            redirect: 'follow',
+    async function getDoctorSpecialities(){
+        setIsDoctorSpecialitiesLoading(true)
+        const specialties = await fetch(`http://localhost:8080/api/doctor/specialities`, {
             mode: 'cors',
             credentials: 'include',
             headers: {
@@ -44,6 +44,27 @@ const VisitRegistration = () => {
                 'Access-Control-Allow-Origin': '*',
                 'Cache': 'no-cache'
             }
+        }).then((response) => {
+            setIsDoctorSpecialitiesLoading(false);
+            return response;
+        });
+        return specialties.json();
+    }
+
+    async function getListOfClinics(){
+        setIsClinicListLoading(true);
+        const clinics = await fetch(`http://localhost:8080/api/clinic`, {
+            mode: 'cors',
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Cache': 'no-cache'
+            }
+        }).then(response => {
+            setIsClinicListLoading(false);
+            return response;
         });
         return clinics.json();
     }
@@ -61,6 +82,9 @@ const VisitRegistration = () => {
                 'Access-Control-Allow-Origin': '*',
                 'Cache': 'no-cache'
             }
+        }).then(response => {
+            setIsDoctorListLoading(false);
+            return response;
         });
         return doctors.json();
     }
@@ -80,6 +104,12 @@ const VisitRegistration = () => {
             }
         });
     }
+
+    useEffect(() =>{
+        getDoctorSpecialities().then(doctorSpecialities => {
+            setDoctorSpecialities(() => {return doctorSpecialities});
+        }).catch(err => console.warn(err.message))
+    }, [])
 
     useEffect(() =>{
         getListOfClinics().then(clinics => {
@@ -142,29 +172,29 @@ const VisitRegistration = () => {
     }
 
     function onlineVisitForm(){
-    return (
-        <form id={"visit-form"} className="row justify-content-center">
-                    <label htmlFor={"doctor"}>Doctor:</label>
-                    <select name={"doctor"} className={"form-select"} onChange={changeDoctor} required>
-                        <option value="" hidden>- Select a Doctor -</option>
-                        {isDoctorListLoading ? "XD" : doctorList.map(doctor => {
-                            return <option key={doctor.doctorId}
-                                           value={doctor.doctorId}>{doctor.user.firstName} {doctor.user.lastName}</option>;
-                        })
-                        }
-                    </select>
-                    <label htmlFor={"date"}>Date:</label>
-                    <input type={"datetime-local"} name={"date"} onChange={changeVisitDate} required/>
+        return (
+            <form id={"visit-form"} className="row justify-content-center">
+                <label htmlFor={"doctor"}>Doctor:</label>
+                <select name={"doctor"} className={"form-select"} onChange={changeDoctor} required>
+                    <option value="" hidden>- Select a Doctor -</option>
+                    {isDoctorListLoading ? "loading" : doctorList.map(doctor => {
+                        return <option key={doctor.doctorId}
+                                       value={doctor.doctorId}>{doctor.user.firstName} {doctor.user.lastName}</option>;
+                    })
+                    }
+                </select>
+                <label htmlFor={"date"}>Date:</label>
+                <input type={"datetime-local"} name={"date"} onChange={changeVisitDate} required/>
 
-                    <div className="form-group info-border">
-                        <label htmlFor="visit-description">Visit description:</label>
-                        <textarea className="form-control" name={"visit-description"} rows="5"
-                                  onChange={changeVisitDescription}></textarea>
-                    </div>
+                <div className="form-group info-border">
+                    <label htmlFor="visit-description">Visit description:</label>
+                    <textarea className="form-control" name={"visit-description"} rows="5"
+                              onChange={changeVisitDescription}></textarea>
+                </div>
 
-                    <button type={"submit"} onClick={submitVisit}>SUBMIT</button>
-                </form>
-    )
+                <button type={"submit"} onClick={submitVisit}>SUBMIT</button>
+            </form>
+        )
     }
 
     function clinicVisitForm(){
@@ -181,7 +211,7 @@ const VisitRegistration = () => {
                 <label htmlFor={"doctor"}>Doctor:</label>
                 <select name={"doctor"} className={"form-select"} onChange={changeDoctor} required>
                     <option value="" hidden>- Select a Doctor -</option>
-                    {isDoctorListLoading ? "XD" : doctorList.map(doctor => {
+                    {isDoctorListLoading ? "loading" : doctorList.map(doctor => {
                         return <option key={doctor.doctorId}
                                        value={doctor.doctorId}>{doctor.user.firstName} {doctor.user.lastName}</option>;
                     })
@@ -203,6 +233,18 @@ const VisitRegistration = () => {
     return (
         <>
             <div className={"container col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow"}>
+
+                <div className={"container mx-auto m-3 m- p-3"}>
+                    <label className={"p-3"} htmlFor={"specialities"}>Speciality:</label>
+                    <select name={"specialities"} className={"form-select"} onChange={changeDoctor} required>
+                        <option value="" hidden>- Select a Speciality -</option>
+                        {isDoctorSpecialitiesLoading ? "loading" : doctorSpecialities.map(speciality => {
+                            return <option key={speciality}
+                                           value={speciality.doctorId}>{speciality}</option>;
+                        })
+                        }
+                    </select>
+                </div>
 
                 <nav className={"align-items-center"}>
                     <div className={"nav nav-tabs nav-fill"} id="nav-tab" role="tablist">
