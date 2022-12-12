@@ -12,7 +12,7 @@ export default function TodayVisit({visit}) {
     const [open, setOpen] = useState(false);
 
     return (
-        <div className="row align-items-center">
+        <div>
 
             <div className="col-10 rounded-3 bg-white text-dark my-3 pb-3 px-4 pt-2 border border-2 btnx">
                 <div className="row justify-content-between">
@@ -45,7 +45,11 @@ export default function TodayVisit({visit}) {
                         <div className="row ">
                             <div className="col fs-5">
                                 <div>
-                                    <MapModal visit={visit}/>
+                                    {visit?.doctor?.medicalSpecialities[0]}
+                                    <br/>
+                                    {visit.visitTypes[0] === "LOCAL" ?
+                                        <div className="row align-items-start">Online Visit</div> :
+                                        <MapModal visit={visit}/>}
                                 </div>
                             </div>
                         </div>
