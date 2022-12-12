@@ -36,7 +36,7 @@ export default function Visit({visit, cancelVisit}) {
                         </div>
                     </div>
 
-                    <div className="row align-items-center">
+                    <div className="row align-items-start">
                         <div className="col-2">
                             <img src={visit?.doctor?.user?.image ?
                                 visit?.doctor?.user?.image :
@@ -46,10 +46,13 @@ export default function Visit({visit, cancelVisit}) {
                                  style={{height: "100px", width: "100px"}}
                                  alt="doctor"/>
                         </div>
+
                         <div className="col-5 m-1">
+
                             <div className="row fs-5">
                                 {visit?.doctor?.medicalSpecialities[0]}
-                                {visit.type?.include("ONLINE") ? "Online Visit" : <MapModal visit={visit}/>}
+                                <br />
+                                {visit.visitTypes[0] === "LOCAL" ? <div className="row align-items-start">Online Visit</div>  : <MapModal visit={visit}/>}
 
                             </div>
                         </div>
@@ -63,31 +66,42 @@ export default function Visit({visit, cancelVisit}) {
                             <br/>
                             <div id="example-collapse-text">
                                 <div className="fs-4">
-                                    Recommendations
+                                    Visit reason:
                                 </div>
                                 <div>
-                                    first name
+                                    {visit?.reason}
                                     <br/>
-                                    {/*{visit.patient.birthDate}*/}
                                 </div>
                                 <br/>
                                 <hr/>
                                 <br/>
                                 <div className="fs-4">
-                                    Referrals
+                                    Recommendation
                                 </div>
                                 <div>
-                                    {visit?.patient?.user?.telephoneNumber}
+
                                     <br/>
                                     {visit?.patient?.user?.email}
                                 </div>
                                 <br/>
                                 <hr/>
                                 <div>
-                                    <Link to={`/visit/${visit?.visitId}`} className="btn btn-dark my-3">Ask doctor a question</Link>
-                                    {new Date(visit?.date) < new Date() ? <Button className="btn bi-skip-forward-btn-fill border-danger border-4 ">Cancel Visit</Button> : ""}
+                                    {isToday(visit) ?
+                                        <Link to={`/visit/${visit?.visitId}`} className="btn btn-dark my-3">
+                                            Ask doctor a question</Link> : ""}
+                                    {new Date(visit?.date) > new Date() ?
+                                            <Button className="fs-3 text-dark bg-light border border-danger
+                                            border-2 rounded-pill p-2 green-shadow mt-3"
+                                            onClick={() => {
+                                                cancelVisit(visit?.visitId)
+                                            }
+                                            }>
+                                                Cancel Visit
+                                            </Button> :
+                                            ""
+                                    }
                                 </div>
-                                <br/>
+
 
                             </div>
                         </div>

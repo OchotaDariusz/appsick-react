@@ -42,7 +42,7 @@ export default function MapModal({visit}) {
 
     return (
         <>
-            <div role="button" className="text-start p-0 text-primary" onClick={() => setModalShow(true)}>
+            <div role="button" className="text-start p-0 text-primary d-flex d-inline align-items-center" onClick={() => setModalShow(true)}>
                 <FontAwesomeIcon icon={faLocationDot}/>
                 <p className="d-inline-block mx-1">
                     {visit.clinic.clinicName}

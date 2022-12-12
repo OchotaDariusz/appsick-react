@@ -1,21 +1,13 @@
-import React, {useEffect, useRef, useState, useCallback} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {
-    faCalendarDays,
-    faChartLine,
-    faLocationDot,
-    faPills,
-    faVideo,
-    faXmark
-} from '@fortawesome/free-solid-svg-icons'
+import {faCalendarDays, faChartLine, faLocationDot, faPills, faVideo, faXmark} from '@fortawesome/free-solid-svg-icons'
 import Visit from "./Visit"
 import TodayVisit from "./TodayVisit"
 import 'bootstrap/dist/css/bootstrap.css'
-import {formatVisitDate} from "../../utils/Utils";
+import {formatVisitDate, isToday} from "../../utils/Utils";
 import PastVisits from './PastVisits'
 import {Spinner} from '@chakra-ui/react'
 import BackToTopBtn from "../BackToTopBtn/BackToTopBtn";
-import classnames from 'classnames';
 
 const BASE_URL = `http://localhost:8080/api/visit/patient/`
 const PATIENT_ID = "1"
@@ -139,8 +131,9 @@ export default function ListOfVisits() {
         getListOfVisits("/future")
             .then(visits => {
                 if (visits.status !== 401) {
+                    let filtered = visits.filter(visit => !isToday(visit))
                     setFutureVisits(() => {
-                        return visits.map(formatVisitDate)
+                        return filtered.map(formatVisitDate)
                     })
                     setIsFutureVisitsLoading(false)
                 }
@@ -222,6 +215,7 @@ export default function ListOfVisits() {
                 <div className="row justify-content-center">
                     <div className="col-2"></div>
                     <div className="col fs-3 ">History</div>
+
                 </div>
 
                 <br/>
@@ -240,7 +234,7 @@ export default function ListOfVisits() {
                                 setIsFiltered(isFiltered)
                             }}>
                         <FontAwesomeIcon icon={faLocationDot} className="me-1"/>
-                        Local Visits
+                        Local
                     </button>
                     <button className={onlineFilterButtonClasses}
                             onClick={() => {
@@ -248,7 +242,7 @@ export default function ListOfVisits() {
                                 setIsFiltered(isFiltered)
                             }}>
                         <FontAwesomeIcon icon={faVideo} className="me-1"/>
-                        Video calls
+                        Online
                     </button>
                     <button className={examinationFilterButtonClasses}
                             onClick={() => {
@@ -266,12 +260,18 @@ export default function ListOfVisits() {
                         <FontAwesomeIcon icon={faPills} className="me-1"/>
                         Prescriptions
                     </button>
-
-                    <button className="col-auto m-0"
-                            onClick={() => setIsFiltered(!isFiltered)}>
+                    <button className="col-auto m-2"
+                            onClick={() => {
+                                setIsFiltered(false)
+                                setIsLocal(false)
+                                setIsOnline(false)
+                                setIsExamination(false)
+                                setIsPrescription(false)
+                            }}>
                         <FontAwesomeIcon icon={faXmark} className="me-1"/>
-                        Clear
+                        Clear filters
                     </button>
+
                 </div>
 
                 {(isPastVisitsLoading) ? <div className="d-flex justify-content-center"><Spinner/></div> :
