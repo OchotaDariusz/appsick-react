@@ -123,6 +123,18 @@ export default function ListOfVisits() {
         return await data.json()
     }
 
+    const cancelVisit = visitId => {
+        console.log(visitId)
+        fetch(`http://localhost:8080/api/visit/${visitId}`, {
+            credentials: "include",
+            method: "DELETE"
+        })
+            .then(() => {
+                setIsFutureVisitsLoading(false)
+            })
+            .catch(err => console.log(err.message))
+    }
+
     useEffect(() => {
         getListOfVisits("/future")
             .then(visits => {
@@ -134,7 +146,9 @@ export default function ListOfVisits() {
                 }
             })
             .catch(err => console.warn(err.message))
+    }, [isFutureVisitsLoading])
 
+    useEffect(() => {
         getListOfVisits("/current")
             .then(visits => {
                 if (visits.status !== 401) {
@@ -169,6 +183,7 @@ export default function ListOfVisits() {
                     <div className="col fs-3 mt-3">Incoming</div>
                 </div>
                 {(isFutureVisitsLoading) ? <Spinner/> : futureVisits.map(visit => <Visit visit={visit}
+                                                                                         cancelVisit={cancelVisit}
                                                                                          key={visit.visitId}/>)}
                 <div className="row align-items-center">
 

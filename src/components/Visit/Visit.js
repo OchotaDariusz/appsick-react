@@ -1,17 +1,13 @@
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faLocationDot} from "@fortawesome/free-solid-svg-icons";
 import Collapse from 'react-bootstrap/Collapse';
 import {useState} from "react";
 import maleDoctor from "../../assets/icons/Lekarz.svg"
 import femaleDoctor from "../../assets/icons/Lekarka.svg"
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import VisitChat from "../VisitChat/VisitChat";
 import {Link} from "react-router-dom";
 import MapModal from "../Map/MapModal";
-import {Spinner} from '@chakra-ui/react'
 import Button from "react-bootstrap/Button";
+import {isToday} from "../../utils/Utils";
 
-export default function Visit({visit}) {
+export default function Visit({visit, cancelVisit}) {
     const [open, setOpen] = useState(false);
 
     return (
