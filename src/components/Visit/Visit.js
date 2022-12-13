@@ -1,17 +1,19 @@
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faLocationDot} from "@fortawesome/free-solid-svg-icons";
 import Collapse from 'react-bootstrap/Collapse';
-import {useState} from "react";
+import React, {useState} from "react";
 import maleDoctor from "../../assets/icons/Lekarz.svg"
 import femaleDoctor from "../../assets/icons/Lekarka.svg"
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import VisitChat from "../VisitChat/VisitChat";
 import {Link} from "react-router-dom";
 import MapModal from "../Map/MapModal";
-import {Spinner} from '@chakra-ui/react'
 import Button from "react-bootstrap/Button";
+import {isToday} from "../../utils/Utils";
+import {BsFileEarmarkPdf} from "react-icons/bs";
+import {MdPersonAddAlt} from "react-icons/md";
+import {FiCheck} from "react-icons/fi";
+import {CgKey} from "react-icons/cg";
+import { CloseIcon, ViewIcon} from '@chakra-ui/icons'
 
-export default function Visit({visit}) {
+
+export default function Visit({visit, cancelVisit}) {
     const [open, setOpen] = useState(false);
 
     return (
@@ -19,14 +21,14 @@ export default function Visit({visit}) {
 
             <div className="row align-items-center text-center ">
                 <div className="col-2 px-3 ">
-                    <div className="col-auto rounded-3 bg-white text-dark shadow-sm p-2 ">
+                    <div className="col-auto rounded-3 bg-white text-dark shadow-sm p-2 border border-2 btnx">
                         {visit?.date[0]}
                         <hr/>
                         {visit?.date[1].slice(0, 5)}
                     </div>
                 </div>
 
-                <div className="col-10 rounded-3 bg-white text-dark my-3 pb-3 px-4 pt-2">
+                <div className="col-10 rounded-3 bg-white text-dark my-3 pb-3 px-4 pt-2 border border-2 btnx">
                     <div className="row justify-content-between">
                         <div className="col-6 my-1 fs-3 text-start">
                             {visit?.doctor?.user?.firstName} {visit?.doctor?.user?.lastName}
@@ -36,11 +38,14 @@ export default function Visit({visit}) {
                              aria-controls="example-collapse-text"
                              aria-expanded={open}
                              role="button">
+                            <div className="fs-5 d-inline px-2">
+                                <ViewIcon />
+                            </div>
                             See details
                         </div>
                     </div>
 
-                    <div className="row align-items-center">
+                    <div className="row align-items-start">
                         <div className="col-2">
                             <img src={visit?.doctor?.user?.image ?
                                 visit?.doctor?.user?.image :
@@ -50,10 +55,16 @@ export default function Visit({visit}) {
                                  style={{height: "100px", width: "100px"}}
                                  alt="doctor"/>
                         </div>
+
                         <div className="col-5 m-1">
+
                             <div className="row fs-5">
                                 {visit?.doctor?.medicalSpecialities[0]}
-                                <MapModal visit={visit}/>
+                                <br/>
+                                {visit?.clinic?.clinicName === "Konsultacje Online" ?
+                                    <div className="row align-items-start">Online Visit</div> :
+                                    <MapModal visit={visit}/>}
+
                             </div>
                         </div>
                     </div>
@@ -63,34 +74,95 @@ export default function Visit({visit}) {
                         <div>
                             <br/>
                             <hr/>
-                            <br/>
                             <div id="example-collapse-text">
-                                <div className="fs-4">
-                                    Recommendations
-                                </div>
-                                <div>
-                                    first name
+                                <div className="fs-4 m-2">
+                                    Visit reason:
                                     <br/>
-                                    {/*{visit.patient.birthDate}*/}
-                                </div>
-                                <br/>
-                                <hr/>
-                                <br/>
-                                <div className="fs-4">
-                                    Referrals
+                                    type={visit.visitTypes[0]}
+                                    <br />
+                                    id={visit.visitId}
                                 </div>
                                 <div>
-                                    {visit?.patient?.user?.telephoneNumber}
+                                    {visit?.reason}
+                                </div>
+                                <div>
+                                    <hr/>
+                                    <div className="fs-4 m-2">
+                                        Visit status:
+
+                                    </div>
+                                    <div>
+                                        {visit?.status !== "MISSED" ?
+                                            <div>{visit.status !== "PENDING" ?
+                                            visit.status :
+                                                <div className="fs-3 text-dark bg-light border border-success
+                                            border-2 rounded-pill p-2 green-shadow mt-3 px-3 d-inline-flex m-2">
+                                                    <div className="fs-1 d-inline px-2">
+                                                        <FiCheck />
+                                                    </div>
+                                                    Visit confirmed
+                                                </div>
+                                            }</div>
+                                            :
+                                            <div className="text-danger">
+                                                {visit.status}
+                                            </div>}
+                                    </div>
+                                </div>
+                                {(visit.status !== "PENDING" && visit.status !== "MISSED") ?
+                                    <div>
+                                        <div>
+                                            <hr/>
+                                            <div className="fs-4 m-2">
+                                                Recommendations
+
+                                            </div>
+                                            <div>
+
+                                                Siedź na dupie i się nie odzywaj niepytany
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <hr/>
+                                            <div className="fs-4 m-2">
+                                                Prescribed medication:
+
+                                            </div>
+                                            <div className=" d-inline-flex m-3 align-content-center">
+                                                <div className="d-flex " role="button">
+                                                    <div className="fs-1 d-inline px-3">
+                                                        <BsFileEarmarkPdf />
+                                                    </div>
+                                                    Drugs.pdf
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    : ""}
+
+
+                                <div>
                                     <br/>
-                                    {visit?.patient?.user?.email}
+                                    <hr/>
+                                    {isToday(visit) ?
+                                        <Link to={`/visit/${visit?.visitId}`} className="btn btn-dark my-3">
+                                            Ask doctor a question</Link> : ""}
+                                    {new Date(visit?.date) > new Date() ?
+                                        <Button className="fs-3 text-dark bg-light border border-danger
+                                            border-2 rounded-pill p-2 green-shadow mt-3 px-3 btnx d-inline-flex"
+                                                onClick={() => {
+                                                    cancelVisit(visit?.visitId)
+                                                }
+                                                }>
+                                            <div className="fs-4 d-inline px-2">
+                                                <CloseIcon />
+                                            </div>
+                                            Cancel Visit
+                                        </Button> :
+                                        ""
+                                    }
                                 </div>
-                                <br/>
-                                <hr/>
-                                <div>
-                                    <Link to={`/visit/${visit?.visitId}`} className="btn btn-dark my-3">Ask doctor a question</Link>
-                                    {new Date(visit?.date) < new Date() ? <Button className="btn bi-skip-forward-btn-fill border-danger border-4 ">Cancel Visit</Button> : ""}
-                                </div>
-                                <br/>
+
 
                             </div>
                         </div>

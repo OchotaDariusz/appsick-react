@@ -114,10 +114,13 @@ export default function Login(props) {
 
                                     <button
                                         className="btn fs-3 text-black border border-dark
-                                        border-2 rounded-pill p-2 px-4 btnx d-flex " type="submit">
+                                        border-2 rounded-pill p-2 px-4 btnx d-flex " onClick={() => {
+                                        props.setRegisterModalShow(false);
+                                        props.setLoginModalShow(false);
+                                        }}>
                                         Submit
                                         <div className="fs-1 d-inline px-3">
-                                            <RiSendPlaneLine/>
+                                            <RiSendPlaneLine />
                                         </div>
                                     </button>
 

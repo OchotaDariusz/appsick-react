@@ -211,7 +211,11 @@ export default function Register(props) {
                             </div>
                             <br/>
                             <button
-                                className="btn fs-3 d-flex border border-dark border-2 rounded-pill p-2 px-4 btnx mx-auto">
+                                className="btn fs-3 d-flex border border-dark border-2
+                                rounded-pill p-2 px-4 btnx mx-auto" onClick={() => {
+                                props.setRegisterModalShow(false);
+                                props.setLoginModalShow(false);
+                            }}>
                                 Submit
                                 <div className="fs-1 d-inline px-3">
                                     <RiSendPlaneLine/>
