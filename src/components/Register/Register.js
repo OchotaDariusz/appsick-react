@@ -83,24 +83,24 @@ export default function Register(props) {
 
     useEffect(() => {
         const isEmailTaken = setTimeout(() => {
-            axios.get(`http://localhost:8080/api/register/`, {
-                params: {
-                    email: `${email}`
-                }
-            }).then(({data}) => {
-                if (data === true) {
-                    setEmailInfo("User already exist");
-                    setEmailColor("salmon")
-
-                } else if (email.length === 0) {
-                    setEmailInfo("");
-                    setEmailColor("white");
-
-                } else {
-                    setEmailInfo("");
-                    setEmailColor("green");
-                }
-            })
+            // axios.get(`http://localhost:8080/api/register/`, {
+            //     params: {
+            //         email: `${email}`
+            //     }
+            // }).then(({data}) => {
+            //     if (data === true) {
+            //         setEmailInfo("User already exist");
+            //         setEmailColor("salmon")
+            //
+            //     } else if (email.length === 0) {
+            //         setEmailInfo("");
+            //         setEmailColor("white");
+            //
+            //     } else {
+            //         setEmailInfo("");
+            //         setEmailColor("green");
+            //     }
+            // })
         }, 1000)
         return () => {
             clearTimeout(isEmailTaken)
