@@ -156,6 +156,7 @@ export default function ListOfVisits() {
 
     useEffect(() => {
         let pastVisitsUrl = (!isFiltered) ? "/past" : `/past?pageNumber=1${local}${online}${examination}${prescription}`
+        console.log(pastVisitsUrl)
         getListOfVisits(pastVisitsUrl)
             .then(visits => {
                 if (visits.status !== 401) {
@@ -170,7 +171,8 @@ export default function ListOfVisits() {
 
     return (
         <div>
-            <div className="container-fluid col-6 mx-auto rounded-5 bg-light text-dark  mt-3 green-shadow">
+            <div className="container-fluid col-lg-6 col-md-12 col-sm-12
+             mx-auto rounded-5 bg-light text-dark  mt-3 green-shadow">
                 <div className="row justify-content-center">
                     <div className="col-2"></div>
                     <div className="col fs-3 mt-3">Incoming</div>
@@ -279,11 +281,11 @@ export default function ListOfVisits() {
             </div>
 
 
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <BackToTopBtn/>
+            <br />
+            <br />
+            <br />
+            <br />
+            <BackToTopBtn />
         </div>
 
     );

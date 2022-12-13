@@ -1,11 +1,13 @@
 import Collapse from 'react-bootstrap/Collapse';
-import {useState} from "react";
+import React, {useState} from "react";
 import maleDoctor from "../../assets/icons/Lekarz.svg"
 import femaleDoctor from "../../assets/icons/Lekarka.svg"
 import {Link} from "react-router-dom";
 import MapModal from "../Map/MapModal";
 import Button from "react-bootstrap/Button";
 import {isToday} from "../../utils/Utils";
+import {BsFileEarmarkPdf} from "react-icons/bs";
+import {MdPersonAddAlt} from "react-icons/md";
 
 export default function Visit({visit, cancelVisit}) {
     const [open, setOpen] = useState(false);
@@ -75,26 +77,60 @@ export default function Visit({visit, cancelVisit}) {
                                     <br/>
                                 </div>
 
-                                {new Date(visit?.date) < new Date() ?      // O CHUJ TU CHODZI
+                                {new Date(visit?.date) < new Date() ?
                                     <div>
-                                        {console.log(new Date(visit?.date))}
-                                        <br/>
-                                        <hr/>
-                                        <br/>
-                                        <div className="fs-4 ">
-                                            Recommendation
+                                        <div>
+                                            <br/>
+                                            <hr/>
+                                            <br/>
+                                            <div className="fs-4 ">
+                                                Visit status:
+
+                                            </div>
+                                            <div>
+                                                <br/>
+                                                {visit.status}
+                                            </div>
                                         </div>
                                         <div>
                                             <br/>
-                                            {visit?.patient?.user?.email}
+                                            <hr/>
+                                            <br/>
+                                            <div className="fs-4 ">
+                                                Recommendations
+
+                                            </div>
+                                            <div>
+                                                <br/>
+                                                Siedź na dupie i się nie odzywaj niepytany
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <br/>
+                                            <hr/>
+                                            <br/>
+                                            <div className="fs-4 ">
+                                                Prescribed medication:
+
+                                            </div>
+                                            <div className=" d-inline-flex m-3 align-content-center">
+                                                <div className="d-flex " role="button">
+                                                    <div className="fs-1 d-inline px-3">
+                                                        <BsFileEarmarkPdf />
+                                                    </div>
+                                                    Drugs.pdf
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+
+
                                     : ""}
 
 
-                                <br/>
-                                <hr/>
                                 <div>
+                                    <br/>
+                                    <hr/>
                                     {isToday(visit) ?
                                         <Link to={`/visit/${visit?.visitId}`} className="btn btn-dark my-3">
                                             Ask doctor a question</Link> : ""}
