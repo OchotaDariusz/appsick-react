@@ -37,7 +37,7 @@ export default function TheNavbar() {
                 'Cache': 'no-cache'
             }
         })
-            .then(res => res.json())
+            // .then(res => res.json())
             .then(res => {
                 console.log(res)
                 auth.logout()

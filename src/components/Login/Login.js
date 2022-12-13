@@ -31,7 +31,7 @@ export default function Login(props) {
 
     const history = useHistory();
     const routeChange = () => {
-        let path = `/visit`;
+        let path = `/`;
         history.push(path);
     }
 
