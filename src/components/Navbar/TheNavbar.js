@@ -5,13 +5,21 @@ import drugs from '../../assets/icons/Drugs.svg'
 import contact from '../../assets/icons/Contact.svg'
 import newVisit from '../../assets/icons/new_visit.svg'
 import hamburger from '../../assets/icons/hamburger.svg'
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {CgKey} from "react-icons/cg"
 import Login from "../Login/Login";
 import Button from "react-bootstrap/Button";
 import Register from "../Register/Register";
+import {useAuth} from "../ProtectedRoutes/auth";
 
 export default function TheNavbar() {
+
+    const history = useHistory();
+    const routeChange = () => {
+        let path = `/`;
+        history.push(path);
+
+    }
 
     const [loginModalShow, setLoginModalShow] = useState(false);
     const [registerModalShow, setRegisterModalShow] = useState(false);
@@ -32,11 +40,15 @@ export default function TheNavbar() {
             .then(res => res.json())
             .then(res => {
                 console.log(res)
+                auth.logout()
+                window.location.reload(false)
+                routeChange()
             })
             .catch(err => {
                 console.log(err.message)
             })
     }
+    const auth = useAuth()
 
     return (
         <>
@@ -55,7 +67,10 @@ export default function TheNavbar() {
                         <Link to={'/'}><img src={logo} style={{height: 80}} alt="Logo"/></Link>
                     </span>
                     <div className="collapse navbar-collapse d-flex justify-content-center" id="navbarNavAltMarkup">
-                        <div className="navbar-nav container">
+
+                        {!auth.email ? <div className="navbar-nav container">
+
+                        </div> :<div className="navbar-nav container">
                             <div className="row flex-nowrap align-items-center">
                                 <div className="col fs-4  mx-4 nvbr">
                                     <Link className="nav-link d-flex align-items-center" to={'/visit'}>
@@ -86,39 +101,57 @@ export default function TheNavbar() {
                                     </Link>
                                 </div>
                             </div>
-                        </div>
+                        </div>}
+
                     </div>
-
                     <div className="w-100">
-                        <div
-                            className="btnx collapse navbar-collapse nav-link d-flex justify-content-end align-items-center">
-
                             <div
-                                className="menu-login button-login fs-3 text-black border border-dark border-2 rounded-pill p-2 green-shadow"
-                                onClick={() => setLoginModalShow(true)}
-                                role="button">
-                                {'\u00A0'}{'\u00A0'}Login | Register{'\u00A0'}
-                                <div className="fs-1 d-inline">
-                                    <CgKey/>
+                                className="btnx collapse navbar-collapse nav-link d-flex justify-content-end align-items-center">
+                                {!auth.email ?
+
+                                <div
+                                    className="menu-login button-login fs-3 text-black border border-dark border-2 rounded-pill p-2 green-shadow"
+                                    onClick={() => setLoginModalShow(true)}
+                                    role="button">
+                                    {'\u00A0'}{'\u00A0'}Login | Register{'\u00A0'}
+                                    <div className="fs-1 d-inline">
+                                        <CgKey/>
+                                    </div>
                                 </div>
+                                :
+                                    <div
+                                        className="menu-login button-login fs-3 text-black border border-dark border-2 rounded-pill p-2 green-shadow"
+                                        onClick={logout}
+                                        role="button">
+                                        {'\u00A0'}{'\u00A0'}Logout{'\u00A0'}
+                                        <div className="fs-1 d-inline">
+                                            <CgKey/>
+                                        </div>
+                                    </div>
+
+
+                                }
+
+
+                                <Login
+                                    show={loginModalShow}
+                                    onHide={() => setLoginModalShow(false)}
+                                    setRegisterModalShow={setRegisterModalShow}
+                                    setLoginModalShow={setLoginModalShow}
+                                />
+                                <Register
+                                    show={registerModalShow}
+                                    onHide={() => setRegisterModalShow(false)}
+                                    setRegisterModalShow={setRegisterModalShow}
+                                    setLoginModalShow={setLoginModalShow}
+                                />
+
                             </div>
 
-                            <Login
-                                show={loginModalShow}
-                                onHide={() => setLoginModalShow(false)}
-                                setRegisterModalShow={setRegisterModalShow}
-                                setLoginModalShow={setLoginModalShow}
-                            />
-                            <Register
-                                show={registerModalShow}
-                                onHide={() => setRegisterModalShow(false)}
-                                setRegisterModalShow={setRegisterModalShow}
-                                setLoginModalShow={setLoginModalShow}
-                            />
-
                         </div>
 
-                    </div>
+
+
                 </div>
             </nav>
 

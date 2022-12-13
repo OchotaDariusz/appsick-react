@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import "./Login.css"
 import {Link, useHistory} from "react-router-dom";
 import InputFields from "../InputFields"
@@ -8,11 +8,27 @@ import {Center, Divider} from '@chakra-ui/react'
 import Register from "../Register/Register";
 import {MdPersonAddAlt} from "react-icons/md";
 import {RiSendPlaneLine} from "react-icons/ri";
+import {useAuth} from "../ProtectedRoutes/auth";
+
+
 
 export default function Login(props) {
 
+    const auth = useAuth()
+    const [role, setRole] = useState('')
+
+    const getUser = async () => {
+        const data = await fetch("http://localhost:8080/api/auth/current", {
+            credentials: 'include'
+        })
+        console.log(data)
+        return await data.json()
+    }
+
+
 
     const [info, setInfo] = useState("")
+
     const history = useHistory();
     const routeChange = () => {
         let path = `/visit`;
@@ -44,11 +60,28 @@ export default function Login(props) {
             .then(res => {
                 console.log(res)
                 routeChange()
+                handleLogin()
             })
             .catch(err => {
                 setInfo("Invalid email or password")
                 console.log(err.message)
             })
+    }
+
+    const handleLogin = () => {
+        getUser()
+            .then(user => {
+                console.log(user)
+                console.log(user.role)
+                setRole(user.role)
+
+                console.log(email)
+                console.log("to")
+                console.log(role)
+                auth.login(email, user.role)
+            })
+
+            .catch(err => console.log(err.message))
     }
 
     return (
@@ -79,14 +112,14 @@ export default function Login(props) {
                                     </div>
                                     <div>{info}</div>
 
-                                    <div
+                                    <button
                                         className="btn fs-3 text-black border border-dark
-                                        border-2 rounded-pill p-2 px-4 btnx d-flex ">
+                                        border-2 rounded-pill p-2 px-4 btnx d-flex " type="submit">
                                         Submit
                                         <div className="fs-1 d-inline px-3">
-                                            <RiSendPlaneLine />
+                                            <RiSendPlaneLine/>
                                         </div>
-                                    </div>
+                                    </button>
 
                                 </form>
                             </div>

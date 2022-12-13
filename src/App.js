@@ -1,7 +1,7 @@
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route
+    BrowserRouter as Router,
+    Switch,
+    Route
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap';
@@ -14,34 +14,37 @@ import VisitChat from "./components/VisitChat/VisitChat"
 import TheNavbar from "./components/Navbar/TheNavbar";
 import VisitRegistration from "./components/Visit/VisitRegistration";
 import Credits from "./components/Footer/Credits";
+import {AuthProvider} from "./components/ProtectedRoutes/auth";
 
 function App() {
-  return (
-    <Router>
-      <TheNavbar />
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/register">
-          <Register />
-        </Route>
-        <Route path="/credits">
-          <Credits />
-        </Route>
-        <Route exact path="/visit">
-          <ListOfVisits />
-        </Route>
-        <Route exact path="/visit/:visitId" component={VisitChat} />
-        <Route path="/register-visit">
-          <VisitRegistration />
-        </Route>
-      </Switch>
-    </Router>
-  );
+    return (
+        <AuthProvider>
+            <Router>
+                <TheNavbar/>
+                <Switch>
+                    <Route exact path="/">
+                        <Home/>
+                    </Route>
+                    <Route path="/login">
+                        <Login/>
+                    </Route>
+                    <Route path="/register">
+                        <Register/>
+                    </Route>
+                    <Route path="/credits">
+                        <Credits/>
+                    </Route>
+                    <Route exact path="/visit">
+                        <ListOfVisits/>
+                    </Route>
+                    <Route exact path="/visit/:visitId" component={VisitChat}/>
+                    <Route path="/register-visit">
+                        <VisitRegistration/>
+                    </Route>
+                </Switch>
+            </Router>
+        </AuthProvider>
+    );
 }
 
 export default App;

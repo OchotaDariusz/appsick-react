@@ -12,6 +12,7 @@ const getData = async (endpoint, id) => {
 
 const getUser = async () => {
   return await getData("http://localhost:8080/api/auth/current")
+
 }
 
 let chatroom, messages
