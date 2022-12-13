@@ -52,7 +52,7 @@ export default function ListOfVisits() {
             // data = "&visitType=0"       KALENDARZ
             setDataFilterButtonClasses("col-auto rounded-5 bg-white m-1 shadow-sm nvbr border border-dark border-2")
         }
-    }, [isLocal])
+    }, [isLocal, isFiltered])
 
     useEffect(() => {
         if (!isLocal) {
@@ -62,7 +62,7 @@ export default function ListOfVisits() {
             local = "&visitType=0"
             setLocalFilterButtonClasses("col-auto rounded-5 bg-white m-1 shadow-sm nvbr border border-dark border-2")
         }
-    }, [isLocal])
+    }, [isLocal, isFiltered])
 
     useEffect(() => {
         if (!isOnline) {
@@ -72,7 +72,7 @@ export default function ListOfVisits() {
             online = "&visitType=1"
             setOnlineFilterButtonClasses("col-auto rounded-5 bg-white m-1 shadow-sm nvbr border border-dark border-2")
         }
-    }, [isOnline])
+    }, [isOnline, isFiltered])
 
     useEffect(() => {
         if (!isExamination) {
@@ -82,7 +82,7 @@ export default function ListOfVisits() {
             examination = "&visitType=2"
             setExaminationFilterButtonClasses("col-auto rounded-5 bg-white m-1 shadow-sm nvbr border border-dark border-2")
         }
-    }, [isExamination])
+    }, [isExamination, isFiltered])
 
     useEffect(() => {
         if (!isPrescription) {
@@ -92,7 +92,7 @@ export default function ListOfVisits() {
             prescription = "&visitType=3"
             setPrescriptionFilterButtonClasses("col-auto rounded-5 bg-white m-1 shadow-sm nvbr border border-dark border-2")
         }
-    }, [isPrescription])
+    }, [isPrescription, isFiltered])
 
 
     const loadMorePastVisits = useCallback(() => {
@@ -169,6 +169,8 @@ export default function ListOfVisits() {
 
     useEffect(() => {
         let pastVisitsUrl = (!isFiltered) ? "/past" : `/past?pageNumber=1${local}${online}${examination}${prescription}`
+        console.log("pastVisitsUrl")
+        console.log(isFiltered)
         console.log(pastVisitsUrl)
         getListOfVisits(pastVisitsUrl)
             .then(visits => {
@@ -180,7 +182,7 @@ export default function ListOfVisits() {
                 }
             })
             .catch(err => console.warn(err.message))
-    }, [isLocal, isOnline, isExamination, isPrescription])
+    }, [isLocal, isOnline, isExamination, isPrescription, isFiltered])
 
     return (
         <div>
@@ -241,7 +243,7 @@ export default function ListOfVisits() {
                     <button className={dataFilterButtonClasses}
                             onClick={() => {
                                 setIsData(!isData)
-                                setIsFiltered(isFiltered)
+                                setIsFiltered(true)
                             }}>
                         <FontAwesomeIcon icon={faCalendarDays} className="me-1"/>
                         Data
@@ -249,7 +251,7 @@ export default function ListOfVisits() {
                     <button className={localFilterButtonClasses}
                             onClick={() => {
                                 setIsLocal(!isLocal)
-                                setIsFiltered(isFiltered)
+                                setIsFiltered(true)
                             }}>
                         <FontAwesomeIcon icon={faLocationDot} className="me-1"/>
                         Local
@@ -257,7 +259,7 @@ export default function ListOfVisits() {
                     <button className={onlineFilterButtonClasses}
                             onClick={() => {
                                 setIsOnline(!isOnline)
-                                setIsFiltered(isFiltered)
+                                setIsFiltered(true)
                             }}>
                         <FontAwesomeIcon icon={faVideo} className="me-1"/>
                         Online
@@ -265,7 +267,7 @@ export default function ListOfVisits() {
                     <button className={examinationFilterButtonClasses}
                             onClick={() => {
                                 setIsExamination(!isExamination)
-                                setIsFiltered(isFiltered)
+                                setIsFiltered(true)
                             }}>
                         <FontAwesomeIcon icon={faChartLine} className="me-1"/>
                         Examinations
@@ -273,7 +275,7 @@ export default function ListOfVisits() {
                     <button className={prescriptionFilterButtonClasses}
                             onClick={() => {
                                 setIsPrescription(!isPrescription)
-                                setIsFiltered(isFiltered)
+                                setIsFiltered(true)
                             }}>
                         <FontAwesomeIcon icon={faPills} className="me-1"/>
                         Prescriptions

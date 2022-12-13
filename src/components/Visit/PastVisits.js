@@ -3,7 +3,7 @@ import Visit from "./Visit";
 import {Virtuoso} from "react-virtuoso";
 import {Spinner} from '@chakra-ui/react'
 
-export default function PastVisits({pastVisits, loadMorePastVisits}) {
+export default function PastVisits({pastVisits, isPastVisitsLoading, loadMorePastVisits}) {
     const Footer = () => {
         return (
             <div
