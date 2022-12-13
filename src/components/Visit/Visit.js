@@ -8,6 +8,10 @@ import Button from "react-bootstrap/Button";
 import {isToday} from "../../utils/Utils";
 import {BsFileEarmarkPdf} from "react-icons/bs";
 import {MdPersonAddAlt} from "react-icons/md";
+import {FiCheck} from "react-icons/fi";
+import {CgKey} from "react-icons/cg";
+import { CloseIcon, ViewIcon} from '@chakra-ui/icons'
+
 
 export default function Visit({visit, cancelVisit}) {
     const [open, setOpen] = useState(false);
@@ -34,6 +38,9 @@ export default function Visit({visit, cancelVisit}) {
                              aria-controls="example-collapse-text"
                              aria-expanded={open}
                              role="button">
+                            <div className="fs-5 d-inline px-2">
+                                <ViewIcon />
+                            </div>
                             See details
                         </div>
                     </div>
@@ -54,7 +61,7 @@ export default function Visit({visit, cancelVisit}) {
                             <div className="row fs-5">
                                 {visit?.doctor?.medicalSpecialities[0]}
                                 <br/>
-                                {visit.visitTypes[0] === "LOCAL" ?
+                                {visit?.clinic?.clinicName === "Konsultacje Online" ?
                                     <div className="row align-items-start">Online Visit</div> :
                                     <MapModal visit={visit}/>}
 
@@ -67,49 +74,57 @@ export default function Visit({visit, cancelVisit}) {
                         <div>
                             <br/>
                             <hr/>
-                            <br/>
                             <div id="example-collapse-text">
-                                <div className="fs-4">
+                                <div className="fs-4 m-2">
                                     Visit reason:
+                                    <br/>
+                                    type={visit.visitTypes[0]}
+                                    <br />
+                                    id={visit.visitId}
                                 </div>
                                 <div>
                                     {visit?.reason}
-                                    <br/>
                                 </div>
+                                <div>
+                                    <hr/>
+                                    <div className="fs-4 m-2">
+                                        Visit status:
 
-                                {new Date(visit?.date) < new Date() ?
+                                    </div>
+                                    <div>
+                                        {visit?.status !== "MISSED" ?
+                                            <div>{visit.status !== "PENDING" ?
+                                            visit.status :
+                                                <div className="fs-3 text-dark bg-light border border-success
+                                            border-2 rounded-pill p-2 green-shadow mt-3 px-3 d-inline-flex m-2">
+                                                    <div className="fs-1 d-inline px-2">
+                                                        <FiCheck />
+                                                    </div>
+                                                    Visit confirmed
+                                                </div>
+                                            }</div>
+                                            :
+                                            <div className="text-danger">
+                                                {visit.status}
+                                            </div>}
+                                    </div>
+                                </div>
+                                {(visit.status !== "PENDING" && visit.status !== "MISSED") ?
                                     <div>
                                         <div>
-                                            <br/>
                                             <hr/>
-                                            <br/>
-                                            <div className="fs-4 ">
-                                                Visit status:
-
-                                            </div>
-                                            <div>
-                                                <br/>
-                                                {visit.status}
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <br/>
-                                            <hr/>
-                                            <br/>
-                                            <div className="fs-4 ">
+                                            <div className="fs-4 m-2">
                                                 Recommendations
 
                                             </div>
                                             <div>
-                                                <br/>
+
                                                 Siedź na dupie i się nie odzywaj niepytany
                                             </div>
                                         </div>
                                         <div>
-                                            <br/>
                                             <hr/>
-                                            <br/>
-                                            <div className="fs-4 ">
+                                            <div className="fs-4 m-2">
                                                 Prescribed medication:
 
                                             </div>
@@ -123,8 +138,6 @@ export default function Visit({visit, cancelVisit}) {
                                             </div>
                                         </div>
                                     </div>
-
-
                                     : ""}
 
 
@@ -136,11 +149,14 @@ export default function Visit({visit, cancelVisit}) {
                                             Ask doctor a question</Link> : ""}
                                     {new Date(visit?.date) > new Date() ?
                                         <Button className="fs-3 text-dark bg-light border border-danger
-                                            border-2 rounded-pill p-2 green-shadow mt-3 px-3"
+                                            border-2 rounded-pill p-2 green-shadow mt-3 px-3 btnx d-inline-flex"
                                                 onClick={() => {
                                                     cancelVisit(visit?.visitId)
                                                 }
                                                 }>
+                                            <div className="fs-4 d-inline px-2">
+                                                <CloseIcon />
+                                            </div>
                                             Cancel Visit
                                         </Button> :
                                         ""

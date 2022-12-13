@@ -24,15 +24,18 @@ export default function ListOfVisits() {
     const [isPastVisitsLoading, setIsPastVisitsLoading] = useState(true);
     const [isFutureVisitsLoading, setIsFutureVisitsLoading] = useState(true);
 
+    const [isData, setIsData] = useState(false)
     const [isLocal, setIsLocal] = useState(false)
     const [isOnline, setIsOnline] = useState(false)
     const [isExamination, setIsExamination] = useState(false)
     const [isPrescription, setIsPrescription] = useState(false)
+    let data = ""
     let local = ""
     let online = ""
     let examination = ""
     let prescription = ""
 
+    const [dataFilterButtonClasses, setDataFilterButtonClasses] = useState("col-auto rounded-5 bg-dark m-1 shadow-sm nvbr")
     const [localFilterButtonClasses, setLocalFilterButtonClasses] = useState("col-auto rounded-5 bg-dark m-1 shadow-sm nvbr")
     const [onlineFilterButtonClasses, setOnlineFilterButtonClasses] = useState("col-auto rounded-5 bg-dark m-1 shadow-sm nvbr")
     const [examinationFilterButtonClasses, setExaminationFilterButtonClasses] = useState("col-auto rounded-5 bg-dark m-1 shadow-sm nvbr")
@@ -40,6 +43,16 @@ export default function ListOfVisits() {
 
 
     const [isFiltered, setIsFiltered] = useState(false)
+
+    useEffect(() => {
+        if (!isLocal) {
+            data = ""
+            setDataFilterButtonClasses("col-auto rounded-5 bg-white m-1 shadow-sm nvbr")
+        } else {
+            // data = "&visitType=0"       KALENDARZ
+            setDataFilterButtonClasses("col-auto rounded-5 bg-white m-1 shadow-sm nvbr border border-dark border-2")
+        }
+    }, [isLocal])
 
     useEffect(() => {
         if (!isLocal) {
@@ -225,7 +238,11 @@ export default function ListOfVisits() {
                     <div className="col-2">
 
                     </div>
-                    <button className="col-auto rounded-5 bg-white m-1 shadow-sm nvbr">
+                    <button className={dataFilterButtonClasses}
+                            onClick={() => {
+                                setIsData(!isData)
+                                setIsFiltered(isFiltered)
+                            }}>
                         <FontAwesomeIcon icon={faCalendarDays} className="me-1"/>
                         Data
                     </button>
