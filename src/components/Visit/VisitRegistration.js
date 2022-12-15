@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {ChakraProvider} from '@chakra-ui/react';
 import {useHistory} from "react-router-dom";
-import { Select, Textarea  } from '@chakra-ui/react'
+import { Select, Textarea, Button  } from '@chakra-ui/react'
 import 'bootstrap/js/dist/util';
 import 'bootstrap/js/dist/dropdown';
+import './VisitRegistration.css';
 
 const VisitRegistration = () => {
 
@@ -47,9 +48,6 @@ const VisitRegistration = () => {
                 'Access-Control-Allow-Origin': '*',
                 'Cache': 'no-cache'
             }
-        }).then((response) => {
-            setIsDoctorSpecialitiesLoading(false);
-            return response;
         });
         return specialties.json();
     }
@@ -65,9 +63,6 @@ const VisitRegistration = () => {
                 'Access-Control-Allow-Origin': '*',
                 'Cache': 'no-cache'
             }
-        }).then(response => {
-            setIsClinicListLoading(false);
-            return response;
         });
         return clinics.json();
     }
@@ -85,9 +80,6 @@ const VisitRegistration = () => {
                 'Access-Control-Allow-Origin': '*',
                 'Cache': 'no-cache'
             }
-        }).then(response => {
-            setIsDoctorListLoading(false);
-            return response;
         });
         return doctors.json();
     }
@@ -105,9 +97,6 @@ const VisitRegistration = () => {
                 'Access-Control-Allow-Origin': '*',
                 'Cache': 'no-cache'
             }
-        }).then(response => {
-            setIsDoctorListLoading(false);
-            return response;
         });
         return doctors.json();
     }
@@ -135,6 +124,7 @@ const VisitRegistration = () => {
         getDoctorSpecialities().then(doctorSpecialities => {
             if (doctorSpecialities) {
                 setDoctorSpecialities(() => {return doctorSpecialities});
+                setIsDoctorSpecialitiesLoading(false);
             }
         }).catch(err => console.warn(err.message))
     }, [])
@@ -143,6 +133,7 @@ const VisitRegistration = () => {
         getListOfClinics().then(clinics => {
             if (clinics){
                 setClinicList( () => {return clinics} );
+                setIsClinicListLoading(false);
             }
         }).catch(err => console.warn(err.message))
     }, [])
@@ -151,6 +142,7 @@ const VisitRegistration = () => {
         getDoctorsForClinic(visitDetails.clinic.clinicId).then(doctors => {
             if (doctors){
                 setDoctorList(() => {return doctors});
+                setIsDoctorListLoading(false);
             }
         })
             .catch(err => console.warn(err.message))
@@ -161,6 +153,7 @@ const VisitRegistration = () => {
         getDoctorsForSpeciality(visitDetails.doctorSpeciality).then( doctors => {
             if (doctors){
                 setDoctorList(() => {return doctors});
+                setIsDoctorListLoading(false);
             }
         })
             .catch(err => console.warn(err.message))
@@ -194,6 +187,7 @@ const VisitRegistration = () => {
         visitObject = {...visitDetails};
         visitObject.doctorSpeciality = e.target.value;
         setVisitDetails(visitObject);
+        document.querySelector("#nav-tabContent").classList.add("show");
     }
 
     const toggleOnline = (e) => {
@@ -220,11 +214,12 @@ const VisitRegistration = () => {
             .finally(() => setIsSubmitting(false));
     }
 
-    function onlineVisitForm(){
+    function visitForm(online){
         return (
-            <form id={"visit-form"} className="row justify-content-center">
+            <form id={"visit-form"} className="row justify-content-center fs-5 px-5 py-3">
+                {online ? "" : clinicVisitForm()}
                 <label htmlFor={"doctor"}>Doctor:</label>
-                <Select name={"doctor"} className={"form-select"} onChange={changeDoctor} required>
+                <Select name={"doctor"} className={"form-select mb-3"} onChange={changeDoctor} required>
                     <option value="" hidden>- Select a Doctor -</option>
                     {isDoctorListLoading ? "loading" : doctorList.map(doctor => {
                         return <option key={doctor.doctorId}
@@ -233,58 +228,41 @@ const VisitRegistration = () => {
                     }
                 </Select>
                 <label htmlFor={"date"}>Date:</label>
-                <input type={"datetime-local"} name={"date"} onChange={changeVisitDate} required/>
+                <input type={"datetime-local"} className={"mb-3"} name={"date"} onChange={changeVisitDate} required/>
 
                 <div className="form-group info-border">
                     <label htmlFor="visit-description">Visit description:</label>
-                    <Textarea className="form-control" name={"visit-description"} rows="5"
+                    <Textarea className="form-control mb-3" name={"visit-description"} rows="5"
                               onChange={changeVisitDescription}></Textarea>
                 </div>
 
-                <button type={"submit"} onClick={submitVisit}>SUBMIT</button>
+                <Button colorScheme={"teal"} size={"lg"}type={"submit"} onClick={submitVisit}>SUBMIT</Button>
             </form>
         )
     }
 
     function clinicVisitForm(){
         return (
-            <form id={"visit-form"} className="row justify-content-center">
+            <>
                 <label htmlFor={"clinic"}>Clinic:</label>
-                <Select name={"clinic"} className="form-select" onChange={changeClinic} required>
+                <Select name={"clinic"} className="form-select mb-3" onChange={changeClinic} required>
                     <option value="" hidden>- Select Clinic -</option>
-                    {isClinicListLoading ? "loading" : clinicList.map(clinic => {
+                    {isClinicListLoading ? "" : clinicList.map(clinic => {
                         return <option key={clinic.clinicId} value={clinic.clinicId}>{clinic.clinicName}</option>;
                     })
                     }
                 </Select>
-                <label htmlFor={"doctor"}>Doctor:</label>
-                <Select name={"doctor"} className={"form-select"} onChange={changeDoctor} required>
-                    <option value="" hidden>- Select a Doctor -</option>
-                    {isDoctorListLoading ? "loading" : doctorList.map(doctor => {
-                        return <option key={doctor.doctorId}
-                                       value={doctor.doctorId}>{doctor.user.firstName} {doctor.user.lastName}</option>;
-                    })
-                    }
-                </Select>
-                <label htmlFor={"date"}>Date:</label>
-                <input type={"datetime-local"} name={"date"} onChange={changeVisitDate} required/>
-
-                <div className="form-group info-border">
-                    <label htmlFor="visit-description">Visit description:</label>
-                    <Textarea className="form-control" name={"visit-description"} rows="5"
-                              onChange={changeVisitDescription}></Textarea>
-                </div>
-
-                <button type={"submit"} onClick={submitVisit}>SUBMIT</button>
-            </form>
+            </>
         )
     }
     return (
         <ChakraProvider>
-            <div className={"container col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow"}>
+            <div className={"container col-6 mx-auto m-3 rounded-5 bg-light text-dark bg-opacity-1 green-shadow"}>
 
-                <div className={"container mx-auto m-3 m- p-3"}>
-                    <label className={"p-3"} htmlFor={"specialities"}>Speciality:</label>
+                <h1 className={"fs-1 pt-3 text-center"}>Make an appointment</h1>
+
+                <div className={"container mx-auto m-3 px-5 py-3"}>
+                    <label className={"p-3 fs-5"} htmlFor={"specialities"}>What kind of service do you require?:</label>
                     <Select name={"specialities"} className={"form-select"} onChange={changeDoctorSpeciality} required>
                         <option value="" hidden>- Select a Speciality -</option>
                         {isDoctorSpecialitiesLoading ? "loading" : doctorSpecialities.map(speciality => {
@@ -315,12 +293,12 @@ const VisitRegistration = () => {
 
                     <div className={"tab-pane fade show active p-3"} id={"nav-online"} role={"tabpanel"}
                          aria-labelledby={"nav-online-tab"}>
-                        {onlineVisitForm()}
+                        {visitForm(true)}
                     </div>
 
                     <div className={"tab-pane fade p-3"} id={"nav-clinic"} role={"tabpanel"}
                          aria-labelledby={"nav-clinic-tab"}>
-                        {clinicVisitForm()}
+                        {visitForm(false)}
                     </div>
 
                 </div>

@@ -1,0 +1,11 @@
+
+#nav-tabContent {
+    overflow: hidden;
+    max-height: 20px;
+    transition: max-height .5s ease-in-out;
+}
+
+#nav-tabContent.show {
+    height: auto;
+    max-height: 1000px;
+}
