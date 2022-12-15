@@ -11,6 +11,8 @@ import Login from "../Login/Login";
 import Button from "react-bootstrap/Button";
 import Register from "../Register/Register";
 import {useAuth} from "../ProtectedRoutes/auth";
+import maleDoctor from "../../assets/icons/Lekarz.svg";
+import femaleDoctor from "../../assets/icons/Lekarka.svg";
 
 export default function TheNavbar() {
 
@@ -70,7 +72,7 @@ export default function TheNavbar() {
 
                         {!auth.email ? <div className="navbar-nav container">
 
-                        </div> :<div className="navbar-nav container">
+                        </div> : <div className="navbar-nav container">
                             <div className="row flex-nowrap align-items-center">
                                 <div className="col fs-4  mx-4 nvbr">
                                     <Link className="nav-link d-flex align-items-center" to={'/visit'}>
@@ -104,10 +106,13 @@ export default function TheNavbar() {
                         </div>}
 
                     </div>
-                    <div className="w-100">
+
+                    {!auth.email ?
+
+
+                        <div className="w-100">
                             <div
                                 className="btnx collapse navbar-collapse nav-link d-flex justify-content-end align-items-center">
-                                {!auth.email ?
 
                                 <div
                                     className="menu-login button-login fs-3 text-black border border-dark border-2 rounded-pill p-2 green-shadow"
@@ -118,42 +123,75 @@ export default function TheNavbar() {
                                         <CgKey/>
                                     </div>
                                 </div>
-                                :
-                                    <div
-                                        className="menu-login button-login fs-3 text-black border border-dark border-2 rounded-pill p-2 green-shadow"
-                                        onClick={logout}
-                                        role="button">
-                                        {'\u00A0'}{'\u00A0'}Logout{'\u00A0'}
-                                        <div className="fs-1 d-inline">
-                                            <CgKey/>
-                                        </div>
-                                    </div>
-
-
-                                }
-
-
-                                <Login
-                                    show={loginModalShow}
-                                    onHide={() => setLoginModalShow(false)}
-                                    setRegisterModalShow={setRegisterModalShow}
-                                    setLoginModalShow={setLoginModalShow}
-                                />
-                                <Register
-                                    show={registerModalShow}
-                                    onHide={() => setRegisterModalShow(false)}
-                                    setRegisterModalShow={setRegisterModalShow}
-                                    setLoginModalShow={setLoginModalShow}
-                                />
-
                             </div>
-
                         </div>
 
+                        :
+                        <>
+                            <div className="w-25">
+                                <div
+                                    className="container collapse navbar-collapse nav-link d-flex justify-content-end align-items-center">
+
+                                    <Link
+                                        className="border border-dark border-2 rounded-pill p-2 green-shadow btnx"
+                                        to={'/user-page'}
+                                        role="button">
+                                        <img src={visit?.doctor?.user?.image ?
+                                            visit?.doctor?.user?.image :
+                                            visit?.doctor?.user?.sex === "MALE" ?
+                                                maleDoctor : femaleDoctor}
+                                             className="img-fluid rounded-circle"
+                                             style={{height: "50px", width: "50px"}}
+                                             alt="doctor"/>
+                                    </Link>
+
+                                </div>
+                            </div>
+
+                            <div className="w-100">
+                                <div
+                                    className="collapse navbar-collapse nav-link d-flex justify-content-end align-items-center">
+
+                                        <div className="justify-content-end">
+                                            <div
+                                                className="collapse navbar-collapse nav-link flex-nowrap d-inline-flex">
+
+                                                <div
+                                                    className="menu-login button-login fs-3 text-black border border-dark border-2 rounded-pill p-2 green-shadow btnx"
+                                                    onClick={logout}
+                                                    role="button">
+                                                    {'\u00A0'}{'\u00A0'}Logout{'\u00A0'}
+                                                    <div className="fs-1 d-inline">
+                                                        <CgKey/>
+                                                    </div>
+                                                </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </>
+
+
+                    }
 
 
                 </div>
             </nav>
+
+            <Login
+                show={loginModalShow}
+                onHide={() => setLoginModalShow(false)}
+                setRegisterModalShow={setRegisterModalShow}
+                setLoginModalShow={setLoginModalShow}
+            />
+            <Register
+                show={registerModalShow}
+                onHide={() => setRegisterModalShow(false)}
+                setRegisterModalShow={setRegisterModalShow}
+                setLoginModalShow={setLoginModalShow}
+            />
 
 
         </>

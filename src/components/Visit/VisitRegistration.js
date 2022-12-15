@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {ChakraProvider} from '@chakra-ui/react';
+import {ChakraProvider, Textarea} from '@chakra-ui/react';
 import {useHistory} from "react-router-dom";
-import { Select, Textarea  } from '@chakra-ui/react'
+import { Spinner } from '@chakra-ui/react'
 import 'bootstrap/js/dist/util';
 import 'bootstrap/js/dist/dropdown';
+import {Select} from "@mui/material";
 
 const VisitRegistration = () => {
 
@@ -44,8 +45,7 @@ const VisitRegistration = () => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Cache': 'no-cache'
+                'Access-Control-Allow-Origin': '*'
             }
         }).then((response) => {
             setIsDoctorSpecialitiesLoading(false);
@@ -62,8 +62,7 @@ const VisitRegistration = () => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Cache': 'no-cache'
+                'Access-Control-Allow-Origin': '*'
             }
         }).then(response => {
             setIsClinicListLoading(false);
@@ -76,14 +75,12 @@ const VisitRegistration = () => {
         setIsDoctorListLoading(true);
         const doctors = await fetch(`http://localhost:8080/api/clinic/${clinicId}/doctor`, {
             method: "GET",
-            redirect: 'follow',
             mode: 'cors',
             credentials: 'include',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Cache': 'no-cache'
+                'Access-Control-Allow-Origin': '*'
             }
         }).then(response => {
             setIsDoctorListLoading(false);
@@ -96,14 +93,12 @@ const VisitRegistration = () => {
         setIsDoctorListLoading(true);
         const doctors = await fetch(`http://localhost:8080/api/doctor/specialities/${speciality}`, {
             method: "GET",
-            redirect: 'follow',
             mode: 'cors',
             credentials: 'include',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Cache': 'no-cache'
+                'Access-Control-Allow-Origin': '*'
             }
         }).then(response => {
             setIsDoctorListLoading(false);
@@ -121,8 +116,7 @@ const VisitRegistration = () => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Cache': 'no-cache'
+                'Access-Control-Allow-Origin': '*'
             }
         });
     }
@@ -271,8 +265,8 @@ const VisitRegistration = () => {
 
                 <div className="form-group info-border">
                     <label htmlFor="visit-description">Visit description:</label>
-                    <Textarea className="form-control" name={"visit-description"} rows="5"
-                              onChange={changeVisitDescription}></Textarea>
+                    <textarea className="form-control" name={"visit-description"} rows="5"
+                              onChange={changeVisitDescription}></textarea>
                 </div>
 
                 <button type={"submit"} onClick={submitVisit}>SUBMIT</button>
@@ -280,8 +274,8 @@ const VisitRegistration = () => {
         )
     }
     return (
-        <ChakraProvider>
-            <div className={"container col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow"}>
+        <>
+            <div className={"container-fluid col-lg-6 col-md-12 col-sm-12 mx-auto rounded-5 bg-light text-dark  mt-3 green-shadow"}>
 
                 <div className={"container mx-auto m-3 m- p-3"}>
                     <label className={"p-3"} htmlFor={"specialities"}>Speciality:</label>
@@ -325,7 +319,7 @@ const VisitRegistration = () => {
 
                 </div>
             </div>
-        </ChakraProvider>
+        </>
     );
 };
 
