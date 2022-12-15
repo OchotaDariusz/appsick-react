@@ -4,20 +4,19 @@ import Chatroom from "./Chatroom"
 import ChatMessage from "./ChatMessage/ChatMessage"
 import { Spinner } from "@chakra-ui/react"
 
-const getData = async (endpoint, id) => {
-  const response = await fetch(`${endpoint}/${id}`)
-  const data = await response.json()
-  return data
-}
-
 const getUser = async () => {
-  return await getData("http://localhost:8080/api/auth/current")
-
+  const data = await fetch("http://localhost:8080/api/auth/current", {
+    credentials: "include"
+  })
+  try {
+    return await data.json()
+  } catch (e) {
+    console.log(e.message)
+    return data
+  }
 }
 
 let chatroom, messages
-
-
 export default function VisitChat(props) {
 
   const [isNewChatMessageLoading, setIsNewChatMessageLoading] = useState(true)
@@ -41,7 +40,7 @@ export default function VisitChat(props) {
       .then(user => {
         chatroom = new Chatroom(
           props.match.params.visitId,
-          user.userId,
+          user.id,
           `${user.firstName} ${user.lastName}`
         )
         updateChat(setChatMessages)

@@ -42,14 +42,11 @@ export default function Login(props) {
         event.preventDefault()
         fetch(`http://localhost:8080/api/auth/login`, {
             method: 'POST',
-            redirect: 'follow',
-            mode: 'cors',
             credentials: 'include',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Cache': 'no-cache'
+                'Access-Control-Allow-Origin': '*'
             },
             body: JSON.stringify({
                 email: email,
