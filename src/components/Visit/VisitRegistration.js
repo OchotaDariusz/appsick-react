@@ -44,8 +44,7 @@ const VisitRegistration = () => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Cache': 'no-cache'
+                'Access-Control-Allow-Origin': '*'
             }
         }).then((response) => {
             setIsDoctorSpecialitiesLoading(false);
@@ -62,8 +61,7 @@ const VisitRegistration = () => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Cache': 'no-cache'
+                'Access-Control-Allow-Origin': '*'
             }
         }).then(response => {
             setIsClinicListLoading(false);
@@ -76,17 +74,15 @@ const VisitRegistration = () => {
         setIsDoctorListLoading(true);
         const doctors = await fetch(`http://localhost:8080/api/clinic/${clinicId}/doctor`, {
             method: "GET",
-            redirect: 'follow',
             mode: 'cors',
             credentials: 'include',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Cache': 'no-cache'
+                'Access-Control-Allow-Origin': '*'
             }
         }).then(response => {
-            setIsDoctorListLoading(false);
+
             return response;
         });
         return doctors.json();
@@ -96,17 +92,15 @@ const VisitRegistration = () => {
         setIsDoctorListLoading(true);
         const doctors = await fetch(`http://localhost:8080/api/doctor/specialities/${speciality}`, {
             method: "GET",
-            redirect: 'follow',
             mode: 'cors',
             credentials: 'include',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Cache': 'no-cache'
+                'Access-Control-Allow-Origin': '*'
             }
         }).then(response => {
-            setIsDoctorListLoading(false);
+            // setIsDoctorListLoading(false);
             return response;
         });
         return doctors.json();
@@ -121,8 +115,7 @@ const VisitRegistration = () => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Cache': 'no-cache'
+                'Access-Control-Allow-Origin': '*'
             }
         });
     }
