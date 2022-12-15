@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {ChakraProvider} from '@chakra-ui/react';
+import {ChakraProvider, Select, Textarea, Button} from '@chakra-ui/react';
 import {useHistory} from "react-router-dom";
-import { Select, Textarea, Button  } from '@chakra-ui/react'
 import 'bootstrap/js/dist/util';
 import 'bootstrap/js/dist/dropdown';
 import './VisitRegistration.css';
@@ -45,8 +44,7 @@ const VisitRegistration = () => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Cache': 'no-cache'
+                'Access-Control-Allow-Origin': '*'
             }
         });
         return specialties.json();
@@ -60,8 +58,7 @@ const VisitRegistration = () => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Cache': 'no-cache'
+                'Access-Control-Allow-Origin': '*'
             }
         });
         return clinics.json();
@@ -71,14 +68,12 @@ const VisitRegistration = () => {
         setIsDoctorListLoading(true);
         const doctors = await fetch(`http://localhost:8080/api/clinic/${clinicId}/doctor`, {
             method: "GET",
-            redirect: 'follow',
             mode: 'cors',
             credentials: 'include',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Cache': 'no-cache'
+                'Access-Control-Allow-Origin': '*'
             }
         });
         return doctors.json();
@@ -88,14 +83,12 @@ const VisitRegistration = () => {
         setIsDoctorListLoading(true);
         const doctors = await fetch(`http://localhost:8080/api/doctor/specialities/${speciality}`, {
             method: "GET",
-            redirect: 'follow',
             mode: 'cors',
             credentials: 'include',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Cache': 'no-cache'
+                'Access-Control-Allow-Origin': '*'
             }
         });
         return doctors.json();
@@ -110,8 +103,7 @@ const VisitRegistration = () => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Cache': 'no-cache'
+                'Access-Control-Allow-Origin': '*'
             }
         });
     }

@@ -7,10 +7,8 @@ import MapModal from "../Map/MapModal";
 import Button from "react-bootstrap/Button";
 import {isToday} from "../../utils/Utils";
 import {BsFileEarmarkPdf} from "react-icons/bs";
-import {MdPersonAddAlt} from "react-icons/md";
 import {FiCheck} from "react-icons/fi";
-import {CgKey} from "react-icons/cg";
-import { CloseIcon, ViewIcon} from '@chakra-ui/icons'
+import {CloseIcon, ViewIcon} from '@chakra-ui/icons'
 
 
 export default function Visit({visit, cancelVisit}) {
@@ -19,8 +17,8 @@ export default function Visit({visit, cancelVisit}) {
     return (
         <div className="row align-items-center">
 
-            <div className="row align-items-center text-center ">
-                <div className="col-2 px-3 ">
+            <div className="row align-items-center text-center">
+                <div className="col-2 px-3">
                     <div className="col-auto rounded-3 bg-white text-dark shadow-sm p-2 border border-2 btnx">
                         {visit?.date[0]}
                         <hr/>
@@ -39,7 +37,7 @@ export default function Visit({visit, cancelVisit}) {
                              aria-expanded={open}
                              role="button">
                             <div className="fs-5 d-inline px-2">
-                                <ViewIcon />
+                                <ViewIcon/>
                             </div>
                             See details
                         </div>
@@ -79,7 +77,7 @@ export default function Visit({visit, cancelVisit}) {
                                     Visit reason:
                                     <br/>
                                     type={visit.visitTypes[0]}
-                                    <br />
+                                    <br/>
                                     id={visit.visitId}
                                 </div>
                                 <div>
@@ -94,11 +92,11 @@ export default function Visit({visit, cancelVisit}) {
                                     <div>
                                         {visit?.status !== "MISSED" ?
                                             <div>{visit.status !== "PENDING" ?
-                                            visit.status :
+                                                visit.status :
                                                 <div className="fs-3 text-dark bg-light border border-success
                                             border-2 rounded-pill p-2 green-shadow mt-3 px-3 d-inline-flex m-2">
                                                     <div className="fs-1 d-inline px-2">
-                                                        <FiCheck />
+                                                        <FiCheck/>
                                                     </div>
                                                     Visit confirmed
                                                 </div>
@@ -131,7 +129,7 @@ export default function Visit({visit, cancelVisit}) {
                                             <div className=" d-inline-flex m-3 align-content-center">
                                                 <div className="d-flex " role="button">
                                                     <div className="fs-1 d-inline px-3">
-                                                        <BsFileEarmarkPdf />
+                                                        <BsFileEarmarkPdf/>
                                                     </div>
                                                     Drugs.pdf
                                                 </div>
@@ -155,7 +153,7 @@ export default function Visit({visit, cancelVisit}) {
                                                 }
                                                 }>
                                             <div className="fs-4 d-inline px-2">
-                                                <CloseIcon />
+                                                <CloseIcon/>
                                             </div>
                                             Cancel Visit
                                         </Button> :
