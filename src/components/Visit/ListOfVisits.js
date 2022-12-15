@@ -158,8 +158,9 @@ export default function ListOfVisits() {
         getListOfVisits("/current")
             .then(visits => {
                 if (visits.status !== 401) {
-                    setCurrentVisits(() => {
-                        return visits.map(formatVisitDate)
+                    let filtered = visits.filter(visit => visit.status === "PENDING")
+                        setCurrentVisits(() => {
+                        return filtered.map(formatVisitDate)
                     })
                     setIsCurrentVisitsLoading(false)
                 }
