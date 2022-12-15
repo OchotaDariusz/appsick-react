@@ -25,8 +25,6 @@ export default function Login(props) {
         return await data.json()
     }
 
-
-
     const [info, setInfo] = useState("")
 
     const history = useHistory();
@@ -68,16 +66,10 @@ export default function Login(props) {
     const handleLogin = () => {
         getUser()
             .then(user => {
-                console.log(user)
-                console.log(user.role)
                 setRole(user.role)
-
-                console.log(email)
-                console.log("to")
-                console.log(role)
+                setEmail(user.email)
                 auth.login(email, user.role)
             })
-
             .catch(err => console.log(err.message))
     }
 
