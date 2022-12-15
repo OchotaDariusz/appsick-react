@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {ChakraProvider} from '@chakra-ui/react';
+import {ChakraProvider, Textarea} from '@chakra-ui/react';
 import {useHistory} from "react-router-dom";
 import { Spinner } from '@chakra-ui/react'
 import 'bootstrap/js/dist/util';
 import 'bootstrap/js/dist/dropdown';
+import {Select} from "@mui/material";
 
 const VisitRegistration = () => {
 
