@@ -272,7 +272,7 @@ const VisitRegistration = () => {
     }
     return (
         <>
-            <div className={"container col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow"}>
+            <div className={"container-fluid col-lg-6 col-md-12 col-sm-12 mx-auto rounded-5 bg-light text-dark  mt-3 green-shadow"}>
 
                 <div className={"container mx-auto m-3 m- p-3"}>
                     <label className={"p-3"} htmlFor={"specialities"}>Speciality:</label>

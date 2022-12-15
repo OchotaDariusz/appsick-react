@@ -1,11 +1,15 @@
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLocationDot} from "@fortawesome/free-solid-svg-icons";
 import Collapse from 'react-bootstrap/Collapse';
-import {useState} from "react";
+import React, {useState} from "react";
 import maleDoctor from "../../assets/icons/Lekarz.svg"
 import femaleDoctor from "../../assets/icons/Lekarka.svg"
 import {Link} from "react-router-dom";
 import MapModal from "../Map/MapModal";
+import {CloseIcon, ViewIcon} from "@chakra-ui/icons";
+import {FiCheck} from "react-icons/fi";
+import {BsFileEarmarkPdf} from "react-icons/bs";
+import {isToday} from "../../utils/Utils";
+import Button from "react-bootstrap/Button";
 
 export default function TodayVisit({visit}) {
 
@@ -13,45 +17,43 @@ export default function TodayVisit({visit}) {
 
     return (
         <div>
-
             <div className="col-10 rounded-3 bg-white text-dark my-3 pb-3 px-4 pt-2 border border-2 btnx">
                 <div className="row justify-content-between">
                     <div className="col-6 my-1 fs-3 text-start">
-                        {visit.doctor.user.firstName} {visit.doctor.user.lastName}
+                        {visit?.doctor?.user?.firstName} {visit?.doctor?.user?.lastName}
                     </div>
                     <div className="col-auto text-capitalize text-decoration-underline"
                          onClick={() => setOpen(!open)}
                          aria-controls="example-collapse-text"
                          aria-expanded={open}
                          role="button">
+                        <div className="fs-5 d-inline px-2">
+                            <ViewIcon/>
+                        </div>
                         See details
                     </div>
                 </div>
 
-                <div className="row align-items-center">
+                <div className="row align-items-start">
                     <div className="col-2">
-                        <img src={visit.doctor.user.image ?
-                            visit.doctor.user.image :
-                            visit.doctor.user.sex === "MALE" ?
+                        <img src={visit?.doctor?.user?.image ?
+                            visit?.doctor?.user?.image :
+                            visit?.doctor?.user?.sex === "MALE" ?
                                 maleDoctor : femaleDoctor}
                              className="img-fluid rounded-circle"
                              style={{height: "100px", width: "100px"}}
                              alt="doctor"/>
                     </div>
+
                     <div className="col-5 m-1">
-                        <div className="row fs-5 mx-1">
+
+                        <div className="row fs-5">
                             {visit?.doctor?.medicalSpecialities[0]}
-                        </div>
-                        <div className="row ">
-                            <div className="col fs-5">
-                                <div>
-                                    {visit?.doctor?.medicalSpecialities[0]}
-                                    <br/>
-                                    {visit.visitTypes[0] === "LOCAL" ?
-                                        <div className="row align-items-start">Online Visit</div> :
-                                        <MapModal visit={visit}/>}
-                                </div>
-                            </div>
+                            <br/>
+                            {visit?.clinic?.clinicName === "Konsultacje Online" ?
+                                <div className="row align-items-start">Online Visit</div> :
+                                <MapModal visit={visit}/>}
+
                         </div>
                     </div>
                 </div>
@@ -61,37 +63,134 @@ export default function TodayVisit({visit}) {
                     <div>
                         <br/>
                         <hr/>
-                        <br/>
                         <div id="example-collapse-text">
-                            <div className="fs-4">
-                                Recommendations
+                            <div className="fs-4 m-2">
+                                Visit reason:
+                                <br/>
+                                type={visit.visitTypes[0]}
+                                <br/>
+                                id={visit.visitId}
                             </div>
                             <div>
-                                first name
-                                <br/>
-                                {/*{visit.patient.birthDate}*/}
-                            </div>
-                            <br/>
-                            <hr/>
-                            <br/>
-                            <div className="fs-4">
-                                Referrals
+                                {visit?.reason}
                             </div>
                             <div>
-                                {visit.patient.user.telephoneNumber}
+                                <hr/>
+                                <div className="fs-4 m-2">
+                                    Visit status:
+
+                                </div>
+                                {visit.status}
+                                    </div>
+
+
+
+
+                            <div>
                                 <br/>
-                                {visit.patient.user.email}
+                                <hr/>
+                                {isToday(visit) ?
+                                    <Link to={`/visit/${visit?.visitId}`} className="btn btn-dark my-3">
+                                        Ask doctor a question</Link> : ""}
+                                {new Date(visit?.date) > new Date() ?
+                                    <Button className="fs-3 text-dark bg-light border border-danger
+                                            border-2 rounded-pill p-2 green-shadow mt-3 px-3 btnx d-inline-flex"
+                                            onClick={() => {
+                                                // cancelVisit(visit?.visitId)
+                                            }
+                                            }>
+                                        <div className="fs-4 d-inline px-2">
+                                            <CloseIcon/>
+                                        </div>
+                                        Cancel Visit
+                                    </Button> :
+                                    ""
+                                }
                             </div>
-                            <br/>
-                            <hr/>
-                            <div className="btn btn-dark my-3">
-                                <Link to={`/visit/${visit.visitId}`}>Chat with a doctor</Link>
-                            </div>
-                            <br/>
+
+
                         </div>
                     </div>
                 </Collapse>
             </div>
+            {/*<div className="col-10 rounded-3 bg-white text-dark my-3 pb-3 px-4 pt-2 border border-2 btnx">*/}
+            {/*    <div className="row justify-content-between">*/}
+            {/*        <div className="col-6 my-1 fs-3 text-start">*/}
+            {/*            {visit.doctor.user.firstName} {visit.doctor.user.lastName}*/}
+            {/*        </div>*/}
+            {/*        <div className="col-auto text-capitalize text-decoration-underline"*/}
+            {/*             onClick={() => setOpen(!open)}*/}
+            {/*             aria-controls="example-collapse-text"*/}
+            {/*             aria-expanded={open}*/}
+            {/*             role="button">*/}
+            {/*            See details*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+
+            {/*    <div className="row align-items-center">*/}
+            {/*        <div className="col-2">*/}
+            {/*            <img src={visit.doctor.user.image ?*/}
+            {/*                visit.doctor.user.image :*/}
+            {/*                visit.doctor.user.sex === "MALE" ?*/}
+            {/*                    maleDoctor : femaleDoctor}*/}
+            {/*                 className="img-fluid rounded-circle"*/}
+            {/*                 style={{height: "100px", width: "100px"}}*/}
+            {/*                 alt="doctor"/>*/}
+            {/*        </div>*/}
+            {/*        <div className="col-5 m-1">*/}
+            {/*            <div className="row fs-5 mx-1">*/}
+            {/*                {visit?.doctor?.medicalSpecialities[0]}*/}
+            {/*            </div>*/}
+            {/*            <div className="row ">*/}
+            {/*                <div className="col fs-5">*/}
+            {/*                    <div>*/}
+            {/*                        {visit?.doctor?.medicalSpecialities[0]}*/}
+            {/*                        <br/>*/}
+            {/*                        {visit.visitTypes[0] === "LOCAL" ?*/}
+            {/*                            <div className="row align-items-start">Online Visit</div> :*/}
+            {/*                            <MapModal visit={visit}/>}*/}
+            {/*                    </div>*/}
+            {/*                </div>*/}
+            {/*            </div>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+
+            {/*    /!*Rozsuwane*!/*/}
+            {/*    <Collapse in={open}>*/}
+            {/*        <div>*/}
+            {/*            <br/>*/}
+            {/*            <hr/>*/}
+            {/*            <br/>*/}
+            {/*            <div id="example-collapse-text">*/}
+            {/*                <div className="fs-4">*/}
+            {/*                    Recommendations*/}
+            {/*                </div>*/}
+            {/*                <div>*/}
+            {/*                    first name*/}
+            {/*                    <br/>*/}
+            {/*                    /!*{visit.patient.birthDate}*!/*/}
+            {/*                </div>*/}
+            {/*                <br/>*/}
+            {/*                <hr/>*/}
+            {/*                <br/>*/}
+            {/*                <div className="fs-4">*/}
+            {/*                    Referrals*/}
+            {/*                </div>*/}
+            {/*                <div>*/}
+            {/*                    {visit.patient.user.telephoneNumber}*/}
+            {/*                    <br/>*/}
+            {/*                    {visit.patient.user.email}*/}
+            {/*                </div>*/}
+            {/*                <br/>*/}
+            {/*                <hr/>*/}
+            {/*                <div className="btn btn-dark my-3">*/}
+            {/*                    <Link to={`/visit/${visit.visitId}`}>Chat with a doctor</Link>*/}
+            {/*                </div>*/}
+            {/*                <br/>*/}
+            {/*            </div>*/}
+            {/*        </div>*/}
+            {/*    </Collapse>*/}
+            {/*</div>*/}
         </div>
     );
 }

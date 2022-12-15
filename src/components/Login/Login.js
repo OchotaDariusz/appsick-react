@@ -9,7 +9,7 @@ import Register from "../Register/Register";
 import {MdPersonAddAlt} from "react-icons/md";
 import {RiSendPlaneLine} from "react-icons/ri";
 import {useAuth} from "../ProtectedRoutes/auth";
-
+import {AiFillGoogleCircle} from "react-icons/ai";
 
 
 export default function Login(props) {
@@ -24,7 +24,6 @@ export default function Login(props) {
         console.log(data)
         return await data.json()
     }
-
 
 
     const [info, setInfo] = useState("")
@@ -117,10 +116,10 @@ export default function Login(props) {
                                         border-2 rounded-pill p-2 px-4 btnx d-flex " onClick={() => {
                                         props.setRegisterModalShow(false);
                                         props.setLoginModalShow(false);
-                                        }}>
+                                    }}>
                                         Submit
                                         <div className="fs-1 d-inline px-3">
-                                            <RiSendPlaneLine />
+                                            <RiSendPlaneLine/>
                                         </div>
                                     </button>
 
@@ -151,6 +150,17 @@ export default function Login(props) {
                                         <MdPersonAddAlt/>
                                     </div>
                                 </div>
+
+
+                                <div role="button" className="btnx fs-3 text-black border border-dark border-2
+                                rounded-pill p-2 px-4 d-flex ">
+                                    <div className="fs-1 d-inline px-3 align-content-center">
+                                        <AiFillGoogleCircle/>
+                                    </div>
+                                    <a href="http://localhost:8080/oauth2/authorization/google">Login with Google</a>
+                                </div>
+
+
                                 <Register
                                     setRegisterModalShow={props.setRegisterModalShow}
                                     setLoginModalShow={props.setLoginModalShow}
