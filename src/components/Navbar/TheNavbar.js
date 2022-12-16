@@ -13,6 +13,7 @@ import Register from "../Register/Register";
 import {useAuth} from "../ProtectedRoutes/auth";
 import maleDoctor from "../../assets/icons/Lekarz.svg";
 import femaleDoctor from "../../assets/icons/Lekarka.svg";
+import Header from "./NavbarParts/Header";
 
 export default function TheNavbar() {
 
@@ -54,6 +55,12 @@ export default function TheNavbar() {
 
     return (
         <>
+            <Header
+                logout={logout}
+                setLoginModalShow={setLoginModalShow}
+                auth={auth}
+            />
+
             <nav className="navbar navbar-expand-md bg-light  flex-nowrap">
                 <div className="container-fluid">
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -152,19 +159,19 @@ export default function TheNavbar() {
                                 <div
                                     className="collapse navbar-collapse nav-link d-flex justify-content-end align-items-center">
 
-                                        <div className="justify-content-end">
-                                            <div
-                                                className="collapse navbar-collapse nav-link flex-nowrap d-inline-flex">
+                                    <div className="justify-content-end">
+                                        <div
+                                            className="collapse navbar-collapse nav-link flex-nowrap d-inline-flex">
 
-                                                <div
-                                                    className="menu-login button-login fs-3 text-black border border-dark border-2 rounded-pill p-2 green-shadow btnx"
-                                                    onClick={logout}
-                                                    role="button">
-                                                    {'\u00A0'}{'\u00A0'}Logout{'\u00A0'}
-                                                    <div className="fs-1 d-inline">
-                                                        <CgKey/>
-                                                    </div>
+                                            <div
+                                                className="menu-login button-login fs-3 text-black border border-dark border-2 rounded-pill p-2 green-shadow btnx"
+                                                onClick={logout}
+                                                role="button">
+                                                {'\u00A0'}{'\u00A0'}Logout{'\u00A0'}
+                                                <div className="fs-1 d-inline">
+                                                    <CgKey/>
                                                 </div>
+                                            </div>
                                         </div>
 
                                     </div>
@@ -172,7 +179,7 @@ export default function TheNavbar() {
 
                             </div>
                         </>
-
+                    }
 
                     }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="90mm" height="90mm" version="1.1" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
-  <g fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2.1167">
+<svg width="90mm"  height="90mm" preserveAspectRatio="xMidYMid" version="1.1" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg" class="svg-content">
+  <g fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2.1167" >
     <path d="m54.648 71.564v-31.609c0-5.2846-8.4667-12.33-8.4667-15.854v-7.045h-28.575v7.0556c0 3.5278-8.4667 10.583-8.4667 15.875v35.359c0 4.826 3.9123 8.7383 8.7383 8.7383h26.892"/>
     <path d="m49.004 7.1786h-34.219v9.8778h34.219z"/>
     <path d="m9.1397 45.631h45.508"/>
