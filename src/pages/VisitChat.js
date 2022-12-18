@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
-import "./VisitChat.css"
-import Chatroom from "./Chatroom"
-import ChatMessage from "./ChatMessage/ChatMessage"
+import "../components/VisitChat/VisitChat.css"
+import Chatroom from "../components/VisitChat/Chatroom"
+import ChatMessage from "../components/VisitChat/ChatMessage/ChatMessage"
 import { Spinner } from "@chakra-ui/react"
 
 const getUser = async () => {

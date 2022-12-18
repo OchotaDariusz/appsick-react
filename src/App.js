@@ -10,11 +10,12 @@ import Home from "./pages/Home"
 import Login from "./components/Login/Login"
 import Register from "./components/Register/Register"
 import MyVisits from "./pages/MyVisits"
-import VisitChat from "./components/VisitChat/VisitChat"
+import VisitChat from "./pages/VisitChat"
 import TheNavbar from "./components/Navbar/TheNavbar";
 import VisitRegistration from "./pages/VisitRegistration";
 import Credits from "./pages/Credits";
 import {AuthProvider} from "./components/Auth/Auth";
+import UserPage from "./pages/UserPage";
 
 function App() {
     return (
@@ -30,6 +31,9 @@ function App() {
                     </Route>
                     <Route exact path="/visit">
                         <MyVisits/>
+                    </Route>
+                    <Route exact path="/user-page">
+                        <UserPage/>
                     </Route>
                     <Route exact path="/visit/:visitId" component={VisitChat}/>
                     <Route path="/register-visit">
