@@ -10,7 +10,7 @@ import {CgKey} from "react-icons/cg"
 import Login from "../Login/Login";
 import Button from "react-bootstrap/Button";
 import Register from "../Register/Register";
-import {useAuth} from "../ProtectedRoutes/auth";
+import {useAuth} from "../Auth/Auth";
 import maleDoctor from "../../assets/icons/Lekarz.svg";
 import femaleDoctor from "../../assets/icons/Lekarka.svg";
 
@@ -78,7 +78,7 @@ export default function TheNavbar() {
                                     <Link className="nav-link d-flex align-items-center" to={'/visit'}>
                                         <img className="float-start img-fluid mx-1" src={visit}
                                              alt="visit" style={{height: 60}}/>
-                                        VISIT HISTORY
+                                        MY VISITS
                                     </Link>
                                 </div>
                                 <div className="col fs-4 mx-4 nvbr">

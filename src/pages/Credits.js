@@ -1,5 +1,5 @@
 import React from "react"
-import Footer from "./Footer";
+import Footer from "../components/Footer/Footer";
 
 export default function Credits() {
     return (
@@ -24,7 +24,7 @@ export default function Credits() {
 
 
                 </div>
-                    <a href="https://www.pexels.com/pl-pl/zdjecie/zdjecie-starszej-pary-7477717/">
+                    <a href="src/pages/Credits">
                         <img src="https://help.pexels.com/hc/en-us/article_attachments/900006864786/Logo_on_Transparent.png"/>
                     </a>
 
