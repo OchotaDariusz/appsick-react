@@ -43,7 +43,7 @@ const VisitRegistration = () => {
         try {
             return await data.json()
         } catch (e) {
-            console.log(e.message)
+            console.warn(e.message)
             return data;
         }
     }
@@ -215,8 +215,6 @@ const VisitRegistration = () => {
     const submitVisit = (e) => {
         const form = document.getElementById("visit-form")
         if (!form.checkValidity()) {
-            console.log("Form invalid")
-            // TODO: informative pop-up
             return;
         }
         if (isSubmitting) { return; }
@@ -235,7 +233,7 @@ const VisitRegistration = () => {
                 <label htmlFor={"doctor"}>Doctor:</label>
                 <Select name={"doctor"} className={"form-select mb-3"} onChange={changeDoctor} required>
                     <option value="" hidden>- Select a Doctor -</option>
-                    {isDoctorListLoading ? "loading" : doctorList.map(doctor => {
+                    {isDoctorListLoading ? "" : doctorList.map(doctor => {
                         return <option key={doctor.doctorId}
                                        value={doctor.doctorId}>{doctor.user.firstName} {doctor.user.lastName}</option>;
                     })
@@ -280,7 +278,7 @@ const VisitRegistration = () => {
                     <label className={"p-3 fs-5"} htmlFor={"specialities"}>What kind of service do you require?:</label>
                     <Select name={"specialities"} className={"form-select"} onChange={changeDoctorSpeciality} required>
                         <option value="" hidden>- Select a Speciality -</option>
-                        {isDoctorSpecialitiesLoading ? "loading" : doctorSpecialities.map(speciality => {
+                        {isDoctorSpecialitiesLoading ? "" : doctorSpecialities.map(speciality => {
                             return <option key={speciality}
                                            value={speciality}>{speciality}</option>;
                         })
