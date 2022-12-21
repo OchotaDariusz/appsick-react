@@ -3,7 +3,7 @@ import {ChakraProvider, Select, Textarea, Button} from '@chakra-ui/react';
 import {useHistory} from "react-router-dom";
 import 'bootstrap/js/dist/util';
 import 'bootstrap/js/dist/dropdown';
-import '../components/Visit/VisitRegistration.css';
+import './VisitRegistration.css';
 import {RiSendPlaneLine} from "react-icons/ri";
 
 const VisitRegistration = () => {
