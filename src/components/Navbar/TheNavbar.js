@@ -13,6 +13,8 @@ import Register from "../Register/Register";
 import {useAuth} from "../Auth/Auth";
 import maleDoctor from "../../assets/icons/Lekarz.svg";
 import femaleDoctor from "../../assets/icons/Lekarka.svg";
+import {useDispatch, useSelector} from "react-redux";
+import {setTrue, setFalse} from "../../redux/ducks/loginModal";
 
 export default function TheNavbar() {
 
@@ -23,7 +25,17 @@ export default function TheNavbar() {
 
     }
 
-    const [loginModalShow, setLoginModalShow] = useState(false);
+    const dispatch = useDispatch();
+    const loginModalShow = useSelector((state) => {
+        return state.loginModal.loginModalShow;
+    });
+    const showLoginModal = () => {
+        dispatch(setTrue());
+    }
+    const hideLoginModal = () => {
+        dispatch(setFalse());
+    }
+
     const [registerModalShow, setRegisterModalShow] = useState(false);
 
     const logout = async () => {
@@ -116,7 +128,7 @@ export default function TheNavbar() {
 
                                 <div
                                     className="menu-login button-login fs-3 text-black border border-dark border-2 rounded-pill p-2 green-shadow"
-                                    onClick={() => setLoginModalShow(true)}
+                                    onClick={showLoginModal}
                                     role="button">
                                     {'\u00A0'}{'\u00A0'}Login | Register{'\u00A0'}
                                     <div className="fs-1 d-inline">
@@ -182,15 +194,13 @@ export default function TheNavbar() {
 
             <Login
                 show={loginModalShow}
-                onHide={() => setLoginModalShow(false)}
+                onHide={hideLoginModal}
                 setRegisterModalShow={setRegisterModalShow}
-                setLoginModalShow={setLoginModalShow}
             />
             <Register
                 show={registerModalShow}
                 onHide={() => setRegisterModalShow(false)}
                 setRegisterModalShow={setRegisterModalShow}
-                setLoginModalShow={setLoginModalShow}
             />
 
 

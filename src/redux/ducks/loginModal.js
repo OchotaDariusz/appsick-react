@@ -11,5 +11,11 @@ export const setFalse = () => ({
 })
 
 export default (state = initialState, action) => {
-    return {...state, loginModalShow: (action.type)};
+    switch (action.type) {
+        case true:
+            return {...state, loginModalShow: true};
+        case false:
+        default:
+            return {...state, loginModalShow: false};
+    }
 }

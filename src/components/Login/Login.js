@@ -10,6 +10,8 @@ import {MdPersonAddAlt} from "react-icons/md";
 import {RiSendPlaneLine} from "react-icons/ri";
 import {useAuth} from "../Auth/Auth";
 import {AiFillGoogleCircle} from "react-icons/ai";
+import {useDispatch, useSelector} from "react-redux";
+import {setFalse, setTrue} from "../../redux/ducks/loginModal";
 
 
 export default function Login(props) {
@@ -35,6 +37,15 @@ export default function Login(props) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const dispatch = useDispatch();
+    const loginModalShow = useSelector((state) => state.loginModal.loginModalShow);
+    const showLoginModal = () => {
+        dispatch(setTrue());
+    }
+    const hideLoginModal = () => {
+        dispatch(setFalse());
+    }
 
     const submitForm = (event) => {
         event.preventDefault()
@@ -105,7 +116,7 @@ export default function Login(props) {
                                         className="btn fs-3 text-black border border-dark
                                         border-2 rounded-pill p-2 px-4 btnx d-flex col-auto" onClick={() => {
                                         props.setRegisterModalShow(false);
-                                        props.setLoginModalShow(false);
+                                        showLoginModal();
                                     }}>
                                         Submit
                                         <div className="fs-1 d-inline px-3">
@@ -132,7 +143,7 @@ export default function Login(props) {
                                      role="button"
                                      onClick={() => {
                                          props.setRegisterModalShow(true);
-                                         props.setLoginModalShow(false);
+                                         hideLoginModal();
                                      }}
                                 >
                                     Join us
@@ -153,7 +164,6 @@ export default function Login(props) {
 
                                 <Register
                                     setRegisterModalShow={props.setRegisterModalShow}
-                                    setLoginModalShow={props.setLoginModalShow}
                                 />
 
                             </div>

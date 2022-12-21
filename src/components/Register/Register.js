@@ -14,6 +14,8 @@ import {BsArrowLeft} from "react-icons/bs";
 import {CgKey} from "react-icons/cg";
 import {MdPersonAddAlt} from "react-icons/md";
 import {RiSendPlaneLine} from "react-icons/ri";
+import {useDispatch, useSelector} from "react-redux";
+import {setFalse, setTrue} from "../../redux/ducks/loginModal";
 
 
 export default function Register(props) {
@@ -141,6 +143,14 @@ export default function Register(props) {
         }
     }
 
+    const dispatch = useDispatch();
+    const showLoginModal = () => {
+        dispatch(setTrue());
+    }
+    const hideLoginModal = () => {
+        dispatch(setFalse());
+    }
+
 
     return (
         <>
@@ -156,7 +166,7 @@ export default function Register(props) {
                              btnx nav-link  mx-auto "
                          onClick={() => {
                              props.setRegisterModalShow(false);
-                             props.setLoginModalShow(true);
+                             showLoginModal();
                          }}>
                         <div className="fs-1 d-inline mx-2 d-flex align-content-center">
                             <BsArrowLeft/>
@@ -175,7 +185,6 @@ export default function Register(props) {
 
                                 <Login
                                     setRegisterModalShow={props.setRegisterModalShow}
-                                    setLoginModalShow={props.setLoginModalShow}
                                 />
                             </div>
                         </div>
@@ -214,7 +223,7 @@ export default function Register(props) {
                                 className="btn fs-3 d-flex border border-dark border-2
                                 rounded-pill p-2 px-4 btnx mx-auto" onClick={() => {
                                 props.setRegisterModalShow(false);
-                                props.setLoginModalShow(false);
+                                hideLoginModal();
                             }}>
                                 Submit
                                 <div className="fs-1 d-inline px-3">
