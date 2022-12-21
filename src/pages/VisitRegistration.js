@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Select, Textarea} from '@chakra-ui/react';
+import {Select, Textarea, Spinner} from '@chakra-ui/react';
 import {useHistory} from "react-router-dom";
 import 'bootstrap/js/dist/util';
 import 'bootstrap/js/dist/dropdown';
@@ -132,9 +132,8 @@ const VisitRegistration = () => {
                     visitObject.patient.patientId = user.id;
                     setVisitDetails(visitObject);
                 } else {
-                    history.push("/");
+                    setTimeout(() => {history.push("/")}, 2000);
                     dispatch(showModal());
-                    console.warn("Failed to fetch user ID");
                 }
             })
     }, [visitDetails.patient.patientId])
@@ -276,6 +275,14 @@ const VisitRegistration = () => {
                     }
                 </Select>
             </>
+        )
+    }
+
+    if (!visitObject.patient.patientId){
+        return (
+            <div className={"container mx-auto p-3 text-center"}>
+                User not logged in. Redirecting...<Spinner size={'md'}></Spinner>
+            </div>
         )
     }
 
