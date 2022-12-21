@@ -6,15 +6,16 @@ import {
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap';
 import Bootstrap from 'bootstrap'
-import Home from "./components/Home/Home"
+import Home from "./pages/Home"
 import Login from "./components/Login/Login"
 import Register from "./components/Register/Register"
-import ListOfVisits from "./components/Visit/ListOfVisits"
-import VisitChat from "./components/VisitChat/VisitChat"
+import MyVisits from "./pages/MyVisits"
+import VisitChat from "./pages/VisitChat"
 import TheNavbar from "./components/Navbar/TheNavbar";
-import VisitRegistration from "./components/Visit/VisitRegistration";
-import Credits from "./components/Footer/Credits";
-import {AuthProvider} from "./components/ProtectedRoutes/auth";
+import VisitRegistration from "./pages/VisitRegistration";
+import Credits from "./pages/Credits";
+import {AuthProvider} from "./components/Auth/Auth";
+import UserPage from "./pages/UserPage";
 
 function App() {
     return (
@@ -25,17 +26,14 @@ function App() {
                     <Route exact path="/">
                         <Home/>
                     </Route>
-                    <Route path="/login">
-                        <Login/>
-                    </Route>
-                    <Route path="/register">
-                        <Register/>
-                    </Route>
                     <Route path="/credits">
                         <Credits/>
                     </Route>
                     <Route exact path="/visit">
-                        <ListOfVisits/>
+                        <MyVisits/>
+                    </Route>
+                    <Route exact path="/user-page">
+                        <UserPage/>
                     </Route>
                     <Route exact path="/visit/:visitId" component={VisitChat}/>
                     <Route path="/register-visit">

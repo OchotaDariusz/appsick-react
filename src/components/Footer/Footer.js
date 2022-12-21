@@ -3,7 +3,7 @@ import Map from "../Map/Map";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHandshake} from '@fortawesome/free-solid-svg-icons'
-import attribution from "./Credits"
+import attribution from "../../pages/Credits"
 
 export default function Footer() {
     return (

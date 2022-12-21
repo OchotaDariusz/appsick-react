@@ -1,19 +1,19 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCalendarDays, faChartLine, faLocationDot, faPills, faVideo, faXmark} from '@fortawesome/free-solid-svg-icons'
-import Visit from "./Visit"
-import TodayVisit from "./TodayVisit"
+import Visit from "../components/Visit/Visit"
+import TodayVisit from "../components/Visit/TodayVisit"
 import 'bootstrap/dist/css/bootstrap.css'
-import {formatVisitDate, isToday} from "../../utils/Utils";
-import PastVisits from './PastVisits'
+import {formatVisitDate, isToday} from "../utils/Utils";
+import PastVisits from '../components/Visit/PastVisits'
 import {Spinner} from '@chakra-ui/react'
-import BackToTopBtn from "../BackToTopBtn/BackToTopBtn";
+import BackToTopBtn from "../components/BackToTopBtn/BackToTopBtn";
 
 const BASE_URL = `http://localhost:8080/api/visit/patient/`
 const PATIENT_ID = "1"
 const listOfVisitsURL = BASE_URL + PATIENT_ID
 
-export default function ListOfVisits() {
+export default function MyVisits() {
 
     let pageNumber = 2;
     const [currentVisits, setCurrentVisits] = useState([])

@@ -3,7 +3,8 @@ import {ChakraProvider, Select, Textarea, Button} from '@chakra-ui/react';
 import {useHistory} from "react-router-dom";
 import 'bootstrap/js/dist/util';
 import 'bootstrap/js/dist/dropdown';
-import './VisitRegistration.css';
+import '../components/Visit/VisitRegistration.css';
+import {RiSendPlaneLine} from "react-icons/ri";
 
 const VisitRegistration = () => {
 
@@ -247,8 +248,14 @@ const VisitRegistration = () => {
                     <Textarea className="form-control mb-3" name={"visit-description"} rows="5"
                               onChange={changeVisitDescription}></Textarea>
                 </div>
-
-                <Button colorScheme={"teal"} size={"lg"}type={"submit"} onClick={submitVisit}>SUBMIT</Button>
+                <button
+                    className="btn fs-3 text-black border border-dark border-2 rounded-pill p-2 px-4 btnx d-flex col-auto"
+                    onClick={submitVisit}>
+                    Submit
+                    <div className="fs-1 d-inline px-1">
+                        <RiSendPlaneLine/>
+                    </div>
+                </button>
             </form>
         )
     }

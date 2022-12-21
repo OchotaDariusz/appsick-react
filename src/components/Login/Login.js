@@ -8,7 +8,7 @@ import {Center, Divider} from '@chakra-ui/react'
 import Register from "../Register/Register";
 import {MdPersonAddAlt} from "react-icons/md";
 import {RiSendPlaneLine} from "react-icons/ri";
-import {useAuth} from "../ProtectedRoutes/auth";
+import {useAuth} from "../Auth/Auth";
 import {AiFillGoogleCircle} from "react-icons/ai";
 
 
@@ -103,7 +103,7 @@ export default function Login(props) {
 
                                     <button
                                         className="btn fs-3 text-black border border-dark
-                                        border-2 rounded-pill p-2 px-4 btnx d-flex " onClick={() => {
+                                        border-2 rounded-pill p-2 px-4 btnx d-flex col-auto" onClick={() => {
                                         props.setRegisterModalShow(false);
                                         props.setLoginModalShow(false);
                                     }}>

@@ -1,8 +1,8 @@
 import React from "react"
-import logo from '../../assets/logo/logo1.svg'
-import News from "./News";
-import Footer from "../Footer/Footer";
-import {useAuth} from "../ProtectedRoutes/auth";
+import logo from '../assets/logo/logo1.svg'
+import News from "../components/NewsCarousel/News";
+import Footer from "../components/Footer/Footer";
+import {useAuth} from "../components/Auth/Auth";
 
 export default function Home() {
     const auth = useAuth()
