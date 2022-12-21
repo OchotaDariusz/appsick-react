@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {ChakraProvider, Select, Textarea, Button} from '@chakra-ui/react';
+import {Select, Textarea} from '@chakra-ui/react';
 import {useHistory} from "react-router-dom";
 import 'bootstrap/js/dist/util';
 import 'bootstrap/js/dist/dropdown';
 import './VisitRegistration.css';
 import {RiSendPlaneLine} from "react-icons/ri";
+import {useDispatch} from "react-redux";
+import {showModal} from "../redux/ducks/loginModal";
 
 const VisitRegistration = () => {
 
@@ -36,6 +38,7 @@ const VisitRegistration = () => {
     const [isDoctorSpecialitiesLoading, setIsDoctorSpecialitiesLoading] = useState(true)
     const [isSubmitting, setIsSubmitting] = useState(false);
     const history = useHistory();
+    const dispatch = useDispatch();
 
     async function getUser() {
         const data = await fetch("http://localhost:8080/api/auth/current", {
@@ -130,6 +133,7 @@ const VisitRegistration = () => {
                     setVisitDetails(visitObject);
                 } else {
                     history.push("/");
+                    dispatch(showModal());
                     console.warn("Failed to fetch user ID");
                 }
             })
@@ -276,7 +280,7 @@ const VisitRegistration = () => {
     }
 
     return (
-        <ChakraProvider>
+        <>
             <div className={"container col-6 mx-auto m-3 rounded-5 bg-light text-dark bg-opacity-1 green-shadow"}>
 
                 <h1 className={"fs-1 pt-3 text-center"}>Make an appointment</h1>
@@ -323,7 +327,7 @@ const VisitRegistration = () => {
 
                 </div>
             </div>
-        </ChakraProvider>
+        </>
     );
 };
 
