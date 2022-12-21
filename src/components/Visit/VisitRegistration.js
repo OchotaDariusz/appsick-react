@@ -15,12 +15,12 @@ const VisitRegistration = () => {
             },
             "date": "2022-11-14T19:57:07.153Z",
             "doctor": {
-                "doctorId": 0
+                "doctorId": null
             },
             "doctorSpeciality": "",
             "online": true,
             "patient": {
-                "patientId": 1 // TODO: fetch data
+                "patientId": null
             },
             "reason": "",
             "status": "PENDING"
@@ -35,6 +35,18 @@ const VisitRegistration = () => {
     const [isDoctorSpecialitiesLoading, setIsDoctorSpecialitiesLoading] = useState(true)
     const [isSubmitting, setIsSubmitting] = useState(false);
     const history = useHistory();
+
+    async function getUser() {
+        const data = await fetch("http://localhost:8080/api/auth/current", {
+            credentials: "include"
+        })
+        try {
+            return await data.json()
+        } catch (e) {
+            console.log(e.message)
+            return data;
+        }
+    }
 
     async function getDoctorSpecialities(){
         setIsDoctorSpecialitiesLoading(true)
@@ -108,9 +120,19 @@ const VisitRegistration = () => {
         });
     }
 
-    async function checkUserLoggedIn(){
-        return; // TODO
-    }
+    useEffect(() => {
+        getUser()
+            .then(user => {
+                if (user?.id) {
+                    visitObject = {...visitDetails};
+                    visitObject.patient.patientId = user.id;
+                    setVisitDetails(visitObject);
+                } else {
+                    history.push("/");
+                    console.warn("Failed to fetch user ID");
+                }
+            })
+    }, [visitDetails.patient.patientId])
 
     useEffect(() =>{
         getDoctorSpecialities().then(doctorSpecialities => {
@@ -247,6 +269,7 @@ const VisitRegistration = () => {
             </>
         )
     }
+
     return (
         <ChakraProvider>
             <div className={"container col-6 mx-auto m-3 rounded-5 bg-light text-dark bg-opacity-1 green-shadow"}>
