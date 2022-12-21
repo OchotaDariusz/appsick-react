@@ -2,11 +2,11 @@ const initialState = {
     loginModalShow: false
 };
 
-export const setTrue = () => ({
+export const showModal = () => ({
   type: true
 })
 
-export const setFalse = () => ({
+export const hideModal = () => ({
   type: false
 })
 

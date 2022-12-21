@@ -15,7 +15,7 @@ import {CgKey} from "react-icons/cg";
 import {MdPersonAddAlt} from "react-icons/md";
 import {RiSendPlaneLine} from "react-icons/ri";
 import {useDispatch, useSelector} from "react-redux";
-import {setFalse, setTrue} from "../../redux/ducks/loginModal";
+import {hideModal, showModal} from "../../redux/ducks/loginModal";
 
 
 export default function Register(props) {
@@ -145,10 +145,10 @@ export default function Register(props) {
 
     const dispatch = useDispatch();
     const showLoginModal = () => {
-        dispatch(setTrue());
+        dispatch(showModal());
     }
     const hideLoginModal = () => {
-        dispatch(setFalse());
+        dispatch(hideModal());
     }
 
 

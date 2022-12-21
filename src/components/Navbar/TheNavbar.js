@@ -14,7 +14,7 @@ import {useAuth} from "../Auth/Auth";
 import maleDoctor from "../../assets/icons/Lekarz.svg";
 import femaleDoctor from "../../assets/icons/Lekarka.svg";
 import {useDispatch, useSelector} from "react-redux";
-import {setTrue, setFalse} from "../../redux/ducks/loginModal";
+import {showModal, hideModal} from "../../redux/ducks/loginModal";
 
 export default function TheNavbar() {
 
@@ -30,10 +30,10 @@ export default function TheNavbar() {
         return state.loginModal.loginModalShow;
     });
     const showLoginModal = () => {
-        dispatch(setTrue());
+        dispatch(showModal());
     }
     const hideLoginModal = () => {
-        dispatch(setFalse());
+        dispatch(hideModal());
     }
 
     const [registerModalShow, setRegisterModalShow] = useState(false);

@@ -11,7 +11,7 @@ import {RiSendPlaneLine} from "react-icons/ri";
 import {useAuth} from "../Auth/Auth";
 import {AiFillGoogleCircle} from "react-icons/ai";
 import {useDispatch, useSelector} from "react-redux";
-import {setFalse, setTrue} from "../../redux/ducks/loginModal";
+import {hideModal, showModal} from "../../redux/ducks/loginModal";
 
 
 export default function Login(props) {
@@ -41,10 +41,10 @@ export default function Login(props) {
     const dispatch = useDispatch();
     const loginModalShow = useSelector((state) => state.loginModal.loginModalShow);
     const showLoginModal = () => {
-        dispatch(setTrue());
+        dispatch(showModal());
     }
     const hideLoginModal = () => {
-        dispatch(setFalse());
+        dispatch(hideModal());
     }
 
     const submitForm = (event) => {
