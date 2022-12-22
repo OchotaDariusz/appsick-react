@@ -115,7 +115,7 @@ export default function Login(props) {
                                         className="btn fs-3 text-black border border-dark
                                         border-2 rounded-pill p-2 px-4 btnx d-flex col-auto" onClick={() => {
                                         props.setRegisterModalShow(false);
-                                        showLoginModal();
+                                        hideLoginModal();
                                     }}>
                                         Submit
                                         <div className="fs-1 d-inline px-3">
