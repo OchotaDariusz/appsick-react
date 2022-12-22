@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react"
+import React, {useState} from "react"
 import "./Login.css"
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import InputFields from "../InputFields"
 import Modal from 'react-bootstrap/Modal';
 import logo from '../../assets/logo/logo.svg'
@@ -10,7 +10,7 @@ import {MdPersonAddAlt} from "react-icons/md";
 import {RiSendPlaneLine} from "react-icons/ri";
 import {useAuth} from "../Auth/Auth";
 import {AiFillGoogleCircle} from "react-icons/ai";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {hideModal, showModal} from "../../redux/ducks/loginModal";
 
 
@@ -39,7 +39,6 @@ export default function Login(props) {
     const [password, setPassword] = useState("");
 
     const dispatch = useDispatch();
-    const loginModalShow = useSelector((state) => state.loginModal.loginModalShow);
     const showLoginModal = () => {
         dispatch(showModal());
     }
