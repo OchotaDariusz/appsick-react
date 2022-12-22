@@ -127,6 +127,8 @@ const VisitRegistration = () => {
     useEffect(() => {
         getUser()
             .then(user => {
+                console.log("user:" )
+                console.log(user)
                 if (user?.id) {
                     visitObject = {...visitDetails};
                     visitObject.patient.patientId = user.id;
@@ -278,10 +280,10 @@ const VisitRegistration = () => {
         )
     }
 
-    if (!visitObject.patient.patientId){
+    if (!visitDetails.patient.patientId){
         return (
             <div className={"container mx-auto p-4 text-center fixed-top"}>
-                User not logged in. Redirecting...<Spinner size={'md'}></Spinner>
+                Redirecting... <Spinner size={'md'}></Spinner>
             </div>
         )
     }
