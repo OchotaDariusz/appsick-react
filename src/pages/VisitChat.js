@@ -3,7 +3,9 @@ import "../components/VisitChat/VisitChat.css"
 import Chatroom from "../components/VisitChat/Chatroom"
 import ChatMessage from "../components/VisitChat/ChatMessage/ChatMessage"
 import { Spinner } from "@chakra-ui/react"
-
+import {useAuth} from "../components/Auth/Auth";
+import doc from '../assets/image/doc.png'
+import Footer from "../components/Footer/Footer";
 const getUser = async () => {
   const data = await fetch("http://localhost:8080/api/auth/current", {
     credentials: "include"
@@ -22,6 +24,7 @@ export default function VisitChat(props) {
   const [isNewChatMessageLoading, setIsNewChatMessageLoading] = useState(true)
   const [chatMessages, setChatMessages] = useState([])
   const [chatMessage, setChatMessage] = useState("")
+  const [userName, setUserName] = useState("")
 
   const updateChat = (setterFn) => {
     setIsNewChatMessageLoading(true)
@@ -38,9 +41,11 @@ export default function VisitChat(props) {
   useEffect(() => {
     getUser()
       .then(user => {
+        console.log(user)
         chatroom = new Chatroom(
           props.match.params.visitId,
           user.id,
+          setUserName(user.firstName +" "+ user.lastName),
           `${user.firstName} ${user.lastName}`
         )
         updateChat(setChatMessages)
@@ -58,29 +63,63 @@ export default function VisitChat(props) {
     chatroom.endVisit(setChatMessages)
   }
 
-  return (
-    <div className="container my-4">
-      <div className="container-fluid col-6 mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow mt-3">
-      <h1 className="my-4 text-center">Visit Chat</h1>
+  const auth = useAuth()
 
-      <div className="chat-window">
+  return (
+
+<div>
+    <div className="container my-4 ">
+<div className="row pt-4">
+  <div className="col-4">
+    {auth.role === "PATIENT"
+        ?
+        <div>
+
+        <p>Imię Nazwisko pacjenta:<br/> {userName}</p>
+          <br/>
+        <button type="submit" className="btn btn-secondary">Historia Wizyt</button>
+        </div>
+        :
+        <div className="row">
+          <div className="col-8">
+            <img src={doc}/>
+          </div>
+          <div className="col-8">
+            <p>Lekarz prowadzący:<br/> {userName}</p>
+            <br/>
+            <br/>
+            <h3> About</h3>
+            <p>Jakiś text o lekarzu z bazy to trzeba by wrzucić :D
+              Jakiś text o lekarzu z bazy to trzeba by wrzucić :D
+              Jakiś text o lekarzu z bazy to trzeba by wrzucić :D
+            </p>
+          </div>
+
+        </div>
+    }
+  </div>
+  <div className="col-8">
+    <div className=" mx-auto rounded-5 bg-dark text-dark bg-opacity-10 shadow mt-3">
+      <h1 className="text-center pt-3">Visit Chat</h1>
+
+      <div className="chat-window px-4 py-4">
         <ul className="chat-list | list-group">
           {
             (chatMessages === []) ?
-              <li className="list-group-item"><Spinner /></li> :
-              chatMessages.map(
-              (message, index) => <ChatMessage
-                author={message.author}
-                message={message.message}
-                time={message.date}
-                key={index}/>
-            )
+                <li className="list-group-item"><Spinner /></li> :
+                chatMessages.map(
+                    (message, index) => <ChatMessage
+                        author={message.author}
+                        message={message.message}
+                        time={message.date}
+                        key={index}/>
+                )
           }
           {(isNewChatMessageLoading) ? <li className="list-group-item"><Spinner /></li> : ""}
         </ul>
       </div>
 
-      <form onSubmit={sendMessage} className="new-chat | my-5 pb-3">
+      <form onSubmit={sendMessage} className="new-chat px-4 py-4 | my-5 pb-3">
         <div className="input-group">
           <div className="input-group-prepend">
             <span className="message__label | input-group-text">Your message:</span>
@@ -92,12 +131,20 @@ export default function VisitChat(props) {
           </div>
         </div>
         <div className="d-flex justify-content-center my-2">
-          <button type="button" className="btn btn-danger" onClick={endVisit}>End Visit</button>
+          {auth.role !== "PATIENT" ? <button type="button" className="btn btn-danger" onClick={endVisit}>End Visit</button>
+              :
+              <div></div>}
         </div>
       </form>
-      </div>
+    </div>
+  </div>
+
+</div>
+
 
     </div>
+  <Footer/>
+</div>
   );
 
 }

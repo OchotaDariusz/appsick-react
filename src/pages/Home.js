@@ -6,6 +6,8 @@ import {useAuth} from "../components/Auth/Auth";
 
 export default function Home() {
     const auth = useAuth()
+    console.log("HOme")
+    console.log(auth.email)
     return (
         <div>
             {auth.role !== "PATIENT" ?
