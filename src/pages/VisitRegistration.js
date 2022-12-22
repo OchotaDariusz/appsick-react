@@ -132,7 +132,7 @@ const VisitRegistration = () => {
                     visitObject.patient.patientId = user.id;
                     setVisitDetails(visitObject);
                 } else {
-                    setTimeout(() => {history.push("/")}, 2000);
+                    setTimeout(() => {history.push("/")}, 3000);
                     dispatch(showModal());
                 }
             })
@@ -280,7 +280,7 @@ const VisitRegistration = () => {
 
     if (!visitObject.patient.patientId){
         return (
-            <div className={"container mx-auto p-3 text-center"}>
+            <div className={"container mx-auto p-4 text-center fixed-top"}>
                 User not logged in. Redirecting...<Spinner size={'md'}></Spinner>
             </div>
         )
