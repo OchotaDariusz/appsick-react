@@ -73,10 +73,7 @@ export default function VisitChat(props) {
         .then(visit=>{
           setDoctorName(visit.doctor.user.firstName + " " + visit.doctor.user.lastName )
           setPatientName(visit.patient.user.firstName + " " + visit.patient.user.lastName )
-          console.log("visit1")
-          console.log(visit)
-          console.log(doctorName)
-          console.log("visit2")
+
         })
         .catch(err => console.log(err.message))
   })
@@ -103,7 +100,7 @@ export default function VisitChat(props) {
         ?
         <div>
 
-        <p>Imię Nazwisko pacjenta:<br/> {doctorName}</p>
+        <p>Imię Nazwisko pacjenta:<br/> {patientName}</p>
           <br/>
         <button type="submit" className="btn btn-secondary">Historia Wizyt</button>
         </div>
@@ -113,7 +110,7 @@ export default function VisitChat(props) {
             <img src={doc}/>
           </div>
           <div className="col-8">
-            <p>Lekarz prowadzący:<br/> {patientName}</p>
+            <p>Lekarz prowadzący:<br/> {doctorName}</p>
             <br/>
             <br/>
             <h3> About</h3>

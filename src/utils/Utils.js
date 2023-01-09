@@ -10,6 +10,7 @@ export const isToday = (visit) => {
     return new Date(visit.date).getFullYear() === new Date().getFullYear()
         && new Date(visit.date).getMonth() === new Date().getMonth()
         && new Date(visit.date).getDay() === new Date().getDay();
+
 }
 
 export const formatVisitDate = visit => {

@@ -14,6 +14,7 @@ import Button from "react-bootstrap/Button";
 export default function TodayVisit({visit}) {
 
     const [open, setOpen] = useState(false);
+console.log(visit)
 console.log(isToday(visit))
 console.log(new Date())
     return (
