@@ -14,7 +14,7 @@ export default function News() {
                         <div className="article">
                             <div className="article-in">
                                 <img src="https://images.pexels.com/photos/254069/pexels-photo-254069.jpeg?auto=compress&cs=tinysrgb&w=1600" className="rounded-3" alt="..."/>
-                                <div className="fs-4">Subscriptions for adults and children</div>
+                                <div className="fs-4">Adults and children subscriptions</div>
                             </div>
                         </div>
                         <div className="article">

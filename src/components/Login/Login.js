@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react"
+import React, {useState} from "react"
 import "./Login.css"
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import InputFields from "../InputFields"
 import Modal from 'react-bootstrap/Modal';
 import logo from '../../assets/logo/logo.svg'
@@ -10,6 +10,8 @@ import {MdPersonAddAlt} from "react-icons/md";
 import {RiSendPlaneLine} from "react-icons/ri";
 import {useAuth} from "../Auth/Auth";
 import {AiFillGoogleCircle} from "react-icons/ai";
+import {useDispatch} from "react-redux";
+import {hideModal, showModal} from "../../redux/ducks/loginModal";
 
 
 export default function Login(props) {
@@ -35,6 +37,14 @@ export default function Login(props) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const dispatch = useDispatch();
+    const showLoginModal = () => {
+        dispatch(showModal());
+    }
+    const hideLoginModal = () => {
+        dispatch(hideModal());
+    }
 
     const submitForm = (event) => {
         event.preventDefault()
@@ -105,7 +115,7 @@ export default function Login(props) {
                                         className="btn fs-3 text-black border border-dark
                                         border-2 rounded-pill p-2 px-4 btnx d-flex col-auto" onClick={() => {
                                         props.setRegisterModalShow(false);
-                                        props.setLoginModalShow(false);
+                                        hideLoginModal();
                                     }}>
                                         Submit
                                         <div className="fs-1 d-inline px-3">
@@ -132,7 +142,7 @@ export default function Login(props) {
                                      role="button"
                                      onClick={() => {
                                          props.setRegisterModalShow(true);
-                                         props.setLoginModalShow(false);
+                                         hideLoginModal();
                                      }}
                                 >
                                     Join us
@@ -153,7 +163,6 @@ export default function Login(props) {
 
                                 <Register
                                     setRegisterModalShow={props.setRegisterModalShow}
-                                    setLoginModalShow={props.setLoginModalShow}
                                 />
 
                             </div>

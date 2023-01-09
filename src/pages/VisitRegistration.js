@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {ChakraProvider, Select, Textarea, Button} from '@chakra-ui/react';
+import {Select, Textarea, Spinner} from '@chakra-ui/react';
 import {useHistory} from "react-router-dom";
 import 'bootstrap/js/dist/util';
 import 'bootstrap/js/dist/dropdown';
-import '../components/Visit/VisitRegistration.css';
+import './VisitRegistration.css';
 import {RiSendPlaneLine} from "react-icons/ri";
+import {useDispatch} from "react-redux";
+import {showModal} from "../redux/ducks/loginModal";
 
 const VisitRegistration = () => {
 
@@ -16,12 +18,12 @@ const VisitRegistration = () => {
             },
             "date": "2022-11-14T19:57:07.153Z",
             "doctor": {
-                "doctorId": 0
+                "doctorId": null
             },
             "doctorSpeciality": "",
             "online": true,
             "patient": {
-                "patientId": 1 // TODO: fetch data
+                "patientId": null
             },
             "reason": "",
             "status": "PENDING"
@@ -36,6 +38,19 @@ const VisitRegistration = () => {
     const [isDoctorSpecialitiesLoading, setIsDoctorSpecialitiesLoading] = useState(true)
     const [isSubmitting, setIsSubmitting] = useState(false);
     const history = useHistory();
+    const dispatch = useDispatch();
+
+    async function getUser() {
+        const data = await fetch("http://localhost:8080/api/auth/current", {
+            credentials: "include"
+        })
+        try {
+            return await data.json()
+        } catch (e) {
+            console.warn(e.message)
+            return data;
+        }
+    }
 
     async function getDoctorSpecialities(){
         setIsDoctorSpecialitiesLoading(true)
@@ -109,9 +124,21 @@ const VisitRegistration = () => {
         });
     }
 
-    async function checkUserLoggedIn(){
-        return; // TODO
-    }
+    useEffect(() => {
+        getUser()
+            .then(user => {
+                console.log("user:" )
+                console.log(user)
+                if (user?.id) {
+                    visitObject = {...visitDetails};
+                    visitObject.patient.patientId = user.id;
+                    setVisitDetails(visitObject);
+                } else {
+                    setTimeout(() => {history.push("/")}, 3000);
+                    dispatch(showModal());
+                }
+            })
+    }, [visitDetails.patient.patientId])
 
     useEffect(() =>{
         getDoctorSpecialities().then(doctorSpecialities => {
@@ -194,8 +221,6 @@ const VisitRegistration = () => {
     const submitVisit = (e) => {
         const form = document.getElementById("visit-form")
         if (!form.checkValidity()) {
-            console.log("Form invalid")
-            // TODO: informative pop-up
             return;
         }
         if (isSubmitting) { return; }
@@ -214,7 +239,7 @@ const VisitRegistration = () => {
                 <label htmlFor={"doctor"}>Doctor:</label>
                 <Select name={"doctor"} className={"form-select mb-3"} onChange={changeDoctor} required>
                     <option value="" hidden>- Select a Doctor -</option>
-                    {isDoctorListLoading ? "loading" : doctorList.map(doctor => {
+                    {isDoctorListLoading ? "" : doctorList.map(doctor => {
                         return <option key={doctor.doctorId}
                                        value={doctor.doctorId}>{doctor.user.firstName} {doctor.user.lastName}</option>;
                     })
@@ -254,8 +279,17 @@ const VisitRegistration = () => {
             </>
         )
     }
+
+    if (!visitDetails.patient.patientId){
+        return (
+            <div className={"container mx-auto p-4 text-center fixed-top"}>
+                Redirecting... <Spinner size={'md'}></Spinner>
+            </div>
+        )
+    }
+
     return (
-        <ChakraProvider>
+        <>
             <div className={"container col-6 mx-auto m-3 rounded-5 bg-light text-dark bg-opacity-1 green-shadow"}>
 
                 <h1 className={"fs-1 pt-3 text-center"}>Make an appointment</h1>
@@ -264,7 +298,7 @@ const VisitRegistration = () => {
                     <label className={"p-3 fs-5"} htmlFor={"specialities"}>What kind of service do you require?:</label>
                     <Select name={"specialities"} className={"form-select"} onChange={changeDoctorSpeciality} required>
                         <option value="" hidden>- Select a Speciality -</option>
-                        {isDoctorSpecialitiesLoading ? "loading" : doctorSpecialities.map(speciality => {
+                        {isDoctorSpecialitiesLoading ? "" : doctorSpecialities.map(speciality => {
                             return <option key={speciality}
                                            value={speciality}>{speciality}</option>;
                         })
@@ -302,7 +336,7 @@ const VisitRegistration = () => {
 
                 </div>
             </div>
-        </ChakraProvider>
+        </>
     );
 };
 

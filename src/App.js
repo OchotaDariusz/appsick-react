@@ -16,6 +16,8 @@ import VisitRegistration from "./pages/VisitRegistration";
 import Credits from "./pages/Credits";
 import {AuthProvider} from "./components/Auth/Auth";
 import UserPage from "./pages/UserPage";
+import ChatHistory from "./pages/ChatHistory";
+
 
 function App() {
     return (
@@ -36,6 +38,7 @@ function App() {
                         <UserPage/>
                     </Route>
                     <Route exact path="/visit/:visitId" component={VisitChat}/>
+                    <Route exact path="/visit/:visitId/history" component={ChatHistory}/>
                     <Route path="/register-visit">
                         <VisitRegistration/>
                     </Route>
