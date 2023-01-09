@@ -42,10 +42,10 @@ export default function VisitChat(props) {
     getUser()
       .then(user => {
         console.log(user)
+        setUserName(user.firstName +" "+ user.lastName)
         chatroom = new Chatroom(
           props.match.params.visitId,
           user.id,
-          setUserName(user.firstName +" "+ user.lastName),
           `${user.firstName} ${user.lastName}`
         )
         updateChat(setChatMessages)
@@ -71,7 +71,7 @@ export default function VisitChat(props) {
     <div className="container my-4 ">
 <div className="row pt-4">
   <div className="col-4">
-    {auth.role === "PATIENT"
+    {auth.role === "DOCTOR"
         ?
         <div>
 
