@@ -17,6 +17,17 @@ const getUser = async () => {
     return data
   }
 }
+const getVisit = async (visitId)=>{
+  const data = await fetch(`http://localhost:8080/api/visit/${visitId}`, {
+    credentials: "include"
+  })
+  try {
+    return await data.json()
+  } catch (e) {
+    console.log(e.message)
+    return data
+  }
+}
 
 let chatroom, messages
 export default function VisitChat(props) {
@@ -25,6 +36,8 @@ export default function VisitChat(props) {
   const [chatMessages, setChatMessages] = useState([])
   const [chatMessage, setChatMessage] = useState("")
   const [userName, setUserName] = useState("")
+  const [doctorName, setDoctorName] = useState("")
+  const [patientName, setPatientName] = useState("")
 
   const updateChat = (setterFn) => {
     setIsNewChatMessageLoading(true)
@@ -43,6 +56,7 @@ export default function VisitChat(props) {
       .then(user => {
         console.log(user)
         setUserName(user.firstName +" "+ user.lastName)
+
         chatroom = new Chatroom(
           props.match.params.visitId,
           user.id,
@@ -51,7 +65,21 @@ export default function VisitChat(props) {
         updateChat(setChatMessages)
       })
       .catch(err => console.log(err.message))
+
   }, [props.match.params.visitId])
+
+  useEffect(()=>{
+    getVisit(props.match.params.visitId)
+        .then(visit=>{
+          setDoctorName(visit.doctor.user.firstName + " " + visit.doctor.user.lastName )
+          setPatientName(visit.patient.user.firstName + " " + visit.patient.user.lastName )
+          console.log("visit1")
+          console.log(visit)
+          console.log(doctorName)
+          console.log("visit2")
+        })
+        .catch(err => console.log(err.message))
+  })
 
   const sendMessage = event => {
     event.preventDefault()
@@ -75,7 +103,7 @@ export default function VisitChat(props) {
         ?
         <div>
 
-        <p>Imię Nazwisko pacjenta:<br/> {userName}</p>
+        <p>Imię Nazwisko pacjenta:<br/> {doctorName}</p>
           <br/>
         <button type="submit" className="btn btn-secondary">Historia Wizyt</button>
         </div>
@@ -85,7 +113,7 @@ export default function VisitChat(props) {
             <img src={doc}/>
           </div>
           <div className="col-8">
-            <p>Lekarz prowadzący:<br/> {userName}</p>
+            <p>Lekarz prowadzący:<br/> {patientName}</p>
             <br/>
             <br/>
             <h3> About</h3>

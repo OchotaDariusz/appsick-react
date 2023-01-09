@@ -14,7 +14,8 @@ import Button from "react-bootstrap/Button";
 export default function TodayVisit({visit}) {
 
     const [open, setOpen] = useState(false);
-
+console.log(isToday(visit))
+console.log(new Date())
     return (
         <div>
             <div className="col-10 rounded-3 bg-white text-dark my-3 pb-3 px-4 pt-2 border border-2 btnx">
