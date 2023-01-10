@@ -76,13 +76,10 @@ export default function Visit({visit, cancelVisit}) {
                                 <div className="fs-4 m-2">
                                     Visit reason:
                                     <br/>
-                                    type={visit.visitTypes[0]}
-                                    <br/>
-                                    id={visit.visitId}
-                                </div>
-                                <div>
+
                                     {visit?.reason}
                                 </div>
+
                                 <div>
                                     <hr/>
                                     <div className="fs-4 m-2">
