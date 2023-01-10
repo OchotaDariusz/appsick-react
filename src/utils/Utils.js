@@ -7,20 +7,6 @@ export const snakeToCamel = str =>
 
 
 export const isToday = (visit) => {
-    // console.log(visit.date)
-    // if(new Date().getDay() === new Date(visit.date).getDay()){
-    //     console.log("asdasd")
-    // }
-    // console.log(visit.date[1].toLocaleDateString("en-US"));
-    if(!(new Date(visit.date).getFullYear() === new Date().getFullYear()
-        && new Date(visit.date).getMonth() === new Date().getMonth()
-        && new Date(visit.date).getDay() === new Date().getDay())){
-
-
-    }
-
-
-
     return new Date(visit.date).getFullYear() === new Date().getFullYear()
         && new Date(visit.date).getMonth() === new Date().getMonth()
         && new Date(visit.date).getDay() === new Date().getDay();

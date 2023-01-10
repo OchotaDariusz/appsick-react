@@ -97,9 +97,7 @@ export default function MyVisits() {
     const loadMorePastVisits = useCallback(() => {
         getListOfVisits(`/past?pageNumber=${pageNumber}${local}${online}${examination}${prescription}`)
             .then(visits => {
-                console.log(`/past?pageNumber=${pageNumber}${local}${online}${examination}${prescription}`)
                 pageNumber++;
-
 
                 // TODO: remove timeout
                 setTimeout(() => {
@@ -169,9 +167,6 @@ export default function MyVisits() {
 
     useEffect(() => {
         let pastVisitsUrl = (!isFiltered) ? "/past" : `/past?pageNumber=1${local}${online}${examination}${prescription}`
-        console.log("pastVisitsUrl")
-        console.log(isFiltered)
-        console.log(pastVisitsUrl)
         getListOfVisits(pastVisitsUrl)
             .then(visits => {
                 if (visits.status !== 401) {
