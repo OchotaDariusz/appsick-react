@@ -11,6 +11,7 @@ import {BsFileEarmarkPdf} from "react-icons/bs";
 import {isToday} from "../../utils/Utils";
 import Button from "react-bootstrap/Button";
 
+
 export default function TodayVisit({visit}) {
 
     const [open, setOpen] = useState(false);
@@ -81,31 +82,27 @@ export default function TodayVisit({visit}) {
 
                                 </div>
                                 {visit.status}
-                                    </div>
-
-
+                            </div>
 
 
                             <div>
                                 <br/>
                                 <hr/>
-                                {isToday(visit) ?
-                                    <Link to={`/visit/${visit?.visitId}`} className="btn btn-dark my-3">
-                                        Ask doctor a question</Link> : ""}
-                                {new Date(visit?.date) > new Date() ?
-                                    <Button className="fs-3 text-dark bg-light border border-danger
+                                <Link to={`/visit/${visit.visitId}`} className="btn btn-dark my-3">
+                                    Ask doctor a question
+                                </Link>
+                                <Button className="fs-3 text-dark bg-light border border-danger
                                             border-2 rounded-pill p-2 green-shadow mt-3 px-3 btnx d-inline-flex"
-                                            onClick={() => {
-                                                // cancelVisit(visit?.visitId)
-                                            }
-                                            }>
-                                        <div className="fs-4 d-inline px-2">
-                                            <CloseIcon/>
-                                        </div>
-                                        Cancel Visit
-                                    </Button> :
-                                    ""
-                                }
+                                        onClick={() => {
+                                            // cancelVisit(visit?.visitId)
+                                        }
+                                        }>
+                                    <div className="fs-4 d-inline px-2">
+                                        <CloseIcon/>
+                                    </div>
+                                    Cancel Visit
+                                </Button>
+
                             </div>
 
 

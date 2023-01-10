@@ -158,7 +158,7 @@ export default function MyVisits() {
         getListOfVisits("/current")
             .then(visits => {
                 if (visits.status !== 401) {
-                    let filtered = visits.filter(visit => visit.status === "PENDING")
+                    let filtered = visits.filter(visit => visit.status === "PENDING"&& isToday(visit))
                         setCurrentVisits(() => {
                         return filtered.map(formatVisitDate)
                     })
@@ -214,6 +214,7 @@ export default function MyVisits() {
                             {currentVisits.length > 0 ?
                                 (isCurrentVisitsLoading) ? <Spinner/> : currentVisits.map(visit => <TodayVisit
                                     visit={visit}
+
                                     key={visit.visitId}/>) :
                                 <div
                                     className="col-12 container border-2 border-dark border-opacity-75 border rounded-3 bg-white text-dark my-3 p-3">

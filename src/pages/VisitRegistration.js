@@ -16,7 +16,7 @@ const VisitRegistration = () => {
             "clinic": {
                 "clinicId": ONLINE_CLINIC_ID
             },
-            "date": "2022-11-14T19:57:07.153Z",
+            "date": "dududupa",
             "doctor": {
                 "doctorId": null
             },
