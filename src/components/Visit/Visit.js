@@ -91,8 +91,8 @@ export default function Visit({visit, cancelVisit}) {
                                             <div>{visit.status !== "PENDING" ?
                                                 visit.status :
                                                 <div className="fs-5 text-dark bg-light border border-success
-                                            border-2 rounded-pill green-shadow mt-1 p-2 px-3 d-inline-flex m-2">
-                                                    <div className="fs-2 d-inline px-1">
+                                            border-2 rounded-pill green-shadow mt-1 p-1 px-3 d-inline-flex m-2">
+                                                    <div className="fs-2 d-inline pe-1">
                                                         <FiCheck/>
                                                     </div>
                                                     Visit confirmed
@@ -144,12 +144,12 @@ export default function Visit({visit, cancelVisit}) {
                                             Ask doctor a question</Link> : ""}
                                     {new Date(visit?.date) > new Date() ?
                                         <Button className="fs-5 text-dark bg-light border border-danger
-                                            border-2 rounded-pill p-2 green-shadow mt-3 px-3 btnx d-inline-flex"
+                                            border-2 rounded-pill p-1 green-shadow mt-3 px-3 btnx d-inline-flex"
                                                 onClick={() => {
                                                     cancelVisit(visit?.visitId)
                                                 }
                                                 }>
-                                            <div className="fs-5 d-inline px-1">
+                                            <div className="fs-5 d-inline pe-1">
                                                 <CloseIcon/>
                                             </div>
                                             Cancel Visit

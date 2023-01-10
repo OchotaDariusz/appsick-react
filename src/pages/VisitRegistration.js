@@ -7,7 +7,7 @@ import './VisitRegistration.css';
 import {RiSendPlaneLine} from "react-icons/ri";
 import {useDispatch} from "react-redux";
 import {showModal} from "../redux/ducks/loginModal";
-
+import {useToast} from "@chakra-ui/react";
 const VisitRegistration = () => {
 
     const ONLINE_CLINIC_ID = 1; // TODO discuss. Maybe id should be nullable
@@ -39,6 +39,7 @@ const VisitRegistration = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const history = useHistory();
     const dispatch = useDispatch();
+    const toast = useToast()
 
     async function getUser() {
         const data = await fetch("http://localhost:8080/api/auth/current", {
@@ -127,8 +128,6 @@ const VisitRegistration = () => {
     useEffect(() => {
         getUser()
             .then(user => {
-                console.log("user:" )
-                console.log(user)
                 if (user?.id) {
                     visitObject = {...visitDetails};
                     visitObject.patient.patientId = user.id;
@@ -218,16 +217,26 @@ const VisitRegistration = () => {
     }
 
 
+
     const submitVisit = (e) => {
         const form = document.getElementById("visit-form")
         if (!form.checkValidity()) {
+            console.log("dupa")
             return;
         }
         if (isSubmitting) { return; }
         setIsSubmitting(true);
         e.preventDefault();
         postVisit().then(response => console.log(response))
-            .then(() => history.push("/visit"))
+            .then(() => {
+                history.push("/visit");
+                toast({
+                    title: "Visit registered successfully.",
+                    status: 'success',
+                    duration: 3000,
+                    isClosable: true,
+                });
+            })
             .catch(err => console.warn(err.message))
             .finally(() => setIsSubmitting(false));
     }
