@@ -248,6 +248,9 @@ const VisitRegistration = () => {
                 <Select name={"doctor"} className={"form-select mb-3"} onChange={changeDoctor} required>
                     <option value="" hidden>- Select a Doctor -</option>
                     {isDoctorListLoading ? "" : doctorList.map(doctor => {
+                        if (!doctor.medicalSpecialities.includes(visitDetails.doctorSpeciality)){
+                            return;
+                        }
                         return <option key={doctor.doctorId}
                                        value={doctor.doctorId}>{doctor.user.firstName} {doctor.user.lastName}</option>;
                     })
