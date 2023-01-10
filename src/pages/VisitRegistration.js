@@ -280,6 +280,7 @@ const VisitRegistration = () => {
                 <Select name={"clinic"} className="form-select mb-3" onChange={changeClinic} required>
                     <option value="" hidden>- Select Clinic -</option>
                     {isClinicListLoading ? "" : clinicList.map(clinic => {
+                        if (clinic.clinicId === ONLINE_CLINIC_ID){ return; }
                         return <option key={clinic.clinicId} value={clinic.clinicId}>{clinic.clinicName}</option>;
                     })
                     }
