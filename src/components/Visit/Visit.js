@@ -138,7 +138,7 @@ export default function Visit({visit, cancelVisit}) {
                                     {visit.status === "COMPLETED" ?
                                         <div>
                                             <Link to={`/visit/${visit.visitId}/history`} className="btn btn-dark my-3">
-                                                See chat history</Link> }
+                                                See chat history</Link>
                                         </div>
                                         :
                                         <div >

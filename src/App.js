@@ -38,7 +38,7 @@ function App() {
                         <UserPage/>
                     </Route>
                     <Route exact path="/visit/:visitId" component={VisitChat}/>
-                    <Route exact path="/visit/:visitId/history" component={ChatHistory}/>
+                    <Route exact path="/visit/:visitId/history"  component={ChatHistory}/>
                     <Route path="/register-visit">
                         <VisitRegistration/>
                     </Route>

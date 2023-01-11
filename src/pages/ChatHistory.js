@@ -25,6 +25,7 @@ export default function ChatHistory(props) {
 
         const data = await fetch(`http://localhost:8080/api/chats/visit/${props.match.params.visitId}`, {
             mode: 'cors',
+
             credentials: "include",
             headers: {
                 'Accept': 'application/json',
