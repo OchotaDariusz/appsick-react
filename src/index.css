@@ -15,8 +15,12 @@ html, body {
     min-height: 100vh;
     overflow-x: hidden;
     margin: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
     font-family: Montserrat, sans-serif !important;
 }
+
 
 body {
     overflow-y: hidden;
@@ -32,13 +36,56 @@ body {
 
 }
 
+
+section {
+    color: black;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    min-height: 90vh;
+}
+
+.anim {
+    display: flex;
+}
+.first-X:nth-child(2) {
+    transition-delay: 200ms;
+}
+.first-X:nth-child(3) {
+    transition-delay: 400ms;
+}
+.first-X:nth-child(4) {
+    transition-delay: 600ms;
+}
+
+
+.hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 1s;
+}
+
+@media(prefers-reduced-motion) {
+    .hidden {
+        transition: none;
+    }
+}
+
+.showX {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+
 .map-container {
     width: auto;
     height: auto;
 }
 
 .home-main-text {
-    background-image: url('/src/home-bar.jpg');
+    /*background-image: url('/src/home-bar.jpg');*/
 
     height: 600px;
     width: 100%;
@@ -56,8 +103,8 @@ body {
     width: 100%;
     text-align: center;
     height: 400px;
-    background-color: rgba(0, 0, 0, 0.2);
-
+    /*background-color: rgba(0, 0, 0, 0.2);*/
+    background: linear-gradient(70deg, var(--C-color), var(--A-color)) !important;
 }
 
 .container-of-slides {

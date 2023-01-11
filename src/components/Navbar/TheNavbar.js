@@ -66,7 +66,7 @@ export default function TheNavbar() {
 
     return (
         <>
-            <nav className="navbar navbar-expand-md bg-light  flex-nowrap">
+            <nav className="navbar navbar-expand-md bg-light  flex-nowrap rounded-4 green-shadow">
                 <div className="container-fluid">
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
