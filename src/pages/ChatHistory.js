@@ -3,7 +3,7 @@ import MyMessage from "../components/ChatHistory/MyMessge"
 import OtherMessage from "../components/ChatHistory/OtherMessage"
 
 
-export default function ChatHistory() {
+export default function ChatHistory(props) {
     const [chatArray, setChatArray] = useState([])
     const [userId, setUserId] = useState();
     let lastId = null;
@@ -22,7 +22,8 @@ export default function ChatHistory() {
     }
 
     async function getChat() {
-        const data = await fetch(`http://localhost:8080/api/chats/visit/1`, {
+
+        const data = await fetch(`http://localhost:8080/api/chats/visit/${props.match.params.visitId}`, {
             mode: 'cors',
             credentials: "include",
             headers: {
