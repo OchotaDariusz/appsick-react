@@ -1,0 +1,45 @@
+body {
+    /*overflow-y: hidden;*/
+
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /*width: 100%;*/
+    /*background-image: url('/src/assets/background/tlo.jpg');*/
+    /*background-repeat: repeat;*/
+    background: linear-gradient(70deg, var(--C-color), var(--A-color)) !important;
+
+
+}
+
+section {
+    color: black;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    min-height: 80vh;
+}
+
+.hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 1s;
+}
+
+@media(prefers-reduced-motion) {
+    .hidden {
+        transition: none;
+    }
+}
+
+.showX {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+}
+
