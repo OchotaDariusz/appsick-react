@@ -2,7 +2,6 @@ import React, {useCallback, useEffect, useState} from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCalendarDays, faChartLine, faLocationDot, faPills, faVideo, faXmark} from '@fortawesome/free-solid-svg-icons'
 import Visit from "../components/Visit/Visit"
-import TodayVisit from "../components/Visit/TodayVisit"
 import 'bootstrap/dist/css/bootstrap.css'
 import {formatVisitDate, isToday} from "../utils/Utils";
 import PastVisits from '../components/Visit/PastVisits'
@@ -98,9 +97,7 @@ export default function MyVisits() {
     const loadMorePastVisits = useCallback(() => {
         getListOfVisits(`/past?pageNumber=${pageNumber}${local}${online}${examination}${prescription}`)
             .then(visits => {
-                console.log(`/past?pageNumber=${pageNumber}${local}${online}${examination}${prescription}`)
                 pageNumber++;
-
 
                 // TODO: remove timeout
                 setTimeout(() => {
@@ -170,9 +167,6 @@ export default function MyVisits() {
 
     useEffect(() => {
         let pastVisitsUrl = (!isFiltered) ? "/past" : `/past?pageNumber=1${local}${online}${examination}${prescription}`
-        console.log("pastVisitsUrl")
-        console.log(isFiltered)
-        console.log(pastVisitsUrl)
         getListOfVisits(pastVisitsUrl)
             .then(visits => {
                 if (visits.status !== 401) {
@@ -196,6 +190,22 @@ export default function MyVisits() {
                 {(isFutureVisitsLoading) ? <Spinner/> : futureVisits.map(visit => <Visit visit={visit}
                                                                                          cancelVisit={cancelVisit}
                                                                                          key={visit.visitId}/>)}
+                <br />
+                <hr />
+                <br />
+                <div className="row justify-content-center">
+                    <div className="col-2"></div>
+                    <div className="col fs-3 mt-3">Today's</div>
+                </div>
+                {currentVisits.length > 0 ?
+                    (isCurrentVisitsLoading) ? <Spinner/> :
+                        currentVisits.map(visit => <Visit  visit={visit} key={visit.visitId}/>) :
+                    <div
+                        className="col-6 text-center container border-2 border-dark border-opacity-75 border rounded-3 bg-white text-dark my-3 p-3">
+                        You do not have planned appointments  for today.
+                    </div>
+                }
+
                 <div className="row align-items-center">
 
                     <div>
@@ -203,31 +213,9 @@ export default function MyVisits() {
                     </div>
                     <br/>
                     <br/>
-                    <div className="row align-items-center">
-                        <div className="col-2 px-2">
-                            <div className=" my-3 mx-2  bg-white border-2 border-opacity-75 border-dark border rounded text-center">
-                                Today's <br/>visits:
-                            </div>
-                        </div>
-
-                        <div className="container col-9">
-                            {currentVisits.length > 0 ?
-                                (isCurrentVisitsLoading) ? <Spinner/> : currentVisits.map(visit => <TodayVisit
-                                    visit={visit}
-
-                                    key={visit.visitId}/>) :
-                                <div
-                                    className="col-12 container border-2 border-dark border-opacity-75 border rounded-3 bg-white text-dark my-3 p-3">
-                                    You do not have appointments planned for today.
-                                </div>
-                            }
-                        </div>
-                    </div>
 
                 </div>
 
-                <br/>
-                <hr/>
                 <br/>
 
                 <div className="row justify-content-center">

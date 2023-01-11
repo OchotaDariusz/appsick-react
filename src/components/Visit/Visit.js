@@ -59,7 +59,7 @@ export default function Visit({visit, cancelVisit}) {
                             <div className="row fs-5">
                                 {visit?.doctor?.medicalSpecialities[0]}
                                 <br/>
-                                {visit?.clinic?.clinicName === "Konsultacje Online" ?
+                                {visit.online ?
                                     <div className="row align-items-start">Online Visit</div> :
                                     <MapModal visit={visit}/>}
 

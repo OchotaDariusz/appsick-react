@@ -110,19 +110,18 @@ export default function Login(props) {
                                         <InputFields placeholder={"Password"} type={"password"} set={setPassword}/>
                                     </div>
                                     <div>{info}</div>
-
                                     <button
                                         className="btn fs-3 text-black border border-dark
-                                        border-2 rounded-pill p-2 px-4 btnx d-flex col-auto" onClick={() => {
-                                        props.setRegisterModalShow(false);
-                                        hideLoginModal();
-                                    }}>
+                                        border-2 rounded-pill p-2 px-4 btnx d-flex col-auto align-items-center"
+                                        onClick={() => {
+                                            props.setRegisterModalShow(false);
+                                            hideLoginModal();
+                                        }}>
                                         Submit
-                                        <div className="fs-1 d-inline px-3">
+                                        <div className="fs-1 d-inline px-1">
                                             <RiSendPlaneLine/>
                                         </div>
                                     </button>
-
                                 </form>
                             </div>
                             <div className="col-sm-1">
@@ -132,13 +131,11 @@ export default function Login(props) {
                             </div>
                             <div className="col-sm-4 ">
                                 <br/>
-                                <br/>
-                                <br/>
                                 <div className="fs-3">Don't have an account yet?</div>
                                 <br/>
 
                                 <div className="btnx fs-3 text-black border border-dark border-2
-                                rounded-pill p-2 px-4 d-flex "
+                                rounded-pill p-1 px-3 d-inline-flex "
                                      role="button"
                                      onClick={() => {
                                          props.setRegisterModalShow(true);
@@ -146,14 +143,14 @@ export default function Login(props) {
                                      }}
                                 >
                                     Join us
-                                    <div className="fs-1 d-inline px-3">
+                                    <div className="fs-1 d-inline px-2">
                                         <MdPersonAddAlt/>
                                     </div>
                                 </div>
 
 
                                 <div role="button" className="btnx fs-3 text-black border border-dark border-2
-                                rounded-pill p-2 px-4 d-flex ">
+                                rounded-pill p-2 d-inline-flex overflow-hidden">
                                     <div className="fs-1 d-inline px-3 align-content-center">
                                         <AiFillGoogleCircle/>
                                     </div>
