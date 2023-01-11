@@ -1,5 +1,5 @@
 import React, {useEffect} from "react"
-
+import Calendar from "../components/Calendar/Calendar";
 export default function UserPage() {
 
     return (
@@ -10,7 +10,7 @@ export default function UserPage() {
                     <div className="col">USER PAGE</div>
                     <div className="col">
 
-                        {/*<TheCalendar />*/}
+                        <Calendar />
 
                     </div>
                 </div>
