@@ -4,7 +4,7 @@ import {useHistory} from "react-router-dom";
 import InputFields from "../InputFields"
 import Modal from 'react-bootstrap/Modal';
 import logo from '../../assets/logo/logo.svg'
-import {Center, Divider} from '@chakra-ui/react'
+import {Center, Divider, useToast} from '@chakra-ui/react'
 import Register from "../Register/Register";
 import {MdPersonAddAlt} from "react-icons/md";
 import {RiSendPlaneLine} from "react-icons/ri";
@@ -12,6 +12,7 @@ import {useAuth} from "../Auth/Auth";
 import {AiFillGoogleCircle} from "react-icons/ai";
 import {useDispatch} from "react-redux";
 import {hideModal, showModal} from "../../redux/ducks/loginModal";
+import toast from "bootstrap/js/src/toast";
 
 
 export default function Login(props) {
@@ -39,6 +40,8 @@ export default function Login(props) {
     const [password, setPassword] = useState("");
 
     const dispatch = useDispatch();
+    const toast = useToast()
+
     const showLoginModal = () => {
         dispatch(showModal());
     }
@@ -79,8 +82,28 @@ export default function Login(props) {
                 setRole(user.role)
                 setEmail(user.email)
                 auth.login(email, user.role)
+                toast({
+                    title: "Logged in",
+                    status: 'success',
+                    duration: 2000,
+                    isClosable: true,
+                    variant: 'subtle',
+                    position: 'bottom'
+                });
             })
-            .catch(err => console.log(err.message))
+            .catch(err => {
+                console.log(err.message);
+                toast({
+                    title: "Error while logging in.",
+                    description: 'Try again!',
+                    status: 'error',
+                    duration: 2000,
+                    isClosable: true,
+                    variant: 'subtle',
+                    position: 'bottom'
+                });
+                showLoginModal();
+            })
     }
 
     return (

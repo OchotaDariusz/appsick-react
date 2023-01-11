@@ -6,7 +6,7 @@ import "../Login/Login.css"
 import axios from "axios";
 import {useHistory} from "react-router-dom";
 import Footer from "../Footer/Footer";
-import {Center, Divider} from '@chakra-ui/react'
+import {Center, Divider, useToast} from '@chakra-ui/react'
 import Modal from 'react-bootstrap/Modal';
 import {Link} from "react-router-dom"
 import Login from "../Login/Login";
@@ -35,6 +35,7 @@ export default function Register(props) {
     const [passwordConfirmationInfo, setPasswordConfirmationInfo] = useState("");
     const [emailColor, setEmailColor] = useState("white");
     const history = useHistory();
+    const toast = useToast()
 
     let passValidation = /(?=.*[!#@$^%*])[a-zA-Z0-9!#@$%*^]{6,100}$/;
     const handleChange = (e) => {
@@ -114,7 +115,6 @@ export default function Register(props) {
         event.preventDefault()
         if (password === passwordConfirmation &&
             password.length > 6 &&
-            // pesel.length === 11 &&
             emailInfo === ""
         ) {
             fetch(`http://localhost:8080/api/auth/register`, {

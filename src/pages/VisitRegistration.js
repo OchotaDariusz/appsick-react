@@ -230,8 +230,10 @@ const VisitRegistration = () => {
                 toast({
                     title: "Visit registered successfully.",
                     status: 'success',
-                    duration: 3000,
+                    duration: 1500,
                     isClosable: true,
+                    variant: 'subtle',
+                    position: 'bottom'
                 });
             })
             .catch(err => console.warn(err.message))

@@ -2,10 +2,10 @@
 
 :root {
     --A-color: rgba(161, 151, 145, 0.29);
-    --B-color: rgba(207, 204, 237, 93);
-    --C-color: rgba(230, 238, 239, 0.93);
-    --D-color: rgba(237, 217, 204, 93);
-    --E-color: rgba(201, 189, 181, 79);
+    --B-color: rgba(207, 204, 237, 0.93);
+    --C-color: rgba(230, 238, 239, 0.96);
+    --D-color: rgba(237, 217, 204, 0.93);
+    --E-color: rgba(220, 215, 204, 0.95);
 }
 
 
@@ -13,24 +13,55 @@
 html, body {
     max-width: 100%;
     min-height: 100vh;
-    overflow-x: hidden;
-    margin: 0;
     font-family: Montserrat, sans-serif !important;
 }
-
 body {
-    overflow-y: hidden;
+    /*overflow-y: hidden;*/
+
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    width: 100%;
+    /*width: 100%;*/
     /*background-image: url('/src/assets/background/tlo.jpg');*/
     /*background-repeat: repeat;*/
-    background: linear-gradient(70deg, rgba(230, 238, 239, 0.93), var(--A-color)) !important;
+    background: linear-gradient(70deg, var(--C-color), var(--A-color)) !important;
 
 
 }
+
+section {
+    color: black;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    min-height: 100vh;
+}
+
+.hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 1s;
+}
+
+/*@media(prefers-reduced-motion) {*/
+/*    .hidden {*/
+/*        transition: none;*/
+/*    }*/
+/*}*/
+
+.showX {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+
+
 
 .map-container {
     width: auto;
@@ -38,13 +69,12 @@ body {
 }
 
 .home-main-text {
-    background-image: url('/src/home-bar.jpg');
+    background-image: url('/src/assets/background/bg_doctor.png');
 
-    height: 600px;
+    height: 832px;
     width: 100%;
-    opacity: 0.7;
     text-align: center;
-    color: #b2e0bb;
+    color: black;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -72,16 +102,6 @@ body {
     transform: translateY(-100%);
 }
 
-/*.button {*/
-/*    height: 100px;*/
-/*    width: 295px;*/
-/*    border-radius: 7px;*/
-/*    background: rgba(255, 255, 255, 0.2);*/
-
-/*    color: white;*/
-/*    box-shadow: 5px 3px 3px black;*/
-/*    font-size: 25px;*/
-/*}*/
 
 .main-container-news {
     margin-left: auto;
