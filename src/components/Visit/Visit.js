@@ -59,7 +59,7 @@ export default function Visit({visit, cancelVisit}) {
                             <div className="row fs-5">
                                 {visit?.doctor?.medicalSpecialities[0]}
                                 <br/>
-                                {visit?.clinic?.clinicName === "Konsultacje Online" ?
+                                {visit.online ?
                                     <div className="row align-items-start">Online Visit</div> :
                                     <MapModal visit={visit}/>}
 
@@ -76,13 +76,10 @@ export default function Visit({visit, cancelVisit}) {
                                 <div className="fs-4 m-2">
                                     Visit reason:
                                     <br/>
-                                    type={visit.visitTypes[0]}
-                                    <br/>
-                                    id={visit.visitId}
-                                </div>
-                                <div>
+
                                     {visit?.reason}
                                 </div>
+
                                 <div>
                                     <hr/>
                                     <div className="fs-4 m-2">
@@ -93,9 +90,9 @@ export default function Visit({visit, cancelVisit}) {
                                         {visit?.status !== "MISSED" ?
                                             <div>{visit.status !== "PENDING" ?
                                                 visit.status :
-                                                <div className="fs-3 text-dark bg-light border border-success
-                                            border-2 rounded-pill p-2 green-shadow mt-3 px-3 d-inline-flex m-2">
-                                                    <div className="fs-1 d-inline px-2">
+                                                <div className="fs-5 text-dark bg-light border border-success
+                                            border-2 rounded-pill green-shadow mt-1 p-1 px-3 d-inline-flex m-2">
+                                                    <div className="fs-2 d-inline pe-1">
                                                         <FiCheck/>
                                                     </div>
                                                     Visit confirmed
@@ -137,7 +134,17 @@ export default function Visit({visit, cancelVisit}) {
                                         </div>
                                     </div>
                                     : ""}
+                                <div>
+                                    {visit.status === "COMPLETED" ?
+                                        <div>
+                                            <Link to={`/visit/${visit.visitId}/history`} className="btn btn-dark my-3">
+                                                See chat history</Link>
+                                        </div>
+                                        :
+                                        <div >
 
+                                        </div>}
+                                </div>
 
                                 <div>
                                     <br/>
@@ -146,13 +153,13 @@ export default function Visit({visit, cancelVisit}) {
                                         <Link to={`/visit/${visit?.visitId}`} className="btn btn-dark my-3">
                                             Ask doctor a question</Link> : ""}
                                     {new Date(visit?.date) > new Date() ?
-                                        <Button className="fs-3 text-dark bg-light border border-danger
-                                            border-2 rounded-pill p-2 green-shadow mt-3 px-3 btnx d-inline-flex"
+                                        <Button className="fs-5 text-dark bg-light border border-danger
+                                            border-2 rounded-pill p-1 green-shadow mt-3 px-3 btnx d-inline-flex"
                                                 onClick={() => {
                                                     cancelVisit(visit?.visitId)
                                                 }
                                                 }>
-                                            <div className="fs-4 d-inline px-2">
+                                            <div className="fs-5 d-inline pe-1">
                                                 <CloseIcon/>
                                             </div>
                                             Cancel Visit
@@ -160,8 +167,6 @@ export default function Visit({visit, cancelVisit}) {
                                         ""
                                     }
                                 </div>
-
-
                             </div>
                         </div>
                     </Collapse>

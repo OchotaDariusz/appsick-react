@@ -7,7 +7,7 @@ import './VisitRegistration.css';
 import {RiSendPlaneLine} from "react-icons/ri";
 import {useDispatch} from "react-redux";
 import {showModal} from "../redux/ducks/loginModal";
-
+import {useToast} from "@chakra-ui/react";
 const VisitRegistration = () => {
 
     const ONLINE_CLINIC_ID = 1; // TODO discuss. Maybe id should be nullable
@@ -16,7 +16,7 @@ const VisitRegistration = () => {
             "clinic": {
                 "clinicId": ONLINE_CLINIC_ID
             },
-            "date": "2022-11-14T19:57:07.153Z",
+            "date": "",
             "doctor": {
                 "doctorId": null
             },
@@ -39,6 +39,7 @@ const VisitRegistration = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const history = useHistory();
     const dispatch = useDispatch();
+    const toast = useToast()
 
     async function getUser() {
         const data = await fetch("http://localhost:8080/api/auth/current", {
@@ -127,8 +128,6 @@ const VisitRegistration = () => {
     useEffect(() => {
         getUser()
             .then(user => {
-                console.log("user:" )
-                console.log(user)
                 if (user?.id) {
                     visitObject = {...visitDetails};
                     visitObject.patient.patientId = user.id;
@@ -217,29 +216,41 @@ const VisitRegistration = () => {
         setVisitDetails(visitObject);
     }
 
-
     const submitVisit = (e) => {
-        const form = document.getElementById("visit-form")
+        e.preventDefault();
+        const form = document.getElementById(visitDetails.online ? 'visit-form-online' : 'visit-form-clinic')
         if (!form.checkValidity()) {
             return;
         }
         if (isSubmitting) { return; }
         setIsSubmitting(true);
-        e.preventDefault();
-        postVisit().then(response => console.log(response))
-            .then(() => history.push("/visit"))
+        postVisit()
+            .then(() => {
+                history.push("/visit");
+                toast({
+                    title: "Visit registered successfully.",
+                    status: 'success',
+                    duration: 3000,
+                    isClosable: true,
+                });
+            })
             .catch(err => console.warn(err.message))
-            .finally(() => setIsSubmitting(false));
+            .finally(() => {
+                setIsSubmitting(false)
+            });
     }
 
     function visitForm(online){
         return (
-            <form id={"visit-form"} className="row justify-content-center fs-5 px-5 py-3">
+            <form id={online ? "visit-form-online" : "visit-form-clinic"} className="row justify-content-center fs-5 px-5 py-3">
                 {online ? "" : clinicVisitForm()}
                 <label htmlFor={"doctor"}>Doctor:</label>
                 <Select name={"doctor"} className={"form-select mb-3"} onChange={changeDoctor} required>
                     <option value="" hidden>- Select a Doctor -</option>
                     {isDoctorListLoading ? "" : doctorList.map(doctor => {
+                        if (!doctor.medicalSpecialities.includes(visitDetails.doctorSpeciality)){
+                            return;
+                        }
                         return <option key={doctor.doctorId}
                                        value={doctor.doctorId}>{doctor.user.firstName} {doctor.user.lastName}</option>;
                     })
@@ -272,6 +283,7 @@ const VisitRegistration = () => {
                 <Select name={"clinic"} className="form-select mb-3" onChange={changeClinic} required>
                     <option value="" hidden>- Select Clinic -</option>
                     {isClinicListLoading ? "" : clinicList.map(clinic => {
+                        if (clinic.clinicId === ONLINE_CLINIC_ID){ return; }
                         return <option key={clinic.clinicId} value={clinic.clinicId}>{clinic.clinicName}</option>;
                     })
                     }
