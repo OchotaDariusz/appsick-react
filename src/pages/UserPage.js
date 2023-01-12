@@ -1,4 +1,4 @@
-import React, {useEffect} from "react"
+import React, {useEffect, useState} from "react"
 import {showModal} from "../redux/ducks/loginModal";
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
@@ -8,7 +8,7 @@ export default function UserPage() {
 
     const dispatch = useDispatch();
     const history = useHistory();
-    let userId = null;
+    const [userId, setUserId] = useState(null);
 
     async function getUser() {
         const data = await fetch("http://localhost:8080/api/auth/current", {
@@ -26,14 +26,14 @@ export default function UserPage() {
         getUser()
             .then(user => {
                 if (user?.id) {
-                    userId = user.id;
+                    setUserId(user.id);
                 } else {
                     setTimeout(() => {history.push("/")}, 3000);
                     dispatch(showModal());
                 }
             })
 
-    }, []);
+    }, [userId]);
 
     if (!userId){
         return (
