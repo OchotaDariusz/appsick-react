@@ -7,6 +7,7 @@ import {formatVisitDate, isToday} from "../utils/Utils";
 import PastVisits from '../components/Visit/PastVisits'
 import {Spinner} from '@chakra-ui/react'
 import BackToTopBtn from "../components/BackToTopBtn/BackToTopBtn";
+import TodayVisit from "../components/Visit/TodayVisit";
 
 const BASE_URL = `http://localhost:8080/api/visit/patient/`
 const PATIENT_ID = "1"
@@ -199,7 +200,7 @@ export default function MyVisits() {
                 </div>
                 {currentVisits.length > 0 ?
                     (isCurrentVisitsLoading) ? <Spinner/> :
-                        currentVisits.map(visit => <Visit  visit={visit} key={visit.visitId}/>) :
+                        currentVisits.map(visit => <TodayVisit  visit={visit} key={visit.visitId}/>) :
                     <div
                         className="col-6 text-center container border-2 border-dark border-opacity-75 border rounded-3 bg-white text-dark my-3 p-3">
                         You do not have planned appointments  for today.
