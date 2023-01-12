@@ -13,7 +13,7 @@ import {CloseIcon, ViewIcon} from '@chakra-ui/icons'
 
 export default function Visit({visit, cancelVisit}) {
     const [open, setOpen] = useState(false);
-
+console.log(visit)
     return (
         <div className="row align-items-center">
 
@@ -151,7 +151,9 @@ export default function Visit({visit, cancelVisit}) {
                                     <hr/>
                                     {isToday(visit) ?
                                         <Link to={`/visit/${visit?.visitId}`} className="btn btn-dark my-3">
-                                            Ask doctor a question</Link> : ""}
+                                            Ask doctor a question</Link> : ""
+
+                                    }
                                     {new Date(visit?.date) > new Date() ?
                                         <Button className="fs-5 text-dark bg-light border border-danger
                                             border-2 rounded-pill p-1 green-shadow mt-3 px-3 btnx d-inline-flex"

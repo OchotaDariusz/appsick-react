@@ -7,6 +7,9 @@ export default function ChatHistory(props) {
     const [chatArray, setChatArray] = useState([])
     const [userId, setUserId] = useState();
     let lastId = null;
+    console.log("props")
+    console.log(props)
+    console.log("props2")
 
     const getUser = async () => {
 
