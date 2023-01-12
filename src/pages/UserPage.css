@@ -1,0 +1,60 @@
+.user-page {
+    display: grid;
+    margin: 3px;
+}
+
+.title {
+    place-self: center;
+    font-size: 1.75rem;
+    margin: 10px
+}
+
+.content {
+    position: relative;
+    display: flex;
+    margin: 10px;
+}
+
+.nav {
+    position: relative;
+    display: inline-block;
+    list-style: none;
+    left: 0px;
+    font-size: 16px
+}
+
+.nav li {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.nav li:hover {
+    background-color: #555;
+    color: white;
+    cursor:pointer;
+}
+
+.data {
+    position: relative;
+    display: inline-block;
+    font-size: 18px;
+    top: 0px;
+    margin: 5px;
+}
+
+.active {
+    /*TODO*/
+}
+
+a {
+    color: #FFF;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #FFF;
+    text-decoration:none;
+    cursor:pointer;
+}

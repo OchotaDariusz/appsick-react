@@ -76,32 +76,30 @@ export default function UserPage() {
         let { path, url } = useRouteMatch();
 
         return (
-            <div className="user-page-content">
-                <ul className={"user-page-nav"}>
-                    <li>
-                        <Link to={`${url}`}>Personal Data</Link>
-                    </li>
-                    <li>
-                        <Link to={`${url}/settings`}>Settings</Link>
-                    </li>
-                    <li>
-                        <Link to={`${url}/your-prescriptions`}>Your Prescriptions</Link>
-                    </li>
+            <div className="content">
+                <ul className={"nav"}>
+                    <Link to={`${url}`}>
+                        <li>Personal Data</li>
+                    </Link>
+                    <Link to={`${url}/settings`}>
+                        <li>Settings</li>
+                    </Link>
+                    <Link to={`${url}/your-prescriptions`}>
+                        <li>Your Prescriptions</li>
+                    </Link>
                 </ul>
 
-                <div className={"user-page-data"}>
-                    <Switch>
-                        <Route exact path={path}>
-                            <div> Patient info </div>
-                        </Route>
-                        <Route path={`${path}/settings`}>
-                            <div> Settings </div>
-                        </Route>
-                        <Route path={`${path}/your-prescriptions`}>
-                            <div> Receipts </div>
-                        </Route>
-                    </Switch>
-                </div>
+                <Switch>
+                    <Route exact path={path}>
+                        <div className={"data"}> Patient info will go here </div>
+                    </Route>
+                    <Route path={`${path}/settings`}>
+                        <div className={"data"}> Some settings will go here </div>
+                    </Route>
+                    <Route path={`${path}/your-prescriptions`}>
+                        <div className={"data"}> To be implemented... </div>
+                    </Route>
+                </Switch>
             </div>
         )
 
@@ -119,8 +117,8 @@ export default function UserPage() {
         <>
             <div className="container-fluid col-lg-6 col-md-12 col-sm-12
              mx-auto rounded-5 bg-light text-dark mt-3 green-shadow">
-                <div className="row justify-content-center">
-                    <div className="user-page-title">MY USER PAGE</div>
+                <div className="user-page">
+                    <div className="title">MY USER PAGE</div>
                     <Content/>
                 </div>
             </div>
