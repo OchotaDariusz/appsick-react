@@ -7,8 +7,8 @@ import attribution from "../../pages/Credits"
 
 export default function Footer() {
     return (
-        <div className="mt-auto">
-            <div className="row text-white p-5" style={{backgroundColor: '#465969'}}>
+        <div className="mt-auto footer rounded-4 green-shadow">
+            <div className="row text-dark p-5">
 
                 <div className="col-2">
                     <br />
@@ -51,20 +51,10 @@ export default function Footer() {
 
                 </div>
                 <div className="col-4" style={{height: '300px'}}>
-                    {/*<img src={location} className="d-block w-10" alt="..."/>*/}
                     <Map/>
                 </div>
 
             </div>
-            {/*<div>*/}
-            {/*    <img*/}
-            {/*        src="https://img.freepik.com/free-vector/patients-doctors-meeting-waiting*/}
-            {/*            -clinic-hall-hospital-interior-illustration-with-reception-person-wheelchair*/}
-            {/*            -visiting-doctor-office-medical-examination-consultation*/}
-            {/*            _74855-8496.jpg?w=1380&t=st=1669899594~exp=1669900194~hmac=88eb*/}
-            {/*            d2ffd5661baf9f64558a184282d80d0658f7fd2b55f22354db855debbf15" alt="pic"/>*/}
-            {/*</div>*/}
-
         </div>
 
     );
