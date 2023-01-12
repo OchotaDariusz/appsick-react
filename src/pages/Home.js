@@ -13,13 +13,10 @@ import guy_with_board from "../assets/background/guy_with_board.png"
 // import './Home.css';
 let observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-        console.log(entry)
         if (entry.isIntersecting) {
-            console.log("ENTRY")
             entry.target.classList.add('showX');
         } else {
             entry.target.classList.remove('showX');
-            console.log("ERLO")
         }
     })
 })
@@ -27,12 +24,10 @@ let observer = new IntersectionObserver((entries) => {
 
 const hiddenElements = document.querySelectorAll('.hidden')
 hiddenElements.forEach((el) => observer.observe(el));
-console.log(hiddenElements + "hidden")
 
 
 export default function Home() {
     const auth = useAuth()
-    console.log(auth.email)
 
     useEffect(() => {
         const hiddenElements = document.querySelectorAll('.hidden')
