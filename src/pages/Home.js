@@ -139,9 +139,9 @@ export default function Home() {
             <News/>
 
 
-            <div className="main-container-of-slides rounded-4 green-shadow">
+            <div className="main-container-of-slides rounded-4 green-shadow ">
 
-                <div className="container-of-slides ">
+                <div className="container-of-slides bg-opacity-50">
                     <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="false">
                         <div className="carousel-indicators">
                             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"

@@ -42,7 +42,7 @@ body {
 }
 
 .footer {
-    background: linear-gradient(0deg, var(--D-color), var(--D-color)) !important;
+    background: linear-gradient(0deg, var(--C-color), var(--A-color)) !important;
 
 }
 
@@ -114,7 +114,7 @@ section {
     height: 400px;
     padding: 0 !important;
     /*background-color: rgba(0, 0, 0, 0.2);*/
-    background: linear-gradient(180deg, var(--B-color), var(--B-color)) !important;
+    /*background: linear-gradient(180deg, var(--B-color), var(--B-color)) !important;*/
 
 }
 
