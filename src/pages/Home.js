@@ -24,12 +24,10 @@ let observer = new IntersectionObserver((entries) => {
 
 const hiddenElements = document.querySelectorAll('.hidden')
 hiddenElements.forEach((el) => observer.observe(el));
-console.log(hiddenElements + "hidden")
 
 
 export default function Home() {
     const auth = useAuth()
-    console.log(auth.email)
 
     useEffect(() => {
         const hiddenElements = document.querySelectorAll('.hidden')
