@@ -13,6 +13,7 @@ import Register from "../Register/Register";
 import {useAuth} from "../Auth/Auth";
 import maleDoctor from "../../assets/icons/Lekarz.svg";
 import femaleDoctor from "../../assets/icons/Lekarka.svg";
+import User from "../../assets/icons/User.svg";
 import {useDispatch, useSelector} from "react-redux";
 import {showModal, hideModal} from "../../redux/ducks/loginModal";
 
@@ -151,7 +152,7 @@ export default function TheNavbar() {
                                         <img src={visit?.doctor?.user?.image ?
                                             visit?.doctor?.user?.image :
                                             visit?.doctor?.user?.sex === "MALE" ?
-                                                maleDoctor : femaleDoctor}
+                                                User : User}
                                              className="img-fluid rounded-circle"
                                              style={{height: "50px", width: "50px"}}
                                              alt="doctor"/>
