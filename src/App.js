@@ -47,7 +47,7 @@ function App() {
                     <Route exact path="/visit">
                         <MyVisits/>
                     </Route>
-                    <Route exact path="/user-page">
+                    <Route path="/user-page">
                         <UserPage/>
                     </Route>
                     <Route exact path="/visit/:visitId" component={VisitChat}/>
