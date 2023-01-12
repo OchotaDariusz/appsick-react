@@ -23,7 +23,6 @@ export default function VisitHistory(props) {
                 setVisits(() => {
                     return visit.map(formatVisitDate)
                 })
-
             })
             .catch(err => console.log(err.message))
     })
@@ -31,9 +30,7 @@ export default function VisitHistory(props) {
         <>
             <div>
                 {visits.map(visit => <OneVisitHistory visit={visit} key={visit.visitId}/>)}
-
             </div>
-            <p>cześć</p>
         </>
     )
 }
