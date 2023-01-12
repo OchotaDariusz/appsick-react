@@ -6,6 +6,7 @@ import { Spinner } from "@chakra-ui/react"
 import {useAuth} from "../components/Auth/Auth";
 import doc from '../assets/image/doc.png'
 import Footer from "../components/Footer/Footer";
+import {Link, useHistory} from "react-router-dom";
 const getUser = async () => {
   const data = await fetch("http://localhost:8080/api/auth/current", {
     credentials: "include"
@@ -17,6 +18,18 @@ const getUser = async () => {
     return data
   }
 }
+const getVisit = async (visitId)=>{
+  const data = await fetch(`http://localhost:8080/api/visit/${visitId}`, {
+    credentials: "include"
+  })
+  try {
+    return await data.json()
+  } catch (e) {
+    console.log(e.message)
+    return data
+  }
+}
+
 
 let chatroom, messages
 export default function VisitChat(props) {
@@ -25,6 +38,11 @@ export default function VisitChat(props) {
   const [chatMessages, setChatMessages] = useState([])
   const [chatMessage, setChatMessage] = useState("")
   const [userName, setUserName] = useState("")
+  const [doctorName, setDoctorName] = useState("")
+  const [patientName, setPatientName] = useState("")
+  const [patientId, setPatientId] = useState("")
+
+  const history = useHistory();
 
   const updateChat = (setterFn) => {
     setIsNewChatMessageLoading(true)
@@ -38,11 +56,29 @@ export default function VisitChat(props) {
       })
   }
 
+  const setStatusVisit = async ()=>{
+    fetch(`http://localhost:8080/api/visit/status/${props.match.params.visitId}`,{
+      credentials: "include",
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: "COMPLETED"
+
+    })
+    setTimeout(()=>{
+      routeChange()
+    }, 1000)
+
+  }
+
   useEffect(() => {
     getUser()
       .then(user => {
         console.log(user)
         setUserName(user.firstName +" "+ user.lastName)
+
         chatroom = new Chatroom(
           props.match.params.visitId,
           user.id,
@@ -51,16 +87,33 @@ export default function VisitChat(props) {
         updateChat(setChatMessages)
       })
       .catch(err => console.log(err.message))
+
   }, [props.match.params.visitId])
+
+  useEffect(()=>{
+    getVisit(props.match.params.visitId)
+        .then(visit=>{
+          setDoctorName(visit.doctor.user.firstName + " " + visit.doctor.user.lastName )
+          setPatientName(visit.patient.user.firstName + " " + visit.patient.user.lastName )
+          setPatientId(visit.patient.patientId)
+console.log(visit)
+        })
+        .catch(err => console.log(err.message))
+  })
 
   const sendMessage = event => {
     event.preventDefault()
     chatroom.addChat(chatMessage)
     document.querySelector("#messageInput").value = ""
   }
+  const routeChange = () => {
+    let path = `/visit/${props.match.params.visitId}/history`;
+    history.push(path);
+  }
 
   const endVisit = () => {
     chatroom.endVisit(setChatMessages)
+    setStatusVisit()
   }
 
   const auth = useAuth()
@@ -75,9 +128,9 @@ export default function VisitChat(props) {
         ?
         <div>
 
-        <p>Imię Nazwisko pacjenta:<br/> {userName}</p>
+        <p>Imię Nazwisko pacjenta:<br/> {patientName}</p>
           <br/>
-        <button type="submit" className="btn btn-secondary">Historia Wizyt</button>
+        <Link to={`/visit/${patientId}/histories`} target="_blank" ><button type="submit" className="btn btn-secondary">Historia Wizyt</button></Link>
         </div>
         :
         <div className="row">
@@ -85,7 +138,7 @@ export default function VisitChat(props) {
             <img src={doc}/>
           </div>
           <div className="col-8">
-            <p>Lekarz prowadzący:<br/> {userName}</p>
+            <p>Lekarz prowadzący:<br/> {doctorName}</p>
             <br/>
             <br/>
             <h3> About</h3>
