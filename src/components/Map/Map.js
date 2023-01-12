@@ -6,7 +6,6 @@ export default function Map() {
 
     return (
         <>
-            {/* eslint-disable-next-line jsx-a11y/iframe-has-title */}
             <iframe
                 width="570"
                 height="302"

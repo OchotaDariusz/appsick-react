@@ -13,13 +13,10 @@ import guy_with_board from "../assets/background/guy_with_board.png"
 // import './Home.css';
 let observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-        console.log(entry)
         if (entry.isIntersecting) {
-            console.log("ENTRY")
             entry.target.classList.add('showX');
         } else {
             entry.target.classList.remove('showX');
-            console.log("ERLO")
         }
     })
 })

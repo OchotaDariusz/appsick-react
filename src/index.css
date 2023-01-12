@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@350&display=swap');
 
 :root {
-    --A-color: rgba(209, 215, 237, 93);
+    --A-color: rgba(228, 230, 2237, 93);
     --B-color: rgba(235, 225, 223, 92);
     --C-color: rgba(109, 129, 199, 78);
     --D-color: rgba(171, 177, 199, 78);
@@ -22,10 +22,7 @@ html, body {
     min-height: 100vh;
     overflow-x: hidden;
     margin: 0;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding: 15px;
     font-family: Montserrat, sans-serif !important;
 }
 

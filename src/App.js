@@ -10,6 +10,7 @@ import Home from "./pages/Home"
 import Login from "./components/Login/Login"
 import Register from "./components/Register/Register"
 import MyVisits from "./pages/MyVisits"
+import Contact from "./pages/Contact"
 import VisitChat from "./pages/VisitChat"
 import TheNavbar from "./components/Navbar/TheNavbar";
 import VisitRegistration from "./pages/VisitRegistration";
@@ -27,6 +28,9 @@ function App() {
                 <Switch>
                     <Route exact path="/">
                         <Home/>
+                    </Route>
+                    <Route exact path="/contact">
+                        <Contact/>
                     </Route>
                     <Route path="/credits">
                         <Credits/>
