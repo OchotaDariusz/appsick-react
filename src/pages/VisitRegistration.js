@@ -294,7 +294,7 @@ const VisitRegistration = () => {
 
     if (!visitDetails.patient.patientId){
         return (
-            <div className={"container mx-auto p-4 text-center fixed-top"}>
+            <div className={"container fixed-top mx-auto m-5 text-center"}>
                 Redirecting... <Spinner size={'md'}></Spinner>
             </div>
         )
