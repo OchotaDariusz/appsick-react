@@ -19,6 +19,7 @@ import {AuthProvider} from "./components/Auth/Auth";
 import UserPage from "./pages/UserPage";
 import ChatHistory from "./pages/ChatHistory";
 import Contact from "./pages/Contact";
+import Drugs from "./pages/Drugs";
 
 
 function App() {
@@ -38,6 +39,9 @@ function App() {
                     </Route>
                     <Route path="/contact">
                         <Contact/>
+                    </Route>
+                    <Route path="/drugs">
+                        <Drugs/>
                     </Route>
                     <Route exact path="/visit">
                         <MyVisits/>

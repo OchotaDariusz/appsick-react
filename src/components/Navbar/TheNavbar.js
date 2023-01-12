@@ -95,7 +95,7 @@ export default function TheNavbar() {
                                     </Link>
                                 </div>
                                 <div className="col fs-4 mx-4 nvbr">
-                                    <Link className="nav-link d-flex align-items-center" to={'#'}>
+                                    <Link className="nav-link d-flex align-items-center" to={'/drugs'}>
                                         <img className="float-start img-fluid mx-1" src={drugs}
                                              alt="drugs" style={{height: 60}}/>
                                         DRUGS

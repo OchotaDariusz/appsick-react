@@ -156,9 +156,8 @@ export default function Home() {
                                 <img src={logo} className="d-block w-10 opacity-0 " alt="..."/>
                                 <div className="carousel-caption d-none d-md-block text-dark text-slider text-center">
                                     <div className="fs-1">Klara</div>
-                                    <div className="fs-5">Polecam pediatra miły i kompetentny. Nie ma presji czasu a więc mozna
-                                        przegadać
-                                        wszystko z czym sie przyszło.</div>
+                                    <div className="fs-5">Polecam pediatra miły i kompetentny.
+                                        Nie ma presji czasu a więc mozna przegadać wszystko z czym sie przyszło.</div>
                                 </div>
                             </div>
                             <div className="carousel-item">
