@@ -7,6 +7,9 @@ export const snakeToCamel = str =>
 
 
 export const isToday = (visit) => {
+const date = new Date(visit.date).getUTCDate()
+    console.log(date)
+
     return new Date(visit.date).getFullYear() === new Date().getFullYear()
         && new Date(visit.date).getMonth() === new Date().getMonth()
         && new Date(visit.date).getDay() === new Date().getDay();
