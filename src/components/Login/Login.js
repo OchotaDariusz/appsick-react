@@ -8,7 +8,7 @@ import {Center, Divider} from '@chakra-ui/react'
 import Register from "../Register/Register";
 import {MdPersonAddAlt} from "react-icons/md";
 import {RiSendPlaneLine} from "react-icons/ri";
-import {useAuth} from "../Auth/Auth";
+import { getUser, useAuth } from "../Auth/Auth";
 import {AiFillGoogleCircle} from "react-icons/ai";
 import {useDispatch} from "react-redux";
 import {hideModal, showModal} from "../../redux/ducks/loginModal";
@@ -18,14 +18,6 @@ export default function Login(props) {
 
     const auth = useAuth()
     const [role, setRole] = useState('')
-
-    const getUser = async () => {
-        const data = await fetch("http://localhost:8080/api/auth/current", {
-            credentials: 'include'
-        })
-        console.log(data)
-        return await data.json()
-    }
 
     const [info, setInfo] = useState("")
 
@@ -63,7 +55,9 @@ export default function Login(props) {
         })
             .then(res => res.json())
             .then(res => {
+                console.log(" PO ZALOGOWANIU : ")
                 console.log(res)
+                console.log(res.value)
                 routeChange()
                 handleLogin()
             })

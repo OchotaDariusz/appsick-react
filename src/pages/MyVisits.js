@@ -8,10 +8,10 @@ import PastVisits from '../components/Visit/PastVisits'
 import {Spinner} from '@chakra-ui/react'
 import BackToTopBtn from "../components/BackToTopBtn/BackToTopBtn";
 import TodayVisit from "../components/Visit/TodayVisit";
+import { getPatient } from "../components/Auth/Auth";
 
 const BASE_URL = `http://localhost:8080/api/visit/patient/`
-const PATIENT_ID = "1"
-const listOfVisitsURL = BASE_URL + PATIENT_ID
+let listOfVisitsURL
 
 export default function MyVisits() {
 
@@ -114,6 +114,8 @@ export default function MyVisits() {
     }, []);
 
     async function getListOfVisits(time) {
+        const patient = await getPatient()
+        listOfVisitsURL = BASE_URL + patient.patientId
         const data = await fetch(listOfVisitsURL + time, {
             mode: 'cors',
             credentials: "include",

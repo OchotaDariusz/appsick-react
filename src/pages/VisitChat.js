@@ -3,21 +3,11 @@ import "../components/VisitChat/VisitChat.css"
 import Chatroom from "../components/VisitChat/Chatroom"
 import ChatMessage from "../components/VisitChat/ChatMessage/ChatMessage"
 import { Spinner } from "@chakra-ui/react"
-import {useAuth} from "../components/Auth/Auth";
+import { getUser, useAuth } from "../components/Auth/Auth";
 import doc from '../assets/image/doc.png'
 import Footer from "../components/Footer/Footer";
 import {Link, useHistory} from "react-router-dom";
-const getUser = async () => {
-  const data = await fetch("http://localhost:8080/api/auth/current", {
-    credentials: "include"
-  })
-  try {
-    return await data.json()
-  } catch (e) {
-    console.log(e.message)
-    return data
-  }
-}
+
 const getVisit = async (visitId)=>{
   const data = await fetch(`http://localhost:8080/api/visit/${visitId}`, {
     credentials: "include"
