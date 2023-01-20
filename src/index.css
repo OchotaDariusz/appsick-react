@@ -43,6 +43,7 @@ body {
 
 .footer {
     background: linear-gradient(0deg, var(--C-color), var(--A-color)) !important;
+    margin-top: auto;
 
 }
 

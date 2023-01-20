@@ -140,15 +140,17 @@ export default function Login(props) {
                                     <div className="fs-1 d-inline px-2">
                                         <MdPersonAddAlt/>
                                     </div>
+                                    <br/>
                                 </div>
-
+                                <br/><br/>
 
                                 <div role="button" className="btnx fs-3 text-black border border-dark border-2
-                                rounded-pill p-2 d-inline-flex overflow-hidden">
-                                    <div className="fs-1 d-inline px-3 align-content-center">
+                                rounded-pill p-2 d-inline-flex  google">
+
+                                    <a href="http://localhost:8080/oauth2/authorization/google">Login with Google</a>
+                                    <div className="fs-1 d-inline px-1 align-content-center">
                                         <AiFillGoogleCircle/>
                                     </div>
-                                    <a href="http://localhost:8080/oauth2/authorization/google">Login with Google</a>
                                 </div>
 
 
