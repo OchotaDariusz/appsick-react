@@ -16,6 +16,12 @@ export const AuthProvider = ({children})=>{
             return data
         }
     }
+}
+
+export const AuthProvider = ({children})=>{
+    const [email, setEmail] = useState(null)
+    const [role, setRole] = useState(null)
+
     useEffect(() => {
         getUser()
             .then(user => {

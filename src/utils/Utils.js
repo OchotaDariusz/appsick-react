@@ -12,7 +12,7 @@ const date = new Date(visit.date).getUTCDate()
 
     return new Date(visit.date).getFullYear() === new Date().getFullYear()
         && new Date(visit.date).getMonth() === new Date().getMonth()
-        && new Date(visit.date).getDay() === new Date().getDay();
+        && new Date(visit.date).getDate() === new Date().getDate();
 
 }
 

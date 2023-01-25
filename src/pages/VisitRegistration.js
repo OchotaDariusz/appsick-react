@@ -8,6 +8,7 @@ import {RiSendPlaneLine} from "react-icons/ri";
 import {useDispatch} from "react-redux";
 import {showModal} from "../redux/ducks/loginModal";
 import {useToast} from "@chakra-ui/react";
+import { getUser } from "../components/Auth/Auth";
 const VisitRegistration = () => {
 
     const ONLINE_CLINIC_ID = 1; // TODO discuss. Maybe id should be nullable
@@ -40,18 +41,6 @@ const VisitRegistration = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const toast = useToast()
-
-    async function getUser() {
-        const data = await fetch("http://localhost:8080/api/auth/current", {
-            credentials: "include"
-        })
-        try {
-            return await data.json()
-        } catch (e) {
-            console.warn(e.message)
-            return data;
-        }
-    }
 
     async function getDoctorSpecialities(){
         setIsDoctorSpecialitiesLoading(true)

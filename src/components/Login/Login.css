@@ -44,3 +44,8 @@
 .input-field i.icon{
     left: 0;
 }
+
+.google {
+    overflow: auto;
+    white-space: nowrap;
+}

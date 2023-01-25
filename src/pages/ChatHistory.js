@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react"
 import MyMessage from "../components/ChatHistory/MyMessge"
 import OtherMessage from "../components/ChatHistory/OtherMessage"
-
+import { getUser } from "../components/Auth/Auth";
 
 export default function ChatHistory(props) {
     const [chatArray, setChatArray] = useState([])
@@ -10,19 +10,6 @@ export default function ChatHistory(props) {
     console.log("props")
     console.log(props)
     console.log("props2")
-
-    const getUser = async () => {
-
-        const data = await fetch("http://localhost:8080/api/auth/current", {
-            credentials: "include"
-        })
-        try {
-            return await data.json()
-        } catch (e) {
-            console.log(e.message)
-            return data
-        }
-    }
 
     async function getChat() {
 
