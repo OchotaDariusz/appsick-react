@@ -13,7 +13,6 @@ export const AuthProvider = ({children})=>{
         try {
             return await data.json()
         } catch (e) {
-            console.log(e.message)
             return data
         }
     }
