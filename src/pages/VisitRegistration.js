@@ -44,7 +44,7 @@ const VisitRegistration = () => {
 
     async function getDoctorSpecialities(){
         setIsDoctorSpecialitiesLoading(true)
-        const specialties = await fetch(`http://localhost:8080/api/doctor/specialities`, {
+        const specialties = await fetch(`${process.env.REACT_APP_BACKEND_HOST}/api/doctor/specialities`, {
             mode: 'cors',
             credentials: 'include',
             headers: {
@@ -58,7 +58,7 @@ const VisitRegistration = () => {
 
     async function getListOfClinics(){
         setIsClinicListLoading(true);
-        const clinics = await fetch(`http://localhost:8080/api/clinic`, {
+        const clinics = await fetch(`${process.env.REACT_APP_BACKEND_HOST}/api/clinic`, {
             mode: 'cors',
             credentials: 'include',
             headers: {
@@ -72,7 +72,7 @@ const VisitRegistration = () => {
 
     async function getDoctorsForClinic(clinicId){
         setIsDoctorListLoading(true);
-        const doctors = await fetch(`http://localhost:8080/api/clinic/${clinicId}/doctor`, {
+        const doctors = await fetch(`${process.env.REACT_APP_BACKEND_HOST}/api/clinic/${clinicId}/doctor`, {
             method: "GET",
             mode: 'cors',
             credentials: 'include',
@@ -87,7 +87,7 @@ const VisitRegistration = () => {
 
     async function getDoctorsForSpeciality(speciality){
         setIsDoctorListLoading(true);
-        const doctors = await fetch(`http://localhost:8080/api/doctor/specialities/${speciality}`, {
+        const doctors = await fetch(`${process.env.REACT_APP_BACKEND_HOST}/api/doctor/specialities/${speciality}`, {
             method: "GET",
             mode: 'cors',
             credentials: 'include',
@@ -101,7 +101,7 @@ const VisitRegistration = () => {
     }
 
     async function postVisit(){
-        return await fetch(`http://localhost:8080/api/visit`, {
+        return await fetch(`${process.env.REACT_APP_BACKEND_HOST}/api/visit`, {
             method: "POST",
             body: JSON.stringify(visitDetails),
             mode: 'cors',

@@ -13,7 +13,7 @@ export default function ChatHistory(props) {
 
     async function getChat() {
 
-        const data = await fetch(`http://localhost:8080/api/chats/visit/${props.match.params.visitId}`, {
+        const data = await fetch(`${process.env.REACT_APP_BACKEND_HOST}/api/chats/visit/${props.match.params.visitId}`, {
             mode: 'cors',
 
             credentials: "include",

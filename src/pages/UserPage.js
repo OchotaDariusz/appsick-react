@@ -9,6 +9,7 @@ import {
 import {useDispatch} from "react-redux";
 import {Spinner} from "@chakra-ui/react";
 import {showModal} from "../redux/ducks/loginModal";
+import { getUser, getPatient } from "../components/Auth/Auth";
 import "./UserPage.css";
 
 export default function UserPage() {
@@ -17,29 +18,6 @@ export default function UserPage() {
     const history = useHistory();
     const [user, setUser] = useState(null);
     const [patient, setPatient] = useState(null);
-
-    async function getUser() {
-        const data = await fetch("http://localhost:8080/api/auth/current", {
-            credentials: "include"
-        })
-        try {
-            return await data.json()
-        } catch (e) {
-            console.warn(e.message)
-            return data;
-        }
-
-    }async function getPatient(userId) {
-        const data = await fetch(`http://localhost:8080/api/patient/${userId}?user_id=true`, {
-            credentials: "include"
-        })
-        try {
-            return await data.json()
-        } catch (e) {
-            console.warn(e.message)
-            return data;
-        }
-    }
 
     useEffect(() => {
         getUser()

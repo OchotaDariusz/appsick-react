@@ -10,7 +10,7 @@ import BackToTopBtn from "../components/BackToTopBtn/BackToTopBtn";
 import TodayVisit from "../components/Visit/TodayVisit";
 import { getPatient } from "../components/Auth/Auth";
 
-const BASE_URL = `http://localhost:8080/api/visit/patient/`
+const BASE_URL = `${process.env.REACT_APP_BACKEND_HOST}/api/visit/patient/`
 let listOfVisitsURL
 
 export default function MyVisits() {
@@ -130,7 +130,7 @@ export default function MyVisits() {
 
     const cancelVisit = visitId => {
         console.log(visitId)
-        fetch(`http://localhost:8080/api/visit/${visitId}`, {
+        fetch(`${process.env.REACT_APP_BACKEND_HOST}/api/visit/${visitId}`, {
             credentials: "include",
             method: "DELETE"
         })

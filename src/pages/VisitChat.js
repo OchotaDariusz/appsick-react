@@ -9,7 +9,7 @@ import Footer from "../components/Footer/Footer";
 import {Link, useHistory} from "react-router-dom";
 
 const getVisit = async (visitId) => {
-    const data = await fetch(`http://localhost:8080/api/visit/${visitId}`, {
+    const data = await fetch(`${process.env.REACT_APP_BACKEND_HOST}/api/visit/${visitId}`, {
         credentials: "include"
     })
     try {
@@ -47,7 +47,7 @@ export default function VisitChat(props) {
     }
 
     const setStatusVisit = async () => {
-        fetch(`http://localhost:8080/api/visit/status/${props.match.params.visitId}`, {
+        fetch(`${process.env.REACT_APP_BACKEND_HOST}/api/visit/status/${props.match.params.visitId}`, {
             credentials: "include",
             method: 'PUT',
             headers: {

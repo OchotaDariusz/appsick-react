@@ -3,7 +3,7 @@ import {useState, createContext, useContext, useEffect} from "react";
 const AuthContext = createContext(null);
 
 export const getUser = async () => {
-    const data = await fetch("http://localhost:8080/api/auth/current", {
+    const data = await fetch(`${process.env.REACT_APP_BACKEND_HOST}/api/auth/current`, {
         credentials: "include"
     })
     try {
@@ -18,7 +18,7 @@ export const getPatient = async () => {
     let patientData
     const user = await getUser()
     if (user?.id) {
-        patientData = await fetch(`http://localhost:8080/api/patient/${user.id}?user_id=true`, { credentials: "include" })
+        patientData = await fetch(`${process.env.REACT_APP_BACKEND_HOST}/api/patient/${user.id}?user_id=true`, { credentials: "include" })
         return await patientData.json()
     }
 }

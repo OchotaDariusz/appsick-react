@@ -7,7 +7,7 @@ export default function VisitHistory(props) {
     const [visits, setVisits] = useState([])
 
     const getVisit = async ()=>{
-        const data = await fetch(`http://localhost:8080/api/visit/status/completed/${props.match.params.patientId}`, {
+        const data = await fetch(`${process.env.REACT_APP_BACKEND_HOST}/api/visit/status/completed/${props.match.params.patientId}`, {
             credentials: "include"
         })
         try {

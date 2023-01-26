@@ -40,7 +40,7 @@ export default function TheNavbar() {
     const [registerModalShow, setRegisterModalShow] = useState(false);
 
     const logout = async () => {
-        fetch(`http://localhost:8080/api/auth/logout`, {
+        fetch(`${process.env.REACT_APP_BACKEND_HOST}/api/auth/logout`, {
             method: 'POST',
             redirect: 'follow',
             mode: 'cors',

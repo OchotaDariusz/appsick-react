@@ -40,7 +40,7 @@ export default function Login(props) {
 
     const submitForm = (event) => {
         event.preventDefault()
-        fetch(`http://localhost:8080/api/auth/login`, {
+        fetch(`${process.env.REACT_APP_BACKEND_HOST}/api/auth/login`, {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -147,7 +147,7 @@ export default function Login(props) {
                                 <div role="button" className="btnx fs-3 text-black border border-dark border-2
                                 rounded-pill p-2 d-inline-flex  google">
 
-                                    <a href="http://localhost:8080/oauth2/authorization/google">Login with Google</a>
+                                    <a href={`${process.env.REACT_APP_BACKEND_HOST}/oauth2/authorization/google`}>Login with Google</a>
                                     <div className="fs-1 d-inline px-1 align-content-center">
                                         <AiFillGoogleCircle/>
                                     </div>

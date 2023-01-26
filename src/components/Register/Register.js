@@ -85,7 +85,7 @@ export default function Register(props) {
 
     useEffect(() => {
         const isEmailTaken = setTimeout(() => {
-            // axios.get(`http://localhost:8080/api/register/`, {
+            // axios.get(`${process.env.REACT_APP_BACKEND_HOST}/api/register/`, {
             //     params: {
             //         email: `${email}`
             //     }
@@ -117,7 +117,7 @@ export default function Register(props) {
             // pesel.length === 11 &&
             emailInfo === ""
         ) {
-            fetch(`http://localhost:8080/api/auth/register`, {
+            fetch(`${process.env.REACT_APP_BACKEND_HOST}/api/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
