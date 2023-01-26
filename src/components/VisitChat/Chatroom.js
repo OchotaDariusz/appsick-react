@@ -6,13 +6,13 @@ import {
 import {getUser} from "../Auth/Auth";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyA1zVAMyBXiP0ogswxRs4_m5M81x3Yer5o",
-    authDomain: "appsick-38f18.firebaseapp.com",
-    projectId: "appsick-38f18",
-    storageBucket: "appsick-38f18.appspot.com",
-    messagingSenderId: "30245671795",
-    appId: "1:30245671795:web:17e60a9979053eb9082b06",
-    measurementId: "G-J6XPY8ZXCP"
+    apiKey: process.env.FIREBASE_API_KEY,
+    authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.FIREBASE_APP_ID,
+    measurementId: process.env.FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
@@ -79,7 +79,7 @@ class Chatroom {
             chatMessage.date = new Date(chatMessage.date.toDate())
             chatHistory.push(chatMessage)
         })
-        fetch("http://localhost:8080/api/chats", {
+        fetch("https://appsick.alwaysdata.net/api/chats", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
