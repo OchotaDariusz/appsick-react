@@ -8,28 +8,31 @@ import {RiSendPlaneLine} from "react-icons/ri";
 import {useDispatch} from "react-redux";
 import {showModal} from "../redux/ducks/loginModal";
 import {useToast} from "@chakra-ui/react";
-import { getUser } from "../components/Auth/Auth";
+import {getUser, getPatient} from "../components/Auth/Auth";
+
+let tokenClient
 const VisitRegistration = () => {
 
     const ONLINE_CLINIC_ID = 1; // TODO discuss. Maybe id should be nullable
 
     let visitObject = {
-            "clinic": {
-                "clinicId": ONLINE_CLINIC_ID
-            },
-            "date": "",
-            "doctor": {
-                "doctorId": null
-            },
-            "doctorSpeciality": "",
-            "online": true,
-            "patient": {
-                "patientId": null
-            },
-            "reason": "",
-            "status": "PENDING"
-        }
+        "clinic": {
+            "clinicId": ONLINE_CLINIC_ID
+        },
+        "date": "",
+        "doctor": {
+            "doctorId": null
+        },
+        "doctorSpeciality": "",
+        "online": true,
+        "patient": {
+            "patientId": null
+        },
+        "reason": "",
+        "status": "PENDING"
+    }
 
+    const [userDetails, setUserDetails] = useState(null)
     const [visitDetails, setVisitDetails] = useState(visitObject)
     const [clinicList, setClinicList] = useState([])
     const [doctorList, setDoctorList] = useState([])
@@ -42,7 +45,7 @@ const VisitRegistration = () => {
     const dispatch = useDispatch();
     const toast = useToast()
 
-    async function getDoctorSpecialities(){
+    async function getDoctorSpecialities() {
         setIsDoctorSpecialitiesLoading(true)
         const specialties = await fetch(`${process.env.REACT_APP_BACKEND_HOST}/api/doctor/specialities`, {
             mode: 'cors',
@@ -56,7 +59,7 @@ const VisitRegistration = () => {
         return specialties.json();
     }
 
-    async function getListOfClinics(){
+    async function getListOfClinics() {
         setIsClinicListLoading(true);
         const clinics = await fetch(`${process.env.REACT_APP_BACKEND_HOST}/api/clinic`, {
             mode: 'cors',
@@ -70,7 +73,7 @@ const VisitRegistration = () => {
         return clinics.json();
     }
 
-    async function getDoctorsForClinic(clinicId){
+    async function getDoctorsForClinic(clinicId) {
         setIsDoctorListLoading(true);
         const doctors = await fetch(`${process.env.REACT_APP_BACKEND_HOST}/api/clinic/${clinicId}/doctor`, {
             method: "GET",
@@ -85,7 +88,7 @@ const VisitRegistration = () => {
         return doctors.json();
     }
 
-    async function getDoctorsForSpeciality(speciality){
+    async function getDoctorsForSpeciality(speciality) {
         setIsDoctorListLoading(true);
         const doctors = await fetch(`${process.env.REACT_APP_BACKEND_HOST}/api/doctor/specialities/${speciality}`, {
             method: "GET",
@@ -100,8 +103,8 @@ const VisitRegistration = () => {
         return doctors.json();
     }
 
-    async function postVisit(){
-        return await fetch(`${process.env.REACT_APP_BACKEND_HOST}/api/visit`, {
+    async function postVisit() {
+        const visitData = await fetch(`${process.env.REACT_APP_BACKEND_HOST}/api/visit`, {
             method: "POST",
             body: JSON.stringify(visitDetails),
             mode: 'cors',
@@ -112,35 +115,107 @@ const VisitRegistration = () => {
                 'Access-Control-Allow-Origin': '*'
             }
         });
+        return await visitData.json()
     }
 
     useEffect(() => {
+        const handleAuthClick = () => {
+            // eslint-disable-next-line no-undef
+            if (gapi && tokenClient) {
+                // eslint-disable-next-line no-undef
+                if (gapi.client.getToken() === null) {
+                    tokenClient.requestAccessToken({ prompt: "consent" });
+                } else {
+                    tokenClient.requestAccessToken({
+                        prompt: "",
+                    });
+                }
+            } else {
+                console.error("Error: gapi not loaded");
+                new Error("Error: gapi not loaded");
+            }
+        }
+        const initGapiClient = () => {
+            // eslint-disable-next-line no-undef
+            gapi.client
+                .init({
+                    apiKey: process.env.REACT_APP_GOOGLE_APP_ID,
+                    discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]
+                })
+                .then(() => {
+                    handleAuthClick()
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        }
+        const handleClientLoad = () => {
+            const scriptGoogle = document.createElement("script");
+            const scriptGapi = document.createElement("script");
+            scriptGoogle.src = "https://accounts.google.com/gsi/client";
+            scriptGoogle.async = true;
+            scriptGoogle.defer = true;
+            scriptGapi.src = "https://apis.google.com/js/api.js";
+            scriptGapi.async = true;
+            scriptGapi.defer = true;
+            document.body.appendChild(scriptGapi);
+            document.body.appendChild(scriptGoogle);
+            scriptGapi.onload = () => {
+                // eslint-disable-next-line no-undef
+                gapi.load("client", initGapiClient);
+            };
+            scriptGoogle.onload = async () => {
+                // eslint-disable-next-line no-undef
+                tokenClient = await google.accounts.oauth2.initTokenClient({
+                    client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+                    scope: "https://www.googleapis.com/auth/calendar",
+                    callback: () => {
+                    }
+                });
+            };
+        }
+        handleClientLoad()
+
         getUser()
             .then(user => {
                 if (user?.id) {
-                    visitObject = {...visitDetails};
-                    visitObject.patient.patientId = user.id;
-                    setVisitDetails(visitObject);
+                    setUserDetails(user)
+                    getPatient()
+                        .then(patient => {
+                            visitObject = {...visitDetails};
+                            visitObject.patient.patientId = patient.patientId;
+                            setVisitDetails(visitObject);
+                        })
+                        .catch(err => {
+                            history.push("/")
+                            console.log(err.message)
+                        })
                 } else {
-                    setTimeout(() => {history.push("/")}, 3000);
+                    setTimeout(() => {
+                        history.push("/")
+                    }, 3000);
                     dispatch(showModal());
                 }
             })
     }, [visitDetails.patient.patientId])
 
-    useEffect(() =>{
+    useEffect(() => {
         getDoctorSpecialities().then(doctorSpecialities => {
             if (doctorSpecialities) {
-                setDoctorSpecialities(() => {return doctorSpecialities});
+                setDoctorSpecialities(() => {
+                    return doctorSpecialities
+                });
                 setIsDoctorSpecialitiesLoading(false);
             }
         }).catch(err => console.warn(err.message))
     }, [])
 
-    useEffect(() =>{
+    useEffect(() => {
         getListOfClinics().then(clinics => {
-            if (clinics){
-                setClinicList( () => {return clinics} );
+            if (clinics) {
+                setClinicList(() => {
+                    return clinics
+                });
                 setIsClinicListLoading(false);
             }
         }).catch(err => console.warn(err.message))
@@ -148,8 +223,10 @@ const VisitRegistration = () => {
 
     useEffect(() => {
         getDoctorsForClinic(visitDetails.clinic.clinicId).then(doctors => {
-            if (doctors){
-                setDoctorList(() => {return doctors});
+            if (doctors) {
+                setDoctorList(() => {
+                    return doctors
+                });
                 setIsDoctorListLoading(false);
             }
         })
@@ -157,10 +234,14 @@ const VisitRegistration = () => {
     }, [visitDetails.clinic.clinicId]);
 
     useEffect(() => {
-        if (visitDetails.doctorSpeciality === "") { return; }
-        getDoctorsForSpeciality(visitDetails.doctorSpeciality).then( doctors => {
-            if (doctors){
-                setDoctorList(() => {return doctors});
+        if (visitDetails.doctorSpeciality === "") {
+            return;
+        }
+        getDoctorsForSpeciality(visitDetails.doctorSpeciality).then(doctors => {
+            if (doctors) {
+                setDoctorList(() => {
+                    return doctors
+                });
                 setIsDoctorListLoading(false);
             }
         })
@@ -201,7 +282,9 @@ const VisitRegistration = () => {
     const toggleOnline = (e) => {
         visitObject = {...visitDetails};
         visitObject.online = e.target.value === "true";
-        if (e.target.value === "true") {visitObject.clinic.clinicId = ONLINE_CLINIC_ID}
+        if (e.target.value === "true") {
+            visitObject.clinic.clinicId = ONLINE_CLINIC_ID
+        }
         setVisitDetails(visitObject);
     }
 
@@ -211,10 +294,54 @@ const VisitRegistration = () => {
         if (!form.checkValidity()) {
             return;
         }
-        if (isSubmitting) { return; }
+        if (isSubmitting) {
+            return;
+        }
         setIsSubmitting(true);
         postVisit()
-            .then(() => {
+            .then(newVisit => {
+                const eventDate = new Date(visitDetails.date)
+                const event = {
+                    summary: "AppSick Online Visit",
+                    description: `${visitDetails.reason}`,
+                    start: {
+                        dateTime: eventDate.toISOString(),
+                        timeZone: 'Europe/Warsaw'
+                    },
+                    end: {
+                        dateTime: (new Date(eventDate.getTime() + 3600000)).toISOString(),
+                        timeZone: 'Europe/Warsaw'
+                    },
+                    attendees: [
+                        {email: userDetails.email}
+                    ],
+                    reminders: {
+                        useDefault: false,
+                        overrides: [
+                            {method: 'email', minutes: 24 * 60},
+                            {method: 'popup', minutes: 10}
+                        ]
+                    },
+                    conferenceData: {
+                        createRequest: {
+                            requestId: `${userDetails.id}+${eventDate.toISOString()}`,
+                            conferenceSolutionKey: {
+                                type: "hangoutsMeet"
+                            }
+                        }
+                    }
+                };
+                // eslint-disable-next-line no-undef
+                gapi.client.calendar.events.insert({
+                    calendarId: "primary",
+                    resource: event,
+                    sendNotifications: true,
+                    conferenceDataVersion: 1
+                }).execute(function (event) {
+                    console.log('Event Created: ' + event.htmlLink)
+                    console.log('event: ', event)
+                })
+
                 history.push("/visit");
                 toast({
                     title: "Visit registered successfully.",
@@ -229,15 +356,16 @@ const VisitRegistration = () => {
             });
     }
 
-    function visitForm(online){
+    function visitForm(online) {
         return (
-            <form id={online ? "visit-form-online" : "visit-form-clinic"} className="row justify-content-center fs-5 px-5 py-3">
+            <form id={online ? "visit-form-online" : "visit-form-clinic"}
+                  className="row justify-content-center fs-5 px-5 py-3">
                 {online ? "" : clinicVisitForm()}
                 <label htmlFor={"doctor"}>Doctor:</label>
                 <Select name={"doctor"} className={"form-select mb-3"} onChange={changeDoctor} required>
                     <option value="" hidden>- Select a Doctor -</option>
                     {isDoctorListLoading ? "" : doctorList.map(doctor => {
-                        if (!doctor.medicalSpecialities.includes(visitDetails.doctorSpeciality)){
+                        if (!doctor.medicalSpecialities.includes(visitDetails.doctorSpeciality)) {
                             return;
                         }
                         return <option key={doctor.doctorId}
@@ -265,14 +393,16 @@ const VisitRegistration = () => {
         )
     }
 
-    function clinicVisitForm(){
+    function clinicVisitForm() {
         return (
             <>
                 <label htmlFor={"clinic"}>Clinic:</label>
                 <Select name={"clinic"} className="form-select mb-3" onChange={changeClinic} required>
                     <option value="" hidden>- Select Clinic -</option>
                     {isClinicListLoading ? "" : clinicList.map(clinic => {
-                        if (clinic.clinicId === ONLINE_CLINIC_ID){ return; }
+                        if (clinic.clinicId === ONLINE_CLINIC_ID) {
+                            return;
+                        }
                         return <option key={clinic.clinicId} value={clinic.clinicId}>{clinic.clinicName}</option>;
                     })
                     }
@@ -281,7 +411,7 @@ const VisitRegistration = () => {
         )
     }
 
-    if (!visitDetails.patient.patientId){
+    if (!visitDetails.patient.patientId) {
         return (
             <div className={"container fixed-top mx-auto m-5 text-center"}>
                 Redirecting... <Spinner size={'md'}></Spinner>
@@ -313,12 +443,14 @@ const VisitRegistration = () => {
                         <button className={"nav-link active"} data-bs-toggle={"tab"} id={"nav-online-tab"}
                                 data-bs-target={"#nav-online"} type={"button"} role={"tab"}
                                 aria-controls={"nav-online"} aria-selected={"true"}
-                                onClick={toggleOnline} value={"true"}>Online consultation</button>
+                                onClick={toggleOnline} value={"true"}>Online consultation
+                        </button>
 
                         <button className={"nav-link"} data-bs-toggle={"tab"} id={"nav-clinic-tab"}
                                 data-bs-target={"#nav-clinic"} type={"button"} role={"tab"}
                                 aria-controls={"nav-clinic"} aria-selected={"false"}
-                                onClick={toggleOnline}>Meet in person</button>
+                                onClick={toggleOnline}>Meet in person
+                        </button>
 
                     </div>
                 </nav>

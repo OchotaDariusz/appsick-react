@@ -13,7 +13,7 @@ import {CloseIcon, ViewIcon} from '@chakra-ui/icons'
 
 export default function Visit({visit, cancelVisit}) {
     const [open, setOpen] = useState(false);
-console.log(visit)
+
     return (
         <div className="row align-items-center">
 
