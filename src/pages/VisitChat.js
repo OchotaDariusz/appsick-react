@@ -31,6 +31,7 @@ export default function VisitChat(props) {
     const [doctorName, setDoctorName] = useState("")
     const [patientName, setPatientName] = useState("")
     const [patientId, setPatientId] = useState("")
+    const [visitReason, setVisitReason] = useState("")
 
     const history = useHistory();
 
@@ -86,7 +87,7 @@ export default function VisitChat(props) {
                 setDoctorName(visit.doctor.user.firstName + " " + visit.doctor.user.lastName)
                 setPatientName(visit.patient.user.firstName + " " + visit.patient.user.lastName)
                 setPatientId(visit.patient.patientId)
-                console.log(visit)
+                setVisitReason(visit.reason)
             })
             .catch(err => console.log(err.message))
     })
@@ -119,7 +120,7 @@ export default function VisitChat(props) {
                             ?
                             <div>
 
-                                <p>Imię Nazwisko pacjenta:<br/> {patientName}</p>
+                                <p>Patient:<br/> {patientName}</p>
                                 <br/>
                                 <Link to={`/visit/${patientId}/histories`} target="_blank">
                                     <button type="submit" className="btn btn-secondary">Historia Wizyt</button>
@@ -131,14 +132,11 @@ export default function VisitChat(props) {
                                     <img src={doc}/>
                                 </div>
                                 <div className="col-8">
-                                    <p>Lekarz prowadzący:<br/> {doctorName}</p>
+                                    <p>Doctor:<br/> {doctorName}</p>
                                     <br/>
                                     <br/>
-                                    <h3> About</h3>
-                                    <p>Jakiś text o lekarzu z bazy to trzeba by wrzucić :D
-                                        Jakiś text o lekarzu z bazy to trzeba by wrzucić :D
-                                        Jakiś text o lekarzu z bazy to trzeba by wrzucić :D
-                                    </p>
+                                    <h3> Reason:</h3>
+                                    <p>{visitReason}</p>
                                 </div>
 
                             </div>

@@ -437,16 +437,16 @@ const VisitRegistration = () => {
                     </Select>
                 </div>
 
-                <nav className={"align-items-center"}>
+                <nav className={"d-flex justify-content-center align-items-center"}>
                     <div className={"nav nav-tabs nav-fill"} id="nav-tab" role="tablist">
 
-                        <button className={"nav-link active"} data-bs-toggle={"tab"} id={"nav-online-tab"}
+                        <button className={"nav-link d-inline-block active"} data-bs-toggle={"tab"} id={"nav-online-tab"}
                                 data-bs-target={"#nav-online"} type={"button"} role={"tab"}
                                 aria-controls={"nav-online"} aria-selected={"true"}
                                 onClick={toggleOnline} value={"true"}>Online consultation
                         </button>
 
-                        <button className={"nav-link"} data-bs-toggle={"tab"} id={"nav-clinic-tab"}
+                        <button className={"nav-link d-inline-block"} data-bs-toggle={"tab"} id={"nav-clinic-tab"}
                                 data-bs-target={"#nav-clinic"} type={"button"} role={"tab"}
                                 aria-controls={"nav-clinic"} aria-selected={"false"}
                                 onClick={toggleOnline}>Meet in person

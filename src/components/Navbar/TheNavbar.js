@@ -8,11 +8,8 @@ import hamburger from '../../assets/icons/hamburger.svg'
 import {Link, useHistory} from "react-router-dom";
 import {CgKey} from "react-icons/cg"
 import Login from "../Login/Login";
-import Button from "react-bootstrap/Button";
 import Register from "../Register/Register";
 import {useAuth} from "../Auth/Auth";
-import maleDoctor from "../../assets/icons/Lekarz.svg";
-import femaleDoctor from "../../assets/icons/Lekarka.svg";
 import User from "../../assets/icons/User.svg";
 import {useDispatch, useSelector} from "react-redux";
 import {showModal, hideModal} from "../../redux/ducks/loginModal";
@@ -155,7 +152,7 @@ export default function TheNavbar() {
                                                 User : User}
                                              className="img-fluid rounded-circle"
                                              style={{height: "50px", width: "50px"}}
-                                             alt="doctor"/>
+                                             alt="user"/>
                                     </Link>
 
                                 </div>

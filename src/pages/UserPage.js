@@ -59,22 +59,22 @@ export default function UserPage() {
                     <Link to={`${url}`}>
                         <li>Personal Data</li>
                     </Link>
+                    <Link to={`${url}/medical-data`}>
+                        <li>Medical Data</li>
+                    </Link>
                     <Link to={`${url}/settings`}>
                         <li>Settings</li>
-                    </Link>
-                    <Link to={`${url}/your-prescriptions`}>
-                        <li>Your Prescriptions</li>
                     </Link>
                 </ul>
 
                 <Switch>
                     <Route exact path={path}>
-                        <div className={"data"}> Patient info will go here </div>
+                        <div className={"data"}> {user ? `${user.firstName} ${user.lastName}` : "Loading data..." } </div>
                     </Route>
                     <Route path={`${path}/settings`}>
                         <div className={"data"}> Some settings will go here </div>
                     </Route>
-                    <Route path={`${path}/your-prescriptions`}>
+                    <Route path={`${path}/medical-data`}>
                         <div className={"data"}> To be implemented... </div>
                     </Route>
                 </Switch>
