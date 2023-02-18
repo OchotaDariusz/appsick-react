@@ -1,12 +1,10 @@
-import { combineReducers, createStore } from 'redux';
-import loginModalReducer from './ducks/loginModal';
+import { combineReducers, createStore } from "redux";
+import loginModalReducer from "./ducks/loginModal";
 
 const reducer = combineReducers({
-    loginModal: loginModalReducer
+  loginModal: loginModalReducer,
 });
 
-const store = createStore(
-    reducer
-);
+const store = createStore(reducer);
 
 export default store;

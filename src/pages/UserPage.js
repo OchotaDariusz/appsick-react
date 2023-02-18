@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from "react"
+import React, { useEffect, useState } from "react";
 import {
-    useHistory,
-    Link,
-    Switch,
-    Route,
-    useRouteMatch,
+  Link,
+  Route,
+  Switch,
+  useHistory,
+  useRouteMatch,
 } from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {Spinner} from "@chakra-ui/react";
-import {showModal} from "../redux/ducks/loginModal";
-import { getUser, getPatient } from "../components/Auth/Auth";
+import { useDispatch } from "react-redux";
+import { Spinner } from "@chakra-ui/react";
+import { showModal } from "../redux/ducks/loginModal";
+import { getPatient, getUser } from "../components/Auth/Auth";
 import "./UserPage.css";
 
 export default function UserPage() {
@@ -54,32 +54,37 @@ export default function UserPage() {
         let { path, url } = useRouteMatch();
 
         return (
-            <div className="content">
-                <ul className={"nav"}>
-                    <Link to={`${url}`}>
-                        <li>Personal Data</li>
-                    </Link>
-                    <Link to={`${url}/medical-data`}>
-                        <li>Medical Data</li>
-                    </Link>
-                    <Link to={`${url}/settings`}>
-                        <li>Settings</li>
-                    </Link>
-                </ul>
+          <div className="content">
+            <ul className={"nav"}>
+              <Link to={`${url}`}>
+                <li>Personal Data</li>
+              </Link>
+              <Link to={`${url}/medical-data`}>
+                <li>Medical Data</li>
+              </Link>
+              <Link to={`${url}/settings`}>
+                <li>Settings</li>
+              </Link>
+            </ul>
 
-                <Switch>
-                    <Route exact path={path}>
-                        <div className={"data"}> {user ? `${user.firstName} ${user.lastName}` : "Loading data..." } </div>
-                    </Route>
-                    <Route path={`${path}/settings`}>
-                        <div className={"data"}> Some settings will go here </div>
-                    </Route>
-                    <Route path={`${path}/medical-data`}>
-                        <div className={"data"}> To be implemented... </div>
-                    </Route>
-                </Switch>
-            </div>
-        )
+            <Switch>
+              <Route exact path={path}>
+                <div className={"data"}>
+                  {" "}
+                  {user
+                    ? `${user.firstName} ${user.lastName}`
+                    : "Loading data..."}{" "}
+                </div>
+              </Route>
+              <Route path={`${path}/settings`}>
+                <div className={"data"}> Some settings will go here </div>
+              </Route>
+              <Route path={`${path}/medical-data`}>
+                <div className={"data"}> To be implemented... </div>
+              </Route>
+            </Switch>
+          </div>
+        );
 
     }
 
