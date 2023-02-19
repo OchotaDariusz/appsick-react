@@ -7,6 +7,7 @@ import { getUser, useAuth } from "../components/Auth/Auth";
 import doc from "../assets/image/doc.png";
 import Footer from "../components/Footer/Footer";
 import { Link, useHistory } from "react-router-dom";
+import EndVisitForm from "../components/VisitChat/EndVisitForm";
 
 const getVisit = async (visitId) => {
   const data = await fetch(
@@ -31,6 +32,7 @@ export default function VisitChat(props) {
   const [doctorName, setDoctorName] = useState("");
   const [patientName, setPatientName] = useState("");
   const [patientId, setPatientId] = useState("");
+  const [userId, setUserId] = useState("");
   const [visitReason, setVisitReason] = useState("");
   const formRef = useRef(null);
   const history = useHistory();
@@ -68,6 +70,7 @@ export default function VisitChat(props) {
   useEffect(() => {
     getUser()
       .then((user) => {
+        setUserId(user.id);
         chatroom = new Chatroom(
           props.match.params.visitId,
           user.id,
@@ -104,6 +107,11 @@ export default function VisitChat(props) {
     let path = `/visit/${props.match.params.visitId}/history`;
     history.push(path);
   };
+
+  // End visit functionalities
+  const [showEndVisitForm, setShowEndVisitForm] = useState(false);
+  const handleClose = () => setShowEndVisitForm(false);
+  const handleShow = () => setShowEndVisitForm(true);
 
   const endVisit = () => {
     chatroom
@@ -208,13 +216,22 @@ export default function VisitChat(props) {
                 </div>
                 <div className="d-flex justify-content-center my-2">
                   {auth.role === "DOCTOR" ? (
-                    <button
-                      type="button"
-                      className="btn btn-danger"
-                      onClick={endVisit}
-                    >
-                      End Visit
-                    </button>
+                    <>
+                      <button
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={handleShow}
+                      >
+                        End Visit
+                      </button>
+                      <EndVisitForm
+                        userId={userId}
+                        visitId={+props.match.params.visitId}
+                        showEndVisitForm={showEndVisitForm}
+                        handleClose={handleClose}
+                        endVisit={endVisit}
+                      />
+                    </>
                   ) : (
                     <div></div>
                   )}

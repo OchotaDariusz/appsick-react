@@ -47,12 +47,10 @@ export default function TheNavbar() {
         Cache: "no-cache",
       },
     })
-      // .then(res => res.json())
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         auth.logout();
-        window.location.reload(false);
         routeChange();
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err.message);

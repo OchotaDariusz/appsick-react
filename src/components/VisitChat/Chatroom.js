@@ -86,7 +86,7 @@ class Chatroom {
       chatMessage.date = new Date(chatMessage.date.toDate());
       chatHistory.push(chatMessage);
     });
-    fetch("${process.env.REACT_APP_BACKEND_HOST}/api/chats", {
+    fetch(`${process.env.REACT_APP_BACKEND_HOST}/api/chats`, {
       method: "POST",
       headers: {
         Accept: "application/json",

@@ -1,7 +1,6 @@
 import React from "react";
 import tracz from "../assets/image/tracz-500px.jpg";
 import github from "../assets/icons/github-mark.png";
-import { Link } from "react-router-dom";
 
 export default function About() {
   return (
@@ -32,9 +31,9 @@ export default function About() {
                   style={{ height: 40 }}
                   alt="gh"
                 />
-                <Link src="https://github.com/szopszop">
+                <a href="https://github.com/szopszop">
                   https://github.com/szopszop
-                </Link>
+                </a>
               </div>
             </div>
           </div>
@@ -45,14 +44,14 @@ export default function About() {
             <div className="col-4">
               <img
                 className="border rounded-5 "
-                src="https://dinoanimals.pl/wp-content/uploads/2014/08/Rokselana_7.jpg"
+                src="https://avatars.githubusercontent.com/u/98316845?v=4"
                 style={{ height: 250 }}
                 alt="tracz"
               />
             </div>
             <div className="col-8 fs-2 d-inline">
               <br />
-              <div className="m-3">Nie Szymon Tracz</div>
+              <div className="m-3">Dariusz Ochota</div>
               <div className="d-inline-flex me-3 align-items-center">
                 <img
                   className="border rounded-5 m-3"
@@ -60,9 +59,9 @@ export default function About() {
                   style={{ height: 40 }}
                   alt="gh"
                 />
-                <Link src="https://github.com/szopszop">
-                  https://github.com/szopszop
-                </Link>
+                <a href="https://github.com/OchotaDariusz">
+                  https://github.com/OchotaDariusz
+                </a>
               </div>
             </div>
           </div>
@@ -73,14 +72,14 @@ export default function About() {
             <div className="col-4">
               <img
                 className="border rounded-5 "
-                src="https://dinoanimals.pl/wp-content/uploads/2014/08/Rokselana_7.jpg"
+                src="https://avatars.githubusercontent.com/u/53392895?v=4"
                 style={{ height: 250 }}
                 alt="tracz"
               />
             </div>
             <div className="col-8 fs-2 d-inline">
               <br />
-              <div className="m-3">Nie Szymon Tracz</div>
+              <div className="m-3">Mateusz Kossowski</div>
               <div className="d-inline-flex me-3 align-items-center">
                 <img
                   className="border rounded-5 m-3"
@@ -88,9 +87,9 @@ export default function About() {
                   style={{ height: 40 }}
                   alt="gh"
                 />
-                <Link src="https://github.com/szopszop">
-                  https://github.com/szopszop
-                </Link>
+                <a href="https://github.com/mat-kossowski">
+                  https://github.com/mat-kossowski
+                </a>
               </div>
             </div>
           </div>
@@ -101,14 +100,14 @@ export default function About() {
             <div className="col-4">
               <img
                 className="border rounded-5 "
-                src="https://dinoanimals.pl/wp-content/uploads/2014/08/Rokselana_7.jpg"
+                src="https://avatars.githubusercontent.com/u/98315192?v=4"
                 style={{ height: 250 }}
                 alt="tracz"
               />
             </div>
             <div className="col-8 fs-2 d-inline">
               <br />
-              <div className="m-3">Nie Szymon Tracz</div>
+              <div className="m-3">Sebastian Dudkowski</div>
               <div className="d-inline-flex me-3 align-items-center">
                 <img
                   className="border rounded-5 m-3"
@@ -116,9 +115,9 @@ export default function About() {
                   style={{ height: 40 }}
                   alt="gh"
                 />
-                <Link src="https://github.com/szopszop">
-                  https://github.com/szopszop
-                </Link>
+                <a href="https://github.com/Sebastian-Dudkowski">
+                  https://github.com/Sebastian-Dudkowski
+                </a>
               </div>
             </div>
           </div>
@@ -129,14 +128,14 @@ export default function About() {
             <div className="col-4">
               <img
                 className="border rounded-5 "
-                src="https://dinoanimals.pl/wp-content/uploads/2014/08/Rokselana_7.jpg"
+                src="https://avatars.githubusercontent.com/u/98315478?v=4"
                 style={{ height: 250 }}
                 alt="tracz"
               />
             </div>
             <div className="col-8 fs-2 d-inline">
               <br />
-              <div className="m-3">Szymon Tracz</div>
+              <div className="m-3">Wojciech Prusaczyk</div>
               <div className="d-inline-flex me-3 align-items-center">
                 <img
                   className="border rounded-5 m-3"
@@ -144,9 +143,9 @@ export default function About() {
                   style={{ height: 40 }}
                   alt="gh"
                 />
-                <Link src="https://github.com/szopszop">
-                  https://github.com/szopszop
-                </Link>
+                <a href="https://github.com/PrWojciech">
+                  https://github.com/PrWojciech
+                </a>
               </div>
             </div>
           </div>
