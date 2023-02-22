@@ -5,7 +5,6 @@ import femaleDoctor from "../../assets/icons/Lekarka.svg";
 import { Link } from "react-router-dom";
 import MapModal from "../Map/MapModal";
 import Button from "react-bootstrap/Button";
-import { isToday } from "../../utils/Utils";
 import { BsFileEarmarkPdf } from "react-icons/bs";
 import { FiCheck } from "react-icons/fi";
 import { CloseIcon, ViewIcon } from "@chakra-ui/icons";
@@ -150,32 +149,18 @@ export default function Visit({ visit, cancelVisit }) {
                 <div>
                   <br />
                   <hr />
-                  {isToday(visit) ? (
-                    <Link
-                      to={`/visit/${visit?.visitId}`}
-                      className="btn btn-dark my-3"
-                    >
-                      Ask doctor a question
-                    </Link>
-                  ) : (
-                    ""
-                  )}
-                  {new Date(visit?.date) > new Date() ? (
-                    <Button
-                      className="fs-5 text-dark bg-light border border-danger
+                  <Button
+                    className="fs-5 text-dark bg-light border border-danger
                                             border-2 rounded-pill p-1 green-shadow mt-3 px-3 btnx d-inline-flex"
-                      onClick={() => {
-                        cancelVisit(visit?.visitId);
-                      }}
-                    >
-                      <div className="fs-5 d-inline pe-1">
-                        <CloseIcon />
-                      </div>
-                      Cancel Visit
-                    </Button>
-                  ) : (
-                    ""
-                  )}
+                    onClick={() => {
+                      cancelVisit(visit?.visitId);
+                    }}
+                  >
+                    <div className="fs-5 d-inline pe-1">
+                      <CloseIcon />
+                    </div>
+                    Cancel Visit
+                  </Button>
                 </div>
               </div>
             </div>

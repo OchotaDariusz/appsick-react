@@ -4,13 +4,12 @@ import maleDoctor from "../../assets/icons/Lekarz.svg";
 import femaleDoctor from "../../assets/icons/Lekarka.svg";
 import { Link } from "react-router-dom";
 import MapModal from "../Map/MapModal";
-import Button from "react-bootstrap/Button";
 import { BsFileEarmarkPdf } from "react-icons/bs";
 import { FiCheck } from "react-icons/fi";
-import { CloseIcon, ViewIcon } from "@chakra-ui/icons";
+import { ViewIcon } from "@chakra-ui/icons";
 import chat from "../../assets/icons/Badania.svg";
 
-export default function TodayVisit({ visit, cancelVisit }) {
+export default function TodayVisit({ visit }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -160,23 +159,6 @@ export default function TodayVisit({ visit, cancelVisit }) {
                     </div>
                     Open chat with the doctor
                   </Link>
-
-                  <br />
-                  <br />
-
-                  <hr />
-                  <Button
-                    className="fs-5 text-dark bg-light border border-danger
-                                            border-2 rounded-pill p-1 green-shadow mt-3 px-3 btnx d-inline-flex"
-                    onClick={() => {
-                      cancelVisit(visit?.visitId);
-                    }}
-                  >
-                    <div className="fs-5 d-inline pe-1">
-                      <CloseIcon />
-                    </div>
-                    Cancel Visit
-                  </Button>
                 </div>
               </div>
             </div>
