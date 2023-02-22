@@ -1,5 +1,5 @@
 import Collapse from "react-bootstrap/Collapse";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import maleDoctor from "../../assets/icons/Lekarz.svg";
 import femaleDoctor from "../../assets/icons/Lekarka.svg";
 import { Link } from "react-router-dom";
@@ -8,9 +8,20 @@ import Button from "react-bootstrap/Button";
 import { BsFileEarmarkPdf } from "react-icons/bs";
 import { FiCheck } from "react-icons/fi";
 import { CloseIcon, ViewIcon } from "@chakra-ui/icons";
+import { getMedicalDataByVisitId } from "../../utils/Utils";
 
 export default function Visit({ visit, cancelVisit }) {
   const [open, setOpen] = useState(false);
+  const [recommendations, setRecommendations] = useState("");
+
+  useEffect(() => {
+    getMedicalDataByVisitId(visit.visitId)
+      .then(medicalData => {
+        console.log(medicalData)
+        setRecommendations(medicalData[0].recommendations)
+      })
+      .catch(err => console.log(err.message));
+  }, [visit, setRecommendations]);
 
   return (
     <div className="row align-items-center">
@@ -113,7 +124,7 @@ export default function Visit({ visit, cancelVisit }) {
                     <div>
                       <hr />
                       <div className="fs-4 m-2">Recommendations</div>
-                      <div>Siedź na dupie i się nie odzywaj niepytany</div>
+                      <div>{recommendations}</div>
                     </div>
                     <div>
                       <hr />

@@ -16,3 +16,19 @@ export const formatVisitDate = (visit) => {
   ];
   return visit;
 };
+
+export const getMedicalDataByVisitId = async (visitId) => {
+  const data = await fetch(
+    `${process.env.REACT_APP_BACKEND_HOST}/api/medical_data/visit/${visitId}`,
+    {
+      mode: "cors",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    }
+  );
+  return data.json();
+};
